@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+    <attr path="/api/package[@name='com.upokecenter.cbor']" name="managedName">CborJava</attr>
+    <attr path="/api/package[@name='com.upokecenter.util']" name="managedName">CborJava.Util</attr>
+    <attr path="/api/package[@name='com.upokecenter.cbor']/class[@name='CBORObject']/method[@name='compareTo']/parameter[@name='other']" name="managedType">Java.Lang.Object</attr>
+    <attr path="/api/package[@name='com.upokecenter.cbor']/class[@name='CBORNumber']/method[@name='compareTo']/parameter[@name='other']" name="managedType">Java.Lang.Object</attr>
+</metadata>
