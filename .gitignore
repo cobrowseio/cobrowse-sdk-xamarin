@@ -403,3 +403,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+# Unused Xcode builds
+Release-iphoneos
+Release-iphonesimulator
