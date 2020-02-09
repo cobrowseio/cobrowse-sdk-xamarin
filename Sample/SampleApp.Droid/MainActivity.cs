@@ -22,17 +22,53 @@ namespace SampleApp.Droid
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.MainLayout);
 
-            FindViewById<Button>(Resource.Id.button_launch_cobrowse).Click += OnCobreowseButtonClick;
-
             CobrowseIO.Instance().License("trial");
             CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
             CobrowseIO.Instance().Start(this);
+
+            FindViewById<Button>(Resource.Id.button_launch_cobrowse).Click += OnCobreowseButtonClick;
+            FindViewById<Button>(Resource.Id.button_check_cobrowse_full_device).Click += OnCheckCobrowseFullDeviceClick;
         }
 
         private void OnCobreowseButtonClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CobrowseActivity));
             StartActivity(intent);
+        }
+
+        private void OnCheckCobrowseFullDeviceClick(object sender, EventArgs e)
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
+            {
+                Toast.MakeText(
+                    this,
+                    "Full-device control is supported only in API 21 (5.0 Lollipop) and above.",
+                    ToastLength.Short)
+                    .Show();
+                return;
+            }
+            bool isConfigured = Resources.GetBoolean(Resource.Boolean.cobrowse_enable_full_device_control);
+            if (!isConfigured)
+            {
+                Toast.MakeText(
+                    this,
+                    "'cobrowse_enable_full_device_control' boolean resource value must be TRUE.",
+                    ToastLength.Short)
+                    .Show();
+                return;
+            }
+            bool isRunning = CobrowseAccessibilityService.IsRunning(this);
+            if (!isRunning)
+            {
+                CobrowseAccessibilityService.ShowSetup(this);
+                return;
+            }
+
+            Toast.MakeText(
+                this,
+                "Full-device control is enabled and ready.",
+                ToastLength.Short)
+                .Show();
         }
 
         public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionRequestDelegate
