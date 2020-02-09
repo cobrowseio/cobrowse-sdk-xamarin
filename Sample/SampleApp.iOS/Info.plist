@@ -64,7 +64,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleName</key>
-	<string>SampleApp.iOS</string>
+	<string>Cobrowse.io Xamarin</string>
 	<key>CBIOBroadcastExtension</key>
 	<string>io.cobrowsesample.ios.broadcastuploadextension</string>
 </dict>

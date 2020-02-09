@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Class="SampleApp.Forms.MainPage"
+    Title="Cobrowse.io SDK Xamarin.Forms">
+    <StackLayout
+        VerticalOptions="CenterAndExpand">
+        <Button
+            HorizontalOptions="CenterAndExpand"
+            Text="Start Cobrowse.io"
+            Clicked="CobrowseButton_Clicked" />
+        <Button
+            HorizontalOptions="CenterAndExpand"
+            Text="Check Full-Device Control&#x0a;configuration"
+            Clicked="CheckCobrowseFullDevice_Clicked">
+            <Button.IsVisible>
+                <OnPlatform
+                    x:TypeArguments="x:Boolean">
+                    <On Platform="iOS">False</On>
+                    <On Platform="Android">True</On>
+                </OnPlatform>
+            </Button.IsVisible>
+        </Button>
+    </StackLayout>
+</ContentPage>
