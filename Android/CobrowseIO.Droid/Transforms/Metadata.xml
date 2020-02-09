@@ -10,4 +10,37 @@
     <attr path="/api/package[@name='io.cobrowse']" name="managedName">CobrowseIOSdk</attr>
     <attr path="/api/package[@name='io.cobrowse.integrations']" name="managedName">CobrowseIOSdk.Integrations</attr>
     <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">CobrowseIOSdk.UI</attr>
+    
+    <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
+    <!-- CobrowseIO.RedactionDelegate -->
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.RedactionDelegate']/method[@name='redactedViews']/parameter[@name='p0']" 
+        name="name">activity</attr>
+    <!-- CobrowseIO.SessionRequestDelegate -->
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionRequestDelegate']/method[@name='handleSessionRequest']/parameter[@name='p0']" 
+        name="name">currentActivity</attr>
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionRequestDelegate']/method[@name='handleSessionRequest']/parameter[@name='p1']" 
+        name="name">session</attr>
+    <!-- Session.Listener -->
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='Session.Listener']/method[@name='sessionDidEnd']/parameter[@name='p0']" 
+        name="name">session</attr>
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='Session.Listener']/method[@name='sessionDidUpdate']/parameter[@name='p0']" 
+        name="name">session</attr>
+    <!-- CobrowseIO.SessionControlsDelegate -->
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionControlsDelegate']/method[@name='showSessionControls']/parameter[@name='p0']" 
+        name="name">activity</attr>
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionControlsDelegate']/method[@name='showSessionControls']/parameter[@name='p1']" 
+        name="name">session</attr>
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionControlsDelegate']/method[@name='hideSessionControls']/parameter[@name='p0']" 
+        name="name">activity</attr>
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionControlsDelegate']/method[@name='hideSessionControls']/parameter[@name='p1']" 
+        name="name">session</attr>
 </metadata>
