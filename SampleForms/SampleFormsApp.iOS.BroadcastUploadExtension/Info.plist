@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>SampleFormsApp.iOS.BroadcastUploadExtension</string>
+	<string>Cobrowse Full-Device</string>
 	<key>CFBundleName</key>
 	<string>SampleFormsApp.iOS.BroadcastUploadExtension</string>
 	<key>CFBundleIdentifier</key>
@@ -23,11 +23,11 @@
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.broadcast-services</string>
+		<string>com.apple.broadcast-services-upload</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>MovieClipHandler</string>
+		<string>SampleHandler</string>
 		<key>RPBroadcastProcessMode</key>
-		<string>RPBroadcastProcessModeMP4Clip</string>
+		<string>RPBroadcastProcessModeSampleBuffer</string>
 	</dict>
 </dict>
 </plist>
