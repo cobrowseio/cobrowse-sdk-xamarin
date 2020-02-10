@@ -68,7 +68,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
@@ -100,6 +99,14 @@
     <ProjectReference Include="..\..\iOS\CobrowseIO.AppExtension.iOS\CobrowseIO.AppExtension.iOS.csproj">
       <Project>{23B1F427-BAA7-47DA-8060-251B09238D78}</Project>
       <Name>CobrowseIO.AppExtension.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\iOS\Starscream.iOS\Starscream.iOS.csproj">
+      <Project>{E19A722D-20E3-4255-8600-F10EFEFBAC16}</Project>
+      <Name>Starscream.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\iOS\SwiftCBOR.iOS\SwiftCBOR.iOS.csproj">
+      <Project>{89690D1D-E492-4302-A262-1125807A9CF7}</Project>
+      <Name>SwiftCBOR.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.AppExtension.CSharp.targets" />
