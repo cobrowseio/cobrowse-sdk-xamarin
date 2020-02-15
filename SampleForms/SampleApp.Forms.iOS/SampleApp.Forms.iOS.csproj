@@ -71,6 +71,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CobrowseAdapter.cs" />
     <Compile Include="UIViewControllerExtensions.cs" />
+    <Compile Include="PlatformCobrowseRedactedViewEffect.cs" />
+    <Compile Include="CobrowseRedactedPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

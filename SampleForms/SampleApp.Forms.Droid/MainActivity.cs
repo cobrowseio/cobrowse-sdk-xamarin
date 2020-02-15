@@ -1,6 +1,9 @@
-﻿using Android.App;
+﻿using System.Collections.Generic;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
+using CobrowseIOSdk;
 
 namespace SampleApp.Forms.Droid
 {
@@ -10,7 +13,9 @@ namespace SampleApp.Forms.Droid
         Theme = "@style/MainTheme",
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity
+        : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity,
+        CobrowseIO.IRedacted
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -21,6 +26,11 @@ namespace SampleApp.Forms.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+        }
+
+        public IList<View> RedactedViews()
+        {
+            return PlatformCobrowseRedactedViewEffect.RedactedViews;
         }
     }
 }
