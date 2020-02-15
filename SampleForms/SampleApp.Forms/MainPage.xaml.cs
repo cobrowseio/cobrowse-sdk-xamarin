@@ -23,5 +23,10 @@ namespace SampleApp.Forms
         {
             DependencyService.Get<ICobrowseAdapter>().CheckCobrowseFullDevice();
         }
+
+        private void PageRedactedViews_Clicked(object sender, EventArgs e)
+        {
+            this.Navigation.PushAsync(new LoginPage());
+        }
     }
 }

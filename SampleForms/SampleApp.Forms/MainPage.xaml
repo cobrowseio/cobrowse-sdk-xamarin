@@ -25,5 +25,9 @@
                 </OnPlatform>
             </Button.IsVisible>
         </Button>
+        <Button
+            HorizontalOptions="CenterAndExpand"
+            Text="Open Page with redacted views"
+            Clicked="PageRedactedViews_Clicked" />
     </StackLayout>
 </ContentPage>
