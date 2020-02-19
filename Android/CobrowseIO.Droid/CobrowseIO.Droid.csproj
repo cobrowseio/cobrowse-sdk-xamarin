@@ -18,7 +18,7 @@
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Description>https://github.com/cobrowseio/cobrowse-sdk-android-binary</Description>
-    <ReleaseVersion>2.1.1</ReleaseVersion>
+    <ReleaseVersion>2.2.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -70,13 +70,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\cobrowse-sdk-android-2.1.1.aar" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CborJava.Droid\CborJava.Droid.csproj">
       <Project>{442C6F83-FEC1-4CED-A374-3953721D7C13}</Project>
       <Name>CborJava.Droid</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryProjectZip Include="Jars\cobrowse-sdk-android-2.2.0.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
