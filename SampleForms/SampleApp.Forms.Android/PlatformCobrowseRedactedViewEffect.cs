@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using SampleApp.Forms.Droid;
+using SampleApp.Forms.Android;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using AView = Android.Views.View;
 
 [assembly: ResolutionGroupName("SampleApp")]
 [assembly: ExportEffect(typeof(PlatformCobrowseRedactedViewEffect), "CobrowseRedactedViewEffect")]
-namespace SampleApp.Forms.Droid
+namespace SampleApp.Forms.Android
 {
     public class PlatformCobrowseRedactedViewEffect : PlatformEffect
     {

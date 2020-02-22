@@ -4,11 +4,11 @@ using Android.Widget;
 using CobrowseIOSdk;
 using CobrowseIOSdk.UI;
 using Plugin.CurrentActivity;
-using SampleApp.Forms.Droid;
+using SampleApp.Forms.Android;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(CobrowseAdapter))]
-namespace SampleApp.Forms.Droid
+namespace SampleApp.Forms.Android
 {
     public class CobrowseAdapter : ICobrowseAdapter
     {

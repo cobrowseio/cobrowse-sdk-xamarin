@@ -6,7 +6,7 @@ using Android.Runtime;
 using CobrowseIOSdk;
 using Plugin.CurrentActivity;
 
-namespace SampleApp.Forms.Droid
+namespace SampleApp.Forms.Android
 {
     [Application(
         #if DEBUG

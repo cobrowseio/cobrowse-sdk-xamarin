@@ -7,7 +7,7 @@ using AndroidX.AppCompat.App;
 using CobrowseIOSdk;
 using CobrowseIOSdk.UI;
 
-namespace SampleApp.Droid
+namespace SampleApp.Android
 {
     [Activity(
         Label = "@string/app_name",

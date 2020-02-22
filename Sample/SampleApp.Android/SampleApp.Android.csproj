@@ -10,8 +10,8 @@
     <TemplateGuid>{84dd83c5-0fe3-4294-9419-09e7c8ba324f}</TemplateGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SampleApp.Droid</RootNamespace>
-    <AssemblyName>SampleApp.Droid</AssemblyName>
+    <RootNamespace>SampleApp.Android</RootNamespace>
+    <AssemblyName>SampleApp.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -115,17 +115,17 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Android\CobrowseIO.Droid\CobrowseIO.Droid.csproj">
+    <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj">
       <Project>{C6ED4775-5505-4166-B973-D0C88830D32B}</Project>
-      <Name>CobrowseIO.Droid</Name>
+      <Name>CobrowseIO.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Android\NumbersJava.Droid\NumbersJava.Droid.csproj">
+    <ProjectReference Include="..\..\Android\NumbersJava.Android\NumbersJava.Android.csproj">
       <Project>{CA05EE40-B53A-4284-99E3-4257304D025A}</Project>
-      <Name>NumbersJava.Droid</Name>
+      <Name>NumbersJava.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Android\CborJava.Droid\CborJava.Droid.csproj">
+    <ProjectReference Include="..\..\Android\CborJava.Android\CborJava.Android.csproj">
       <Project>{442C6F83-FEC1-4CED-A374-3953721D7C13}</Project>
-      <Name>CborJava.Droid</Name>
+      <Name>CborJava.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -5,7 +5,7 @@ using Android.App;
 using Android.Runtime;
 using CobrowseIOSdk;
 
-namespace SampleApp.Droid
+namespace SampleApp.Android
 {
     [Application(
         #if DEBUG

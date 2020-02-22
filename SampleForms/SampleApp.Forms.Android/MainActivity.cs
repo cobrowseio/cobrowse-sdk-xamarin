@@ -5,7 +5,7 @@ using Android.OS;
 using Android.Views;
 using CobrowseIOSdk;
 
-namespace SampleApp.Forms.Droid
+namespace SampleApp.Forms.Android
 {
     [Activity(
         Label = "Cobrowse.io Xamarin.Forms",

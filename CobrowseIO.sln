@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{49356296-576E-4DCF-8304-8581237E44F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersJava.Droid", "Android\NumbersJava.Droid\NumbersJava.Droid.csproj", "{CA05EE40-B53A-4284-99E3-4257304D025A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersJava.Android", "Android\NumbersJava.Android\NumbersJava.Android.csproj", "{CA05EE40-B53A-4284-99E3-4257304D025A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CborJava.Droid", "Android\CborJava.Droid\CborJava.Droid.csproj", "{442C6F83-FEC1-4CED-A374-3953721D7C13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CborJava.Android", "Android\CborJava.Android\CborJava.Android.csproj", "{442C6F83-FEC1-4CED-A374-3953721D7C13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO.Droid", "Android\CobrowseIO.Droid\CobrowseIO.Droid.csproj", "{C6ED4775-5505-4166-B973-D0C88830D32B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO.Android", "Android\CobrowseIO.Android\CobrowseIO.Android.csproj", "{C6ED4775-5505-4166-B973-D0C88830D32B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{1CB72FBA-590B-47C5-A046-237ED1E4D458}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Droid", "Sample\SampleApp.Droid\SampleApp.Droid.csproj", "{8CD53026-D5CE-44EE-8755-982C1C700A0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Android", "Sample\SampleApp.Android\SampleApp.Android.csproj", "{8CD53026-D5CE-44EE-8755-982C1C700A0D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{62E01987-E2D9-42B7-A5F0-254574224E10}"
 EndProject
@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.iOS.BroadcastUplo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleForms", "SampleForms", "{E4BCFA53-CDC5-4704-A0BC-6A190440FC87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Forms.Droid", "SampleForms\SampleApp.Forms.Droid\SampleApp.Forms.Droid.csproj", "{9D8B0224-C67B-4D4D-944C-7155177D910B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Forms.Android", "SampleForms\SampleApp.Forms.Android\SampleApp.Forms.Android.csproj", "{9D8B0224-C67B-4D4D-944C-7155177D910B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Forms.iOS", "SampleForms\SampleApp.Forms.iOS\SampleApp.Forms.iOS.csproj", "{F60B55ED-B23A-4C7B-A87D-77AE9034BBC5}"
 EndProject
