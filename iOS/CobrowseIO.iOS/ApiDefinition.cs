@@ -315,13 +315,7 @@ namespace CobrowseIOSdk
 		// -(CBIOSession * _Nullable)currentSession;
 		[NullAllowed, Export("currentSession")]
 		CBIOSession CurrentSession { get; }
-	}
 
-	// @interface Push (CobrowseIO)
-	[Category]
-	[BaseType(typeof(CobrowseIO))]
-	interface CobrowseIO_Push
-	{
 		// +(BOOL)isCobrowseNotification:(NSDictionary * _Nonnull)userInfo;
 		[Static]
 		[Export("isCobrowseNotification:")]
