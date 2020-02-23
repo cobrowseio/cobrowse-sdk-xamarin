@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="2.8.1">
+        <id>NumbersJava.Android</id>
+        <version>1.4.3-pre1</version>
+        <title>NumbersJava.Android</title>
+        <authors>Cobrowse.io</authors>
+        <owners>Cobrowse.io</owners>
+        <license type="expression">CC0-1.0</license>
+        <projectUrl>https://github.com/peteroupc/numbers-java/</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Xamarin binding for numbers-java: a Java implementation of arbitrary-precision arithmetic classes</description>
+        <tags>xamarin, android</tags>
+        <dependencies>
+            <group targetFramework="MonoAndroid10" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Android/NumbersJava.Android/bin/Release/NumbersJava.Android.dll" target="lib/MonoAndroid10" />
+    </files>
+</package>

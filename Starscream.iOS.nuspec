@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="2.8.1">
+        <id>Starscream.iOS</id>
+        <version>3.1.1-pre1</version>
+        <title>Starscream.iOS</title>
+        <authors>Cobrowse.io</authors>
+        <owners>Cobrowse.io</owners>
+        <license type="expression">Apache-2.0</license>
+        <projectUrl>https://github.com/daltoniam/Starscream</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Xamarin binding for Starscream: websockets in swift for iOS and OSX</description>
+        <tags>xamarin, ios</tags>
+        <dependencies>
+            <group targetFramework="Xamarin.iOS10" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="iOS/Starscream.iOS/bin/Release/Starscream.iOS.dll" target="lib/Xamarin.iOS10" />
+    </files>
+</package>

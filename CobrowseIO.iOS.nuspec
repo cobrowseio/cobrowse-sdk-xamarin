@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="2.8.1">
+        <id>CobrowseIO.iOS</id>
+        <version>2.3.2-pre1</version>
+        <title>CobrowseIO.iOS</title>
+        <authors>Cobrowse.io</authors>
+        <owners>Cobrowse.io</owners>
+        <license type="expression">Apache-2.0</license>
+        <projectUrl>https://cobrowse.io</projectUrl>
+        <icon>icon.png</icon>
+        <iconUrl>https://avatars3.githubusercontent.com/u/32596876</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Cobrowse.io - Xamarin.iOS SDK</description>
+        <tags>xamarin, ios</tags>
+        <dependencies>
+            <group targetFramework="Xamarin.iOS10">
+                <dependency id="Starscream.iOS" version="3.1.1-pre1" />
+                <dependency id="SwiftCBOR.iOS" version="0.4.3-pre1" />
+                <dependency id="Xamarin.Swift" version="1.0.4" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.dll" target="lib/Xamarin.iOS10" />
+        <file src="icon.png" />
+    </files>
+</package>

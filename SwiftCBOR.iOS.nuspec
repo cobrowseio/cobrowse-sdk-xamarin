@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="2.8.1">
+        <id>SwiftCBOR.iOS</id>
+        <version>0.4.3-pre1</version>
+        <title>SwiftCBOR.iOS</title>
+        <authors>Cobrowse.io</authors>
+        <owners>Cobrowse.io</owners>
+        <license type="expression">Unlicense</license>
+        <projectUrl>https://github.com/myfreeweb/SwiftCBOR</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Xamarin binding for SwiftCBOR: a CBOR implementation for Swift</description>
+        <tags>xamarin, ios</tags>
+        <dependencies>
+            <group targetFramework="Xamarin.iOS10" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="iOS/SwiftCBOR.iOS/bin/Release/SwiftCBOR.iOS.dll" target="lib/Xamarin.iOS10" />
+    </files>
+</package>
