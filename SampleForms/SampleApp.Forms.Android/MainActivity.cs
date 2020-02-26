@@ -3,7 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using CobrowseIOSdk;
+using Xamarin.CobrowseIO;
 
 namespace SampleApp.Forms.Android
 {

@@ -1,10 +1,10 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Widget;
-using CobrowseIOSdk;
-using CobrowseIOSdk.UI;
 using Plugin.CurrentActivity;
 using SampleApp.Forms.Android;
+using Xamarin.CobrowseIO;
+using Xamarin.CobrowseIO.UI;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(CobrowseAdapter))]

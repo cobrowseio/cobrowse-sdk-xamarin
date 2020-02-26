@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 
-namespace CobrowseIOSdk
+namespace Xamarin.CobrowseIO
 {
     public static class CBIO
     {

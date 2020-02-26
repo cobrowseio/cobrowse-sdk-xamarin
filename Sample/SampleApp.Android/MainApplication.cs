@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Android.App;
 using Android.Runtime;
-using CobrowseIOSdk;
+using Xamarin.CobrowseIO;
 
 namespace SampleApp.Android
 {

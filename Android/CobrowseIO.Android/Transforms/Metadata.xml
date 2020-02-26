@@ -7,9 +7,9 @@
   This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
   <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
   -->
-    <attr path="/api/package[@name='io.cobrowse']" name="managedName">CobrowseIOSdk</attr>
-    <attr path="/api/package[@name='io.cobrowse.integrations']" name="managedName">CobrowseIOSdk.Integrations</attr>
-    <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">CobrowseIOSdk.UI</attr>
+    <attr path="/api/package[@name='io.cobrowse']" name="managedName">Xamarin.CobrowseIO</attr>
+    <attr path="/api/package[@name='io.cobrowse.integrations']" name="managedName">Xamarin.CobrowseIO.Integrations</attr>
+    <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">Xamarin.CobrowseIO.UI</attr>
     
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->

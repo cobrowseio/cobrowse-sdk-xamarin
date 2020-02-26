@@ -1,6 +1,6 @@
 ﻿using System;
-using CobrowseIOSdk;
 using UIKit;
+using Xamarin.CobrowseIO;
 
 namespace SampleApp.iOS
 {

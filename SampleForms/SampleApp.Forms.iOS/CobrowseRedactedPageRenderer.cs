@@ -1,6 +1,6 @@
-﻿using CobrowseIOSdk;
-using SampleApp.Forms.iOS;
+﻿using SampleApp.Forms.iOS;
 using UIKit;
+using Xamarin.CobrowseIO;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 

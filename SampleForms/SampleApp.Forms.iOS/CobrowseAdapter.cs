@@ -1,8 +1,6 @@
-﻿using System;
-using CobrowseIOSdk;
-using Foundation;
-using SampleApp.Forms.iOS;
+﻿using SampleApp.Forms.iOS;
 using UIKit;
+using Xamarin.CobrowseIO;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(CobrowseAdapter))]

@@ -1,6 +1,6 @@
 ﻿using System;
-using CobrowseIOSdk.AppExtension;
 using Foundation;
+using Xamarin.CobrowseIO.AppExtension;
 
 namespace SampleApp.iOS.BroadcastUploadExtension
 {

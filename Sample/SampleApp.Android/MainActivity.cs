@@ -4,8 +4,8 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using CobrowseIOSdk;
-using CobrowseIOSdk.UI;
+using Xamarin.CobrowseIO;
+using Xamarin.CobrowseIO.UI;
 
 namespace SampleApp.Android
 {

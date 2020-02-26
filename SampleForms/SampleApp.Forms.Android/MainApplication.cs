@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Android.App;
 using Android.Runtime;
-using CobrowseIOSdk;
 using Plugin.CurrentActivity;
+using Xamarin.CobrowseIO;
 
 namespace SampleApp.Forms.Android
 {

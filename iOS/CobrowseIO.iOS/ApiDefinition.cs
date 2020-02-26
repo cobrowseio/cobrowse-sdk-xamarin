@@ -1,11 +1,11 @@
 using System;
-using CobrowseIOSdk;
+using Xamarin.CobrowseIO;
 using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
 
-namespace CobrowseIOSdk
+namespace Xamarin.CobrowseIO
 {
 	// @interface CBIOAgent : NSObject
 	[BaseType(typeof(NSObject))]
