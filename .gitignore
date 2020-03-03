@@ -407,3 +407,8 @@ ASALocalRun/
 # Unused Xcode builds
 Release-iphoneos
 Release-iphonesimulator
+
+
+# Cake Build related
+tools/**
+!tools/packages.config
