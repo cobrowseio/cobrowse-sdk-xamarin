@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 var target = Argument("target", "Default");
 
 // Patch version code can be set manually
-var PATCH = ".1";
+var PATCH = EnvironmentVariable("COBROWSE_PATCH") ?? string.Empty;
 // NuGet version suffix can be set manually
-var NUGET_SUFFIX = "-pre1";
+var NUGET_SUFFIX = EnvironmentVariable("COBROWSE_NUGET_SUFFIX") ?? string.Empty;
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 
