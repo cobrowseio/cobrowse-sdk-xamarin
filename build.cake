@@ -11,14 +11,17 @@ using Newtonsoft.Json;
 
 var target = Argument("target", "Default");
 
+var slnPath = "./CobrowseIO.sln";
+var buildConfiguration = Argument("configuration", "Release");
+
 // Patch version code can be set manually
-var PATCH = EnvironmentVariable("COBROWSE_PATCH") ?? string.Empty;
+var PATCH = EnvironmentVariable("COBROWSE_PATCH") == null ? string.Empty : '.' + EnvironmentVariable("COBROWSE_PATCH");
 // NuGet version suffix can be set manually
-var NUGET_SUFFIX = EnvironmentVariable("COBROWSE_NUGET_SUFFIX") ?? string.Empty;
+var NUGET_SUFFIX = EnvironmentVariable("COBROWSE_NUGET_SUFFIX") == null ? string.Empty : '-' + EnvironmentVariable("COBROWSE_NUGET_SUFFIX");
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 
-abstract class Artifact {
+class Artifact {
     public string AssemblyInfoPath { get; set; }
     public string NuspecPath { get; set; }
     public string Version { get; set; }
@@ -52,31 +55,56 @@ IosArtifact cobrowseIosExtensionArtifact = new IosArtifact {
     NuspecPath = "CobrowseIO.AppExtension.iOS.nuspec"
 };
 
-AndroidArtifact[] androidArtifacts = new [] {
+AndroidArtifact[] androidCobrowseArtifacts = new [] {
     cobrowseAndroidArtifact
 };
 
-IosArtifact[] iosArtifacts = new [] {
+IosArtifact[] iosCobrowseArtifacts = new [] {
     cobrowseIosArtifact,
     cobrowseIosExtensionArtifact
 };
 
-Artifact[] artifacts = new Artifact[] {
+Artifact[] cobrowseArtifacts = new Artifact[] {
     cobrowseAndroidArtifact,
     cobrowseIosArtifact,
     cobrowseIosExtensionArtifact
 };
 
+Artifact[] allNuGetArtifacts = new Artifact[] {
+    new Artifact {
+        NuspecPath = "./NumbersJava.Android.nuspec"
+    },
+    new Artifact {
+        NuspecPath = "./CborJava.Android.nuspec"
+    },
+    cobrowseAndroidArtifact,
+    cobrowseIosArtifact,
+    cobrowseIosExtensionArtifact,
+    new Artifact {
+        NuspecPath = "./SwiftCBOR.iOS.nuspec"
+    },
+    new Artifact {
+        NuspecPath = "./Starscream.iOS.nuspec"
+    }
+};
+
+
+Task("RestoreNuGetPackages")
+    .Does(() =>
+{
+    NuGetRestore(slnPath);
+});
+
 Task("CleanUp")
     .Does(() =>
 {
-    foreach(var artifact in androidArtifacts) {
+    foreach(var artifact in androidCobrowseArtifacts) {
         if (FileExists(artifact.JarPath)) {
             DeleteFile(artifact.JarPath);
         }
     }
     
-    foreach(var artifact in iosArtifacts) {
+    foreach(var artifact in iosCobrowseArtifacts) {
         if(DirectoryExists(artifact.FrameworkPath)) {
             DeleteDirectory(artifact.FrameworkPath,
                             new DeleteDirectorySettings {
@@ -114,7 +142,7 @@ Task("FindLatestVersions")
 Task("DownloadAndroidJars")
     .Does(() =>
 {
-    foreach(var artifact in androidArtifacts) {
+    foreach(var artifact in androidCobrowseArtifacts) {
         var downloadUrl = string.Format(artifact.DownloadUrl, artifact.Version);
         var jarPath = string.Format(artifact.JarPath, artifact.Version);
 
@@ -125,7 +153,7 @@ Task("DownloadAndroidJars")
 Task("CopyIosFrameworks")
     .Does(() =>
 {
-    foreach(var artifact in iosArtifacts) {
+    foreach(var artifact in iosCobrowseArtifacts) {
         string dirName = System.IO.Path.GetFileName(artifact.FrameworkPath);
         CopyDirectory(POD_CLONE_DIRECTORY + "/" + dirName,
                       artifact.FrameworkPath);
@@ -135,7 +163,7 @@ Task("CopyIosFrameworks")
 Task("UpdateVersions")
     .Does(() => 
 {
-    foreach(var artifact in artifacts) {
+    foreach(var artifact in cobrowseArtifacts) {
         ReplaceRegexInFiles(
             artifact.AssemblyInfoPath, 
             "(?<=AssemblyVersion\\(\")(.+?)(?=\"\\))", 
@@ -157,7 +185,37 @@ Task("UpdateVersions")
     }
 });
 
+Task("Build")
+    .Does(() =>
+{
+    MSBuild(slnPath, settings => settings.SetConfiguration(buildConfiguration));
+});
+
+Task("Pack")
+    .Does(() =>
+{
+    foreach(var artifact in allNuGetArtifacts) {
+        NuGetPackSettings settings = artifact.Version == null
+            ? new NuGetPackSettings()
+            : new NuGetPackSettings {
+                  Version = artifact.Version + PATCH + NUGET_SUFFIX
+              };
+        NuGetPack(artifact.NuspecPath, settings);
+    }
+});
+
+
 Task("Default")
+    .IsDependentOn("RestoreNuGetPackages")
+    .IsDependentOn("CleanUp")
+    .IsDependentOn("FindLatestVersions")
+    .IsDependentOn("DownloadAndroidJars")
+    .IsDependentOn("CopyIosFrameworks")
+    .IsDependentOn("UpdateVersions")
+    .IsDependentOn("Build")
+    .IsDependentOn("Pack");
+
+Task("UpdateBindings")
     .IsDependentOn("CleanUp")
     .IsDependentOn("FindLatestVersions")
     .IsDependentOn("DownloadAndroidJars")
