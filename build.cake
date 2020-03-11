@@ -14,17 +14,14 @@ var target = Argument("target", "Default");
 var slnPath = "./CobrowseIO.sln";
 var buildConfiguration = Argument("configuration", "Release");
 
-// Patch version code can be set manually
-var PATCH = EnvironmentVariable("COBROWSE_PATCH") == null ? string.Empty : '.' + EnvironmentVariable("COBROWSE_PATCH");
-// NuGet version suffix can be set manually
-var NUGET_SUFFIX = EnvironmentVariable("COBROWSE_NUGET_SUFFIX") == null ? string.Empty : '-' + EnvironmentVariable("COBROWSE_NUGET_SUFFIX");
-
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 
 class Artifact {
     public string AssemblyInfoPath { get; set; }
     public string NuspecPath { get; set; }
     public string Version { get; set; }
+    public string Patch { get; set; }
+    public string NugetSuffix { get; set; }
 }
 
 class AndroidArtifact : Artifact {
@@ -40,19 +37,25 @@ AndroidArtifact cobrowseAndroidArtifact = new AndroidArtifact {
     AssemblyInfoPath = "./Android/CobrowseIO.Android/Properties/AssemblyInfo.cs",
     NuspecPath = "./CobrowseIO.Android.nuspec",
     DownloadUrl = "https://jcenter.bintray.com/io/cobrowse/cobrowse-sdk-android/{0}/cobrowse-sdk-android-{0}.aar",
-    JarPath = "./Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar"
+    JarPath = "./Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar",
+    Patch = EnvironmentVariable("COBROWSE_ANDROID_PATCH") == null ? string.Empty : '.' + EnvironmentVariable("COBROWSE_ANDROID_PATCH"),
+    NugetSuffix = EnvironmentVariable("COBROWSE_ANDROID_NUGET_SUFFIX") == null ? string.Empty : '-' + EnvironmentVariable("COBROWSE_ANDROID_NUGET_SUFFIX")
 };
 
 IosArtifact cobrowseIosArtifact = new IosArtifact {
     AssemblyInfoPath = "./iOS/CobrowseIO.iOS/Properties/AssemblyInfo.cs",
     FrameworkPath = "./iOS/CobrowseIO.iOS/CobrowseIO.framework",
-    NuspecPath = "CobrowseIO.iOS.nuspec"
+    NuspecPath = "CobrowseIO.iOS.nuspec",
+    Patch = EnvironmentVariable("COBROWSE_IOS_PATCH") == null ? string.Empty : '.' + EnvironmentVariable("COBROWSE_IOS_PATCH"),
+    NugetSuffix = EnvironmentVariable("COBROWSE_IOS_NUGET_SUFFIX") == null ? string.Empty : '-' + EnvironmentVariable("COBROWSE_IOS_NUGET_SUFFIX")
 };
 
 IosArtifact cobrowseIosExtensionArtifact = new IosArtifact {
     AssemblyInfoPath = "./iOS/CobrowseIO.AppExtension.iOS/Properties/AssemblyInfo.cs",
     FrameworkPath = "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIOAppExtension.framework",
-    NuspecPath = "CobrowseIO.AppExtension.iOS.nuspec"
+    NuspecPath = "CobrowseIO.AppExtension.iOS.nuspec",
+    Patch = EnvironmentVariable("COBROWSE_IOS_PATCH") == null ? string.Empty : '.' + EnvironmentVariable("COBROWSE_IOS_PATCH"),
+    NugetSuffix = EnvironmentVariable("COBROWSE_IOS_NUGET_SUFFIX") == null ? string.Empty : '-' + EnvironmentVariable("COBROWSE_IOS_NUGET_SUFFIX")
 };
 
 AndroidArtifact[] androidCobrowseArtifacts = new [] {
@@ -167,16 +170,16 @@ Task("UpdateVersions")
         ReplaceRegexInFiles(
             artifact.AssemblyInfoPath, 
             "(?<=AssemblyVersion\\(\")(.+?)(?=\"\\))", 
-            artifact.Version + PATCH);
+            artifact.Version + artifact.Patch);
         ReplaceRegexInFiles(
             artifact.AssemblyInfoPath, 
             "(?<=AssemblyInformationalVersion\\(\")(.+?)(?=\"\\))", 
-            artifact.Version + PATCH);
+            artifact.Version + artifact.Patch);
 
         XmlPoke(
             artifact.NuspecPath,
             "/ns:package/ns:metadata/ns:version",
-            artifact.Version + PATCH + NUGET_SUFFIX,
+            artifact.Version + artifact.Patch + artifact.NugetSuffix,
             new XmlPokeSettings {
                 Namespaces = new Dictionary<string, string> {
                 { "ns", "http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd" }
@@ -198,7 +201,7 @@ Task("Pack")
         NuGetPackSettings settings = artifact.Version == null
             ? new NuGetPackSettings()
             : new NuGetPackSettings {
-                  Version = artifact.Version + PATCH + NUGET_SUFFIX
+                  Version = artifact.Version + artifact.Patch + artifact.NugetSuffix
               };
         NuGetPack(artifact.NuspecPath, settings);
     }
