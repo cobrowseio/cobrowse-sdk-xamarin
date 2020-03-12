@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>CobrowseIO.Android</id>
-        <version>2.2.0-pre1</version>
+        <version>2.2.0</version>
         <title>CobrowseIO.Android</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
@@ -15,8 +15,8 @@
         <tags>xamarin, android</tags>
         <dependencies>
             <group targetFramework="MonoAndroid100">
-                <dependency id="NumbersJava.Android" version="1.4.3-pre1" />
-                <dependency id="CborJava.Android" version="4.0.1-pre1" />
+                <dependency id="NumbersJava.Android" version="1.4.3" />
+                <dependency id="CborJava.Android" version="4.0.1" />
                 <dependency id="Square.OkHttp3" version="3.12.6" />
                 <dependency id="Xamarin.AndroidX.Core" version="1.1.0" />
                 <dependency id="Xamarin.AndroidX.AppCompat" version="1.1.0" />

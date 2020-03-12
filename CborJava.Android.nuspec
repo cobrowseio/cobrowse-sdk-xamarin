@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>CborJava.Android</id>
-        <version>4.0.1-pre1</version>
+        <version>4.0.1</version>
         <title>CborJava.Android</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
@@ -13,7 +13,7 @@
         <tags>xamarin, android</tags>
         <dependencies>
             <group targetFramework="MonoAndroid10">
-                <dependency id="NumbersJava.Android" version="1.4.3-pre1" />
+                <dependency id="NumbersJava.Android" version="1.4.3" />
             </group>
         </dependencies>
     </metadata>
