@@ -34,7 +34,7 @@ class Artifact {
                 return null;
             if (string.IsNullOrEmpty(Patch))
                 return new Version(VersionString);
-            return new Version(VersionString + Patch);
+            return new Version(VersionString + "." + Patch);
         }
     }
 }
