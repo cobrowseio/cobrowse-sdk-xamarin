@@ -12,8 +12,6 @@
     <AssemblyName>CobrowseIO.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary</Description>
-    <ReleaseVersion>2.3.2</ReleaseVersion>
-    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

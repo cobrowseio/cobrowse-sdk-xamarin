@@ -138,18 +138,6 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj">
-        <Project>{42D519FB-6597-4CFE-A2B5-9F57BADBE925}</Project>
-        <Name>CobrowseIO.iOS</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\..\iOS\SwiftCBOR.iOS\SwiftCBOR.iOS.csproj">
-        <Project>{89690D1D-E492-4302-A262-1125807A9CF7}</Project>
-        <Name>SwiftCBOR.iOS</Name>
-      </ProjectReference>
-      <ProjectReference Include="..\..\iOS\Starscream.iOS\Starscream.iOS.csproj">
-        <Project>{E19A722D-20E3-4255-8600-F10EFEFBAC16}</Project>
-        <Name>Starscream.iOS</Name>
-      </ProjectReference>
       <ProjectReference Include="..\SampleApp.iOS.BroadcastUploadExtension\SampleApp.iOS.BroadcastUploadExtension.csproj">
         <IsAppExtension>true</IsAppExtension>
         <Project>{146D2039-84E1-428F-8020-23BA03B56795}</Project>
@@ -158,10 +146,13 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Xamarin.Build.Download">
-        <Version>0.8.0</Version>
+        <Version>0.10.0</Version>
       </PackageReference>
-      <PackageReference Include="Xamarin.Swift">
-        <Version>1.0.4</Version>
+      <PackageReference Include="CobrowseIO.iOS">
+        <Version>2.4.0-pre2</Version>
+      </PackageReference>
+      <PackageReference Include="Xamarin.iOS.SwiftRuntimeSupport">
+        <Version>0.2.0</Version>
       </PackageReference>
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
