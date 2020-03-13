@@ -20,6 +20,7 @@ var buildConfiguration = Argument("configuration", "Release");
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 
 class Artifact {
+    public string CsprojFile { get; set; }
     public string AssemblyInfoPath { get; set; }
     public string NuspecPath { get; set; }
     public string VersionString { get; set; }
@@ -49,6 +50,7 @@ class IosArtifact : Artifact {
 }
 
 AndroidArtifact cobrowseAndroidArtifact = new AndroidArtifact {
+    CsprojFile = "./Android/CobrowseIO.Android/CobrowseIO.Android.csproj",
     AssemblyInfoPath = "./Android/CobrowseIO.Android/Properties/AssemblyInfo.cs",
     NuspecPath = "./CobrowseIO.Android.nuspec",
     DownloadUrl = "https://jcenter.bintray.com/io/cobrowse/cobrowse-sdk-android/{0}/cobrowse-sdk-android-{0}.aar",
@@ -58,6 +60,7 @@ AndroidArtifact cobrowseAndroidArtifact = new AndroidArtifact {
 };
 
 IosArtifact cobrowseIosArtifact = new IosArtifact {
+    CsprojFile = "./iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj",
     AssemblyInfoPath = "./iOS/CobrowseIO.iOS/Properties/AssemblyInfo.cs",
     FrameworkPath = "./iOS/CobrowseIO.iOS/CobrowseIO.framework",
     NuspecPath = "CobrowseIO.iOS.nuspec",
@@ -66,6 +69,7 @@ IosArtifact cobrowseIosArtifact = new IosArtifact {
 };
 
 IosArtifact cobrowseIosExtensionArtifact = new IosArtifact {
+    CsprojFile = "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj",
     AssemblyInfoPath = "./iOS/CobrowseIO.AppExtension.iOS/Properties/AssemblyInfo.cs",
     FrameworkPath = "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIOAppExtension.framework",
     NuspecPath = "CobrowseIO.AppExtension.iOS.nuspec",
@@ -90,22 +94,62 @@ Artifact[] cobrowseArtifacts = new Artifact[] {
 
 Artifact[] allNuGetArtifacts = new Artifact[] {
     new Artifact {
+        CsprojFile = "./Android/NumbersJava.Android/NumbersJava.Android.csproj",
         NuspecPath = "./NumbersJava.Android.nuspec"
     },
     new Artifact {
+        CsprojFile = "./Android/CborJava.Android/CborJava.Android.csproj",
         NuspecPath = "./CborJava.Android.nuspec"
     },
     cobrowseAndroidArtifact,
     cobrowseIosArtifact,
     cobrowseIosExtensionArtifact,
     new Artifact {
+        CsprojFile = "./iOS/SwiftCBOR.iOS/SwiftCBOR.iOS.csproj",
         NuspecPath = "./SwiftCBOR.iOS.nuspec"
     },
     new Artifact {
+        CsprojFile = "./iOS/Starscream.iOS/Starscream.iOS.csproj",
         NuspecPath = "./Starscream.iOS.nuspec"
     }
 };
 
+Task("ConfigureNuGetSources")
+    .Does(() =>
+{
+    string apiKey = EnvironmentVariable("NUGET_PRIVATE_FEED_API_KEY");
+    
+    if (string.IsNullOrEmpty(apiKey))
+    {
+        throw new NotSupportedException("No API key was found for the private NuGet feed");
+    }
+    
+    // Generate a new token: https://dev.azure.com/cobrowse-xamarin-sdk/_usersSettings/tokens
+    string privateFeed = "https://pkgs.dev.azure.com/cobrowse-xamarin-sdk/cobrowse-xamarin-sdk-nuget/_packaging/cobrowse-nuget-feed/nuget/v3/index.json";
+    
+    if (!NuGetHasSource(privateFeed))
+    {
+        Information("Private NuGet source is missing, adding...");
+        NuGetAddSource(
+            "cobrowse-nuget-feed",
+            privateFeed,
+            new NuGetSourcesSettings
+            {
+                UserName = "user",
+                Password = apiKey
+            });
+    }
+    else
+    {
+        Information("Private NuGet source already exists");
+    }
+    
+    if (string.IsNullOrEmpty(apiKey))
+    {
+        Warning("No API key was found for the private NuGet feed");
+        return;
+    }
+});
 
 Task("RestoreNuGetPackages")
     .Does(() =>
@@ -145,7 +189,6 @@ Task("FindExistingNuGetVersions")
         if (artifact.ExistingNugetId == null)
             continue;
 
-
         var repository =
                 NuGet.Protocol.FactoryExtensionsV3.GetCoreV3(
                     NuGet.Protocol.Core.Types.Repository.Factory,
@@ -163,10 +206,10 @@ Task("FindExistingNuGetVersions")
             .LastOrDefault();
 
         if (version == null) {
-            Information($"No NuGet version of {artifact.ExistingNugetId} is available");
+            Information("No NuGet version of {0} is available", artifact.ExistingNugetId);
         } else {
             artifact.ExistingNugetVersion = version.Version;
-            Information($"Found version {artifact.ExistingNugetVersion} of {artifact.ExistingNugetId}");
+            Information("Found version {0} of {1}", artifact.ExistingNugetVersion, artifact.ExistingNugetId);
         }
     }
 });
@@ -179,6 +222,8 @@ Task("FindLatestVersions")
     JObject result = ParseJson(responseBody.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
 
     cobrowseAndroidArtifact.VersionString = result["latest_version"].ToString();
+    
+    Information("Latest native Android SDK is {0}", cobrowseAndroidArtifact.VersionString);
     
     if(!DirectoryExists(POD_CLONE_DIRECTORY)) {
         GitClone("https://github.com/cobrowseio/cobrowse-sdk-ios-binary.git", 
@@ -194,6 +239,8 @@ Task("FindLatestVersions")
             @"s\.version = '([\S]*?)'",
             1,
             RegexOptions.Compiled).Value;
+    
+    Information("Latest native iOS SDK is {0}", cobrowseIosArtifact.VersionString);
 });
 
 Task("DownloadAndroidJars")
@@ -245,7 +292,9 @@ Task("UpdateVersions")
 Task("Build")
     .Does(() =>
 {
-    MSBuild(slnPath, settings => settings.SetConfiguration(buildConfiguration));
+    foreach (var artifact in allNuGetArtifacts) {
+        MSBuild(artifact.CsprojFile, settings => settings.SetConfiguration(buildConfiguration));
+    }
 });
 
 Task("Pack")
@@ -274,8 +323,58 @@ Task("Pack")
     }
 });
 
+Task("PushToPrivateFeed")
+    .Does(() =>
+{
+    string apiKey = EnvironmentVariable("NUGET_PRIVATE_FEED_API_KEY");
+    var nugetPackages = GetFiles("./*.nupkg");
+    foreach (var package in nugetPackages)
+    {
+        string name = System.IO.Path.GetFileName(package.FullPath);
+        Information("Publishing {0}", name);
+        NuGetPush(name, new NuGetPushSettings
+        {
+            ApiKey = apiKey,
+            SkipDuplicate = true,
+            Source = "cobrowse-nuget-feed"
+        });
+    }
+});
+
+Task("PushToNuGetOrg")
+    .Does(() =>
+{
+    string apiKey = EnvironmentVariable("NUGET_ORG_API_KEY");
+    
+    if (string.IsNullOrEmpty(apiKey))
+    {
+        Warning("No API key was found for NuGet.org");
+        return;
+    }
+    
+    var nugetPackages = GetFiles("./*.nupkg");
+    foreach (var package in nugetPackages)
+    {
+        string name = System.IO.Path.GetFileName(package.FullPath);
+        bool isPrerelease = name.Contains("-pre");
+        if (isPrerelease)
+        {
+            Information("{0} is a prerelease package, skipping...", name);
+            continue;
+        }
+        Information("Publishing {0}", name);
+        NuGetPush(name, new NuGetPushSettings
+        {
+            ApiKey = apiKey,
+            SkipDuplicate = true,
+            Source = "https://api.nuget.org/v3/index.json"
+        });
+    }
+});
+
 
 Task("Default")
+    .IsDependentOn("ConfigureNuGetSources")
     .IsDependentOn("RestoreNuGetPackages")
     .IsDependentOn("CleanUp")
     .IsDependentOn("FindExistingNuGetVersions")
@@ -284,7 +383,9 @@ Task("Default")
     .IsDependentOn("CopyIosFrameworks")
     .IsDependentOn("UpdateVersions")
     .IsDependentOn("Build")
-    .IsDependentOn("Pack");
+    .IsDependentOn("Pack")
+    .IsDependentOn("PushToPrivateFeed")
+    .IsDependentOn("PushToNuGetOrg");
 
 Task("UpdateBindings")
     .IsDependentOn("CleanUp")
