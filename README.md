@@ -36,6 +36,14 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
 
 *Important: Do this in your `UIApplicationDelegate.FinishedLaunching` implementation to make sure your device shows up in your dashboard right away.*
 
+#### Xamarin.iOS Swift support
+
+Cobrowse.io SDK uses Swift language, and if you are targeting iOS 12.1 or earlier, it is required to add [Xamarin.iOS.SwiftRuntimeSupport]() NuGet dependency to ship specific Swift dylibs used by Cobrowse with your application. 
+
+* [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.SwiftRuntimeSupport.svg?label=Xamarin.iOS.SwiftRuntimeSupport)](https://www.nuget.org/packages/Xamarin.iOS.SwiftRuntimeSupport/)
+
+Please follow [Xamarin documentation](https://github.com/xamarin/XamarinComponents/blob/master/iOS/SwiftRuntimeSupport/readme.txt) describing how to build and publish your Xamarin.iOS application using the Xcode IPA wizard.
+
 ##### Xamarin.Android
 
 To use Cobrowse.io in your Xamarin.Android project, please add the following lines to your Application subclass.
