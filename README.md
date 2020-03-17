@@ -109,23 +109,6 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
 }
 ```
 
-```cs
-using Xamarin.CobrowseIO;
-
-
-[Export("application:didFinishLaunchingWithOptions:")]
-public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
-{
-
-    CobrowseIO.Instance().License = "<your license key here>";
-
-    
-
-    CobrowseIO.Instance().Start();
-
-}
-```
-
 #### Xamarin.Android
 
 ```cs
