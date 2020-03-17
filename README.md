@@ -20,14 +20,17 @@ To use Cobrowse.io in your Xamarin.iOS project, please add the following lines t
 ```cs
 using Xamarin.CobrowseIO;
 
-
-[Export("application:didFinishLaunchingWithOptions:")]
-public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+[Register("AppDelegate")]
+public class AppDelegate : UIResponder, IUIApplicationDelegate
 {
-
-    CobrowseIO.Instance().License = "<your license key here>";
-    CobrowseIO.Instance().Start();
-
+    [Export("application:didFinishLaunchingWithOptions:")]
+    public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        CobrowseIO.Instance().License = "<your license key here>";
+        CobrowseIO.Instance().Start();
+        
+        return true;
+    }
 }
 ```
 
@@ -74,6 +77,41 @@ You may add any custom key/value pairs you'd like, and they will all be searchab
 ```cs
 using Xamarin.CobrowseIO;
 
+[Register("AppDelegate")]
+public class AppDelegate : UIResponder, IUIApplicationDelegate
+{
+    [Export("application:didFinishLaunchingWithOptions:")]
+    public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    {
+        CobrowseIO.Instance().License = "<your license key here>";
+        CobrowseIO.Instance().CustomData = new NSDictionary<NSString, NSObject>(
+            keys: new NSString[]
+            {
+                CBIO.UserIdKey,
+                CBIO.UserNameKey,
+                CBIO.UserEmailKey,
+                CBIO.DeviceIdKey,
+                CBIO.DeviceNameKey,
+            },
+            values: new NSObject[]
+            {
+                new NSString("<your_user_id>"),
+                new NSString("<your_user_name>"),
+                new NSString("<your_user_email>"),
+                new NSString("<your_device_id>"),
+                new NSString("<your_device_name>"),
+            }
+        );
+        CobrowseIO.Instance().Start();
+        
+        return true;
+    }
+}
+```
+
+```cs
+using Xamarin.CobrowseIO;
+
 
 [Export("application:didFinishLaunchingWithOptions:")]
 public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
@@ -81,24 +119,7 @@ public bool FinishedLaunching(UIApplication application, NSDictionary launchOpti
 
     CobrowseIO.Instance().License = "<your license key here>";
 
-    CobrowseIO.Instance().CustomData = new NSDictionary<NSString, NSObject>(
-        keys: new NSString[]
-        {
-            CBIO.UserIdKey,
-            CBIO.UserNameKey,
-            CBIO.UserEmailKey,
-            CBIO.DeviceIdKey,
-            CBIO.DeviceNameKey,
-        },
-        values: new NSObject[]
-        {
-            new NSString("<your_user_id>"),
-            new NSString("<your_user_name>"),
-            new NSString("<your_user_email>"),
-            new NSString("<your_device_id>"),
-            new NSString("<your_device_name>"),
-        }
-    );
+    
 
     CobrowseIO.Instance().Start();
 
