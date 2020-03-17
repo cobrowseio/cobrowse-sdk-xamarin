@@ -10,8 +10,8 @@ Try our **online demo** at the bottom of our homepage at <https://cobrowse.io/#t
 
 We recommend installing the Cobrowse.io SDK using NuGet. Add the following packages to your Xamarin projects:
 
-- iOS: [![NuGet](https://img.shields.io/nuget/v/CobrowseIO.iOS.svg?label=CobrowseIO.iOS)](https://www.nuget.org/packages/CobrowseIO.iOS/)
-- Android: [![NuGet](https://img.shields.io/nuget/v/CobrowseIO.Android.svg?label=CobrowseIO.Android)](https://www.nuget.org/packages/CobrowseIO.Android/)
+- iOS: [![CobrowseIO.iOS NuGet](https://img.shields.io/nuget/v/CobrowseIO.iOS.svg?label=CobrowseIO.iOS)](https://www.nuget.org/packages/CobrowseIO.iOS/)
+- Android: [![CobrowseIO.Android NuGet](https://img.shields.io/nuget/v/CobrowseIO.Android.svg?label=CobrowseIO.Android)](https://www.nuget.org/packages/CobrowseIO.Android/)
 
 #### Xamarin.iOS
 
