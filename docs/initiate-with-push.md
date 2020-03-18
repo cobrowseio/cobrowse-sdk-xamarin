@@ -8,7 +8,7 @@ Try our **online demo** at the bottom of our homepage at <https://cobrowse.io/#t
 
 These are the native-side requirements on iOS and Android to initiate sessions with push. More info at <https://cobrowse.io/docs#initiate-with-push>
 
-## Xamarin.iOS implementation
+### Xamarin.iOS implementation
 
 If you are already using push notifications in your app, there is nothing further required on the native side.
 
@@ -26,7 +26,7 @@ public void OnActivated(UIApplication application)
 }
 ```
 
-## Xamarin.Android implementation
+### Xamarin.Android implementation
 
 You must first add Firebase Cloud Messaging (FCM) to your app. Please see FCM documentation at <https://docs.microsoft.com/en-us/xamarin/android/data-cloud/google-messaging/firebase-cloud-messaging>.
 

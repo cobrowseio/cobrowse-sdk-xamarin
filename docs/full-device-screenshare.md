@@ -98,7 +98,6 @@ Full device remote control for Android uses an accessibility service that must b
 
 Add the following line to one of your resources xml files, eg. in `res/values/bools.xml`:
 
-
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -113,16 +112,19 @@ Enable the accessibility service the Cobrowse SDK will have added in the main de
 We also have built some logic to detect if accessibility service is running, and if not, to deep link the user to the settings to enable it. 
 
 Show the sample UI with:
+
 ```cs
 CobrowseAccessibilityService.ShowSetup(...)
 ```
 
 Check if accessibility service is already running with:
+
 ```cs
 CobrowseAccessibilityService.IsRunning(...)
 ```
 
 Deep link user to accessibility settings with:
+
 ```cs
 Intent intent = new Intent(global::Android.Provider.Settings.ActionAccessibilitySettings);
 intent.AddFlags(ActivityFlags.NewTask);

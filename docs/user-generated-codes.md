@@ -10,7 +10,7 @@ These are the native-side requirements on iOS and Android to initiate sessions u
 
 You may expose a small UI in your app for users to generate a 6-digit code that they pass to an agent over the phone or chat to initiate a session.
 
-## Xamarin.iOS implementation
+### Xamarin.iOS implementation
 
 To setup user-initiated sessions:
 
@@ -34,7 +34,7 @@ namespace SampleApp.iOS
 
 For a full example written in C#, see our sample app at: <https://github.com/cobrowseio/cobrowse-sdk-xamarin>
 
-## Xamarin.Android implementation
+### Xamarin.Android implementation
 
 We have provided some default UI to make things easier to get started:
 
@@ -56,7 +56,7 @@ namespace SampleApp.Android
 }
 ```
 
-## Xamarin.Forms implementation
+### Xamarin.Forms implementation
 
 While it is not possible to access platform-specific code directly from a cross-platform project, you can easily achive it using [DependencyService](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/dependency-service/introduction).
 
