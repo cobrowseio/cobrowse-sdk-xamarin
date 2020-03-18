@@ -71,7 +71,7 @@ Open Info.plist of the extension project and make sure that `NSExtension` sectio
 ```xml
 <plist version="1.0">
 <dict>
-    ...
+	...
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
