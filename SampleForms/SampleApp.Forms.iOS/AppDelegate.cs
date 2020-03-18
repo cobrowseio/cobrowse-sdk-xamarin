@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Foundation;
 using UIKit;
 using Xamarin.CobrowseIO;
+using Xamarin.Forms.Platform.iOS;
 
 namespace SampleApp.Forms.iOS
 {
@@ -60,6 +61,41 @@ namespace SampleApp.Forms.iOS
 
             public CustomCobrowseDelegate(System.IntPtr handle) : base(handle)
             {
+            }
+
+            private UIView _indicatorInstance;
+
+            public override void CobrowseShowSessionControls(CBIOSession session)
+            {
+                if (_indicatorInstance == null)
+                {
+                    _indicatorInstance = GetDefaultSessionIndicator(container: UIApplication.SharedApplication.KeyWindow);
+                }
+                _indicatorInstance.Hidden = false;
+            }
+
+            public override void CobrowseHideSessionControls(CBIOSession session)
+            {
+                if (_indicatorInstance != null)
+                    _indicatorInstance.Hidden = true;
+            }
+
+            private UIView GetDefaultSessionIndicator(UIView container)
+            {
+                var indicator = new CobrowseCustomView();
+                var renderer = Platform.CreateRenderer(indicator);
+                renderer.Element.Layout(new Xamarin.Forms.Rectangle(0, 0, indicator.WidthRequest, indicator.HeightRequest));
+                var nativeIndicator = renderer.NativeView;
+                nativeIndicator.TranslatesAutoresizingMaskIntoConstraints = false;
+
+                container.AddSubview(nativeIndicator);
+
+                nativeIndicator.WidthAnchor.ConstraintEqualTo((float)indicator.WidthRequest).Active = true;
+                nativeIndicator.HeightAnchor.ConstraintEqualTo((float)indicator.HeightRequest).Active = true;
+                nativeIndicator.CenterYAnchor.ConstraintEqualTo(container.CenterYAnchor).Active = true;
+                nativeIndicator.RightAnchor.ConstraintEqualTo(container.RightAnchor, constant: -20f).Active = true;
+
+                return nativeIndicator;
             }
 
             public override void CobrowseSessionDidUpdate(CBIOSession session)

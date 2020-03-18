@@ -6,5 +6,7 @@ namespace SampleApp.Forms
         void StartCobrowse();
 
         void CheckCobrowseFullDevice();
+
+        void EndCurrentSession();
     }
 }

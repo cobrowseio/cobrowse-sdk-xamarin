@@ -46,26 +46,66 @@ namespace SampleApp.iOS
             // If not required for your application you can safely delete this method
             return true;
         }
+    }
 
-        public class CustomCobrowseDelegate : CobrowseIODelegate
+    public class CustomCobrowseDelegate : CobrowseIODelegate
+    {
+        // Sample end session UIView, constructor, and tap gesture recognizer implementation
+        private UIView _indicatorInstance;
+
+        public override void CobrowseShowSessionControls(CBIOSession session)
         {
-            public CustomCobrowseDelegate()
+            // You can render controls however you like here.
+            // One option is to add our sample end session UI defined below.
+            if (_indicatorInstance == null)
             {
+                _indicatorInstance = GetDefaultSessionIndicator(container: UIApplication.SharedApplication.KeyWindow);
             }
+            _indicatorInstance.Hidden = false;
+        }
 
-            public CustomCobrowseDelegate(System.IntPtr handle) : base(handle)
-            {
-            }
+        public override void CobrowseHideSessionControls(CBIOSession session)
+        {
+            if (_indicatorInstance != null)
+                _indicatorInstance.Hidden = true;
+        }
 
-            public override void CobrowseSessionDidUpdate(CBIOSession session)
-            {
-                Debug.WriteLine("CobrowseSessionDidUpdate");
-            }
+        private UIView GetDefaultSessionIndicator(UIView container)
+        {
+            var indicator = new UILabel();
+            indicator.BackgroundColor = new UIColor(red: 1.0f, green: 0.0f, blue: 0.0f, alpha: 0.7f);
+            indicator.Text = "End Session";
+            indicator.UserInteractionEnabled = true;
+            indicator.TextAlignment = UITextAlignment.Center;
+            indicator.Font.WithSize(UIFont.SmallSystemFontSize);
+            indicator.TextColor = UIColor.White;
+            indicator.Layer.CornerRadius = 10;
+            indicator.ClipsToBounds = true;
+            indicator.TranslatesAutoresizingMaskIntoConstraints = false;
+            container.AddSubview(indicator);
 
-            public override void CobrowseSessionDidEnd(CBIOSession session)
+            indicator.WidthAnchor.ConstraintEqualTo(200f).Active = true;
+            indicator.HeightAnchor.ConstraintEqualTo(40f).Active = true;
+            indicator.CenterXAnchor.ConstraintEqualTo(container.CenterXAnchor).Active = true;
+            indicator.BottomAnchor.ConstraintEqualTo(container.BottomAnchor, constant: -20f).Active = true;
+
+            var tapRecognizer = new UITapGestureRecognizer(() =>
             {
-                Debug.WriteLine("CobrowseSessionDidEnd");
-            }
+                CobrowseIO.Instance().CurrentSession?.End(null);
+            });
+            tapRecognizer.NumberOfTapsRequired = 1;
+            indicator.AddGestureRecognizer(tapRecognizer);
+            return indicator;
+        }
+
+        public override void CobrowseSessionDidUpdate(CBIOSession session)
+        {
+            Debug.WriteLine("CobrowseSessionDidUpdate");
+        }
+
+        public override void CobrowseSessionDidEnd(CBIOSession session)
+        {
+            Debug.WriteLine("CobrowseSessionDidEnd");
         }
     }
 }
