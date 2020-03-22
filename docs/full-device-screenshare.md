@@ -42,15 +42,15 @@ Take the bundle ID of the **extension** you created above, and add the following
 <string>your.app.extension.bundle.ID.here</string>
 ```
 
-**Add the new target to your Podfile**
+**Add the Cobrowse.io AppExntesion NuGet**
 
-The app extension needs a dependency on the CobrowseIO app extension framework. Add the following NuGet to the **extension project**:
+The app extension needs a dependency on the CobrowseIO app extension framework. Add the following NuGet to the **extension project** (not to the iOS app project):
 
 - [![CobrowseIO.AppExtension.iOS NuGet](https://img.shields.io/nuget/v/CobrowseIO.AppExtension.iOS.svg?label=CobrowseIO.AppExtension.iOS)](https://www.nuget.org/packages/CobrowseIO.AppExtension.iOS/)
 
 **Implement the extension**
 
-Xcode will have added `SampleHandler.cs` file as part of the extension project you created earlier. Replace the content of the file with the following:
+Visual Studio will have added `SampleHandler.cs` file as part of the extension project you created earlier. Replace the content of the file with the following:
 
 ```cs
 using Xamarin.CobrowseIO.AppExtension;
