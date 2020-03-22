@@ -148,7 +148,7 @@ namespace YourAppNamespace.iOS
 }
 ```
 
-**iOS-specific** platform Effect would look like this:
+**Android-specific** platform Effect would look like this:
 
 ```cs
 using System.Collections.Generic;
