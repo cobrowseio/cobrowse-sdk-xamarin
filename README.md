@@ -42,9 +42,18 @@ Cobrowse.io SDK uses Swift language, and if you are targeting iOS 12.1 or earlie
 
 * [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.SwiftRuntimeSupport.svg?label=Xamarin.iOS.SwiftRuntimeSupport)](https://www.nuget.org/packages/Xamarin.iOS.SwiftRuntimeSupport/)
 
-Please follow [Xamarin documentation](https://github.com/xamarin/XamarinComponents/blob/master/iOS/SwiftRuntimeSupport/readme.txt) describing how to build and publish your Xamarin.iOS application using the Xcode IPA wizard.
+This NuGet copiese the necessary Swift libraries in the right place when building your app or when generating the archive of the app (not the IPA).
 
-##### Xamarin.Android
+This NuGet, however, does not copy the Swift libraries in he right place when generating the IPA using Visual Studio, causing the rejection of the App Store when uploading the IPA. Please follow [Xamarin documentation](https://github.com/xamarin/XamarinComponents/blob/master/iOS/SwiftRuntimeSupport/readme.txt) describing how to build and publish your Xamarin.iOS application using the Xcode IPA wizard. The steps are:
+
+1. In Visual Studio, select a valid iOS device before archiving.
+2. Go to *Build* menu → *Archive for Publishing*
+3. Once done, open Xcode and go to *Window* → *Organizer*
+4. Select the *Archives* tab
+5. On the left side of the window, select your app
+6. Click on *Distribute App* button and follow the wizard
+
+#### Xamarin.Android
 
 To use Cobrowse.io in your Xamarin.Android project, please add the following lines to your Application subclass.
 
