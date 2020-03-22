@@ -25,5 +25,10 @@ namespace SampleApp.Forms.iOS
         {
             return;
         }
+
+        public void EndCurrentSession()
+        {
+            CobrowseIO.Instance().CurrentSession?.End(null);
+        }
     }
 }

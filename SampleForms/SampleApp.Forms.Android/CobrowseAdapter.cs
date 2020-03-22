@@ -39,5 +39,10 @@ namespace SampleApp.Forms.Android
                 ToastLength.Short)
                 .Show();
         }
+
+        public void EndCurrentSession()
+        {
+            CobrowseIO.Instance().CurrentSession()?.End(null);
+        }
     }
 }
