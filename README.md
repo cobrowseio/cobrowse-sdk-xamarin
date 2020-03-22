@@ -73,7 +73,13 @@ public class MainApplication : Application
 }
 ```
 
-**Important:** Make sure you do this in your custom Application subclass `OnCreate()` to ensure devices register in your dashboard right away.
+**Important:** 
+
+- Make sure you do this in your custom Application subclass `OnCreate()` to ensure devices register in your dashboard right away.
+- Also make sure you are targeting Android 10 (API 29). In Visual Studio:
+    - Open the project settings
+    - Navigate to *Build* → *General*
+    - In *"Compile using Android version: (Target Framework)*" drop-down list choose **Android 10.0 (Q)**
 
 You may also start CobrowseIO in your `MainActivity` or other Activity if necessary. In that case, the SDK will continue to function even as new Activities are being created and destroyed.
 
