@@ -48,7 +48,7 @@ If making changes to your Activity classes isn't an option, we also support a de
 
 #### Xamarin.Forms implementation
 
-While it is not possible to access platform-specific UI code directly from a cross-platform project, you can easily achive it using [Effects](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/effects/introduction) and [Custom Renderers](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/).
+While it is not possible to access platform-specific UI code directly from a cross-platform project, you can easily achieve it using [Effects](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/effects/introduction) and [Custom Renderers](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/custom-renderer/).
 
 In your **cross-platform** project declare a new `Effect` for marking Xamarin.Forms UI elements as *redacted*:
 
