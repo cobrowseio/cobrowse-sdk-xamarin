@@ -58,7 +58,7 @@ namespace SampleApp.Android
 
 ### Xamarin.Forms implementation
 
-While it is not possible to access platform-specific code directly from a cross-platform project, you can easily achive it using [DependencyService](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/dependency-service/introduction).
+While it is not possible to access platform-specific code directly from a cross-platform project, you can easily achieve it using [DependencyService](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/dependency-service/introduction).
 
 In your **cross-platform** project declare an interface for accessing Cobrowse.io SDK:
 
