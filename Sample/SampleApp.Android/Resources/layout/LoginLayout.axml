@@ -14,26 +14,30 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:id="@+id/button_launch_cobrowse"
-            android:text="Launch Cobrowse.io"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/button_check_cobrowse_full_device"
-            android:text="Check Full-Device Control\nconfiguration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/button_open_login_view"
-            android:text="Open Activity with redacted views"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+        <TextView
+            android:text="Dummy Login"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/button_show_device_id"
-            android:text="Show Cobrowse.io DeviceId"
+        <EditText
+            android:id="@+id/edittext_login"
+            android:hint="Login"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edittext_password"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="Log In"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
