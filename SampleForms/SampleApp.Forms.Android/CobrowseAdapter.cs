@@ -18,6 +18,8 @@ namespace SampleApp.Forms.Android
         {
         }
 
+        public string DeviceId => CobrowseIO.Instance().DeviceId(Activity.Application);
+
         public void StartCobrowse()
         {
             var intent = new Intent(Activity, typeof(CobrowseActivity));

@@ -18,16 +18,28 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Entry
+        <Label
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Keyboard="Email"
-            Placeholder="Email" />
+            Text="Dummy Login"
+            FontSize="Large"
+            HorizontalTextAlignment="Center" />
         <Entry
             Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Keyboard="Email"
+            Placeholder="Email">
+            <Entry.Effects>
+                <effects:CobrowseRedactedViewEffect />
+            </Entry.Effects>
+        </Entry>
+        <Entry
+            Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             IsPassword="True"
@@ -37,7 +49,7 @@
             </Entry.Effects>
         </Entry>
         <Button
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="1"
             Text="Log In" />
     </Grid>

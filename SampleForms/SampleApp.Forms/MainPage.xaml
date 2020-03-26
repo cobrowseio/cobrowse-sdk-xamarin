@@ -7,14 +7,13 @@
     mc:Ignorable="d"
     x:Class="SampleApp.Forms.MainPage"
     Title="Cobrowse.io SDK Xamarin.Forms">
-    <StackLayout
-        VerticalOptions="CenterAndExpand">
+    <StackLayout>
         <Button
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
             Text="Start Cobrowse.io"
             Clicked="CobrowseButton_Clicked" />
         <Button
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
             Text="Check Full-Device Control&#x0a;configuration"
             Clicked="CheckCobrowseFullDevice_Clicked">
             <Button.IsVisible>
@@ -26,8 +25,12 @@
             </Button.IsVisible>
         </Button>
         <Button
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
             Text="Open Page with redacted views"
             Clicked="PageRedactedViews_Clicked" />
+        <Button
+            HorizontalOptions="FillAndExpand"
+            Text="Show Cobrowse.io DeviceId"
+            Clicked="CobrowseUserId_Clicked" />
     </StackLayout>
 </ContentPage>

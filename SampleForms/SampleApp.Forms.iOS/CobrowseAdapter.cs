@@ -12,6 +12,8 @@ namespace SampleApp.Forms.iOS
         {
         }
 
+        public string DeviceId => CobrowseIO.Instance().DeviceId;
+
         public void StartCobrowse()
         {
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;

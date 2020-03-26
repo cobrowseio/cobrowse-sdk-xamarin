@@ -28,5 +28,14 @@ namespace SampleApp.Forms
         {
             this.Navigation.PushAsync(new LoginPage());
         }
+
+        private void CobrowseUserId_Clicked(object sender, EventArgs e)
+        {
+            string userId = DependencyService.Get<ICobrowseAdapter>().DeviceId;
+            this.DisplayAlert(
+                title: "Cobrowse.io",
+                message: $"Cobrowse.io DeviceId: {userId}",
+                cancel: "OK");
+        }
     }
 }
