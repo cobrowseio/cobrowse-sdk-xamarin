@@ -123,6 +123,7 @@
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
+        <InterfaceDefinition Include="LoginViewController.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -135,6 +136,10 @@
         <Compile Include="ViewController.cs" />
         <Compile Include="ViewController.designer.cs">
             <DependentUpon>ViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="LoginViewController.cs" />
+        <Compile Include="LoginViewController.designer.cs">
+          <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
     </ItemGroup>
     <ItemGroup>

@@ -16,6 +16,8 @@ namespace SampleApp.iOS
             // Perform any additional setup after loading the view, typically from a nib.
 
             this.buttonCobrowse.TouchUpInside += ButtonCobrowse_TouchUpInside;
+            this.buttonRedactedViews.TouchUpInside += ButtonRedactedViews_TouchUpInside;
+            this.buttonDeviceId.TouchUpInside += ButtonDeviceId_TouchUpInside;
         }
 
         public override void DidReceiveMemoryWarning()
@@ -29,6 +31,24 @@ namespace SampleApp.iOS
             this.NavigationController.PushViewController(
                 new CBIOViewController(),
                 animated: true);
+        }
+
+        private void ButtonRedactedViews_TouchUpInside(object sender, EventArgs e)
+        {
+            this.NavigationController.PushViewController(
+                new LoginViewController(),
+                animated: true);
+        }
+
+        private void ButtonDeviceId_TouchUpInside(object sender, EventArgs e)
+        {
+            var alert = new UIAlertView
+            {
+                Title = "Cobrowse.io",
+                Message = $"Cobrowse.io DeviceId: {CobrowseIO.Instance().DeviceId}"
+            };
+            alert.AddButton("OK");
+            alert.Show();
         }
     }
 }

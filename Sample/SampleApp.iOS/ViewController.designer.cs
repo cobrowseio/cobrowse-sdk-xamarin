@@ -18,11 +18,29 @@ namespace SampleApp.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton buttonCobrowse { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton buttonDeviceId { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton buttonRedactedViews { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (buttonCobrowse != null) {
                 buttonCobrowse.Dispose ();
                 buttonCobrowse = null;
+            }
+
+            if (buttonDeviceId != null) {
+                buttonDeviceId.Dispose ();
+                buttonDeviceId = null;
+            }
+
+            if (buttonRedactedViews != null) {
+                buttonRedactedViews.Dispose ();
+                buttonRedactedViews = null;
             }
         }
     }
