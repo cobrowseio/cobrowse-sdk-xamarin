@@ -271,5 +271,52 @@ public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionContr
 }
 ```
 
+## Customizing the 6 Digit Code screen
+
+You can build your own UI to completely replace the default UI we provide for generating 6 digit codes. You can generate a code for your UI by using the `CreateSession` API:
+
+**iOS**:
+
+```cs
+CobrowseIO.Instance().CreateSession((NSError error, CBIOSession session) =>
+{
+    if (error != null)
+    {
+        Debug.WriteLine("Error creating code: {0}", error);
+    }
+    else
+    {
+        Debug.WriteLine("Created session code: {0}", error.Code);
+    }
+});
+```
+
+**Note:** the codes expire shortly after creation (codes last less than 10 minutes), so wait until your user is ready to share the code with an agent before generating it:
+
+You can monitor changes in the state of the session you create using the CobrowseIO delegate methods:
+
+**iOS**:
+
+```cs
+public void CobrowseSessionDidUpdate (CBIOSession session);
+public void CobrowseSessionDidEnd (CBIOSession session);
+```
+
+**Android**:
+
+```cs
+void SessionDidUpdate (Session session);
+void SessionDidEnd (Session session);
+```
+
+You can get information about the state of the session using the following methods, which may adjust the UI you are showing:
+
+| iOS | Android | Description |
+| --- | --- | --- |
+| CBIOSession.IsPending | Session.IsPending | Session has been created but is waiting for agent or user |
+| CBIOSession.IsAuthorizing | Session.IsAuthorizing | Waiting for the user to confirm the session |
+| CBIOSession.IsActive | Session.IsActive | Session running, frames are streaming to the agent |
+| CBIOSession.IsEnded | Session.IsEnded | Session is over and can no longer be used or edited|
+
 ## Questions?
 Any questions at all? Please email us directly at [hello@cobrowse.io](mailto:hello@cobrowse.io).
