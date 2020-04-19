@@ -21,6 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/button_launch_cobrowse_custom_ui"
+            android:text="Launch Cobrowse.io (Custom UI)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
             android:id="@+id/button_check_cobrowse_full_device"
             android:text="Check Full-Device Control\nconfiguration"
             android:layout_width="match_parent"
