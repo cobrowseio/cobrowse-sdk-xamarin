@@ -43,9 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CobrowseCallback.cs" />
-    <Compile Include="CobrowseSessionListener.cs" />
-    <Compile Include="CobrowseIO.cs" />
+    <Compile Include="Additions\CobrowseCallback.cs" />
+    <Compile Include="Additions\CobrowseIO.cs" />
+    <Compile Include="Additions\CobrowseSessionListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
