@@ -32,11 +32,11 @@ namespace SampleApp.Forms.Android
             base.OnCreate();
             CrossCurrentActivity.Current.Init(this);
 
-            CobrowseIO.Instance().License("trial");
+            CobrowseIO.Instance().SetLicense("trial");
 
-            Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance().DeviceId(this));
+            Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance().GetDeviceId(this));
 
-            var customData = new Dictionary<string, Java.Lang.Object>()
+            var customData = new Dictionary<string, object>()
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
@@ -44,7 +44,7 @@ namespace SampleApp.Forms.Android
                 { CobrowseIO.DeviceIdKey, "<your_device_id>" },
                 { CobrowseIO.DeviceNameKey, "<your_device_name>" },
             };
-            CobrowseIO.Instance().CustomData(customData);
+            CobrowseIO.Instance().SetCustomData(customData);
 
             CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
             CobrowseIO.Instance().Start(this);

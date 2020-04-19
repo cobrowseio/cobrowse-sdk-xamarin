@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Foundation;
 using UIKit;
@@ -22,28 +23,19 @@ namespace SampleApp.Forms.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            CobrowseIO.Instance().License = "trial";
+            CobrowseIO.Instance().SetLicense("trial");
             Console.WriteLine($"Cobrowse device id: {CobrowseIO.Instance().DeviceId}");
 
-            CobrowseIO.Instance().Delegate = new CustomCobrowseDelegate();
-            CobrowseIO.Instance().CustomData = new NSDictionary<NSString, NSObject>(
-                keys: new NSString[]
-                {
-                    CBIO.UserIdKey,
-                    CBIO.UserNameKey,
-                    CBIO.UserEmailKey,
-                    CBIO.DeviceIdKey,
-                    CBIO.DeviceNameKey,
-                },
-                values: new NSObject[]
-                {
-                    new NSString("<your_user_id>"),
-                    new NSString("<your_user_name>"),
-                    new NSString("<your_user_email>"),
-                    new NSString("<your_device_id>"),
-                    new NSString("<your_device_name>"),
-                }
-            );
+            CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
+            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>
+            {
+                { CobrowseIO.UserIdKey, "<your_user_id>" },
+                { CobrowseIO.UserNameKey, "<your_user_name>" },
+                { CobrowseIO.UserEmailKey, "<your_user_email>" },
+                { CobrowseIO.DeviceIdKey, "<your_device_id>" },
+                { CobrowseIO.DeviceNameKey, "<your_device_name>" },
+                { "custom_field", 5.75f }
+            });
 
             CobrowseIO.Instance().Start();
 

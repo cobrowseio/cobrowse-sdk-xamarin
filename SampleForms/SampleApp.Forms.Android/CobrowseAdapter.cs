@@ -18,7 +18,7 @@ namespace SampleApp.Forms.Android
         {
         }
 
-        public string DeviceId => CobrowseIO.Instance().DeviceId(Activity.Application);
+        public string DeviceId => CobrowseIO.Instance().GetDeviceId(Activity.Application);
 
         public void StartCobrowse()
         {
@@ -44,7 +44,7 @@ namespace SampleApp.Forms.Android
 
         public void EndCurrentSession()
         {
-            CobrowseIO.Instance().CurrentSession()?.End(null);
+            CobrowseIO.Instance().CurrentSession?.End(null);
         }
     }
 }
