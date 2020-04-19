@@ -5,7 +5,7 @@ namespace Xamarin.CobrowseIO
 {
     public partial class CobrowseIO
     {
-        public void SetCustomData(Dictionary<string, object> customData)
+        public void SetCustomData(IDictionary<string, object> customData)
         {
             if (customData == null)
             {

@@ -19,7 +19,7 @@ namespace Xamarin.CobrowseIO
 
         public static NSString DeviceNameKey { get; } = new NSString("device_name");
 
-        public void SetCustomData(Dictionary<string, string> customData)
+        public void SetCustomData(IDictionary<string, string> customData)
         {
             if (customData == null)
             {
@@ -43,7 +43,7 @@ namespace Xamarin.CobrowseIO
             this.CustomData = customData;
         }
 
-        public void SetCustomData(Dictionary<string, object> customData)
+        public void SetCustomData(IDictionary<string, object> customData)
         {
             if (customData == null)
             {
