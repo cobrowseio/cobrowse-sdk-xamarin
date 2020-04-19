@@ -94,13 +94,13 @@ namespace SampleApp.Android
         {
             base.OnResume();
 
-            Session current = CobrowseIO.Instance().CurrentSession();
+            Session current = CobrowseIO.Instance().CurrentSession;
             if (current != null)
             {
                 ListenTo(current);
             }
 
-            if (CobrowseIO.Instance().CurrentSession() == null || CobrowseIO.Instance().CurrentSession().IsEnded)
+            if (CobrowseIO.Instance().CurrentSession == null || CobrowseIO.Instance().CurrentSession.IsEnded)
             {
                 CreateSession(new CobrowseCallback((err, session) =>
                 {
@@ -115,13 +115,13 @@ namespace SampleApp.Android
                 }));
             }
 
-            Render(CobrowseIO.Instance().CurrentSession());
+            Render(CobrowseIO.Instance().CurrentSession);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            Session s = CobrowseIO.Instance().CurrentSession();
+            Session s = CobrowseIO.Instance().CurrentSession;
             if (s != null && s.IsPending)
             {
                 s.End(null);
@@ -131,7 +131,7 @@ namespace SampleApp.Android
         [Export("endSessionClicked")]
         public void EndSessionClicked(View view)
         {
-            Session session = CobrowseIO.Instance().CurrentSession();
+            Session session = CobrowseIO.Instance().CurrentSession;
             if (session != null)
             {
                 session.End(new CobrowseCallback((JError e, Session s) =>

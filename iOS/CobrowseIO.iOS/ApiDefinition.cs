@@ -261,6 +261,7 @@ namespace Xamarin.CobrowseIO
 	{
 		// @property CBLicense * _Nonnull license;
 		[Export("license")]
+		[Internal]
 		string License { get; set; }
 
 		// @property NSString * _Nonnull api;
@@ -269,10 +270,12 @@ namespace Xamarin.CobrowseIO
 
 		// @property NSDictionary<NSString *,NSObject *> * _Nonnull customData;
 		[Export("customData", ArgumentSemantic.Assign)]
+		[Internal]
 		NSDictionary<NSString, NSObject> CustomData { get; set; }
 
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
+		[Internal]
 		CobrowseIODelegate Delegate { get; set; }
 
 		// @property id<CobrowseIODelegate> _Nullable delegate;
