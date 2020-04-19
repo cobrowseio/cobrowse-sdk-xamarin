@@ -26,7 +26,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     [Export("application:didFinishLaunchingWithOptions:")]
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
-        CobrowseIO.Instance().License = "<your license key here>";
+        CobrowseIO.Instance().SetLicense("<your license key here>");
         CobrowseIO.Instance().Start();
         
         return true;
@@ -67,7 +67,7 @@ public class MainApplication : Application
     {
         base.OnCreate();
 
-        CobrowseIO.Instance().License("<your license key here>");
+        CobrowseIO.Instance().SetLicense("<your license key here>");
         CobrowseIO.Instance().Start(this);
     }
 }
@@ -108,25 +108,15 @@ namespace YourAppNamespace
         [Export("application:didFinishLaunchingWithOptions:")]
         public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            CobrowseIO.Instance().License = "<your license key here>";
-            CobrowseIO.Instance().CustomData = new NSDictionary<NSString, NSObject>(
-                keys: new NSString[]
-                {
-                    CBIO.UserIdKey,
-                    CBIO.UserNameKey,
-                    CBIO.UserEmailKey,
-                    CBIO.DeviceIdKey,
-                    CBIO.DeviceNameKey,
-                },
-                values: new NSObject[]
-                {
-                    new NSString("<your_user_id>"),
-                    new NSString("<your_user_name>"),
-                    new NSString("<your_user_email>"),
-                    new NSString("<your_device_id>"),
-                    new NSString("<your_device_name>"),
-                }
-            );
+            CobrowseIO.Instance().SetLicense("<your license key here>");
+            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>()
+            {
+                { CobrowseIO.UserIdKey, "<your_user_id>" },
+                { CobrowseIO.UserNameKey, "<your_user_name>" },
+                { CobrowseIO.UserEmailKey, "<your_user_email>" },
+                { CobrowseIO.DeviceIdKey, "<your_device_id>" },
+                { CobrowseIO.DeviceNameKey, "<your_device_name>" }
+            });
             CobrowseIO.Instance().Start();
             
             return true;
@@ -149,18 +139,15 @@ namespace YourAppNamespace
         {
             base.OnCreate();
 
-            CobrowseIO.Instance().License("<your license key here>");
-
-            var customData = new Dictionary<string, Java.Lang.Object>()
+            CobrowseIO.Instance().SetLicense("<your license key here>");
+            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
                 { CobrowseIO.UserEmailKey, "<your_user_email>" },
                 { CobrowseIO.DeviceIdKey, "<your_device_id>" },
-                { CobrowseIO.DeviceNameKey, "<your_device_name>" },
-            };
-            CobrowseIO.Instance().CustomData(customData);
-
+                { CobrowseIO.DeviceNameKey, "<your_device_name>" }
+            });
             CobrowseIO.Instance().Start(this);
         }
     }

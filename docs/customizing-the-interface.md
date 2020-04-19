@@ -19,7 +19,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     [Export("application:didFinishLaunchingWithOptions:")]
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
-        CobrowseIO.Instance().Delegate = new CustomCobrowseDelegate();
+        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
         // ... the rest of your app setup
         return true;
     }
@@ -153,7 +153,7 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 {
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
-        CobrowseIO.Instance().Delegate = new CustomCobrowseDelegate();
+        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
         // and the rest of cobrowse setup ...
     }
 }

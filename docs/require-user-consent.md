@@ -20,7 +20,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
         // ... the rest of your app setup
-        CobrowseIO.Instance().Delegate = new CustomCobrowseDelegate();
+        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
         return true;
     }
 }
