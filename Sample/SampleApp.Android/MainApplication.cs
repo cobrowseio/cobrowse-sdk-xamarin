@@ -62,7 +62,7 @@ namespace SampleApp.Android
         public void HandleSessionRequest(Activity activity, Session session)
         {
             Debug.WriteLine("HandleSessionRequest");
-            session.Activate(null);
+            session.Activate(callback: null);
         }
 
         public void SessionDidEnd(Session session)

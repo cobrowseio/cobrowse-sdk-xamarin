@@ -25,5 +25,15 @@ namespace Xamarin.CobrowseIO
             }
             this.SetCustomJavaData(javaCustomData);
         }
+
+        public void CreateSession(CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        {
+            this.CreateSession(new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
+        }
+
+        public void GetSession(string idOrCode, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        {
+            this.GetSession(idOrCode, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
+        }
     }
 }

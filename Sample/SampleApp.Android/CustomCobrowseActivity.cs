@@ -32,9 +32,9 @@ namespace SampleApp.Android
             transaction.Commit();
         }
 
-        protected void CreateSession(CobrowseCallback callback)
+        protected void CreateSession(CobrowseCallbackDelegate<JError, Session> callback)
         {
-            CobrowseIO.Instance().CreateSession(new CobrowseCallback((err, session) =>
+            CobrowseIO.Instance().CreateSession((err, session) =>
             {
                 if (err != null)
                 {
@@ -44,8 +44,8 @@ namespace SampleApp.Android
                 {
                     Render(session);
                 }
-                if (callback != null) callback.Call(err, session);
-            }));
+                callback?.Invoke(err, session);
+            });
         }
 
         protected void ShowError(JError e)
@@ -102,7 +102,7 @@ namespace SampleApp.Android
 
             if (CobrowseIO.Instance().CurrentSession == null || CobrowseIO.Instance().CurrentSession.IsEnded)
             {
-                CreateSession(new CobrowseCallback((err, session) =>
+                CreateSession((JError err, Session session) =>
                 {
                     if (err != null)
                     {
@@ -112,7 +112,7 @@ namespace SampleApp.Android
                     {
                         ListenTo(session);
                     }
-                }));
+                });
             }
 
             Render(CobrowseIO.Instance().CurrentSession);
@@ -124,7 +124,7 @@ namespace SampleApp.Android
             Session s = CobrowseIO.Instance().CurrentSession;
             if (s != null && s.IsPending)
             {
-                s.End(null);
+                s.End(callback: null);
             }
         }
 
@@ -134,7 +134,7 @@ namespace SampleApp.Android
             Session session = CobrowseIO.Instance().CurrentSession;
             if (session != null)
             {
-                session.End(new CobrowseCallback((JError e, Session s) =>
+                session.End((JError e, Session s) =>
                 {
                     if (e != null)
                     {
@@ -144,7 +144,7 @@ namespace SampleApp.Android
                     {
                         Finish();
                     }
-                }));
+                });
             }
         }
     }

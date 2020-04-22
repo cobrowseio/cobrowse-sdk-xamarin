@@ -88,7 +88,7 @@ namespace SampleApp.Forms.Android
         /// </summary>
         public void EndCurrentSession()
         {
-            CobrowseIO.Instance().CurrentSession?.End(null);
+            CobrowseIO.Instance().CurrentSession?.End(callback: null);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace SampleApp.Forms.Android
         public void HandleSessionRequest(Activity activity, Session session)
         {
             Debug.WriteLine("HandleSessionRequest");
-            session.Activate(null);
+            session.Activate(callback: null);
         }
 
         public void SessionDidEnd(Session session)
