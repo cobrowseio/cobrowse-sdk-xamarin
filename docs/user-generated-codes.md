@@ -26,7 +26,7 @@ namespace SampleApp.iOS
     {
         private void StartCobrowse(object sender, EventArgs e)
         {
-            NavigationController.PushViewController(new CBIOViewController(), animated: true);
+            NavigationController.PushViewController(new CobrowseViewController(), animated: true);
         }
     }
 }
@@ -91,7 +91,7 @@ namespace YourAppNamespace.iOS
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var nc = vc.GetUINavigationController();
             nc.PushViewController(
-                new CBIOViewController(),
+                new CobrowseViewController(),
                 animated: true);
         }
     }

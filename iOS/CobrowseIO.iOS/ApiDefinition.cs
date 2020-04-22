@@ -8,8 +8,8 @@ using UIKit;
 namespace Xamarin.CobrowseIO
 {
 	// @interface CBIOAgent : NSObject
-	[BaseType(typeof(NSObject))]
-	interface CBIOAgent
+	[BaseType(typeof(NSObject), Name = "CBIOAgent")]
+	interface Agent
 	{
 		// @property NSString * _Nonnull name;
 		[Export("name")]
@@ -23,12 +23,12 @@ namespace Xamarin.CobrowseIO
 		[Static]
 		[Export("from:")]
 		[return: NullAllowed]
-		CBIOAgent From(NSDictionary dict);
+		Agent From(NSDictionary dict);
 	}
 
 	// @interface CBIORESTResource : NSObject
-	[BaseType(typeof(NSObject))]
-	interface CBIORESTResource
+	[BaseType(typeof(NSObject), Name = "CBIORESTResource")]
+	interface RESTResource
 	{
 		// -(NSString * _Nullable)id;
 		[NullAllowed, Export("id")]
@@ -36,8 +36,8 @@ namespace Xamarin.CobrowseIO
 	}
 
 	// @interface CBIODevice : CBIORESTResource
-	[BaseType(typeof(CBIORESTResource))]
-	interface CBIODevice
+	[BaseType(typeof(RESTResource), Name = "CBIODevice")]
+	interface Device
 	{
 		// @property NSData * _Nullable token;
 		[NullAllowed, Export("token", ArgumentSemantic.Assign)]
@@ -49,8 +49,8 @@ namespace Xamarin.CobrowseIO
 	}
 
 	// @interface CBIOKeyPress : NSObject
-	[BaseType(typeof(NSObject))]
-	interface CBIOKeyPress
+	[BaseType(typeof(NSObject), Name = "CBIOKeyPress")]
+	interface KeyPress
 	{
 		// @property (readonly) NSString * _Nonnull key;
 		[Export("key")]
@@ -76,36 +76,37 @@ namespace Xamarin.CobrowseIO
 	  be used.
 	*/
 	[Protocol, Model]
-	[BaseType(typeof(NSObject))]
-	interface CBIOResponder
+	[BaseType(typeof(NSObject), Name = "CBIOResponder")]
+	interface Responder
 	{
 		// @optional -(void)cobrowseTouchesBegan:(NSSet<CBIOTouch *> * _Nonnull)touches withEvent:(CBIOTouchEvent * _Nonnull)event;
 		[Export("cobrowseTouchesBegan:withEvent:")]
-		void CobrowseTouchesBegan(NSSet<CBIOTouch> touches, CBIOTouchEvent @event);
+		void CobrowseTouchesBegan(NSSet<Touch> touches, TouchEvent @event);
 
 		// @optional -(void)cobrowseTouchesMoved:(NSSet<CBIOTouch *> * _Nonnull)touches withEvent:(CBIOTouchEvent * _Nonnull)event;
 		[Export("cobrowseTouchesMoved:withEvent:")]
-		void CobrowseTouchesMoved(NSSet<CBIOTouch> touches, CBIOTouchEvent @event);
+		void CobrowseTouchesMoved(NSSet<Touch> touches, TouchEvent @event);
 
 		// @optional -(void)cobrowseTouchesEnded:(NSSet<CBIOTouch *> * _Nonnull)touches withEvent:(CBIOTouchEvent * _Nonnull)event;
 		[Export("cobrowseTouchesEnded:withEvent:")]
-		void CobrowseTouchesEnded(NSSet<CBIOTouch> touches, CBIOTouchEvent @event);
+		void CobrowseTouchesEnded(NSSet<Touch> touches, TouchEvent @event);
 
 		// @optional -(void)cobrowseTouchesCancelled:(NSSet<CBIOTouch *> * _Nonnull)touches withEvent:(CBIOTouchEvent * _Nonnull)event;
 		[Export("cobrowseTouchesCancelled:withEvent:")]
-		void CobrowseTouchesCancelled(NSSet<CBIOTouch> touches, CBIOTouchEvent @event);
+		void CobrowseTouchesCancelled(NSSet<Touch> touches, TouchEvent @event);
 
 		// @optional -(void)cobrowseKeyDown:(CBIOKeyPress * _Nonnull)event;
 		[Export("cobrowseKeyDown:")]
-		void CobrowseKeyDown(CBIOKeyPress @event);
+		void CobrowseKeyDown(KeyPress @event);
 	}
 
+    // TODO remove CB prefix
 	// typedef const void (^CBErrorSessionBlock)(NSError * _Nullable, CBIOSession * _Nullable);
-	delegate void CBErrorSessionBlock([NullAllowed] NSError arg0, [NullAllowed] CBIOSession arg1);
+	delegate void CBErrorSessionBlock([NullAllowed] NSError error, [NullAllowed] Session session);
 
 	// @interface CBIOSession : CBIORESTResource
-	[BaseType(typeof(CBIORESTResource))]
-	interface CBIOSession
+	[BaseType(typeof(RESTResource), Name = "CBIOSession")]
+	interface Session
 	{
 		// -(_Bool)isPending;
 		[Export("isPending")]
@@ -149,12 +150,12 @@ namespace Xamarin.CobrowseIO
 
 		// -(CBIOAgent * _Nullable)agent;
 		[NullAllowed, Export("agent")]
-		CBIOAgent Agent { get; }
+		Agent Agent { get; }
 	}
 
 	// @interface CBIOTouch : NSObject
-	[BaseType(typeof(NSObject))]
-	interface CBIOTouch : INativeObject
+	[BaseType(typeof(NSObject), Name = "CBIOTouch")]
+	interface Touch : INativeObject
 	{
 		// @property (readonly) UIView * _Nonnull target;
 		[Export("target")]
@@ -166,8 +167,8 @@ namespace Xamarin.CobrowseIO
 	}
 
 	// @interface CBIOTouchEvent : NSObject
-	[BaseType(typeof(NSObject))]
-	interface CBIOTouchEvent
+	[BaseType(typeof(NSObject), Name = "CBIOTouchEvent")]
+	interface TouchEvent
 	{
 		// @property (readonly) CGPoint position;
 		[Export("position")]
@@ -186,20 +187,20 @@ namespace Xamarin.CobrowseIO
 		// @required -(void)cobrowseSessionDidUpdate:(CBIOSession * _Nonnull)session;
 		[Abstract]
 		[Export("cobrowseSessionDidUpdate:")]
-		void CobrowseSessionDidUpdate(CBIOSession session);
+		void CobrowseSessionDidUpdate(Session session);
 
 		// @required -(void)cobrowseSessionDidEnd:(CBIOSession * _Nonnull)session;
 		[Abstract]
 		[Export("cobrowseSessionDidEnd:")]
-		void CobrowseSessionDidEnd(CBIOSession session);
+		void CobrowseSessionDidEnd(Session session);
 
 		// @optional -(_Bool)cobrowseShouldAllowTouchEvent:(CBIOTouchEvent * _Nonnull)touchEvent forSession:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShouldAllowTouchEvent:forSession:")]
-		bool CobrowseShouldAllowTouchEvent(CBIOTouchEvent touchEvent, CBIOSession session);
+		bool CobrowseShouldAllowTouchEvent(TouchEvent touchEvent, Session session);
 
 		// @optional -(_Bool)cobrowseShouldAllowKeyEvent:(CBIOKeyPress * _Nonnull)keyEvent forSession:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShouldAllowKeyEvent:forSession:")]
-		bool CobrowseShouldAllowKeyEvent(CBIOKeyPress keyEvent, CBIOSession session);
+		bool CobrowseShouldAllowKeyEvent(KeyPress keyEvent, Session session);
 
 		// @optional -(_Bool)cobrowseShouldCaptureWindow:(UIWindow * _Nonnull)window;
 		[Export("cobrowseShouldCaptureWindow:")]
@@ -207,15 +208,15 @@ namespace Xamarin.CobrowseIO
 
 		// @optional -(void)cobrowseHandleSessionRequest:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseHandleSessionRequest:")]
-		void CobrowseHandleSessionRequest(CBIOSession session);
+		void CobrowseHandleSessionRequest(Session session);
 
 		// @optional -(void)cobrowseShowSessionControls:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShowSessionControls:")]
-		void CobrowseShowSessionControls(CBIOSession session);
+		void CobrowseShowSessionControls(Session session);
 
 		// @optional -(void)cobrowseHideSessionControls:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseHideSessionControls:")]
-		void CobrowseHideSessionControls(CBIOSession session);
+		void CobrowseHideSessionControls(Session session);
 
 		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseRedactedViewsForViewController:(UIViewController * _Nonnull)vc;
 		[Export("cobrowseRedactedViewsForViewController:")]
@@ -223,12 +224,12 @@ namespace Xamarin.CobrowseIO
 	}
 
 	// @interface CBIOViewController : UIViewController
-	[BaseType(typeof(UIViewController))]
-	interface CBIOViewController
+	[BaseType(typeof(UIViewController), Name = "CBIOViewController")]
+	interface CobrowseViewController
 	{
 		// -(instancetype _Nonnull)loadSession:(NSString * _Nonnull)codeOrId;
 		[Export("loadSession:")]
-		CBIOViewController LoadSession(string codeOrId);
+		CobrowseViewController LoadSession(string codeOrId);
 
 		// -(void)endSession:(id _Nonnull)sender __attribute__((ibaction));
 		[Export("endSession:")]
@@ -245,7 +246,7 @@ namespace Xamarin.CobrowseIO
 	  protocol, then [Model] is redundant and will generate code that will never
 	  be used.
 	*/
-	[Protocol, Model]
+	[Protocol(Name = "CobrowseIORedacted"), Model]
 	[BaseType(typeof(NSObject))]
 	interface CobrowseIORedacted
 	{
@@ -256,7 +257,7 @@ namespace Xamarin.CobrowseIO
 	}
 
 	// @interface CobrowseIO : NSObject
-	[BaseType(typeof(NSObject))]
+	[BaseType(typeof(NSObject), Name = "CobrowseIO")]
 	interface CobrowseIO
 	{
 		// @property CBLicense * _Nonnull license;
@@ -288,7 +289,7 @@ namespace Xamarin.CobrowseIO
 
 		// @property (readonly) CBIODevice * _Nonnull device;
 		[Export("device")]
-		CBIODevice Device { get; }
+		Device Device { get; }
 
 		// +(instancetype _Nonnull)instance;
 		[Static]
@@ -317,7 +318,7 @@ namespace Xamarin.CobrowseIO
 
 		// -(CBIOSession * _Nullable)currentSession;
 		[NullAllowed, Export("currentSession")]
-		CBIOSession CurrentSession { get; }
+		Session CurrentSession { get; }
 
 		// +(BOOL)isCobrowseNotification:(NSDictionary * _Nonnull)userInfo;
 		[Static]

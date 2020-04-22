@@ -30,7 +30,7 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
     // Sample end session UIView, constructor, and tap gesture recognizer implementation
     private UIView _indicatorInstance;
 
-    public override void CobrowseShowSessionControls(CBIOSession session)
+    public override void CobrowseShowSessionControls(Session session)
     {
         // You can render controls however you like here.
         // One option is to add our sample end session UI defined below.
@@ -41,7 +41,7 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
         _indicatorInstance.Hidden = false;
     }
 
-    public override void CobrowseHideSessionControls(CBIOSession session)
+    public override void CobrowseHideSessionControls(Session session)
     {
         if (_indicatorInstance != null)
             _indicatorInstance.Hidden = true;
@@ -75,11 +75,11 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
         return indicator;
     }
 
-    public override void CobrowseSessionDidUpdate(CBIOSession session)
+    public override void CobrowseSessionDidUpdate(Session session)
     {
     }
 
-    public override void CobrowseSessionDidEnd(CBIOSession session)
+    public override void CobrowseSessionDidEnd(Session session)
     {
     }
 }
@@ -162,7 +162,7 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
 {
     private UIView _indicatorInstance;
 
-    public override void CobrowseShowSessionControls(CBIOSession session)
+    public override void CobrowseShowSessionControls(Session session)
     {
         if (_indicatorInstance == null)
         {
@@ -171,7 +171,7 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
         _indicatorInstance.Hidden = false;
     }
 
-    public override void CobrowseHideSessionControls(CBIOSession session)
+    public override void CobrowseHideSessionControls(Session session)
     {
         if (_indicatorInstance != null)
             _indicatorInstance.Hidden = true;
@@ -278,7 +278,7 @@ You can build your own UI to completely replace the default UI we provide for ge
 **iOS**:
 
 ```cs
-CobrowseIO.Instance().CreateSession((NSError error, CBIOSession session) =>
+CobrowseIO.Instance().CreateSession((NSError error, Session session) =>
 {
     if (error != null)
     {
@@ -298,8 +298,8 @@ You can monitor changes in the state of the session you create using the Cobrows
 **iOS**:
 
 ```cs
-public void CobrowseSessionDidUpdate (CBIOSession session);
-public void CobrowseSessionDidEnd (CBIOSession session);
+public void CobrowseSessionDidUpdate (Session session);
+public void CobrowseSessionDidEnd (Session session);
 ```
 
 **Android**:
@@ -309,14 +309,14 @@ void SessionDidUpdate (Session session);
 void SessionDidEnd (Session session);
 ```
 
-You can get information about the state of the session using the following methods, which may adjust the UI you are showing:
+You can get information about the state of the session using the following properties, which may adjust the UI you are showing:
 
-| iOS | Android | Description |
-| --- | --- | --- |
-| CBIOSession.IsPending | Session.IsPending | Session has been created but is waiting for agent or user |
-| CBIOSession.IsAuthorizing | Session.IsAuthorizing | Waiting for the user to confirm the session |
-| CBIOSession.IsActive | Session.IsActive | Session running, frames are streaming to the agent |
-| CBIOSession.IsEnded | Session.IsEnded | Session is over and can no longer be used or edited|
+| Property | Description |
+| --- | --- |
+| Session.IsPending | Session has been created but is waiting for agent or user |
+| Session.IsAuthorizing | Waiting for the user to confirm the session |
+| Session.IsActive | Session running, frames are streaming to the agent |
+| Session.IsEnded | Session is over and can no longer be used or edited|
 
 ## Questions?
 Any questions at all? Please email us directly at [hello@cobrowse.io](mailto:hello@cobrowse.io).

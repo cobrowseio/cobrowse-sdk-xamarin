@@ -27,7 +27,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
 
 public class CustomCobrowseDelegate : CobrowseIODelegate
 {
-    public override void CobrowseHandleSessionRequest(CBIOSession session)
+    public override void CobrowseHandleSessionRequest(Session session)
     {
         // show your own UI here
         // call Activate(<callback>) to accept and start the session

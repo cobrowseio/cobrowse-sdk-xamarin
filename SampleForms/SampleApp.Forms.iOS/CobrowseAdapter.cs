@@ -51,7 +51,7 @@ namespace SampleApp.Forms.iOS
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var nc = vc.GetUINavigationController();
             nc.PushViewController(
-                new CBIOViewController(),
+                new CobrowseViewController(),
                 animated: true);
         }
 
@@ -94,7 +94,7 @@ namespace SampleApp.Forms.iOS
 
         private UIView _indicatorInstance;
 
-        public override void CobrowseShowSessionControls(CBIOSession session)
+        public override void CobrowseShowSessionControls(Session session)
         {
             if (_indicatorInstance == null)
             {
@@ -106,7 +106,7 @@ namespace SampleApp.Forms.iOS
             }
         }
 
-        public override void CobrowseHideSessionControls(CBIOSession session)
+        public override void CobrowseHideSessionControls(Session session)
         {
             if (_indicatorInstance != null)
             {
@@ -136,12 +136,12 @@ namespace SampleApp.Forms.iOS
             return nativeIndicator;
         }
 
-        public override void CobrowseSessionDidUpdate(CBIOSession session)
+        public override void CobrowseSessionDidUpdate(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidUpdate");
         }
 
-        public override void CobrowseSessionDidEnd(CBIOSession session)
+        public override void CobrowseSessionDidEnd(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidEnd");
         }

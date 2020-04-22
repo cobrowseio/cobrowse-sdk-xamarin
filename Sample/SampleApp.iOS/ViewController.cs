@@ -29,7 +29,7 @@ namespace SampleApp.iOS
         private void ButtonCobrowse_TouchUpInside(object sender, EventArgs e)
         {
             this.NavigationController.PushViewController(
-                new CBIOViewController(),
+                new CobrowseViewController(),
                 animated: true);
         }
 
