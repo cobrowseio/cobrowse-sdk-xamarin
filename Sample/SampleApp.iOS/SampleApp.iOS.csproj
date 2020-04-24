@@ -119,6 +119,10 @@
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
         <InterfaceDefinition Include="LoginViewController.xib" />
+        <InterfaceDefinition Include="ErrorDisplayViewController.xib" />
+        <InterfaceDefinition Include="CodeDisplayViewController.xib" />
+        <InterfaceDefinition Include="ManageSessionViewController.xib" />
+        <InterfaceDefinition Include="CustomCobrowseViewController.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -136,6 +140,23 @@
         <Compile Include="LoginViewController.designer.cs">
           <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
+        <Compile Include="ErrorDisplayViewController.cs" />
+        <Compile Include="ErrorDisplayViewController.designer.cs">
+          <DependentUpon>ErrorDisplayViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="CodeDisplayViewController.cs" />
+        <Compile Include="CodeDisplayViewController.designer.cs">
+          <DependentUpon>CodeDisplayViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="ManageSessionViewController.cs" />
+        <Compile Include="ManageSessionViewController.designer.cs">
+          <DependentUpon>ManageSessionViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="CustomCobrowseViewController.cs" />
+        <Compile Include="CustomCobrowseViewController.designer.cs">
+          <DependentUpon>CustomCobrowseViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="UIViewControllerExtensions.cs" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Xamarin.Build.Download">
@@ -163,6 +184,9 @@
         <Project>{89690D1D-E492-4302-A262-1125807A9CF7}</Project>
         <Name>SwiftCBOR.iOS</Name>
       </ProjectReference>
+    </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="Resources\.DS_Store" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

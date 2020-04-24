@@ -93,11 +93,23 @@ namespace SampleApp.iOS
         public override void CobrowseSessionDidUpdate(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidUpdate");
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var vvc = vc.GetVisibleViewController();
+            if (vvc is UINavigationController nc && nc.TopViewController is CustomCobrowseViewController cobrowseVc)
+            {
+                cobrowseVc.SessionDidUpdate(session);
+            }
         }
 
         public override void CobrowseSessionDidEnd(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidEnd");
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var vvc = vc.GetVisibleViewController();
+            if (vvc is UINavigationController nc && nc.TopViewController is CustomCobrowseViewController cobrowseVc)
+            {
+                cobrowseVc.SessionDidEnd(session);
+            }
         }
     }
 }

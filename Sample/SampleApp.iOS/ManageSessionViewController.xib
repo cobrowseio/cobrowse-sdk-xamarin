@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManageSessionViewController">
+            <connections>
+                <outlet property="end" destination="aUd-Zc-jF1" id="p46-eX-KJI"/>
+                <outlet property="text" destination="w3y-b6-5Rl" id="q1w-xl-osO"/>
+                <outlet property="view" destination="iN0-l3-epB" id="l4l-2w-lPQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="193"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're sharing screens from this app with a support agent. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3y-b6-5Rl">
+                    <rect key="frame" x="30" y="30" width="309" height="48"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUd-Zc-jF1">
+                    <rect key="frame" x="129" y="128" width="111" height="35"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                    <state key="normal" title="End Session"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RdN-mh-EH5" firstAttribute="bottom" secondItem="aUd-Zc-jF1" secondAttribute="bottom" constant="30" id="EDp-ad-YXe"/>
+                <constraint firstItem="w3y-b6-5Rl" firstAttribute="leading" secondItem="RdN-mh-EH5" secondAttribute="leading" constant="30" id="Fsg-zD-Fah"/>
+                <constraint firstItem="aUd-Zc-jF1" firstAttribute="centerX" secondItem="RdN-mh-EH5" secondAttribute="centerX" id="fpJ-YT-w9j"/>
+                <constraint firstItem="RdN-mh-EH5" firstAttribute="trailing" secondItem="w3y-b6-5Rl" secondAttribute="trailing" constant="30" id="h4w-F2-jP5"/>
+                <constraint firstItem="aUd-Zc-jF1" firstAttribute="top" secondItem="w3y-b6-5Rl" secondAttribute="bottom" constant="50" id="xII-b9-qi4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="RdN-mh-EH5"/>
+            <point key="canvasLocation" x="174.5" y="167.5"/>
+        </view>
+    </objects>
+</document>
