@@ -114,15 +114,18 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Resources\" />
+        <Folder Include="Views\" />
+        <Folder Include="Views\DummyLogin\" />
+        <Folder Include="Views\CodeUI\" />
     </ItemGroup>
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
         <InterfaceDefinition Include="Main.storyboard" />
-        <InterfaceDefinition Include="LoginViewController.xib" />
-        <InterfaceDefinition Include="ErrorDisplayViewController.xib" />
-        <InterfaceDefinition Include="CodeDisplayViewController.xib" />
-        <InterfaceDefinition Include="ManageSessionViewController.xib" />
-        <InterfaceDefinition Include="CustomCobrowseViewController.xib" />
+        <InterfaceDefinition Include="Views\DummyLogin\LoginViewController.xib" />
+        <InterfaceDefinition Include="Views\CodeUI\CodeDisplayViewController.xib" />
+        <InterfaceDefinition Include="Views\CodeUI\CustomCobrowseViewController.xib" />
+        <InterfaceDefinition Include="Views\CodeUI\ErrorDisplayViewController.xib" />
+        <InterfaceDefinition Include="Views\CodeUI\ManageSessionViewController.xib" />
     </ItemGroup>
     <ItemGroup>
         <None Include="Info.plist" />
@@ -136,27 +139,27 @@
         <Compile Include="ViewController.designer.cs">
             <DependentUpon>ViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="LoginViewController.cs" />
-        <Compile Include="LoginViewController.designer.cs">
+        <Compile Include="UIViewControllerExtensions.cs" />
+        <Compile Include="Views\DummyLogin\LoginViewController.cs" />
+        <Compile Include="Views\DummyLogin\LoginViewController.designer.cs">
           <DependentUpon>LoginViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="ErrorDisplayViewController.cs" />
-        <Compile Include="ErrorDisplayViewController.designer.cs">
-          <DependentUpon>ErrorDisplayViewController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="CodeDisplayViewController.cs" />
-        <Compile Include="CodeDisplayViewController.designer.cs">
+        <Compile Include="Views\CodeUI\CodeDisplayViewController.cs" />
+        <Compile Include="Views\CodeUI\CodeDisplayViewController.designer.cs">
           <DependentUpon>CodeDisplayViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="ManageSessionViewController.cs" />
-        <Compile Include="ManageSessionViewController.designer.cs">
-          <DependentUpon>ManageSessionViewController.cs</DependentUpon>
-        </Compile>
-        <Compile Include="CustomCobrowseViewController.cs" />
-        <Compile Include="CustomCobrowseViewController.designer.cs">
+        <Compile Include="Views\CodeUI\CustomCobrowseViewController.cs" />
+        <Compile Include="Views\CodeUI\CustomCobrowseViewController.designer.cs">
           <DependentUpon>CustomCobrowseViewController.cs</DependentUpon>
         </Compile>
-        <Compile Include="UIViewControllerExtensions.cs" />
+        <Compile Include="Views\CodeUI\ErrorDisplayViewController.cs" />
+        <Compile Include="Views\CodeUI\ErrorDisplayViewController.designer.cs">
+          <DependentUpon>ErrorDisplayViewController.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Views\CodeUI\ManageSessionViewController.cs" />
+        <Compile Include="Views\CodeUI\ManageSessionViewController.designer.cs">
+          <DependentUpon>ManageSessionViewController.cs</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Xamarin.Build.Download">

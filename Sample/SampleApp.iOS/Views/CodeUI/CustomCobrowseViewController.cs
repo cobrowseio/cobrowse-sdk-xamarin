@@ -135,18 +135,14 @@ namespace SampleApp.iOS
         {
             DispatchQueue.MainQueue.DispatchAsync(() =>
             {
-                if (_session == null)
-                {
-                    return;
-                }
-                if (_session.IsActive)
+                if (_session?.IsActive == true)
                 {
                     ShowSubview(_manageSession.View);
                 }
                 else
                 {
                     ShowSubview(_codeDisplay.View);
-                    _codeDisplay.SetCode(_session.Code);
+                    _codeDisplay.SetCode(_session?.Code);
                 }
             });
         }

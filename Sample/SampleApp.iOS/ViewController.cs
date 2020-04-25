@@ -16,6 +16,7 @@ namespace SampleApp.iOS
             // Perform any additional setup after loading the view, typically from a nib.
 
             this.buttonCobrowse.TouchUpInside += ButtonCobrowse_TouchUpInside;
+            this.buttonCobrowseCustomUI.TouchUpInside += ButtonCobrowseCustomUi_TouchUpInside;
             this.buttonRedactedViews.TouchUpInside += ButtonRedactedViews_TouchUpInside;
             this.buttonDeviceId.TouchUpInside += ButtonDeviceId_TouchUpInside;
         }
@@ -30,6 +31,13 @@ namespace SampleApp.iOS
         {
             this.NavigationController.PushViewController(
                 new CobrowseViewController(),
+                animated: true);
+        }
+
+        private void ButtonCobrowseCustomUi_TouchUpInside(object sender, EventArgs e)
+        {
+            this.NavigationController.PushViewController(
+                new CustomCobrowseViewController(),
                 animated: true);
         }
 
