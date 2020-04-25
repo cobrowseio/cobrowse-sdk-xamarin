@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Foundation;
 using SampleApp.Forms.iOS;
 using UIKit;
 using Xamarin.CobrowseIO;
@@ -11,12 +12,107 @@ using XView = Xamarin.Forms.View;
 [assembly: Dependency(typeof(CobrowseAdapter))]
 namespace SampleApp.Forms.iOS
 {
+    /// <summary>
+    /// Cross-platform wrapper of the Cobrowse.io session.
+    /// </summary>
+    public class CobrowseSession : ICobrowseSession
+    {
+        private Session _platformSession;
+
+        public CobrowseSession(Session session)
+        {
+            _platformSession = session ?? throw new ArgumentNullException(nameof(session));
+        }
+
+        public static CobrowseSession TryCreate(Session session)
+        {
+            return session != null
+                ? new CobrowseSession(session)
+                : null;
+        }
+
+        /// <summary>
+        /// Gets the session's code.
+        /// </summary>
+        public string Code => _platformSession.Code;
+
+        /// <summary>
+        /// Gets a value indicating if the session running, frames are streaming to the agent.
+        /// </summary>
+        public bool IsActive => _platformSession.IsActive;
+
+        /// <summary>
+        /// Gets a value indicating if waiting for the user to confirm the session.
+        /// </summary>
+        public bool IsAuthorizing => _platformSession.IsAuthorizing;
+
+        /// <summary>
+        /// Gets a value indicating if the ession is over and can no longer be used or edited.
+        /// </summary>
+        public bool IsEnded => _platformSession.IsEnded;
+
+        /// <summary>
+        /// Gets a value indicating if the session has been created but is waiting for agent or user.
+        /// </summary>
+        public bool IsPending => _platformSession.IsPending;
+
+        /// <summary>
+        /// Ends the session.
+        /// </summary>
+        public void End(CobrowseCallback callback)
+        {
+            _platformSession.End((NSError e, Session session) =>
+            {
+                callback.Invoke(e?.AsException(), CobrowseSession.TryCreate(session));
+            });
+        }
+    }
+
+    /// <summary>
+    /// Cross-platform wrapper of the Cobrowse.io SDK.
+    /// </summary>
     public class CobrowseAdapter : ICobrowseAdapter
     {
-        private CustomOverlayCobrowseDelegate _overlayDelegate;
+        private readonly CustomOverlayCobrowseDelegate _overlayDelegate;
 
         public CobrowseAdapter()
         {
+            _overlayDelegate = new CustomOverlayCobrowseDelegate();
+        }
+
+        /// <summary>
+        /// Occurs when a session is updated.
+        /// </summary>
+        public event EventHandler<ICobrowseSession> SessionDidUpdate
+        {
+            add => _overlayDelegate.SessionDidUpdate += value;
+            remove => _overlayDelegate.SessionDidUpdate -= value;
+        }
+
+        /// <summary>
+        /// Occurs when a session ends.
+        /// </summary>
+        public event EventHandler<ICobrowseSession> SessionDidEnd
+        {
+            add => _overlayDelegate.SessionDidEnd += value;
+            remove => _overlayDelegate.SessionDidEnd -= value;
+        }
+
+        /// <summary>
+        /// Returns the current session instance or null if it doesn't exist.
+        /// </summary>
+        public ICobrowseSession CurrentSession
+            => CobrowseSession.TryCreate(CobrowseIO.Instance().CurrentSession);
+
+        /// <summary>
+        /// Creates a new Cobrowse.io session.
+        /// </summary>
+        public void CreateSession(CobrowseCallback callback)
+        {
+            CobrowseIO.Instance().CreateSession((NSError e, Session session) =>
+            {
+                callback.Invoke(e?.AsException(), CobrowseSession.TryCreate(session));
+            });
         }
 
         /// <summary>
@@ -30,8 +126,7 @@ namespace SampleApp.Forms.iOS
         public void Initialize(string licenseKey)
         {
             CobrowseIO.Instance().SetLicense(licenseKey);
-            CobrowseIO.Instance().SetDelegate(
-                _overlayDelegate = new CustomOverlayCobrowseDelegate());
+            CobrowseIO.Instance().SetDelegate(_overlayDelegate);
             CobrowseIO.Instance().Start();
         }
 
@@ -82,6 +177,10 @@ namespace SampleApp.Forms.iOS
 
     public class CustomOverlayCobrowseDelegate : CobrowseIODelegate
     {
+        public event EventHandler<ICobrowseSession> SessionDidUpdate;
+
+        public event EventHandler<ICobrowseSession> SessionDidEnd;
+
         public CustomOverlayCobrowseDelegate()
         {
         }
@@ -139,11 +238,13 @@ namespace SampleApp.Forms.iOS
         public override void CobrowseSessionDidUpdate(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidUpdate");
+            SessionDidUpdate?.Invoke(this, CobrowseSession.TryCreate(session));
         }
 
         public override void CobrowseSessionDidEnd(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidEnd");
+            SessionDidEnd?.Invoke(this, CobrowseSession.TryCreate(session));
         }
     }
 }

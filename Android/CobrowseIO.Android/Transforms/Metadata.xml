@@ -17,6 +17,10 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='customData']" name="managedName">SetCustomJavaData</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='deviceId']" name="managedName">GetDeviceId</attr>
     
+    <!-- Make method names the same as in the iOS SDK -->
+    <attr path="/api/package[@name='io.cobrowse']/interface[@name='Session.Listener']/method[@name='sessionDidUpdate']" name="managedName">CobrowseSessionDidUpdate</attr>
+    <attr path="/api/package[@name='io.cobrowse']/interface[@name='Session.Listener']/method[@name='sessionDidEnd']" name="managedName">CobrowseSessionDidEnd</attr>
+    
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->
     <attr 

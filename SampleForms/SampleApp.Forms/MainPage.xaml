@@ -14,6 +14,10 @@
             Clicked="CobrowseButton_Clicked" />
         <Button
             HorizontalOptions="FillAndExpand"
+            Text="Start Cobrowse.io (Custom UI)"
+            Clicked="CobrowseCustomUiButton_Clicked" />
+        <Button
+            HorizontalOptions="FillAndExpand"
             Text="Check Full-Device Control&#x0a;configuration"
             Clicked="CheckCobrowseFullDevice_Clicked">
             <Button.IsVisible>

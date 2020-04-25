@@ -87,7 +87,6 @@ namespace SampleApp.iOS
                 else
                 {
                     _session = session;
-                    //[self->session registerSessionObserver:self];
                     Render();
                 }
             });

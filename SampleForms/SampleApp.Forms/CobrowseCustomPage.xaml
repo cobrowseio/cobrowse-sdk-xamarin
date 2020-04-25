@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SampleApp.Forms.CobrowseCustomPage">
+    <AbsoluteLayout
+        x:Name="viewContainer"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Label
+            x:Name="viewError"
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            IsVisible="false"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            Text="Sorry, something went wrong. Check you're online and try again." />
+        <StackLayout
+            x:Name="viewCodeDisplay"
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            IsVisible="false"
+            Orientation="Vertical"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="32">
+            <Label
+                x:Name="viewCodeLabel"
+                Text="XXX-XXX"
+                FontSize="32"
+                HorizontalTextAlignment="Center" />
+            <Label
+                Text="Provide this code to your support agent to begin screen sharing."
+                HorizontalTextAlignment="Center" />
+            <ActivityIndicator
+                x:Name="viewCodeDiplayWorking"
+                IsRunning="True"
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+        <StackLayout
+            x:Name="viewManageSession"
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            IsVisible="false"
+            Orientation="Vertical"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Spacing="32">
+            <Label
+                Text="You're sharing screens from this app with a support agent."
+                HorizontalTextAlignment="Center" />
+            <Button
+                Text="End Session"
+                HorizontalOptions="CenterAndExpand"
+                Clicked="EndSession" />
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

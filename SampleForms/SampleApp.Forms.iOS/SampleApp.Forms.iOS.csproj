@@ -73,6 +73,7 @@
     <Compile Include="UIViewControllerExtensions.cs" />
     <Compile Include="PlatformCobrowseRedactedViewEffect.cs" />
     <Compile Include="CobrowseRedactedPageRenderer.cs" />
+    <Compile Include="NSErrorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

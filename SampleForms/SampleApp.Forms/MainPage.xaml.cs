@@ -19,6 +19,11 @@ namespace SampleApp.Forms
             DependencyService.Get<ICobrowseAdapter>().StartCobrowse();
         }
 
+        private void CobrowseCustomUiButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CobrowseCustomPage());
+        }
+
         private void CheckCobrowseFullDevice_Clicked(object sender, EventArgs e)
         {
             DependencyService.Get<ICobrowseAdapter>().CheckCobrowseFullDevice();

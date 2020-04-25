@@ -13,19 +13,115 @@ using Xamarin.CobrowseIO;
 using Xamarin.CobrowseIO.UI;
 using Xamarin.Forms.Platform.Android;
 using Application = Android.App.Application;
+using JError = Java.Lang.Error;
 using XView = Xamarin.Forms.View;
 
 [assembly: Xamarin.Forms.Dependency(typeof(CobrowseAdapter))]
 namespace SampleApp.Forms.Android
 {
+    /// <summary>
+    /// Cross-platform wrapper of the Cobrowse.io session.
+    /// </summary>
+    public class CobrowseSession : ICobrowseSession
+    {
+        private Session _platformSession;
+
+        public CobrowseSession(Session session)
+        {
+            _platformSession = session ?? throw new ArgumentNullException(nameof(session));
+        }
+
+        public static CobrowseSession TryCreate(Session session)
+        {
+            return session != null
+                ? new CobrowseSession(session)
+                : null;
+        }
+
+        /// <summary>
+        /// Gets the session's code.
+        /// </summary>
+        public string Code => _platformSession.Code();
+
+        /// <summary>
+        /// Gets a value indicating if the session running, frames are streaming to the agent.
+        /// </summary>
+        public bool IsActive => _platformSession.IsActive;
+
+        /// <summary>
+        /// Gets a value indicating if waiting for the user to confirm the session.
+        /// </summary>
+        public bool IsAuthorizing => _platformSession.IsAuthorizing;
+
+        /// <summary>
+        /// Gets a value indicating if the ession is over and can no longer be used or edited.
+        /// </summary>
+        public bool IsEnded => _platformSession.IsEnded;
+
+        /// <summary>
+        /// Gets a value indicating if the session has been created but is waiting for agent or user.
+        /// </summary>
+        public bool IsPending => _platformSession.IsPending;
+
+        /// <summary>
+        /// Ends the session.
+        /// </summary>
+        public void End(CobrowseCallback callback)
+        {
+            _platformSession.End((JError e, Session session) =>
+            {
+                callback.Invoke(e, CobrowseSession.TryCreate(session));
+            });
+        }
+    }
+
+    /// <summary>
+    /// Cross-platform wrapper of the Cobrowse.io SDK.
+    /// </summary>
     public class CobrowseAdapter : ICobrowseAdapter
     {
         private Activity Activity => CrossCurrentActivity.Current.Activity;
 
-        private CustomOverlayCobrowseDelegate _overlayDelegate;
+        private readonly CustomOverlayCobrowseDelegate _overlayDelegate;
 
         public CobrowseAdapter()
         {
+            _overlayDelegate = new CustomOverlayCobrowseDelegate();
+        }
+
+        /// <summary>
+        /// Occurs when a session is updated.
+        /// </summary>
+        public event EventHandler<ICobrowseSession> SessionDidUpdate
+        {
+            add => _overlayDelegate.SessionDidUpdate += value;
+            remove => _overlayDelegate.SessionDidUpdate -= value;
+        }
+
+        /// <summary>
+        /// Occurs when a session ends.
+        /// </summary>
+        public event EventHandler<ICobrowseSession> SessionDidEnd
+        {
+            add => _overlayDelegate.SessionDidEnd += value;
+            remove => _overlayDelegate.SessionDidEnd -= value;
+        }
+
+        /// <summary>
+        /// Returns the current session instance or null if it doesn't exist.
+        /// </summary>
+        public ICobrowseSession CurrentSession
+            => CobrowseSession.TryCreate(CobrowseIO.Instance().CurrentSession);
+
+        /// <summary>
+        /// Creates a new Cobrowse.io session.
+        /// </summary>
+        public void CreateSession(CobrowseCallback callback)
+        {
+            CobrowseIO.Instance().CreateSession((JError e, Session session) =>
+            {
+                callback.Invoke(e, CobrowseSession.TryCreate(session));
+            });
         }
 
         /// <summary>
@@ -41,8 +137,7 @@ namespace SampleApp.Forms.Android
             if (Application.Context is Application application)
             {
                 CobrowseIO.Instance().SetLicense(licenseKey);
-                CobrowseIO.Instance().SetDelegate(
-                    _overlayDelegate = new CustomOverlayCobrowseDelegate());
+                CobrowseIO.Instance().SetDelegate(_overlayDelegate);
                 CobrowseIO.Instance().Start(application);
             }
         }
@@ -104,6 +199,10 @@ namespace SampleApp.Forms.Android
         CobrowseIO.ISessionRequestDelegate,
         CobrowseIO.ISessionControlsDelegate
     {
+        public event EventHandler<ICobrowseSession> SessionDidUpdate;
+
+        public event EventHandler<ICobrowseSession> SessionDidEnd;
+
         public CustomOverlayCobrowseDelegate()
         {
         }
@@ -175,14 +274,16 @@ namespace SampleApp.Forms.Android
             session.Activate(callback: null);
         }
 
-        public void SessionDidEnd(Session session)
-        {
-            Debug.WriteLine("SessionDidEnd");
-        }
-
-        public void SessionDidUpdate(Session session)
+        public void CobrowseSessionDidUpdate(Session session)
         {
             Debug.WriteLine("SessionDidUpdate");
+            SessionDidUpdate?.Invoke(this, CobrowseSession.TryCreate(session));
+        }
+
+        public void CobrowseSessionDidEnd(Session session)
+        {
+            Debug.WriteLine("SessionDidEnd");
+            SessionDidEnd?.Invoke(this, CobrowseSession.TryCreate(session));
         }
     }
 }

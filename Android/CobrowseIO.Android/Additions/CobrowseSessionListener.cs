@@ -15,12 +15,12 @@
             _delegateDidEnd = onDidEnd;
         }
 
-        public void SessionDidUpdate(Session session)
+        public void CobrowseSessionDidUpdate(Session session)
         {
             _delegateDidUpdate(session);
         }
 
-        public void SessionDidEnd(Session session)
+        public void CobrowseSessionDidEnd(Session session)
         {
             _delegateDidEnd(session);
         }
