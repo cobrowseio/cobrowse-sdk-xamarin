@@ -41,7 +41,7 @@ namespace SampleApp.Forms.Android
         /// <summary>
         /// Gets the session's code.
         /// </summary>
-        public string Code => _platformSession.Code();
+        public string Code => _platformSession.Code;
 
         /// <summary>
         /// Gets a value indicating if the session running, frames are streaming to the agent.

@@ -18,6 +18,9 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='deviceId']" name="managedName">GetDeviceId</attr>
     
     <!-- Make method names the same as in the iOS SDK -->
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='code']" name="managedName">GetCode</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='agent']" name="managedName">GetAgent</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='state']" name="managedName">GetState</attr>
     <attr path="/api/package[@name='io.cobrowse']/interface[@name='Session.Listener']/method[@name='sessionDidUpdate']" name="managedName">CobrowseSessionDidUpdate</attr>
     <attr path="/api/package[@name='io.cobrowse']/interface[@name='Session.Listener']/method[@name='sessionDidEnd']" name="managedName">CobrowseSessionDidEnd</attr>
     
