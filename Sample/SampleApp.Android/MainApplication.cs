@@ -65,12 +65,12 @@ namespace SampleApp.Android
             session.Activate(callback: null);
         }
 
-        public void SessionDidEnd(Session session)
+        public void CobrowseSessionDidEnd(Session session)
         {
             Debug.WriteLine("SessionDidEnd");
         }
 
-        public void SessionDidUpdate(Session session)
+        public void CobrowseSessionDidUpdate(Session session)
         {
             Debug.WriteLine("SessionDidUpdate");
         }

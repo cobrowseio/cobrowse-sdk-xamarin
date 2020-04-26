@@ -61,7 +61,7 @@ namespace SampleApp.Android
                 ShowFragment(_codeDisplay);
                 if (session != null)
                 {
-                    _codeDisplay.SetCode(session.Code());
+                    _codeDisplay.SetCode(session.Code);
                 }
             }
             else if (session.IsActive)

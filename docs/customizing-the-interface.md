@@ -295,18 +295,9 @@ CobrowseIO.Instance().CreateSession((NSError error, Session session) =>
 
 You can monitor changes in the state of the session you create using the CobrowseIO delegate methods:
 
-**iOS**:
-
 ```cs
 public void CobrowseSessionDidUpdate (Session session);
 public void CobrowseSessionDidEnd (Session session);
-```
-
-**Android**:
-
-```cs
-void SessionDidUpdate (Session session);
-void SessionDidEnd (Session session);
 ```
 
 You can get information about the state of the session using the following properties, which may adjust the UI you are showing:
