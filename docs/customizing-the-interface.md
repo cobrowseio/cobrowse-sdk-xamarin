@@ -75,11 +75,11 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
         return indicator;
     }
 
-    public override void CobrowseSessionDidUpdate(Session session)
+    public override void SessionDidUpdate(Session session)
     {
     }
 
-    public override void CobrowseSessionDidEnd(Session session)
+    public override void SessionDidEnd(Session session)
     {
     }
 }
@@ -275,7 +275,7 @@ public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionContr
 
 You can build your own UI to completely replace the default UI we provide for generating 6 digit codes. You can generate a code for your UI by using the `CreateSession` API:
 
-**iOS**:
+#### Xamarin.iOS:
 
 ```cs
 CobrowseIO.Instance().CreateSession((NSError error, Session session) =>
@@ -286,18 +286,34 @@ CobrowseIO.Instance().CreateSession((NSError error, Session session) =>
     }
     else
     {
-        Debug.WriteLine("Created session code: {0}", error.Code);
+        Debug.WriteLine("Created session code: {0}", session.Code);
     }
 });
 ```
 
-**Note:** the codes expire shortly after creation (codes last less than 10 minutes), so wait until your user is ready to share the code with an agent before generating it:
+#### Xamarin.Android:
+
+```cs
+CobrowseIO.Instance().CreateSession((Java.Lang.Error error, Session session) =>
+{
+    if (error != null)
+    {
+        Debug.WriteLine("Error creating code: {0}", error);
+    }
+    else
+    {
+        Debug.WriteLine("Created session code: {0}", session.Code);
+    }
+});
+```
+
+**Note:** the codes expire shortly after creation (codes last less than 10 minutes), so wait until your user is ready to share the code with an agent before generating it.
 
 You can monitor changes in the state of the session you create using the CobrowseIO delegate methods:
 
 ```cs
-public void CobrowseSessionDidUpdate (Session session);
-public void CobrowseSessionDidEnd (Session session);
+public void SessionDidUpdate (Session session);
+public void SessionDidEnd (Session session);
 ```
 
 You can get information about the state of the session using the following properties, which may adjust the UI you are showing:
