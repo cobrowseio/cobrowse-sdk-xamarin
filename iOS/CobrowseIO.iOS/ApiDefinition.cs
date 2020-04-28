@@ -187,40 +187,40 @@ namespace Xamarin.CobrowseIO
 		// @required -(void)cobrowseSessionDidUpdate:(CBIOSession * _Nonnull)session;
 		[Abstract]
 		[Export("cobrowseSessionDidUpdate:")]
-		void CobrowseSessionDidUpdate(Session session);
+		void SessionDidUpdate(Session session);
 
 		// @required -(void)cobrowseSessionDidEnd:(CBIOSession * _Nonnull)session;
 		[Abstract]
 		[Export("cobrowseSessionDidEnd:")]
-		void CobrowseSessionDidEnd(Session session);
+		void SessionDidEnd(Session session);
 
 		// @optional -(_Bool)cobrowseShouldAllowTouchEvent:(CBIOTouchEvent * _Nonnull)touchEvent forSession:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShouldAllowTouchEvent:forSession:")]
-		bool CobrowseShouldAllowTouchEvent(TouchEvent touchEvent, Session session);
+		bool ShouldAllowTouchEvent(TouchEvent touchEvent, Session session);
 
 		// @optional -(_Bool)cobrowseShouldAllowKeyEvent:(CBIOKeyPress * _Nonnull)keyEvent forSession:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShouldAllowKeyEvent:forSession:")]
-		bool CobrowseShouldAllowKeyEvent(KeyPress keyEvent, Session session);
+		bool ShouldAllowKeyEvent(KeyPress keyEvent, Session session);
 
 		// @optional -(_Bool)cobrowseShouldCaptureWindow:(UIWindow * _Nonnull)window;
 		[Export("cobrowseShouldCaptureWindow:")]
-		bool CobrowseShouldCaptureWindow(UIWindow window);
+		bool ShouldCaptureWindow(UIWindow window);
 
 		// @optional -(void)cobrowseHandleSessionRequest:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseHandleSessionRequest:")]
-		void CobrowseHandleSessionRequest(Session session);
+		void HandleSessionRequest(Session session);
 
 		// @optional -(void)cobrowseShowSessionControls:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShowSessionControls:")]
-		void CobrowseShowSessionControls(Session session);
+		void ShowSessionControls(Session session);
 
 		// @optional -(void)cobrowseHideSessionControls:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseHideSessionControls:")]
-		void CobrowseHideSessionControls(Session session);
+		void HideSessionControls(Session session);
 
 		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseRedactedViewsForViewController:(UIViewController * _Nonnull)vc;
 		[Export("cobrowseRedactedViewsForViewController:")]
-		UIView[] CobrowseRedactedViewsForViewController(UIViewController vc);
+		UIView[] RedactedViewsForViewController(UIViewController vc);
 	}
 
 	// @interface CBIOViewController : UIViewController

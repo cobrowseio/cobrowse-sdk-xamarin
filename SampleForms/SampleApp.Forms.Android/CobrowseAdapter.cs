@@ -94,8 +94,8 @@ namespace SampleApp.Forms.Android
         /// </summary>
         public event EventHandler<ICobrowseSession> SessionDidUpdate
         {
-            add => _overlayDelegate.SessionDidUpdate += value;
-            remove => _overlayDelegate.SessionDidUpdate -= value;
+            add => _overlayDelegate.SessionUpdated += value;
+            remove => _overlayDelegate.SessionUpdated -= value;
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace SampleApp.Forms.Android
         /// </summary>
         public event EventHandler<ICobrowseSession> SessionDidEnd
         {
-            add => _overlayDelegate.SessionDidEnd += value;
-            remove => _overlayDelegate.SessionDidEnd -= value;
+            add => _overlayDelegate.SessionEnded += value;
+            remove => _overlayDelegate.SessionEnded -= value;
         }
 
         /// <summary>
@@ -199,9 +199,9 @@ namespace SampleApp.Forms.Android
         CobrowseIO.ISessionRequestDelegate,
         CobrowseIO.ISessionControlsDelegate
     {
-        public event EventHandler<ICobrowseSession> SessionDidUpdate;
+        public event EventHandler<ICobrowseSession> SessionUpdated;
 
-        public event EventHandler<ICobrowseSession> SessionDidEnd;
+        public event EventHandler<ICobrowseSession> SessionEnded;
 
         public CustomOverlayCobrowseDelegate()
         {
@@ -274,16 +274,16 @@ namespace SampleApp.Forms.Android
             session.Activate(callback: null);
         }
 
-        public void CobrowseSessionDidUpdate(Session session)
+        public void SessionDidUpdate(Session session)
         {
             Debug.WriteLine("SessionDidUpdate");
-            SessionDidUpdate?.Invoke(this, CobrowseSession.TryCreate(session));
+            SessionUpdated?.Invoke(this, CobrowseSession.TryCreate(session));
         }
 
-        public void CobrowseSessionDidEnd(Session session)
+        public void SessionDidEnd(Session session)
         {
             Debug.WriteLine("SessionDidEnd");
-            SessionDidEnd?.Invoke(this, CobrowseSession.TryCreate(session));
+            SessionEnded?.Invoke(this, CobrowseSession.TryCreate(session));
         }
     }
 }

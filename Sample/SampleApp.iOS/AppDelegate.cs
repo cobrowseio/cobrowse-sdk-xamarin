@@ -45,7 +45,7 @@ namespace SampleApp.iOS
         // Sample end session UIView, constructor, and tap gesture recognizer implementation
         private UIView _indicatorInstance;
 
-        public override void CobrowseShowSessionControls(Session session)
+        public override void ShowSessionControls(Session session)
         {
             // You can render controls however you like here.
             // One option is to add our sample end session UI defined below.
@@ -56,7 +56,7 @@ namespace SampleApp.iOS
             _indicatorInstance.Hidden = false;
         }
 
-        public override void CobrowseHideSessionControls(Session session)
+        public override void HideSessionControls(Session session)
         {
             if (_indicatorInstance != null)
                 _indicatorInstance.Hidden = true;
@@ -90,7 +90,7 @@ namespace SampleApp.iOS
             return indicator;
         }
 
-        public override void CobrowseSessionDidUpdate(Session session)
+        public override void SessionDidUpdate(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidUpdate");
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
@@ -101,7 +101,7 @@ namespace SampleApp.iOS
             }
         }
 
-        public override void CobrowseSessionDidEnd(Session session)
+        public override void SessionDidEnd(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidEnd");
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
