@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>CobrowseIO.iOS</id>
-        <version>2.4.0</version>
+        <version>2.4.0.1</version>
         <title>CobrowseIO.iOS</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>

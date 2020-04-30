@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>CobrowseIO.Android</id>
-        <version>2.2.0</version>
+        <version>2.2.0.1</version>
         <title>CobrowseIO.Android</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
