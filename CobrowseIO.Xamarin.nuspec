@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>CobrowseIO.Xamarin</id>
-        <version>3.0.0</version>
+        <version>3.0.0-pre02</version>
         <title>CobrowseIO.Xamarin</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
@@ -21,23 +21,35 @@
                 <dependency id="Xamarin.AndroidX.Core" version="1.1.0" />
                 <dependency id="Xamarin.AndroidX.AppCompat" version="1.1.0" />
                 <dependency id="Xamarin.AndroidX.ConstraintLayout" version="1.1.3" />
+                <dependency id="Plugin.CurrentActivity" version="2.1.0.4" />
             </group>
             <group targetFramework="Xamarin.iOS10">
                 <dependency id="Starscream.iOS" version="3.1.1" />
-                <dependency id="SwiftCBOR.iOS" version="0.4.3" />
+                <dependency id="SwiftCBOR.iOS" version="0.4.3.1" />
+            </group>
+            <group targetFramework="netstandard1.0">
+                <dependency id="NETStandard.Library" version="1.6.1" />
             </group>
         </dependencies>
         <!-- TODO 'releaseNotes' tag -->
     </metadata>
     <files>
+        <!--Core-->
+        <file src="XamarinSDK/CobrowseIO.Xamarin/bin/Release/netstandard1.0/CobrowseIO.Xamarin.pdb" target="lib\netstandard1.0" />
+        <file src="XamarinSDK/CobrowseIO.Xamarin/bin/Release/netstandard1.0/CobrowseIO.Xamarin.dll" target="lib\netstandard1.0" />
+        <file src="XamarinSDK/CobrowseIO.Xamarin.Abstractions/bin/Release/netstandard1.0/CobrowseIO.Xamarin.Abstractions.pdb" target="lib\netstandard1.0" />
+        <file src="XamarinSDK/CobrowseIO.Xamarin.Abstractions/bin/Release/netstandard1.0/CobrowseIO.Xamarin.Abstractions.dll" target="lib\netstandard1.0" />
+    
         <!-- Android-specific files -->
         <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.dll" target="lib/MonoAndroid100" />
         <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.pdb" target="lib/MonoAndroid100" />
+        <file src="XamarinSDK/CobrowseIO.Xamarin.Android/bin/Release/CobrowseIO.Xamarin.*" target="lib/MonoAndroid100" />
 
         <!-- iOS-specific files -->
         <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.dll" target="lib/Xamarin.iOS10" />
         <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.pdb" target="lib/Xamarin.iOS10" />
-        
+        <file src="XamarinSDK/CobrowseIO.Xamarin.iOS/bin/Release/CobrowseIO.Xamarin.*" target="lib/Xamarin.iOS10" />
+
         <!-- Package icon -->
         <file src="icon.png" />
     </files>
