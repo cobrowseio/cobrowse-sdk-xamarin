@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using UIKit;
+using Xamarin.CobrowseIO;
 
 namespace SampleApp.Forms.iOS
 {
@@ -20,6 +21,10 @@ namespace SampleApp.Forms.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            CobrowseIO.Instance().SetDelegate(new CustomOverlayCobrowseDelegate()
+            {
+                IndicatorFunction = () => new CobrowseCustomView()
+            });
 
             return base.FinishedLaunching(app, options);
         }

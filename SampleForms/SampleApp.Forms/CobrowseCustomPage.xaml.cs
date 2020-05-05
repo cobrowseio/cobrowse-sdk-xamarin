@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Xamarin.CobrowseIO;
 using Xamarin.Forms;
 
 namespace SampleApp.Forms
@@ -8,8 +9,6 @@ namespace SampleApp.Forms
     {
         private ICobrowseSession _session;
         private bool _loadingSession;
-
-        private ICobrowseAdapter CobrowseAdapter => DependencyService.Get<ICobrowseAdapter>();
 
         private Random _random;
         private bool _animationTimerActive;
@@ -43,16 +42,16 @@ namespace SampleApp.Forms
         {
             base.OnAppearing();
 
-            CobrowseAdapter.SessionDidUpdate += CobrowseAdapter_SessionDidUpdate;
-            CobrowseAdapter.SessionDidEnd += CobrowseAdapter_SessionDidEnd;
+            CrossCobrowseIO.Current.SessionDidUpdate += CobrowseAdapter_SessionDidUpdate;
+            CrossCobrowseIO.Current.SessionDidEnd += CobrowseAdapter_SessionDidEnd;
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            CobrowseAdapter.SessionDidUpdate -= CobrowseAdapter_SessionDidUpdate;
-            CobrowseAdapter.SessionDidEnd -= CobrowseAdapter_SessionDidEnd;
+            CrossCobrowseIO.Current.SessionDidUpdate -= CobrowseAdapter_SessionDidUpdate;
+            CrossCobrowseIO.Current.SessionDidEnd -= CobrowseAdapter_SessionDidEnd;
 
             _animationTimerActive = false;
         }
@@ -67,9 +66,9 @@ namespace SampleApp.Forms
             {
                 // if the current session looks like it's still active
                 // then we'll use that one
-                if (CobrowseAdapter.CurrentSession?.IsActive == true)
+                if (CrossCobrowseIO.Current.CurrentSession?.IsActive == true)
                 {
-                    _session = CobrowseAdapter.CurrentSession;
+                    _session = CrossCobrowseIO.Current.CurrentSession;
                     //[session registerSessionObserver:self];
                 }
                 else
@@ -82,7 +81,7 @@ namespace SampleApp.Forms
 
         private void CreateSession()
         {
-            CobrowseAdapter.CreateSession((Exception err, ICobrowseSession session) =>
+            CrossCobrowseIO.Current.CreateSession((Exception err, ICobrowseSession session) =>
             {
                 if (err != null)
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Xamarin.CobrowseIO;
 using Xamarin.Forms;
 
 namespace SampleApp.Forms
@@ -16,7 +17,7 @@ namespace SampleApp.Forms
 
         private void CobrowseButton_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<ICobrowseAdapter>().StartCobrowse();
+            CrossCobrowseIO.Current.StartCobrowse();
         }
 
         private void CobrowseCustomUiButton_Clicked(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace SampleApp.Forms
 
         private void CheckCobrowseFullDevice_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<ICobrowseAdapter>().CheckCobrowseFullDevice();
+            CrossCobrowseIO.Current.CheckCobrowseFullDevice();
         }
 
         private void PageRedactedViews_Clicked(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace SampleApp.Forms
 
         private void CobrowseUserId_Clicked(object sender, EventArgs e)
         {
-            string userId = DependencyService.Get<ICobrowseAdapter>().DeviceId;
+            string userId = CrossCobrowseIO.Current.DeviceId;
             this.DisplayAlert(
                 title: "Cobrowse.io",
                 message: $"Cobrowse.io DeviceId: {userId}",

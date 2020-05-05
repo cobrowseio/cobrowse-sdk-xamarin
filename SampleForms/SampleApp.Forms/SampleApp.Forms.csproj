@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageReference Include="CobrowseIO.Xamarin" Version="3.0.0-pre03" />
   </ItemGroup>
 </Project>

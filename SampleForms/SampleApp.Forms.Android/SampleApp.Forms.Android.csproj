@@ -68,12 +68,15 @@
     <PackageReference Include="Xamarin.AndroidX.ConstraintLayout">
       <Version>1.1.3</Version>
     </PackageReference>
+    <PackageReference Include="CobrowseIO.Xamarin">
+      <Version>3.0.0-pre03</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CobrowseAdapter.cs" />
+    <Compile Include="CustomOverlayCobrowseDelegate.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="PlatformCobrowseRedactedViewEffect.cs" />
   </ItemGroup>
@@ -111,18 +114,6 @@
     <ProjectReference Include="..\SampleApp.Forms\SampleApp.Forms.csproj">
       <Project>{28C2AABA-55D8-47E3-9404-1C9C13BFC8E9}</Project>
       <Name>SampleApp.Forms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Android\CborJava.Android\CborJava.Android.csproj">
-      <Project>{442C6F83-FEC1-4CED-A374-3953721D7C13}</Project>
-      <Name>CborJava.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Android\NumbersJava.Android\NumbersJava.Android.csproj">
-      <Project>{CA05EE40-B53A-4284-99E3-4257304D025A}</Project>
-      <Name>NumbersJava.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj">
-      <Project>{C6ED4775-5505-4166-B973-D0C88830D32B}</Project>
-      <Name>CobrowseIO.Android</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
