@@ -46,6 +46,9 @@
       <Link>CrossCobrowseIO.cs</Link>
     </Compile>
     <Compile Include="UIViewControllerExtensions.cs" />
+    <Compile Include="CobrowseSession.cs" />
+    <Compile Include="NSErrorExtensions.cs" />
+    <Compile Include="CrossCobrowseDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj">

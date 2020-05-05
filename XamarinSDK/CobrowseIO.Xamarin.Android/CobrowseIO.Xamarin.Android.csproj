@@ -57,6 +57,8 @@
     <Compile Include="..\CobrowseIO.Xamarin\CrossCobrowseIO.cs">
       <Link>CrossCobrowseIO.cs</Link>
     </Compile>
+    <Compile Include="CobrowseSession.cs" />
+    <Compile Include="CrossCobrowseDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CobrowseIO.Xamarin.Abstractions\CobrowseIO.Xamarin.Abstractions.csproj">

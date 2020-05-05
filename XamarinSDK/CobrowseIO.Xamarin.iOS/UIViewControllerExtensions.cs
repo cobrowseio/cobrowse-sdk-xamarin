@@ -3,6 +3,9 @@ using UIKit;
 
 namespace Xamarin.CobrowseIO
 {
+    /// <summary>
+    /// <see cref="UIViewController"/> extension methods.
+    /// </summary>
     internal static class UIViewControllerExtensions
     {
         public static UINavigationController GetUINavigationController(this UIViewController controller)
