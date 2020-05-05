@@ -96,9 +96,9 @@ Task("FindLatestAndroidVersions")
     string responseBody = HttpGet(bintrayApiEndpoint);
     JObject result = ParseJson(responseBody.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
 
-    cobrowseAndroidProject.NativeVersion = result["latest_version"].ToString();
+    cobrowseAndroidProject._VersionString = result["latest_version"].ToString();
     
-    Information("Latest native Android SDK is {0}", cobrowseAndroidProject.NativeVersion);
+    Information("Latest native Android SDK is {0}", cobrowseAndroidProject._VersionString);
 });
 
 Task("FindLatestIosVersions")
@@ -117,15 +117,15 @@ Task("FindLatestIosVersions")
         POD_CLONE_DIRECTORY,
         "900d81fbaad88f8fd8369d65578bd3ab8dcd6f27");
 
-    cobrowseIosProject.NativeVersion 
-        = cobrowseIosExtensionProject.NativeVersion
+    cobrowseIosProject._VersionString 
+        = cobrowseIosExtensionProject._VersionString
         = FindRegexMatchGroupInFile(
             POD_CLONE_DIRECTORY + "/" + "CobrowseIO.podspec", 
             @"s\.version = '([\S]*?)'",
             1,
             RegexOptions.Compiled).Value;
     
-    Information("Latest native iOS SDK is {0}", cobrowseIosProject.NativeVersion);
+    Information("Latest native iOS SDK is {0}", cobrowseIosProject._VersionString);
 });
 
 Task("DownloadNativeSDKs")
@@ -133,8 +133,8 @@ Task("DownloadNativeSDKs")
 {
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
-            var downloadUrl = string.Format(androidBindingProject.DownloadUrl, androidBindingProject.NativeVersion);
-            var jarPath = string.Format(androidBindingProject.JarPath, androidBindingProject.NativeVersion);
+            var downloadUrl = string.Format(androidBindingProject.DownloadUrl, androidBindingProject._VersionString);
+            var jarPath = string.Format(androidBindingProject.JarPath, androidBindingProject._VersionString);
             DownloadFile(downloadUrl, jarPath);
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
@@ -147,15 +147,32 @@ Task("DownloadNativeSDKs")
 Task("UpdateAssemblyVersions")
     .Does(() =>
 {
-    foreach (var bindingProject in bindingProjects) {
+    void _SetAseemblyVersion(string filePath, Version version) {
+        if (version == null) {
+            return;
+        }
+
         ReplaceRegexInFiles(
-            bindingProject.AssemblyInfoPath, 
+            filePath,
             "(?<=AssemblyVersion\\(\")(.+?)(?=\"\\))", 
-            bindingProject.NativeVersion);
+            version.ToString());
         ReplaceRegexInFiles(
-            bindingProject.AssemblyInfoPath, 
+            filePath,
             "(?<=AssemblyInformationalVersion\\(\")(.+?)(?=\"\\))", 
-            bindingProject.NativeVersion);
+            version.ToString());
+    }
+
+    foreach (var bindingProject in bindingProjects) {
+        _SetAseemblyVersion(bindingProject.AssemblyInfoFile, bindingProject.Version);
+    }
+    
+    foreach (var nugetArtifact in nugetArtifacts) {
+        if (nugetArtifact.AssemblyInfoFiles == null) {
+            continue;
+        }
+        foreach (string assemblyInfoFile in nugetArtifact.AssemblyInfoFiles) {
+            _SetAseemblyVersion(assemblyInfoFile, nugetArtifact.Version);
+        }
     }
 });
 
@@ -173,14 +190,14 @@ Task("Pack")
     .Does(() =>
 {
     foreach (NuGetArtifact artifact in nugetArtifacts) {
-        if (artifact.Version == null) {
+        if (artifact._VersionString == null) {
             // There are packages which nuspec files we do not modify on each build
             // We just build these packages
             NuGetPack(artifact.NuspecFile, new NuGetPackSettings());
         } else {
             NuGetPack(artifact.NuspecFile,
                       new NuGetPackSettings {
-                          Version = artifact.Version
+                          Version = artifact._VersionString
                       });
         }
     }

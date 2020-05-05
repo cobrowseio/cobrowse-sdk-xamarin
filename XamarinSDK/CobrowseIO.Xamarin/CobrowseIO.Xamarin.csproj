@@ -4,6 +4,7 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>CobrowseIO.Xamarin</AssemblyName>
     <RootNamespace>Xamarin.CobrowseIO</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
