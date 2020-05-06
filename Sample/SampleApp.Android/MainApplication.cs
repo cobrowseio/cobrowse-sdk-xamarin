@@ -30,10 +30,10 @@ namespace SampleApp.Android
         {
             base.OnCreate();
 
-            CobrowseIO.Instance().SetLicense("trial");
-            Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance().GetDeviceId(this));
+            CobrowseIO.Instance.SetLicense("trial");
+            Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance.GetDeviceId(this));
 
-            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>()
+            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>()
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
@@ -43,8 +43,8 @@ namespace SampleApp.Android
                 { "custom_field", 5.75f }
             });
 
-            CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
-            CobrowseIO.Instance().Start(this);
+            CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
+            CobrowseIO.Instance.Start(this);
         }
     }
 

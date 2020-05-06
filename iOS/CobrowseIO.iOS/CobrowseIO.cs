@@ -6,7 +6,6 @@ namespace Xamarin.CobrowseIO
 {
     public partial class CobrowseIO
     {
-
         // These values copied directly from CobrowseIO.h
         // https://forums.xamarin.com/discussion/8572/how-do-you-bind-extern-nsstring-const
         public static NSString UserIdKey { get; } = new NSString("user_id");
@@ -18,6 +17,8 @@ namespace Xamarin.CobrowseIO
         public static NSString DeviceIdKey { get; } = new NSString("device_id");
 
         public static NSString DeviceNameKey { get; } = new NSString("device_name");
+
+        public static CobrowseIO Instance => GetInstance();
 
         public void SetCustomData(IDictionary<string, string> customData)
         {

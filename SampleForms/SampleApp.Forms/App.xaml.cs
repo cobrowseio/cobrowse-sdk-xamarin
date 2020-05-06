@@ -10,9 +10,9 @@ namespace SampleApp.Forms
         {
             InitializeComponent();
 
-            CrossCobrowseIO.Instance().SetLicense("trial");
-            CrossCobrowseIO.Instance().Start();
-            CrossCobrowseIO.Instance().SetCustomData(new Dictionary<string, object>
+            CrossCobrowseIO.Instance.SetLicense("trial");
+            CrossCobrowseIO.Instance.Start();
+            CrossCobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
             {
                 { CrossCobrowseIO.UserId, "<your_user_id>" },
                 { CrossCobrowseIO.UserName, "<your_user_name>" },
@@ -42,12 +42,12 @@ namespace SampleApp.Forms
 
         private void Subscribe()
         {
-            CrossCobrowseIO.Instance().SessionDidRequest += OnCobrowseSessionDidRequest;
+            CrossCobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
         }
 
         private void Unsubscribe()
         {
-            CrossCobrowseIO.Instance().SessionDidRequest -= OnCobrowseSessionDidRequest;
+            CrossCobrowseIO.Instance.SessionDidRequest -= OnCobrowseSessionDidRequest;
         }
 
         private async void OnCobrowseSessionDidRequest(object sender, ICobrowseSession session)

@@ -24,12 +24,15 @@ namespace Xamarin.CobrowseIO
 
         static readonly Lazy<ICrossCobrowseIO> Implementation = new Lazy<ICrossCobrowseIO>(CreateCrossCobrowseIO);
 
-        public static ICrossCobrowseIO Instance()
+        public static ICrossCobrowseIO Instance
         {
-            if (Implementation.Value == null)
-                throw NotImplementedInReferenceAssembly();
+            get
+            {
+                if (Implementation.Value == null)
+                    throw NotImplementedInReferenceAssembly();
 
-            return Implementation.Value;
+                return Implementation.Value;
+            }
         }
 
         static ICrossCobrowseIO CreateCrossCobrowseIO()

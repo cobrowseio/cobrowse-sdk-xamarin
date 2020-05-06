@@ -21,7 +21,7 @@ namespace SampleApp.Forms.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-            CobrowseIO.Instance().SetDelegate(new CustomOverlayCobrowseDelegate()
+            CobrowseIO.Instance.SetDelegate(new CustomOverlayCobrowseDelegate()
             {
                 IndicatorFunction = () => new CobrowseCustomView()
             });

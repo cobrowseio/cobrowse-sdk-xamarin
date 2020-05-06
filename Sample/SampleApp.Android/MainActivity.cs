@@ -70,7 +70,7 @@ namespace SampleApp.Android
         {
             new AlertDialog.Builder(this)
                 .SetTitle("Cobrowse.io ")
-                .SetMessage($"Cobrowse.io DeviceId: {CobrowseIO.Instance().GetDeviceId(this.Application)}")
+                .SetMessage($"Cobrowse.io DeviceId: {CobrowseIO.Instance.GetDeviceId(this.Application)}")
                 .SetPositiveButton(global::Android.Resource.String.Yes, (sender, args) => { })
                 .Show();
         }

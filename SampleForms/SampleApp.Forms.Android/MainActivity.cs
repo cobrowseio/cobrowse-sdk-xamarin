@@ -26,7 +26,7 @@ namespace SampleApp.Forms.Android
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-            CobrowseIO.Instance().SetDelegate(new CustomOverlayCobrowseDelegate()
+            CobrowseIO.Instance.SetDelegate(new CustomOverlayCobrowseDelegate()
             {
                 IndicatorFunction = () => new CobrowseCustomView()
             });

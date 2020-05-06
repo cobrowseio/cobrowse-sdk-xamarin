@@ -17,7 +17,7 @@ namespace SampleApp.Forms
 
         private void CobrowseButton_Clicked(object sender, EventArgs e)
         {
-            CrossCobrowseIO.Instance().OpenCobrowseUI();
+            CrossCobrowseIO.Instance.OpenCobrowseUI();
         }
 
         private void CobrowseCustomUiButton_Clicked(object sender, EventArgs e)
@@ -27,7 +27,7 @@ namespace SampleApp.Forms
 
         private void CheckCobrowseFullDevice_Clicked(object sender, EventArgs e)
         {
-            CrossCobrowseIO.Instance().CheckCobrowseFullDevice();
+            CrossCobrowseIO.Instance.CheckCobrowseFullDevice();
         }
 
         private void PageRedactedViews_Clicked(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace SampleApp.Forms
 
         private void CobrowseUserId_Clicked(object sender, EventArgs e)
         {
-            string userId = CrossCobrowseIO.Instance().DeviceId;
+            string userId = CrossCobrowseIO.Instance.DeviceId;
             this.DisplayAlert(
                 title: "Cobrowse.io",
                 message: $"Cobrowse.io DeviceId: {userId}",

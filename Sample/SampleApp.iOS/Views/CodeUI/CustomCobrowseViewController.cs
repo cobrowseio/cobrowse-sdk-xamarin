@@ -49,9 +49,9 @@ namespace SampleApp.iOS
             {
                 // if the current session looks like it's still active
                 // then we'll use that one
-                if (CobrowseIO.Instance().CurrentSession?.IsActive == true)
+                if (CobrowseIO.Instance.CurrentSession?.IsActive == true)
                 {
-                    _session = CobrowseIO.Instance().CurrentSession;
+                    _session = CobrowseIO.Instance.CurrentSession;
                     //[session registerSessionObserver:self];
                 }
                 else
@@ -78,7 +78,7 @@ namespace SampleApp.iOS
 
         private void CreateSession()
         {
-            CobrowseIO.Instance().CreateSession((NSError err, Session session) =>
+            CobrowseIO.Instance.CreateSession((NSError err, Session session) =>
             {
                 if (err != null)
                 {
@@ -95,7 +95,7 @@ namespace SampleApp.iOS
         private void LoadSession(string codeOrId)
         {
             _loadingSession = true;
-            CobrowseIO.Instance().GetSession(codeOrId, (NSError err, Session session) =>
+            CobrowseIO.Instance.GetSession(codeOrId, (NSError err, Session session) =>
             { 
                 if (err != null)
                 {

@@ -18,10 +18,10 @@ namespace SampleApp.iOS
         [Export("application:didFinishLaunchingWithOptions:")]
         public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            CobrowseIO.Instance().SetLicense("trial");
-            Console.WriteLine("Cobrowse device id:" + CobrowseIO.Instance().DeviceId);
+            CobrowseIO.Instance.SetLicense("trial");
+            Console.WriteLine("Cobrowse device id:" + CobrowseIO.Instance.DeviceId);
             
-            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>
+            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
@@ -31,8 +31,8 @@ namespace SampleApp.iOS
                 { "custom_field", 5.75f }
             });
 
-            CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
-            CobrowseIO.Instance().Start();
+            CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
+            CobrowseIO.Instance.Start();
 
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
@@ -83,7 +83,7 @@ namespace SampleApp.iOS
 
             var tapRecognizer = new UITapGestureRecognizer(() =>
             {
-                CobrowseIO.Instance().CurrentSession?.End(null);
+                CobrowseIO.Instance.CurrentSession?.End(null);
             });
             tapRecognizer.NumberOfTapsRequired = 1;
             indicator.AddGestureRecognizer(tapRecognizer);

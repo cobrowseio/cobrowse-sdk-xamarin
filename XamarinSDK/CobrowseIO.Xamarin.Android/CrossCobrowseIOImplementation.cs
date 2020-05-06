@@ -69,14 +69,14 @@ namespace Xamarin.CobrowseIO
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>
         public ICobrowseSession CurrentSession
-            => CobrowseSession.TryCreate(CobrowseIO.Instance().CurrentSession);
+            => CobrowseSession.TryCreate(CobrowseIO.Instance.CurrentSession);
 
         /// <summary>
         /// Creates a new Cobrowse.io session.
         /// </summary>
         public void CreateSession(CobrowseCallback callback)
         {
-            CobrowseIO.Instance().CreateSession((JError e, Session session) =>
+            CobrowseIO.Instance.CreateSession((JError e, Session session) =>
             {
                 callback?.Invoke(e, CobrowseSession.TryCreate(session));
             });
@@ -85,14 +85,14 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Gets the current Cobrowse.io device ID.
         /// </summary>
-        public string DeviceId => CobrowseIO.Instance().GetDeviceId(Activity.Application);
+        public string DeviceId => CobrowseIO.Instance.GetDeviceId(Activity.Application);
 
         /// <summary>
         /// Sets the license.
         /// </summary>
         public void SetLicense(string licenseKey)
         {
-            CobrowseIO.Instance().SetLicense(licenseKey);
+            CobrowseIO.Instance.SetLicense(licenseKey);
         }
 
         /// <summary>
@@ -102,8 +102,8 @@ namespace Xamarin.CobrowseIO
         {
             if (Application.Context is Application application)
             {
-                CobrowseIO.Instance().SetDelegate(new CrossCobrowseDelegate());
-                CobrowseIO.Instance().Start(application);
+                CobrowseIO.Instance.SetDelegate(new CrossCobrowseDelegate());
+                CobrowseIO.Instance.Start(application);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public void Stop()
         {
-            CobrowseIO.Instance().Stop();
+            CobrowseIO.Instance.Stop();
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public void SetCustomData(IDictionary<string, object> customData)
         {
-            CobrowseIO.Instance().SetCustomData(customData);
+            CobrowseIO.Instance.SetCustomData(customData);
         }
 
         /// <summary>

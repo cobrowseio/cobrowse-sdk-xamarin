@@ -53,7 +53,7 @@ namespace SampleApp.iOS
             var alert = new UIAlertView
             {
                 Title = "Cobrowse.io",
-                Message = $"Cobrowse.io DeviceId: {CobrowseIO.Instance().DeviceId}"
+                Message = $"Cobrowse.io DeviceId: {CobrowseIO.Instance.DeviceId}"
             };
             alert.AddButton("OK");
             alert.Show();

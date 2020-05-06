@@ -294,7 +294,8 @@ namespace Xamarin.CobrowseIO
 		// +(instancetype _Nonnull)instance;
 		[Static]
 		[Export("instance")]
-		CobrowseIO Instance();
+		[Internal]
+		CobrowseIO GetInstance();
 
 		// -(instancetype _Nonnull)start;
 		[Export("start")]

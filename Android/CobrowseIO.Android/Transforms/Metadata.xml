@@ -12,6 +12,7 @@
     <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">Xamarin.CobrowseIO.UI</attr>
 
     <!-- Make setter-method names start with "Set" -->
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='instance']" name="managedName">GetInstance</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='license']" name="managedName">SetLicense</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='currentSession']" name="managedName">GetCurrentSession</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='customData']" name="managedName">SetCustomJavaData</attr>

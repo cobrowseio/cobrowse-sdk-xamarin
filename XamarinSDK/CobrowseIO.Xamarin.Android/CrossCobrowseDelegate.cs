@@ -12,7 +12,7 @@ namespace Xamarin.CobrowseIO
         CobrowseIO.ISessionRequestDelegate
     {
         private CrossCobrowseIOImplementation CrossImplementation
-            => (CrossCobrowseIOImplementation)CrossCobrowseIO.Instance();
+            => (CrossCobrowseIOImplementation)CrossCobrowseIO.Instance;
 
         public CrossCobrowseDelegate()
         {
