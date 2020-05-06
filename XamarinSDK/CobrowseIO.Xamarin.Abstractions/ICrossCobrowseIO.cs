@@ -39,9 +39,19 @@ namespace Xamarin.CobrowseIO
         string DeviceId { get; }
 
         /// <summary>
-        /// Initializes the Cobrowse.io SDK.
+        /// Sets the license.
         /// </summary>
-        void Initialize(string licenseKey);
+        void SetLicense(string licenseKey);
+
+        /// <summary>
+        /// Starts the Cobrowse.io.
+        /// </summary>
+        void Start();
+
+        /// <summary>
+        /// Stops the Cobrowse.io.
+        /// </summary>
+        void Stop();
 
         /// <summary>
         /// Sets Cobrowse.io custom data.
@@ -51,7 +61,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Launches 6-digits code UI.
         /// </summary>
-        void StartCobrowse();
+        void OpenCobrowseUI();
 
         /// <summary>
         /// Checks if full-device screen sharing is allowed.

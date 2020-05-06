@@ -13,7 +13,7 @@ namespace SampleApp.Forms
 
         void EndSessionButton_Clicked(object sender, EventArgs e)
         {
-            CrossCobrowseIO.Current.CurrentSession?.End(null);
+            CrossCobrowseIO.Instance().CurrentSession?.End(null);
         }
     }
 }

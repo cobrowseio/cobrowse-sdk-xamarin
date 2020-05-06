@@ -72,7 +72,7 @@
       <Version>1.1.3</Version>
     </PackageReference>
     <PackageReference Include="CobrowseIO.Xamarin">
-      <Version>3.0.0-pre03</Version>
+      <Version>3.0.0-pre05</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

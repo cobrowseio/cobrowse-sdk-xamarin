@@ -30,6 +30,11 @@ namespace Xamarin.CobrowseIO
         public string Code => _platformSession.Code;
 
         /// <summary>
+        /// Gets the session's state.
+        /// </summary>
+        public string State => _platformSession.State;
+
+        /// <summary>
         /// Gets a value indicating if the session running, frames are streaming to the agent.
         /// </summary>
         public bool IsActive => _platformSession.IsActive;

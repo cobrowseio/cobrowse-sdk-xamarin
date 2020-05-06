@@ -42,16 +42,16 @@ namespace SampleApp.Forms
         {
             base.OnAppearing();
 
-            CrossCobrowseIO.Current.SessionDidUpdate += CobrowseAdapter_SessionDidUpdate;
-            CrossCobrowseIO.Current.SessionDidEnd += CobrowseAdapter_SessionDidEnd;
+            CrossCobrowseIO.Instance().SessionDidUpdate += CobrowseAdapter_SessionDidUpdate;
+            CrossCobrowseIO.Instance().SessionDidEnd += CobrowseAdapter_SessionDidEnd;
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            CrossCobrowseIO.Current.SessionDidUpdate -= CobrowseAdapter_SessionDidUpdate;
-            CrossCobrowseIO.Current.SessionDidEnd -= CobrowseAdapter_SessionDidEnd;
+            CrossCobrowseIO.Instance().SessionDidUpdate -= CobrowseAdapter_SessionDidUpdate;
+            CrossCobrowseIO.Instance().SessionDidEnd -= CobrowseAdapter_SessionDidEnd;
 
             _animationTimerActive = false;
         }
@@ -66,9 +66,9 @@ namespace SampleApp.Forms
             {
                 // if the current session looks like it's still active
                 // then we'll use that one
-                if (CrossCobrowseIO.Current.CurrentSession?.IsActive == true)
+                if (CrossCobrowseIO.Instance().CurrentSession?.IsActive == true)
                 {
-                    _session = CrossCobrowseIO.Current.CurrentSession;
+                    _session = CrossCobrowseIO.Instance().CurrentSession;
                     //[session registerSessionObserver:self];
                 }
                 else
@@ -81,7 +81,7 @@ namespace SampleApp.Forms
 
         private void CreateSession()
         {
-            CrossCobrowseIO.Current.CreateSession((Exception err, ICobrowseSession session) =>
+            CrossCobrowseIO.Instance().CreateSession((Exception err, ICobrowseSession session) =>
             {
                 if (err != null)
                 {

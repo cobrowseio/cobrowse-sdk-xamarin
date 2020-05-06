@@ -8,17 +8,28 @@ namespace Xamarin.CobrowseIO
     /// </summary>
     public class CrossCobrowseIO
     {
+        #region Common Cobrowse.io custom data keys
+
+        public static string UserId = "user_id";
+
+        public static string UserEmail = "user_email";
+
+        public static string UserName = "user_name";
+
+        public static string DeviceId = "device_id";
+
+        public static string DeviceName = "device_name";
+
+        #endregion
+
         static readonly Lazy<ICrossCobrowseIO> Implementation = new Lazy<ICrossCobrowseIO>(CreateCrossCobrowseIO);
 
-        public static ICrossCobrowseIO Current
+        public static ICrossCobrowseIO Instance()
         {
-            get
-            {
-                if (Implementation.Value == null)
-                    throw NotImplementedInReferenceAssembly();
+            if (Implementation.Value == null)
+                throw NotImplementedInReferenceAssembly();
 
-                return Implementation.Value;
-            }
+            return Implementation.Value;
         }
 
         static ICrossCobrowseIO CreateCrossCobrowseIO()

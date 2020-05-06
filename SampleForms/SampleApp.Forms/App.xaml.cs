@@ -10,14 +10,15 @@ namespace SampleApp.Forms
         {
             InitializeComponent();
 
-            CrossCobrowseIO.Current.Initialize("trial");
-            CrossCobrowseIO.Current.SetCustomData(new Dictionary<string, object>
+            CrossCobrowseIO.Instance().SetLicense("trial");
+            CrossCobrowseIO.Instance().Start();
+            CrossCobrowseIO.Instance().SetCustomData(new Dictionary<string, object>
             {
-                { CobrowseDataKeys.UserId, "<your_user_id>" },
-                { CobrowseDataKeys.UserName, "<your_user_name>" },
-                { CobrowseDataKeys.UserEmail, "<your_user_email>" },
-                { CobrowseDataKeys.DeviceId, "<your_device_id>" },
-                { CobrowseDataKeys.DeviceName, "<your_device_name>" },
+                { CrossCobrowseIO.UserId, "<your_user_id>" },
+                { CrossCobrowseIO.UserName, "<your_user_name>" },
+                { CrossCobrowseIO.UserEmail, "<your_user_email>" },
+                { CrossCobrowseIO.DeviceId, "<your_device_id>" },
+                { CrossCobrowseIO.DeviceName, "<your_device_name>" },
                 { "custom_field", 5.75f }
             });
 
@@ -41,12 +42,12 @@ namespace SampleApp.Forms
 
         private void Subscribe()
         {
-            CrossCobrowseIO.Current.SessionDidRequest += OnCobrowseSessionDidRequest;
+            CrossCobrowseIO.Instance().SessionDidRequest += OnCobrowseSessionDidRequest;
         }
 
         private void Unsubscribe()
         {
-            CrossCobrowseIO.Current.SessionDidRequest -= OnCobrowseSessionDidRequest;
+            CrossCobrowseIO.Instance().SessionDidRequest -= OnCobrowseSessionDidRequest;
         }
 
         private async void OnCobrowseSessionDidRequest(object sender, ICobrowseSession session)

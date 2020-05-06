@@ -82,13 +82,28 @@ namespace Xamarin.CobrowseIO
         public string DeviceId => CobrowseIO.Instance().DeviceId;
 
         /// <summary>
-        /// Initializes the Cobrowse.io SDK.
+        /// Sets the license.
         /// </summary>
-        public void Initialize(string licenseKey)
+        public void SetLicense(string licenseKey)
         {
             CobrowseIO.Instance().SetLicense(licenseKey);
+        }
+
+        /// <summary>
+        /// Starts the Cobrowse.io.
+        /// </summary>
+        public void Start()
+        {
             CobrowseIO.Instance().SetDelegate(new CrossCobrowseDelegate());
             CobrowseIO.Instance().Start();
+        }
+
+        /// <summary>
+        /// Stops the Cobrowse.io.
+        /// </summary>
+        public void Stop()
+        {
+            CobrowseIO.Instance().Stop();
         }
 
         /// <summary>
@@ -102,7 +117,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Launches 6-digits code UI.
         /// </summary>
-        public void StartCobrowse()
+        public void OpenCobrowseUI()
         {
             var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var nc = vc.GetUINavigationController();

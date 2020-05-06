@@ -11,6 +11,11 @@
         string Code { get; }
 
         /// <summary>
+        /// Gets the session's state.
+        /// </summary>
+        string State { get; }
+
+        /// <summary>
         /// Gets a value indicating if the session running, frames are streaming to the agent.
         /// </summary>
         bool IsActive { get; }
