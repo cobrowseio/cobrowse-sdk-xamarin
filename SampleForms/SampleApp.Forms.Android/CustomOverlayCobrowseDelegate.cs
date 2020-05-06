@@ -10,7 +10,7 @@ using XView = Xamarin.Forms.View;
 
 namespace SampleApp.Forms.Android
 {
-    public class CustomOverlayCobrowseDelegate : CrossCobrowseDelegate,
+    public class CustomOverlayCobrowseDelegate : CobrowseDelegateImplementation,
         CobrowseIO.ISessionControlsDelegate
     {
         public CustomOverlayCobrowseDelegate()

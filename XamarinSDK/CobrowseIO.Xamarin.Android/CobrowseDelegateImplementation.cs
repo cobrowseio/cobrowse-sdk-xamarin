@@ -8,17 +8,17 @@ namespace Xamarin.CobrowseIO
     /// Cobrowse.io delegate provides callbacks to the cross-platform wrapper.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class CrossCobrowseDelegate : Java.Lang.Object,
+    public class CobrowseDelegateImplementation : Java.Lang.Object,
         CobrowseIO.ISessionRequestDelegate
     {
-        private CrossCobrowseIOImplementation CrossImplementation
-            => (CrossCobrowseIOImplementation)CrossCobrowseIO.Instance;
+        private CobrowseIOImplementation CrossImplementation
+            => (CobrowseIOImplementation)Xamarin.CobrowseIO.Abstractions.CobrowseIO.Instance;
 
-        public CrossCobrowseDelegate()
+        public CobrowseDelegateImplementation()
         {
         }
 
-        public CrossCobrowseDelegate(IntPtr handle, JniHandleOwnership transfer)
+        public CobrowseDelegateImplementation(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
         {
         }

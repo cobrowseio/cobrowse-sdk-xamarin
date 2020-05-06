@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Plugin.CurrentActivity;
-using Xamarin.CobrowseIO.UI;
-using JError = Java.Lang.Error;
+using Foundation;
+using UIKit;
+using Xamarin.CobrowseIO.Abstractions;
 
 namespace Xamarin.CobrowseIO
 {
     /// <summary>
-    /// Android-specific implementation of the cross-platform Cobrowse.io wrapper.
+    /// iOS-specific implementation of the cross-platform Cobrowse.io wrapper.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class CrossCobrowseIOImplementation : ICrossCobrowseIO
+    public class CobrowseIOImplementation : ICobrowseIO
     {
-        protected Activity Activity => CrossCurrentActivity.Current.Activity;
-
         /// <summary>
         /// Occurs when a session is requested.
         /// </summary>
-        public event EventHandler<ICobrowseSession> SessionDidRequest;
+        public event EventHandler<ISession> SessionDidRequest;
 
         internal bool RaiseSessionDidRequest(Session session)
         {
             var sessionDidRequest = SessionDidRequest;
             if (sessionDidRequest != null)
             {
-                sessionDidRequest(this, CobrowseSession.TryCreate(session));
+                sessionDidRequest(this, CobrowseSessionImplementation.TryCreate(session));
                 return true;
             }
             return false;
@@ -36,14 +31,14 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Occurs when a session is updated.
         /// </summary>
-        public event EventHandler<ICobrowseSession> SessionDidUpdate;
+        public event EventHandler<ISession> SessionDidUpdate;
 
         internal bool RaiseSessionDidUpdate(Session session)
         {
             var sessionDidUpdate = SessionDidUpdate;
             if (sessionDidUpdate != null)
             {
-                sessionDidUpdate(this, CobrowseSession.TryCreate(session));
+                sessionDidUpdate(this, CobrowseSessionImplementation.TryCreate(session));
                 return true;
             }
             return false;
@@ -52,14 +47,14 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Occurs when a session ends.
         /// </summary>
-        public event EventHandler<ICobrowseSession> SessionDidEnd;
+        public event EventHandler<ISession> SessionDidEnd;
 
         internal bool RaiseSessionDidEnd(Session session)
         {
             var sessionDidEnd = SessionDidEnd;
             if (sessionDidEnd != null)
             {
-                sessionDidEnd(this, CobrowseSession.TryCreate(session));
+                sessionDidEnd(this, CobrowseSessionImplementation.TryCreate(session));
                 return true;
             }
             return false;
@@ -68,24 +63,24 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>
-        public ICobrowseSession CurrentSession
-            => CobrowseSession.TryCreate(CobrowseIO.Instance.CurrentSession);
+        public ISession CurrentSession
+            => CobrowseSessionImplementation.TryCreate(CobrowseIO.Instance.CurrentSession);
 
         /// <summary>
         /// Creates a new Cobrowse.io session.
         /// </summary>
         public void CreateSession(CobrowseCallback callback)
         {
-            CobrowseIO.Instance.CreateSession((JError e, Session session) =>
+            CobrowseIO.Instance.CreateSession((NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSession.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
         /// <summary>
         /// Gets the current Cobrowse.io device ID.
         /// </summary>
-        public string DeviceId => CobrowseIO.Instance.GetDeviceId(Activity.Application);
+        public string DeviceId => CobrowseIO.Instance.DeviceId;
 
         /// <summary>
         /// Sets the license.
@@ -100,11 +95,8 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public void Start()
         {
-            if (Application.Context is Application application)
-            {
-                CobrowseIO.Instance.SetDelegate(new CrossCobrowseDelegate());
-                CobrowseIO.Instance.Start(application);
-            }
+            CobrowseIO.Instance.SetDelegate(new CobrowseDelegateImplementation());
+            CobrowseIO.Instance.Start();
         }
 
         /// <summary>
@@ -128,8 +120,11 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public void OpenCobrowseUI()
         {
-            var intent = new Intent(Activity, typeof(CobrowseActivity));
-            Activity.StartActivity(intent);
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var nc = vc.GetUINavigationController();
+            nc?.PushViewController(
+                new CobrowseViewController(),
+                animated: true);
         }
 
         /// <summary>
@@ -137,13 +132,7 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public void CheckCobrowseFullDevice()
         {
-            bool isRunning = CobrowseAccessibilityService.IsRunning(Activity);
-            if (!isRunning)
-            {
-                CobrowseAccessibilityService.ShowSetup(Activity);
-                return;
-            }
+            return;
         }
     }
-
 }

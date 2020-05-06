@@ -1,9 +1,9 @@
-﻿namespace Xamarin.CobrowseIO
+﻿namespace Xamarin.CobrowseIO.Abstractions
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io session.
     /// </summary>
-    public interface ICobrowseSession
+    public interface ISession
     {
         /// <summary>
         /// Gets the session's code.

@@ -6,7 +6,7 @@ using XView = Xamarin.Forms.View;
 
 namespace SampleApp.Forms.iOS
 {
-    public class CustomOverlayCobrowseDelegate : CrossCobrowseDelegate
+    public class CustomOverlayCobrowseDelegate : CobrowseDelegateImplementation
     {
         public CustomOverlayCobrowseDelegate()
         {

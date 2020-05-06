@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Xamarin.CobrowseIO;
+using Xamarin.CobrowseIO.Abstractions;
 using Xamarin.Forms;
 
 namespace SampleApp.Forms
@@ -10,15 +10,15 @@ namespace SampleApp.Forms
         {
             InitializeComponent();
 
-            CrossCobrowseIO.Instance.SetLicense("trial");
-            CrossCobrowseIO.Instance.Start();
-            CrossCobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
+            CobrowseIO.Instance.SetLicense("trial");
+            CobrowseIO.Instance.Start();
+            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
             {
-                { CrossCobrowseIO.UserId, "<your_user_id>" },
-                { CrossCobrowseIO.UserName, "<your_user_name>" },
-                { CrossCobrowseIO.UserEmail, "<your_user_email>" },
-                { CrossCobrowseIO.DeviceId, "<your_device_id>" },
-                { CrossCobrowseIO.DeviceName, "<your_device_name>" },
+                { CobrowseIO.UserId, "<your_user_id>" },
+                { CobrowseIO.UserName, "<your_user_name>" },
+                { CobrowseIO.UserEmail, "<your_user_email>" },
+                { CobrowseIO.DeviceId, "<your_device_id>" },
+                { CobrowseIO.DeviceName, "<your_device_name>" },
                 { "custom_field", 5.75f }
             });
 
@@ -42,15 +42,15 @@ namespace SampleApp.Forms
 
         private void Subscribe()
         {
-            CrossCobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
+            CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
         }
 
         private void Unsubscribe()
         {
-            CrossCobrowseIO.Instance.SessionDidRequest -= OnCobrowseSessionDidRequest;
+            CobrowseIO.Instance.SessionDidRequest -= OnCobrowseSessionDidRequest;
         }
 
-        private async void OnCobrowseSessionDidRequest(object sender, ICobrowseSession session)
+        private async void OnCobrowseSessionDidRequest(object sender, ISession session)
         {
             bool allowed = await this.MainPage.DisplayAlert(
                 title: "Cobrowse.io",

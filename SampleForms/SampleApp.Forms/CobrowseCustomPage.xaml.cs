@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using Xamarin.CobrowseIO;
+using Xamarin.CobrowseIO.Abstractions;
 using Xamarin.Forms;
 
 namespace SampleApp.Forms
 {
     public partial class CobrowseCustomPage : ContentPage
     {
-        private ICobrowseSession _session;
+        private ISession _session;
         private bool _loadingSession;
 
         private Random _random;
@@ -42,16 +42,16 @@ namespace SampleApp.Forms
         {
             base.OnAppearing();
 
-            CrossCobrowseIO.Instance.SessionDidUpdate += CobrowseAdapter_SessionDidUpdate;
-            CrossCobrowseIO.Instance.SessionDidEnd += CobrowseAdapter_SessionDidEnd;
+            CobrowseIO.Instance.SessionDidUpdate += CobrowseAdapter_SessionDidUpdate;
+            CobrowseIO.Instance.SessionDidEnd += CobrowseAdapter_SessionDidEnd;
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            CrossCobrowseIO.Instance.SessionDidUpdate -= CobrowseAdapter_SessionDidUpdate;
-            CrossCobrowseIO.Instance.SessionDidEnd -= CobrowseAdapter_SessionDidEnd;
+            CobrowseIO.Instance.SessionDidUpdate -= CobrowseAdapter_SessionDidUpdate;
+            CobrowseIO.Instance.SessionDidEnd -= CobrowseAdapter_SessionDidEnd;
 
             _animationTimerActive = false;
         }
@@ -66,9 +66,9 @@ namespace SampleApp.Forms
             {
                 // if the current session looks like it's still active
                 // then we'll use that one
-                if (CrossCobrowseIO.Instance.CurrentSession?.IsActive == true)
+                if (CobrowseIO.Instance.CurrentSession?.IsActive == true)
                 {
-                    _session = CrossCobrowseIO.Instance.CurrentSession;
+                    _session = CobrowseIO.Instance.CurrentSession;
                     //[session registerSessionObserver:self];
                 }
                 else
@@ -81,7 +81,7 @@ namespace SampleApp.Forms
 
         private void CreateSession()
         {
-            CrossCobrowseIO.Instance.CreateSession((Exception err, ICobrowseSession session) =>
+            CobrowseIO.Instance.CreateSession((Exception err, ISession session) =>
             {
                 if (err != null)
                 {
@@ -131,7 +131,7 @@ namespace SampleApp.Forms
         private void EndSession(object sender, EventArgs args)
         {
             this.Navigation.PopAsync();
-            _session.End((Exception e, ICobrowseSession session) =>
+            _session.End((Exception e, ISession session) =>
             {
                 if (e != null)
                 {
@@ -140,12 +140,12 @@ namespace SampleApp.Forms
             });
         }
 
-        private void CobrowseAdapter_SessionDidUpdate(object sender, ICobrowseSession e)
+        private void CobrowseAdapter_SessionDidUpdate(object sender, ISession e)
         {
             Render();
         }
 
-        private void CobrowseAdapter_SessionDidEnd(object sender, ICobrowseSession e)
+        private void CobrowseAdapter_SessionDidEnd(object sender, ISession e)
         {
             InitSession();
             Render();

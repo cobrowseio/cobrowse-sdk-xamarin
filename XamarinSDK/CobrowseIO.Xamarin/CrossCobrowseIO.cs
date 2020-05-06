@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Xamarin.CobrowseIO
+namespace Xamarin.CobrowseIO.Abstractions
 {
     /// <summary>
     /// Cross-platform Cobrowse.io API.
     /// </summary>
-    public class CrossCobrowseIO
+    public class CobrowseIO
     {
         #region Common Cobrowse.io custom data keys
 
@@ -22,9 +22,9 @@ namespace Xamarin.CobrowseIO
 
         #endregion
 
-        static readonly Lazy<ICrossCobrowseIO> Implementation = new Lazy<ICrossCobrowseIO>(CreateCrossCobrowseIO);
+        static readonly Lazy<ICobrowseIO> Implementation = new Lazy<ICobrowseIO>(CreateCobrowseIO);
 
-        public static ICrossCobrowseIO Instance
+        public static ICobrowseIO Instance
         {
             get
             {
@@ -35,14 +35,14 @@ namespace Xamarin.CobrowseIO
             }
         }
 
-        static ICrossCobrowseIO CreateCrossCobrowseIO()
+        static ICobrowseIO CreateCobrowseIO()
         {
             #if PORTABLE || NETSTANDARD
             Debug.WriteLine("PORTABLE || NETSTANDARD reached");
             return null;
             #else
             Debug.WriteLine("Other reached");
-            return new CrossCobrowseIOImplementation();
+            return new CobrowseIOImplementation();
             #endif
         }
 

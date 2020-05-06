@@ -52,13 +52,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrossCobrowseIOImplementation.cs" />
+    <Compile Include="CobrowseIOImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\CobrowseIO.Xamarin\CrossCobrowseIO.cs">
       <Link>CrossCobrowseIO.cs</Link>
     </Compile>
-    <Compile Include="CobrowseSession.cs" />
-    <Compile Include="CrossCobrowseDelegate.cs" />
+    <Compile Include="CobrowseSessionImplementation.cs" />
+    <Compile Include="CobrowseDelegateImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CobrowseIO.Xamarin.Abstractions\CobrowseIO.Xamarin.Abstractions.csproj">

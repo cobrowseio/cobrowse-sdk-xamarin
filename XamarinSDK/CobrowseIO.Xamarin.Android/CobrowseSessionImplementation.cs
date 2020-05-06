@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.Runtime;
+using Xamarin.CobrowseIO.Abstractions;
 using JError = Java.Lang.Error;
 
 namespace Xamarin.CobrowseIO
@@ -8,19 +9,19 @@ namespace Xamarin.CobrowseIO
     /// Cross-platform wrapper of the Cobrowse.io session.
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class CobrowseSession : ICobrowseSession
+    public class CobrowseSessionImplementation : ISession
     {
         private Session _platformSession;
 
-        public CobrowseSession(Session session)
+        public CobrowseSessionImplementation(Session session)
         {
             _platformSession = session ?? throw new ArgumentNullException(nameof(session));
         }
 
-        public static CobrowseSession TryCreate(Session session)
+        public static CobrowseSessionImplementation TryCreate(Session session)
         {
             return session != null
-                ? new CobrowseSession(session)
+                ? new CobrowseSessionImplementation(session)
                 : null;
         }
 
@@ -61,7 +62,7 @@ namespace Xamarin.CobrowseIO
         {
             _platformSession.Activate((JError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSession.TryCreate(session));
+                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
@@ -72,7 +73,7 @@ namespace Xamarin.CobrowseIO
         {
             _platformSession.End((JError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSession.TryCreate(session));
+                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
             });
         }
     }

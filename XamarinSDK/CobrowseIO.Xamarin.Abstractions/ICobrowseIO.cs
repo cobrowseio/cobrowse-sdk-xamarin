@@ -1,32 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Xamarin.CobrowseIO
+namespace Xamarin.CobrowseIO.Abstractions
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io SDK.
     /// </summary>
-    public interface ICrossCobrowseIO
+    public interface ICobrowseIO
     {
         /// <summary>
         /// Occurs when a session is requested.
         /// </summary>
-        event EventHandler<ICobrowseSession> SessionDidRequest;
+        event EventHandler<ISession> SessionDidRequest;
 
         /// <summary>
         /// Occurs when a session is updated.
         /// </summary>
-        event EventHandler<ICobrowseSession> SessionDidUpdate;
+        event EventHandler<ISession> SessionDidUpdate;
 
         /// <summary>
         /// Occurs when a session ends.
         /// </summary>
-        event EventHandler<ICobrowseSession> SessionDidEnd;
+        event EventHandler<ISession> SessionDidEnd;
 
         /// <summary>
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>
-        ICobrowseSession CurrentSession { get; }
+        ISession CurrentSession { get; }
 
         /// <summary>
         /// Creates a new Cobrowse.io session.

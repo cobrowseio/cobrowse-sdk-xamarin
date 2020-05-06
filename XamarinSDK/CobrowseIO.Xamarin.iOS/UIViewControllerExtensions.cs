@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Foundation;
 using UIKit;
 
 namespace Xamarin.CobrowseIO
@@ -6,6 +7,7 @@ namespace Xamarin.CobrowseIO
     /// <summary>
     /// <see cref="UIViewController"/> extension methods.
     /// </summary>
+    [Preserve(AllMembers = true)]
     internal static class UIViewControllerExtensions
     {
         public static UINavigationController GetUINavigationController(this UIViewController controller)
