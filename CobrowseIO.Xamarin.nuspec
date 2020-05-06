@@ -31,7 +31,7 @@
                 <dependency id="NETStandard.Library" version="1.6.1" />
             </group>
         </dependencies>
-        <!-- TODO 'releaseNotes' tag -->
+        <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/master/CHANGELOG.md</releaseNotes>
     </metadata>
     <files>
         <!--Core-->

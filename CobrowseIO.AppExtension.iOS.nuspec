@@ -19,6 +19,7 @@
                 <dependency id="SwiftCBOR.iOS" version="0.4.3.1" />
             </group>
         </dependencies>
+        <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/master/CHANGELOG.md</releaseNotes>
     </metadata>
     <files>
         <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/CobrowseIO.AppExtension.iOS.dll" target="lib/Xamarin.iOS10" />
