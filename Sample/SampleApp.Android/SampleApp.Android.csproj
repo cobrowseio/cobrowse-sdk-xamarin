@@ -71,9 +71,6 @@
     <PackageReference Include="Xamarin.AndroidX.ConstraintLayout">
       <Version>1.1.3</Version>
     </PackageReference>
-    <PackageReference Include="CobrowseIO.Xamarin">
-      <Version>3.0.0-pre08</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -130,6 +127,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\XamarinSDK\CobrowseIO.Xamarin.Android\CobrowseIO.Xamarin.Android.csproj">
+      <Project>{F0A627E6-45D3-446B-A99E-DFE32BBBABAE}</Project>
+      <Name>CobrowseIO.Xamarin.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj">
+      <Project>{C6ED4775-5505-4166-B973-D0C88830D32B}</Project>
+      <Name>CobrowseIO.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
