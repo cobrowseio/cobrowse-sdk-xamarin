@@ -58,93 +58,18 @@ namespace SampleApp.Android
 
 ### Xamarin.Forms implementation
 
-While it is not possible to access platform-specific code directly from a cross-platform project, you can easily achieve it using [DependencyService](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/dependency-service/introduction).
-
-In your **cross-platform** project declare an interface for accessing Cobrowse.io SDK:
+The Cobrowse.io Xamarin SDK provides a convenient way to open the default 6 digit code UI. In your **cross-platform** project:
 
 ```cs
-using System;
+using Xamarin.CobrowseIO.Abstractions;
 
 namespace YourAppNamespace.Forms
 {
-    public interface ICobrowseAdapter
-    {
-        void StartCobrowse();
-    }
-}
-```
-
-**iOS-specific** implementation would look like this:
-
-```cs
-using System.Linq;
-using UIKit;
-using Xamarin.CobrowseIO;
-
-[assembly: Xamarin.Forms.Dependency(typeof(YourAppNamespace.iOS.CobrowseAdapter))]
-namespace YourAppNamespace.iOS
-{
-    public class CobrowseAdapter : ICobrowseAdapter
+    public partial class YourPage : Xamarin.Forms.Page
     {
         public void StartCobrowse()
         {
-            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
-            var nc = vc.GetUINavigationController();
-            nc.PushViewController(
-                new CobrowseViewController(),
-                animated: true);
-        }
-    }
-
-    public static class UIViewControllerExtensions
-    {
-        public static UINavigationController GetUINavigationController(this UIViewController controller)
-        {
-            if (controller != null)
-            {
-                if (controller is UINavigationController nv)
-                {
-                    return nv;
-                }
-                else if (controller.ChildViewControllers.Any())
-                {
-                    int count = controller.ChildViewControllers.Count();
-                    for (int i = 0; i < count; i++)
-                    {
-                        var child = GetUINavigationController(controller.ChildViewControllers[i]);
-                        if (child is UINavigationController nc)
-                        {
-                            return nc;
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-    }
-}
-
-```
-
-**Android-speific** implementation would look like this (it uses [CurrentActivityPlugin](https://github.com/jamesmontemagno/CurrentActivityPlugin)):
-
-```cs
-using Android.App;
-using Android.Content;
-using Plugin.CurrentActivity;
-using Xamarin.CobrowseIO.UI;
-
-[assembly: Xamarin.Forms.Dependency(typeof(YourAppNamespace.Android.CobrowseAdapter))]
-namespace YourAppNamespace.Android
-{
-    public class CobrowseAdapter : ICobrowseAdapter
-    {
-        private Activity Activity => CrossCurrentActivity.Current.Activity;
-
-        public void StartCobrowse()
-        {
-            var intent = new Intent(Activity, typeof(CobrowseActivity));
-            Activity.StartActivity(intent);
+            CobrowseIO.Instance.OpenCobrowseUI();
         }
     }
 }

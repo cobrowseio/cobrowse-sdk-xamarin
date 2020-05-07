@@ -55,12 +55,12 @@ namespace YourAppNamespace
 
         public override void OnMessageReceived(RemoteMessage remoteMessage)
         {
-            CobrowseIO.Instance().OnPushNotification(remoteMessage.Data);
+            CobrowseIO.Instance.OnPushNotification(remoteMessage.Data);
         }
 
         public override void OnNewToken(string token)
         {
-            CobrowseIO.Instance().SetDeviceToken(Application, token);
+            CobrowseIO.Instance.SetDeviceToken(Application, token);
         }
     }
 }

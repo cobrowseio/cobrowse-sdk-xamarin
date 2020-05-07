@@ -8,10 +8,9 @@ Try our **online demo** at the bottom of our homepage at <https://cobrowse.io/#t
 
 ## Installation
 
-We recommend installing the Cobrowse.io SDK using NuGet. Add the following packages to your Xamarin projects:
+We recommend installing the Cobrowse.io SDK using NuGet. Add the following package to your Xamarin projects:
 
-- iOS: [![CobrowseIO.iOS NuGet](https://img.shields.io/nuget/v/CobrowseIO.iOS.svg?label=CobrowseIO.iOS)](https://www.nuget.org/packages/CobrowseIO.iOS/)
-- Android: [![CobrowseIO.Android NuGet](https://img.shields.io/nuget/v/CobrowseIO.Android.svg?label=CobrowseIO.Android)](https://www.nuget.org/packages/CobrowseIO.Android/)
+- `CobrowseIO.Xamarin`: [![CobrowseIO.iOS NuGet](https://img.shields.io/nuget/v/CobrowseIO.Xamarin.svg?label=CobrowseIO.Xamarin)](https://www.nuget.org/packages/CobrowseIO.Xamarin/)
 
 #### Xamarin.iOS
 
@@ -26,8 +25,8 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     [Export("application:didFinishLaunchingWithOptions:")]
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
-        CobrowseIO.Instance().SetLicense("<your license key here>");
-        CobrowseIO.Instance().Start();
+        CobrowseIO.Instance.SetLicense("<your license key here>");
+        CobrowseIO.Instance.Start();
         
         return true;
     }
@@ -67,8 +66,8 @@ public class MainApplication : Application
     {
         base.OnCreate();
 
-        CobrowseIO.Instance().SetLicense("<your license key here>");
-        CobrowseIO.Instance().Start(this);
+        CobrowseIO.Instance.SetLicense("<your license key here>");
+        CobrowseIO.Instance.Start(this);
     }
 }
 ```
@@ -80,8 +79,28 @@ public class MainApplication : Application
     - Open the project settings
     - Navigate to *Build* → *General*
     - In *"Compile using Android version: (Target Framework)*" drop-down list choose **Android 10.0 (Q)**
+- The Cobrowse.io SDK uses AndroidX, so make sure you have [migrated to AndroidX](https://docs.microsoft.com/en-us/xamarin/android/platform/androidx#migration-tooling)
 
 You may also start CobrowseIO in your `MainActivity` or other Activity if necessary. In that case, the SDK will continue to function even as new Activities are being created and destroyed.
+
+#### Xamarin.Forms
+
+Alternatively, it is possible to access Cobrowse.io features from Xamarin.Forms projects. In this case you only need to initialize the Cobrowse.io SDK in your cross-platform project:
+
+```cs
+using Xamarin.CobrowseIO.Abstractions;
+
+public partial class App : Xamarin.Forms.Application
+{
+    public App()
+    {
+        InitializeComponent();
+
+        CobrowseIO.Instance.SetLicense("<your license key here>");
+        CobrowseIO.Instance.Start();
+    }
+}
+```
 
 ### Add your License Key
 
@@ -95,63 +114,17 @@ To help you identify, search, and filter devices in your Cobrowse dashboard, it'
 
 You may add any custom key/value pairs you'd like, and they will all be searchable and filterable in your online dashboard. We've added a few placeholders for convenience only - all fields are optional.
 
-#### Xamarin.iOS
-
 ```cs
-using Xamarin.CobrowseIO;
-
-namespace YourAppNamespace
+CobrowseIO.Instance.SetLicense("<your license key here>");
+CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
 {
-    [Register("AppDelegate")]
-    public class AppDelegate : UIResponder, IUIApplicationDelegate
-    {
-        [Export("application:didFinishLaunchingWithOptions:")]
-        public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
-        {
-            CobrowseIO.Instance().SetLicense("<your license key here>");
-            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>()
-            {
-                { CobrowseIO.UserIdKey, "<your_user_id>" },
-                { CobrowseIO.UserNameKey, "<your_user_name>" },
-                { CobrowseIO.UserEmailKey, "<your_user_email>" },
-                { CobrowseIO.DeviceIdKey, "<your_device_id>" },
-                { CobrowseIO.DeviceNameKey, "<your_device_name>" }
-            });
-            CobrowseIO.Instance().Start();
-            
-            return true;
-        }
-    }
-}
-```
-
-#### Xamarin.Android
-
-```cs
-using Xamarin.CobrowseIO;
-
-namespace YourAppNamespace
-{
-    [Application]
-    public class MainApplication : Application
-    {
-        public override void OnCreate()
-        {
-            base.OnCreate();
-
-            CobrowseIO.Instance().SetLicense("<your license key here>");
-            CobrowseIO.Instance().SetCustomData(new Dictionary<string, object>
-            {
-                { CobrowseIO.UserIdKey, "<your_user_id>" },
-                { CobrowseIO.UserNameKey, "<your_user_name>" },
-                { CobrowseIO.UserEmailKey, "<your_user_email>" },
-                { CobrowseIO.DeviceIdKey, "<your_device_id>" },
-                { CobrowseIO.DeviceNameKey, "<your_device_name>" }
-            });
-            CobrowseIO.Instance().Start(this);
-        }
-    }
-}
+    { CobrowseIO.UserIdKey, "<your_user_id>" },
+    { CobrowseIO.UserNameKey, "<your_user_name>" },
+    { CobrowseIO.UserEmailKey, "<your_user_email>" },
+    { CobrowseIO.DeviceIdKey, "<your_device_id>" },
+    { CobrowseIO.DeviceNameKey, "<your_device_name>" }
+});
+CobrowseIO.Instance.Start();
 ```
 
 ## Xamarin sample app

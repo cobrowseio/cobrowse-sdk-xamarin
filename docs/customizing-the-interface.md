@@ -19,7 +19,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     [Export("application:didFinishLaunchingWithOptions:")]
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
-        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
+        CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
         // ... the rest of your app setup
         return true;
     }
@@ -98,7 +98,7 @@ public class MainApplication : Application, CobrowseIO.ISessionControlsDelegate
     public override void OnCreate()
     {
         base.OnCreate();
-        CobrowseIO.Instance().SetDelegate(this);
+        CobrowseIO.Instance.SetDelegate(this);
         // and the rest of cobrowse setup ...
     }
 
@@ -153,12 +153,11 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 {
     public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
-        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
-        // and the rest of cobrowse setup ...
+        CobrowseIO.Instance.SetDelegate(new CustomOverlayCobrowseDelegate());
     }
 }
 
-public class CustomCobrowseDelegate : CobrowseIODelegate
+public class CustomOverlayCobrowseDelegate : CobrowseDelegateImplementation
 {
     private UIView _indicatorInstance;
 
@@ -194,8 +193,6 @@ public class CustomCobrowseDelegate : CobrowseIODelegate
 
         return nativeIndicator;
     }
-    
-    // ...
 }
 ```
 
@@ -210,12 +207,11 @@ public class MainApplication : Application
 {
     public override void OnCreate()
     {
-        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
-        // and the rest of cobrowse setup ...
+        CobrowseIO.Instance.SetDelegate(new CustomOverlayCobrowseDelegate());
     }
 }
 
-public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionControlsDelegate
+public class CustomOverlayCobrowseDelegate : CobrowseDelegateImplementation, CobrowseIO.ISessionControlsDelegate
 {
     private View _overlayIndicator;
 
@@ -266,8 +262,6 @@ public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionContr
         rootFrameLayout.RemoveView(_overlayIndicator);
         _overlayIndicator = null;
     }
-    
-    // ...
 }
 ```
 
@@ -275,26 +269,8 @@ public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionContr
 
 You can build your own UI to completely replace the default UI we provide for generating 6 digit codes. You can generate a code for your UI by using the `CreateSession` API:
 
-#### Xamarin.iOS:
-
 ```cs
-CobrowseIO.Instance().CreateSession((NSError error, Session session) =>
-{
-    if (error != null)
-    {
-        Debug.WriteLine("Error creating code: {0}", error);
-    }
-    else
-    {
-        Debug.WriteLine("Created session code: {0}", session.Code);
-    }
-});
-```
-
-#### Xamarin.Android:
-
-```cs
-CobrowseIO.Instance().CreateSession((Java.Lang.Error error, Session session) =>
+CobrowseIO.Instance.CreateSession((error, session) =>
 {
     if (error != null)
     {
@@ -314,6 +290,13 @@ You can monitor changes in the state of the session you create using the Cobrows
 ```cs
 public void SessionDidUpdate (Session session);
 public void SessionDidEnd (Session session);
+```
+
+In **Xamarin.Forms** you can subscribe to the following `CobrowseIO` events:
+
+```cs
+event EventHandler<ISession> SessionDidUpdate;
+event EventHandler<ISession> SessionDidEnd;
 ```
 
 You can get information about the state of the session using the following properties, which may adjust the UI you are showing:
