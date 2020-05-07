@@ -262,9 +262,8 @@ Task("Default")
     .IsDependentOn("UpdateAssemblyVersions")
     .IsDependentOn("Build")
     .IsDependentOn("Pack")
-    //.IsDependentOn("PushToPrivateFeed")
-    //.IsDependentOn("PushToNuGetOrg");
-    ;
+    .IsDependentOn("PushToPrivateFeed")
+    .IsDependentOn("PushToNuGetOrg");
 
 Task("UpdateBindings")
     .IsDependentOn("CleanUp")
