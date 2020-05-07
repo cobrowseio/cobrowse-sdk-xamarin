@@ -25,15 +25,22 @@ namespace SampleApp.Android
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            FindViewById<Button>(Resource.Id.button_launch_cobrowse).Click += OnCobreowseButtonClick;
+            FindViewById<Button>(Resource.Id.button_launch_cobrowse).Click += OnCobrowseButtonClick;
+            FindViewById<Button>(Resource.Id.button_launch_cobrowse_custom_ui).Click += OnCobrowseCustomUIButtonClick;
             FindViewById<Button>(Resource.Id.button_check_cobrowse_full_device).Click += OnCheckCobrowseFullDeviceClick;
             FindViewById<Button>(Resource.Id.button_open_login_view).Click += OnShowLoginViewClick;
             FindViewById<Button>(Resource.Id.button_show_device_id).Click += OnShowDeviceIdClick;
         }
 
-        private void OnCobreowseButtonClick(object sender, EventArgs e)
+        private void OnCobrowseButtonClick(object sender, EventArgs e)
         {
             var intent = new Intent(this, typeof(CobrowseActivity));
+            StartActivity(intent);
+        }
+
+        private void OnCobrowseCustomUIButtonClick(object sender, EventArgs e)
+        {
+            var intent = new Intent(this, typeof(CustomCobrowseActivity));
             StartActivity(intent);
         }
 
@@ -63,7 +70,7 @@ namespace SampleApp.Android
         {
             new AlertDialog.Builder(this)
                 .SetTitle("Cobrowse.io ")
-                .SetMessage($"Cobrowse.io DeviceId: {CobrowseIO.Instance().DeviceId(this.Application)}")
+                .SetMessage($"Cobrowse.io DeviceId: {CobrowseIO.Instance.GetDeviceId(this.Application)}")
                 .SetPositiveButton(global::Android.Resource.String.Yes, (sender, args) => { })
                 .Show();
         }

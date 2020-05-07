@@ -30,22 +30,21 @@ namespace SampleApp.Android
         {
             base.OnCreate();
 
-            CobrowseIO.Instance().License("trial");
+            CobrowseIO.Instance.SetLicense("trial");
+            Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance.GetDeviceId(this));
 
-            Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance().DeviceId(this));
-
-            var customData = new Dictionary<string, Java.Lang.Object>()
+            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>()
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
                 { CobrowseIO.UserEmailKey, "<your_user_email>" },
                 { CobrowseIO.DeviceIdKey, "<your_device_id>" },
                 { CobrowseIO.DeviceNameKey, "<your_device_name>" },
-            };
-            CobrowseIO.Instance().CustomData(customData);
+                { "custom_field", 5.75f }
+            });
 
-            CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
-            CobrowseIO.Instance().Start(this);
+            CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
+            CobrowseIO.Instance.Start(this);
         }
     }
 
@@ -63,7 +62,7 @@ namespace SampleApp.Android
         public void HandleSessionRequest(Activity activity, Session session)
         {
             Debug.WriteLine("HandleSessionRequest");
-            session.Activate(null);
+            session.Activate(callback: null);
         }
 
         public void SessionDidEnd(Session session)

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>CobrowseIO.AppExtension.iOS</id>
-        <version>2.4.0</version>
+        <version>3.0.0</version>
         <title>CobrowseIO.AppExtension.iOS</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
@@ -16,9 +16,10 @@
         <dependencies>
             <group targetFramework="Xamarin.iOS10">
                 <dependency id="Starscream.iOS" version="3.1.1" />
-                <dependency id="SwiftCBOR.iOS" version="0.4.3" />
+                <dependency id="SwiftCBOR.iOS" version="0.4.3.1" />
             </group>
         </dependencies>
+        <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/master/CHANGELOG.md</releaseNotes>
     </metadata>
     <files>
         <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/CobrowseIO.AppExtension.iOS.dll" target="lib/Xamarin.iOS10" />

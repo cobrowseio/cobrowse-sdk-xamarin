@@ -20,14 +20,14 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
         // ... the rest of your app setup
-        CobrowseIO.Instance().Delegate = new CustomCobrowseDelegate();
+        CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
         return true;
     }
 }
 
 public class CustomCobrowseDelegate : CobrowseIODelegate
 {
-    public override void CobrowseHandleSessionRequest(CBIOSession session)
+    public override void CobrowseHandleSessionRequest(Session session)
     {
         // show your own UI here
         // call Activate(<callback>) to accept and start the session
@@ -59,7 +59,7 @@ public class MainApplication : Application
     public override void OnCreate()
     {
         base.OnCreate();
-        CobrowseIO.Instance().SetDelegate(new CustomCobrowseDelegate());
+        CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
         // and the rest of cobrowse setup ...
     }
 }
@@ -82,10 +82,77 @@ public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionReque
         // you want to start the session.
         // Provide a callback if you wish to handle errors during session
         // initiation.
-        session.Activate(null);
+        session.Activate(callback: null);
     }
 
     // ...
+}
+```
+
+## Xamarin.Forms implementation
+
+You can also achieve this functionality from a cross-platform project. In this case you don't have to implement your own delegate, but instead you subscribe to the `SessionDidRequest` event:
+
+```cs
+using Xamarin.CobrowseIO.Abstractions;
+
+public partial class App : Xamarin.Forms.Application
+{
+    public App()
+    {
+        InitializeComponent();
+
+        CobrowseIO.Instance.SetLicense("trial");
+        CobrowseIO.Instance.Start();
+        // and the rest of cobrowse setup ...
+    }
+
+    protected override void OnStart()
+    {
+        Subscribe();
+    }
+
+    protected override void OnSleep()
+    {
+        Unsubscribe();
+    }
+
+    protected override void OnResume()
+    {
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
+    }
+
+    private void Unsubscribe()
+    {
+        CobrowseIO.Instance.SessionDidRequest -= OnCobrowseSessionDidRequest;
+    }
+
+    private async void OnCobrowseSessionDidRequest(object sender, ISession session)
+    {
+        // Do something here, e.g. showing a permission request dialog
+        // Make sure to call Activate(<callback>) on the session object if
+        // you want to start the session.
+        // Provide a callback if you wish to handle errors during session
+        // initiation.
+        bool allowed = await this.MainPage.DisplayAlert(
+            title: "Cobrowse.io",
+            message: "Allow Cobrowse.io session?",
+            accept: "Allow",
+            cancel: "Reject");
+        if (allowed)
+        {
+            session.Activate(null);
+        }
+        else
+        {
+            session.End(null);
+        }
+    }
 }
 ```
 

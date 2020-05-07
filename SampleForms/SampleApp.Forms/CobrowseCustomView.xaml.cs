@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.CobrowseIO.Abstractions;
 using Xamarin.Forms;
 
 namespace SampleApp.Forms
@@ -12,7 +13,7 @@ namespace SampleApp.Forms
 
         void EndSessionButton_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<ICobrowseAdapter>().EndCurrentSession();
+            CobrowseIO.Instance.CurrentSession?.End(null);
         }
     }
 }

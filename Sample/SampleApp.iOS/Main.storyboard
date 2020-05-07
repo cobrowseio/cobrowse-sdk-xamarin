@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="219">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="219">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,30 +23,37 @@
                                 <rect key="frame" x="143.5" y="78" width="127" height="30"/>
                                 <state key="normal" title="Open Cobrowse.io"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3t-3y-cyL">
-                                <rect key="frame" x="90" y="116" width="234" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwc-sP-fof">
+                                <rect key="frame" x="100.5" y="116" width="213" height="30"/>
+                                <state key="normal" title="Open Cobrowse.io (Custom UI)"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hri-5g-dk0">
+                                <rect key="frame" x="90" y="154" width="234" height="30"/>
                                 <state key="normal" title="Open screen with Redacted Views"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVg-eO-zsn">
-                                <rect key="frame" x="111.5" y="154" width="191" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6N-xq-6VN" misplaced="YES">
+                                <rect key="frame" x="109" y="192" width="196" height="30"/>
                                 <state key="normal" title="Show Cobrowse.io DeviceId"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="k3t-3y-cyL" firstAttribute="top" secondItem="9gG-oc-KTd" secondAttribute="bottom" constant="8" id="Jod-Rz-COt"/>
-                            <constraint firstItem="AVg-eO-zsn" firstAttribute="top" secondItem="k3t-3y-cyL" secondAttribute="bottom" constant="8" id="PRh-Pg-Cw5"/>
-                            <constraint firstItem="AVg-eO-zsn" firstAttribute="centerX" secondItem="k3t-3y-cyL" secondAttribute="centerX" id="Tio-8u-jZL"/>
-                            <constraint firstItem="k3t-3y-cyL" firstAttribute="centerX" secondItem="9gG-oc-KTd" secondAttribute="centerX" id="Ydw-2t-blD"/>
                             <constraint firstItem="9gG-oc-KTd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Z2X-aG-3WT"/>
+                            <constraint firstItem="y6N-xq-6VN" firstAttribute="centerX" secondItem="Hri-5g-dk0" secondAttribute="centerX" id="bi0-Ek-rby"/>
+                            <constraint firstItem="lwc-sP-fof" firstAttribute="centerX" secondItem="9gG-oc-KTd" secondAttribute="centerX" id="bye-ID-95V"/>
+                            <constraint firstItem="lwc-sP-fof" firstAttribute="top" secondItem="9gG-oc-KTd" secondAttribute="bottom" constant="8" id="dWU-I2-7aa"/>
                             <constraint firstItem="9gG-oc-KTd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ngu-W7-Ct7"/>
+                            <constraint firstItem="Hri-5g-dk0" firstAttribute="top" secondItem="lwc-sP-fof" secondAttribute="bottom" constant="8" id="vJE-BN-chh"/>
+                            <constraint firstItem="y6N-xq-6VN" firstAttribute="top" secondItem="Hri-5g-dk0" secondAttribute="bottom" constant="8" id="yKX-S9-gyn"/>
+                            <constraint firstItem="Hri-5g-dk0" firstAttribute="centerX" secondItem="lwc-sP-fof" secondAttribute="centerX" id="ycO-Q6-uey"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Cobrowse.io SDK Xamarin.iOS" id="558"/>
                     <connections>
                         <outlet property="buttonCobrowse" destination="9gG-oc-KTd" id="name-outlet-9gG-oc-KTd"/>
-                        <outlet property="buttonRedactedViews" destination="k3t-3y-cyL" id="name-outlet-k3t-3y-cyL"/>
-                        <outlet property="buttonDeviceId" destination="AVg-eO-zsn" id="name-outlet-AVg-eO-zsn"/>
+                        <outlet property="buttonDeviceId" destination="y6N-xq-6VN" id="name-outlet-y6N-xq-6VN"/>
+                        <outlet property="buttonRedactedViews" destination="Hri-5g-dk0" id="name-outlet-Hri-5g-dk0"/>
+                        <outlet property="buttonCobrowseCustomUI" destination="lwc-sP-fof" id="name-outlet-lwc-sP-fof"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -20,6 +20,10 @@ namespace SampleApp.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton buttonCobrowseCustomUI { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton buttonDeviceId { get; set; }
 
         [Outlet]
@@ -31,6 +35,11 @@ namespace SampleApp.iOS
             if (buttonCobrowse != null) {
                 buttonCobrowse.Dispose ();
                 buttonCobrowse = null;
+            }
+
+            if (buttonCobrowseCustomUI != null) {
+                buttonCobrowseCustomUI.Dispose ();
+                buttonCobrowseCustomUI = null;
             }
 
             if (buttonDeviceId != null) {

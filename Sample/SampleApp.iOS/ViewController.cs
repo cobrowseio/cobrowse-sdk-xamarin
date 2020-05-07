@@ -16,6 +16,7 @@ namespace SampleApp.iOS
             // Perform any additional setup after loading the view, typically from a nib.
 
             this.buttonCobrowse.TouchUpInside += ButtonCobrowse_TouchUpInside;
+            this.buttonCobrowseCustomUI.TouchUpInside += ButtonCobrowseCustomUi_TouchUpInside;
             this.buttonRedactedViews.TouchUpInside += ButtonRedactedViews_TouchUpInside;
             this.buttonDeviceId.TouchUpInside += ButtonDeviceId_TouchUpInside;
         }
@@ -29,7 +30,14 @@ namespace SampleApp.iOS
         private void ButtonCobrowse_TouchUpInside(object sender, EventArgs e)
         {
             this.NavigationController.PushViewController(
-                new CBIOViewController(),
+                new CobrowseViewController(),
+                animated: true);
+        }
+
+        private void ButtonCobrowseCustomUi_TouchUpInside(object sender, EventArgs e)
+        {
+            this.NavigationController.PushViewController(
+                new CustomCobrowseViewController(),
                 animated: true);
         }
 
@@ -45,7 +53,7 @@ namespace SampleApp.iOS
             var alert = new UIAlertView
             {
                 Title = "Cobrowse.io",
-                Message = $"Cobrowse.io DeviceId: {CobrowseIO.Instance().DeviceId}"
+                Message = $"Cobrowse.io DeviceId: {CobrowseIO.Instance.DeviceId}"
             };
             alert.AddButton("OK");
             alert.Show();

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <AssemblyName>CobrowseIO.Xamarin</AssemblyName>
+    <RootNamespace>Xamarin.CobrowseIO.Abstractions</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CobrowseIO.Xamarin.Abstractions\CobrowseIO.Xamarin.Abstractions.csproj" />
+  </ItemGroup>
+</Project>

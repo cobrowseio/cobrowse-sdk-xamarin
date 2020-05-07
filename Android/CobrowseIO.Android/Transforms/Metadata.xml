@@ -10,6 +10,18 @@
     <attr path="/api/package[@name='io.cobrowse']" name="managedName">Xamarin.CobrowseIO</attr>
     <attr path="/api/package[@name='io.cobrowse.integrations']" name="managedName">Xamarin.CobrowseIO.Integrations</attr>
     <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">Xamarin.CobrowseIO.UI</attr>
+
+    <!-- Make setter-method names start with "Set" -->
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='instance']" name="managedName">GetInstance</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='license']" name="managedName">SetLicense</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='currentSession']" name="managedName">GetCurrentSession</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='customData']" name="managedName">SetCustomJavaData</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='deviceId']" name="managedName">GetDeviceId</attr>
+    
+    <!-- Make method names the same as in the iOS SDK -->
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='code']" name="managedName">GetCode</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='agent']" name="managedName">GetAgent</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='state']" name="managedName">GetState</attr>
     
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Foundation;
 using UIKit;
@@ -17,30 +18,21 @@ namespace SampleApp.iOS
         [Export("application:didFinishLaunchingWithOptions:")]
         public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            CobrowseIO.Instance().License = "trial";
-            Console.WriteLine($"Cobrowse device id: {CobrowseIO.Instance().DeviceId}");
+            CobrowseIO.Instance.SetLicense("trial");
+            Console.WriteLine("Cobrowse device id:" + CobrowseIO.Instance.DeviceId);
+            
+            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
+            {
+                { CobrowseIO.UserIdKey, "<your_user_id>" },
+                { CobrowseIO.UserNameKey, "<your_user_name>" },
+                { CobrowseIO.UserEmailKey, "<your_user_email>" },
+                { CobrowseIO.DeviceIdKey, "<your_device_id>" },
+                { CobrowseIO.DeviceNameKey, "<your_device_name>" },
+                { "custom_field", 5.75f }
+            });
 
-            CobrowseIO.Instance().Delegate = new CustomCobrowseDelegate();
-            CobrowseIO.Instance().CustomData = new NSDictionary<NSString, NSObject>(
-                keys: new NSString[]
-                {
-                    CBIO.UserIdKey,
-                    CBIO.UserNameKey,
-                    CBIO.UserEmailKey,
-                    CBIO.DeviceIdKey,
-                    CBIO.DeviceNameKey,
-                },
-                values: new NSObject[]
-                {
-                    new NSString("<your_user_id>"),
-                    new NSString("<your_user_name>"),
-                    new NSString("<your_user_email>"),
-                    new NSString("<your_device_id>"),
-                    new NSString("<your_device_name>"),
-                }
-            );
-
-            CobrowseIO.Instance().Start();
+            CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
+            CobrowseIO.Instance.Start();
 
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
@@ -53,7 +45,7 @@ namespace SampleApp.iOS
         // Sample end session UIView, constructor, and tap gesture recognizer implementation
         private UIView _indicatorInstance;
 
-        public override void CobrowseShowSessionControls(CBIOSession session)
+        public override void ShowSessionControls(Session session)
         {
             // You can render controls however you like here.
             // One option is to add our sample end session UI defined below.
@@ -64,7 +56,7 @@ namespace SampleApp.iOS
             _indicatorInstance.Hidden = false;
         }
 
-        public override void CobrowseHideSessionControls(CBIOSession session)
+        public override void HideSessionControls(Session session)
         {
             if (_indicatorInstance != null)
                 _indicatorInstance.Hidden = true;
@@ -91,21 +83,33 @@ namespace SampleApp.iOS
 
             var tapRecognizer = new UITapGestureRecognizer(() =>
             {
-                CobrowseIO.Instance().CurrentSession?.End(null);
+                CobrowseIO.Instance.CurrentSession?.End(null);
             });
             tapRecognizer.NumberOfTapsRequired = 1;
             indicator.AddGestureRecognizer(tapRecognizer);
             return indicator;
         }
 
-        public override void CobrowseSessionDidUpdate(CBIOSession session)
+        public override void SessionDidUpdate(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidUpdate");
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var vvc = vc.GetVisibleViewController();
+            if (vvc is UINavigationController nc && nc.TopViewController is CustomCobrowseViewController cobrowseVc)
+            {
+                cobrowseVc.SessionDidUpdate(session);
+            }
         }
 
-        public override void CobrowseSessionDidEnd(CBIOSession session)
+        public override void SessionDidEnd(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidEnd");
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var vvc = vc.GetVisibleViewController();
+            if (vvc is UINavigationController nc && nc.TopViewController is CustomCobrowseViewController cobrowseVc)
+            {
+                cobrowseVc.SessionDidEnd(session);
+            }
         }
     }
 }
