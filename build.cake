@@ -19,16 +19,18 @@ var target = Argument("target", "Default");
 var slnPath = "./CobrowseIO.sln";
 var buildConfiguration = Argument("configuration", "Release");
 
+string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
+string nugetPrivateFeedApiKey = Argument("nugetPrivateFeedApiKey", string.Empty);
+
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 
 Task("ConfigureNuGetSources")
     .Does(() =>
 {
-    string apiKey = EnvironmentVariable("NUGET_PRIVATE_FEED_API_KEY");
-    
-    if (string.IsNullOrEmpty(apiKey))
+    if (string.IsNullOrEmpty(nugetPrivateFeedApiKey))
     {
-        throw new NotSupportedException("No API key was found for the private NuGet feed");
+        Warning("No API key was found for the private NuGet feed");
+        return;
     }
     
     // Generate a new token: https://dev.azure.com/cobrowse-xamarin-sdk/_usersSettings/tokens
@@ -43,18 +45,12 @@ Task("ConfigureNuGetSources")
             new NuGetSourcesSettings
             {
                 UserName = "user",
-                Password = apiKey
+                Password = nugetPrivateFeedApiKey
             });
     }
     else
     {
         Information("Private NuGet source already exists");
-    }
-    
-    if (string.IsNullOrEmpty(apiKey))
-    {
-        Warning("No API key was found for the private NuGet feed");
-        return;
     }
 });
 
@@ -96,9 +92,9 @@ Task("FindLatestAndroidVersions")
     string responseBody = HttpGet(bintrayApiEndpoint);
     JObject result = ParseJson(responseBody.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
 
-    cobrowseAndroidProject._VersionString = result["latest_version"].ToString();
+    cobrowseAndroidProject.VersionString = result["latest_version"].ToString();
     
-    Information("Latest native Android SDK is {0}", cobrowseAndroidProject._VersionString);
+    Information("Latest native Android SDK is {0}", cobrowseAndroidProject.VersionString);
 });
 
 Task("FindLatestIosVersions")
@@ -115,17 +111,17 @@ Task("FindLatestIosVersions")
     // TODO: This is a temprorary workaround until I find a way to create a 'fat' iOS framework from 'CobrowseIO.xcframework'
     GitCheckout(
         POD_CLONE_DIRECTORY,
-        "900d81fbaad88f8fd8369d65578bd3ab8dcd6f27");
+        "675e142cc7be080e0235bc1baaa144fc0e5c2b5f");
 
-    cobrowseIosProject._VersionString 
-        = cobrowseIosExtensionProject._VersionString
+    cobrowseIosProject.VersionString 
+        = cobrowseIosExtensionProject.VersionString
         = FindRegexMatchGroupInFile(
             POD_CLONE_DIRECTORY + "/" + "CobrowseIO.podspec", 
             @"s\.version = '([\S]*?)'",
             1,
             RegexOptions.Compiled).Value;
     
-    Information("Latest native iOS SDK is {0}", cobrowseIosProject._VersionString);
+    Information("Latest native iOS SDK is {0}", cobrowseIosProject.VersionString);
 });
 
 Task("DownloadNativeSDKs")
@@ -133,8 +129,8 @@ Task("DownloadNativeSDKs")
 {
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
-            var downloadUrl = string.Format(androidBindingProject.DownloadUrl, androidBindingProject._VersionString);
-            var jarPath = string.Format(androidBindingProject.JarPath, androidBindingProject._VersionString);
+            var downloadUrl = string.Format(androidBindingProject.DownloadUrl, androidBindingProject.VersionString);
+            var jarPath = string.Format(androidBindingProject.JarPath, androidBindingProject.VersionString);
             DownloadFile(downloadUrl, jarPath);
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
@@ -190,14 +186,14 @@ Task("Pack")
     .Does(() =>
 {
     foreach (NuGetArtifact artifact in nugetArtifacts) {
-        if (artifact._VersionString == null) {
+        if (artifact.VersionString == null) {
             // There are packages which nuspec files we do not modify on each build
             // We just build these packages
             NuGetPack(artifact.NuspecFile, new NuGetPackSettings());
         } else {
             NuGetPack(artifact.NuspecFile,
                       new NuGetPackSettings {
-                          Version = artifact._VersionString
+                          Version = artifact.VersionString
                       });
         }
     }
@@ -206,6 +202,12 @@ Task("Pack")
 Task("PushToPrivateFeed")
     .Does(() =>
 {
+    if (string.IsNullOrEmpty(nugetPrivateFeedApiKey))
+    {
+        Warning("No API key was found for the private NuGet feed");
+        return;
+    }
+    
     string apiKey = EnvironmentVariable("NUGET_PRIVATE_FEED_API_KEY");
     var nugetPackages = GetFiles("./*.nupkg");
     foreach (var package in nugetPackages)
@@ -214,7 +216,7 @@ Task("PushToPrivateFeed")
         Information("Publishing {0}", name);
         NuGetPush(name, new NuGetPushSettings
         {
-            ApiKey = apiKey,
+            ApiKey = nugetPrivateFeedApiKey,
             SkipDuplicate = true,
             Source = "cobrowse-nuget-feed"
         });
@@ -224,9 +226,7 @@ Task("PushToPrivateFeed")
 Task("PushToNuGetOrg")
     .Does(() =>
 {
-    string apiKey = EnvironmentVariable("NUGET_ORG_API_KEY");
-    
-    if (string.IsNullOrEmpty(apiKey))
+    if (string.IsNullOrEmpty(nugetOrgApiKey))
     {
         Warning("No API key was found for NuGet.org");
         return;
@@ -245,7 +245,7 @@ Task("PushToNuGetOrg")
         Information("Publishing {0}", name);
         NuGetPush(name, new NuGetPushSettings
         {
-            ApiKey = apiKey,
+            ApiKey = nugetOrgApiKey,
             SkipDuplicate = true,
             Source = "https://api.nuget.org/v3/index.json"
         });
