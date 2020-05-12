@@ -108,10 +108,33 @@ Task("FindLatestIosVersions")
         GitPull(POD_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
 
-    // TODO: This is a temprorary workaround until I find a way to create a 'fat' iOS framework from 'CobrowseIO.xcframework'
-    GitCheckout(
-        POD_CLONE_DIRECTORY,
-        "675e142cc7be080e0235bc1baaa144fc0e5c2b5f");
+    // Starting 2.6.0, Cobrowse.io iOS SDK uses xcframework instead of regularu framework
+    // This function creates a 'fat' framework which will be used in next tasks
+    void _BuildUniversal() {
+        var targetDirectory=POD_CLONE_DIRECTORY;
+        var targetFrameworkName="CobrowseIO";
+        var frameworkDirectory=$"{targetFrameworkName}.framework";
+        var xcFrameworkDirectory=$"{targetFrameworkName}.xcframework";
+
+        var iphoneFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
+        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-i386_x86_64-simulator/{frameworkDirectory}";
+
+        if (DirectoryExists($"./{targetDirectory}/{frameworkDirectory}")) {
+            DeleteDirectory($"./{targetDirectory}/{frameworkDirectory}", new DeleteDirectorySettings {
+                Recursive = true,
+                Force = true
+            });
+        }
+        CopyDirectory($"{iphoneFrameworkDirectory}", $"{targetDirectory}/{frameworkDirectory}");
+        CopyDirectory($"{simulatorFrameworkDirectory}/Modules/", $"{targetDirectory}/{frameworkDirectory}/Modules/");
+        StartProcess(
+            "lipo", 
+            new ProcessSettings { 
+                Arguments = $"-create -output \"./{targetDirectory}/{frameworkDirectory}/{targetFrameworkName}\" \"{iphoneFrameworkDirectory}/{targetFrameworkName}\" \"{simulatorFrameworkDirectory}/{targetFrameworkName}\"" 
+            });
+    }
+
+    _BuildUniversal();
 
     cobrowseIosProject.VersionString 
         = cobrowseIosExtensionProject.VersionString

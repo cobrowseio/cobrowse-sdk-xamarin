@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+TARGET_DIR=$1
+TARGET_NAME="CobrowseIO"
+FRAMEWORK="$TARGET_NAME.framework"
+XCFRAMEWORK="CobrowseIO.xcframework"
+
+IOS=$TARGET_DIR/$XCFRAMEWORK/ios-armv7_arm64/$FRAMEWORK
+SIMULATOR=$TARGET_DIR/$XCFRAMEWORK/ios-i386_x86_64-simulator/$FRAMEWORK
+
+rm -rf ./$TARGET_DIR/$TARGET_NAME.framework
+cp -r $IOS ./$TARGET_DIR/$FRAMEWORK
+cp -r $SIMULATOR/Modules/ ./$TARGET_DIR/$FRAMEWORK/Modules/
+lipo -create -output "./$TARGET_DIR/$FRAMEWORK/$TARGET_NAME" "$IOS/$TARGET_NAME" "$SIMULATOR/$TARGET_NAME"
