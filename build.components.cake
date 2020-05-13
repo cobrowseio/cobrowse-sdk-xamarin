@@ -2,14 +2,14 @@ class NuGetArtifact {
     public string[] CsprojFiles { get; set; }
     public string[] AssemblyInfoFiles { get; set; }    
     public string NuspecFile { get; set; }
-    public string _VersionString { get; set; }
-    public Version Version => TrimVersionString(_VersionString);
+    public string VersionString { get; set; }
+    public Version Version => TrimVersionString(VersionString);
 }
 
 abstract class BindingProject {
     public string AssemblyInfoFile { get; set; }
-    public string _VersionString { get; set; }
-    public Version Version => TrimVersionString(_VersionString);
+    public string VersionString { get; set; }
+    public Version Version => TrimVersionString(VersionString);
 }
 
 class AndroidBindingProject : BindingProject {
@@ -76,12 +76,12 @@ NuGetArtifact[] nugetArtifacts = new NuGetArtifact[] {
             "./XamarinSDK/CobrowseIO.Xamarin.iOS/Properties/AssemblyInfo.cs",
         },
         NuspecFile = "./CobrowseIO.Xamarin.nuspec",
-        _VersionString = GetCobrowseNuGetVersion()
+        VersionString = GetCobrowseNuGetVersion()
     },
     new NuGetArtifact {
         CsprojFiles = new [] { "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj" },
         NuspecFile = "./CobrowseIO.AppExtension.iOS.nuspec",
-        _VersionString = GetCobrowseNuGetVersion()
+        VersionString = GetCobrowseNuGetVersion()
     },
 };
 
@@ -94,7 +94,7 @@ static Version TrimVersionString(string versionString) {
 }
 
 string GetCobrowseNuGetVersion() {
-    string version = EnvironmentVariable("COBROWSE_NUGET_PACKAGE_VERSION");
+    string version = Argument("cobrowseNuGetPackageVersion", string.Empty);
     return !string.IsNullOrEmpty(version)
         ? version
         : null;
