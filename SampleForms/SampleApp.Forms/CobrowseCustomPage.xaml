@@ -34,6 +34,7 @@
                 HorizontalTextAlignment="Center" />
             <ActivityIndicator
                 x:Name="viewCodeDiplayWorking"
+                Color="Black"
                 IsRunning="True"
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

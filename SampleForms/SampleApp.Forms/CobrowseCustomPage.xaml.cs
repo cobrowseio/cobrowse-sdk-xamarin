@@ -105,18 +105,16 @@ namespace SampleApp.Forms
 
         private void Render()
         {
-            Device.BeginInvokeOnMainThread(() =>
+            if (_session?.IsActive == true)
             {
-                if (_session?.IsActive == true)
-                {
-                    ShowSubview(viewManageSession);
-                }
-                else
-                {
-                    ShowSubview(viewCodeDisplay);
-                    SetCodeDisplay(_session?.Code);
-                }
-            });
+                ShowSubview(viewManageSession);
+            }
+            else
+            {
+                Debug.WriteLine("New session code is " + _session?.Code);
+                ShowSubview(viewCodeDisplay);
+                SetCodeDisplay(_session?.Code);
+            }
         }
 
         private void RenderError(Exception e)
@@ -158,13 +156,10 @@ namespace SampleApp.Forms
                 return;
             }
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                _animationTimerActive = false;
-                this.viewCodeDiplayWorking.IsVisible = true;
-                this.viewCodeLabel.Opacity = 1f;
-                RenderCode(code);
-            });
+            _animationTimerActive = false;
+            this.viewCodeDiplayWorking.IsVisible = true;
+            this.viewCodeLabel.Opacity = 1f;
+            RenderCode(code);
         }
 
         private void RenderRandomCode()
