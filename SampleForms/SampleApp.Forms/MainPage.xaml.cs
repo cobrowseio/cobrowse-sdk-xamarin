@@ -27,7 +27,13 @@ namespace SampleApp.Forms
 
         private void CheckCobrowseFullDevice_Clicked(object sender, EventArgs e)
         {
-            CobrowseIO.Instance.CheckCobrowseFullDevice();
+            bool configured = CobrowseIO.Instance.CheckCobrowseFullDevice();
+            if (configured)
+            {
+                DisplayAlert("Cobrowse.io",
+                             "Full-device screen sharing is configured correctly",
+                             "OK");
+            }
         }
 
         private void PageRedactedViews_Clicked(object sender, EventArgs e)

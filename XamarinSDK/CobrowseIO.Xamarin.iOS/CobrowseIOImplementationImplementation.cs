@@ -130,9 +130,11 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
-        public void CheckCobrowseFullDevice()
+        public bool CheckCobrowseFullDevice()
         {
-            return;
+            // On iOS it is only requered to add a broadcast extension to the app.
+            // Assuming the extension is configured, we always return 'true'.
+            return true;
         }
     }
 }

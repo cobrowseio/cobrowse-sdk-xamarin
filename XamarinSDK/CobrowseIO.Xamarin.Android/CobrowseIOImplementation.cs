@@ -136,14 +136,15 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
-        public void CheckCobrowseFullDevice()
+        public bool CheckCobrowseFullDevice()
         {
             bool isRunning = CobrowseAccessibilityService.IsRunning(Activity);
             if (!isRunning)
             {
                 CobrowseAccessibilityService.ShowSetup(Activity);
-                return;
+                return false;
             }
+            return true;
         }
     }
 

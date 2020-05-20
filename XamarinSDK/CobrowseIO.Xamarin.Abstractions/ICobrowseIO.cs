@@ -66,6 +66,6 @@ namespace Xamarin.CobrowseIO.Abstractions
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
-        void CheckCobrowseFullDevice();
+        bool CheckCobrowseFullDevice();
     }
 }
