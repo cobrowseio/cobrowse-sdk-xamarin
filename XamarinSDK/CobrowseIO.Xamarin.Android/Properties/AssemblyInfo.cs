@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Android;
 
 [assembly: AssemblyTitle("Cobrowse.io - Xamarin SDK")]
 [assembly: AssemblyDescription("Cobrowse.io - Xamarin SDK")]
@@ -9,3 +10,5 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("3.0.0")]
 [assembly: AssemblyInformationalVersion("3.0.0")]
+
+[assembly: LinkerSafe]
