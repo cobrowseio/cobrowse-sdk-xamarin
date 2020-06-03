@@ -4,7 +4,7 @@ Please see full documentation at [https://cobrowse.io/docs](https://cobrowse.io/
 
 Try our **online demo** at the bottom of our homepage at <https://cobrowse.io/#tryit>.
 
-## Implementation
+## Customizing the Session Indicator
 
 You can fully customize the interface for a Cobrowse session. The SDK provides hooks via `CobrowseIODelegate` for you to render your own interface:
 

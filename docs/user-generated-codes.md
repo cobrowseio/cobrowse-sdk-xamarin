@@ -10,6 +10,8 @@ These are the native-side requirements on iOS and Android to initiate sessions u
 
 You may expose a small UI in your app for users to generate a 6-digit code that they pass to an agent over the phone or chat to initiate a session.
 
+**Note:** this guide will use our default UI to display the code. To build your own 6 digit code UI see [customizing the interface](./customizing-the-interface.md).
+
 ### Xamarin.iOS implementation
 
 To setup user-initiated sessions:
