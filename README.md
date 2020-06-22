@@ -1,8 +1,6 @@
 # Cobrowse.io - Xamarin SDK
 
-Cobrowse.io for Xamarin supports iOS 9.0+ and Android API 19+ (4.4 KitKat and above).
-
-Cobrowse.io is 100% free and easy to try out in your own apps. Please see full documentation at [https://cobrowse.io/docs](https://cobrowse.io/docs).
+Cobrowse.io is 100% free and easy to try out in your own apps. Please see full documentation at [https://docs.cobrowse.io](https://docs.cobrowse.io).
 
 Try our **online demo** at the bottom of our homepage at <https://cobrowse.io/#tryit>.
 
@@ -108,25 +106,6 @@ Please register an account and generate your free License Key at <https://cobrow
 
 This will associate sessions from your mobile app with your Cobrowse account.
 
-### Add device metadata
-
-To help you identify, search, and filter devices in your Cobrowse dashboard, it's helpful to specify any meaningful metadata. We recommend specifying the end-user's email if available.
-
-You may add any custom key/value pairs you'd like, and they will all be searchable and filterable in your online dashboard. We've added a few placeholders for convenience only - all fields are optional.
-
-```cs
-CobrowseIO.Instance.SetLicense("<your license key here>");
-CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
-{
-    { CobrowseIO.UserIdKey, "<your_user_id>" },
-    { CobrowseIO.UserNameKey, "<your_user_name>" },
-    { CobrowseIO.UserEmailKey, "<your_user_email>" },
-    { CobrowseIO.DeviceIdKey, "<your_device_id>" },
-    { CobrowseIO.DeviceNameKey, "<your_device_name>" }
-});
-CobrowseIO.Instance.Start();
-```
-
 ## Xamarin sample app
 
 We provide a sample application showing how to use Cobrowse.io NuGet packages in Xamarin. [Xamarin.Forms sample](https://github.com/cobrowseio/cobrowse-sdk-xamarin/tree/master/SampleForms) includes using 6-digit codes, full device screen sharing, and redacting sensitive data. [Xamarin Classic sample](https://github.com/cobrowseio/cobrowse-sdk-xamarin/tree/master/Sample) is also available.
@@ -137,19 +116,19 @@ Once you have your app running in the iOS Simulator or on a physical device, nav
 
 ## Optional features
 
-[Initiate sessions with push](./docs/initiate-with-push.md)
+[Identify your devices](https://docs.cobrowse.io/sdk-features/identify-your-devices)
 
-[Use 6-digit codes](./docs/user-generated-codes.md)
+[Use 6-digit codes](https://docs.cobrowse.io/sdk-features/6-digit-codes)
 
-[Redact sensitive data](./docs/redact-sensitive-data.md)
+[Redact sensitive data](https://docs.cobrowse.io/sdk-features/redact-sensitive-data)
 
-[Requiring acceptance from the user](./docs/require-user-consent.md)
+[Customize the interface](https://docs.cobrowse.io/sdk-features/customize-the-interface)
 
-[Customizing the interface](./docs/customizing-the-interface.md)
+[Initiate sessions with push](https://docs.cobrowse.io/sdk-features/initiate-sessions-with-push)
 
-[Full device screenshare](./docs/full-device-screenshare.md)
+[Full device capabilities](https://docs.cobrowse.io/sdk-features/full-device-capabilities)
 
-[Alternate render method](./docs/alternate-render-method.md)
+[Advanced features](https://docs.cobrowse.io/sdk-features/advanced-features)
 
 ## Questions?
 Any questions at all? Please email us directly at [hello@cobrowse.io](mailto:hello@cobrowse.io).
@@ -157,4 +136,4 @@ Any questions at all? Please email us directly at [hello@cobrowse.io](mailto:hel
 ## Requirements
 
 * iOS 9.0 or later
-* Android API version 19 or later
+* Android API version 19 (4.4 KitKat) or later
