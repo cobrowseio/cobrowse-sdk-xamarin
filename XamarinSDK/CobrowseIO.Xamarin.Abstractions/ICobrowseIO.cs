@@ -39,8 +39,14 @@ namespace Xamarin.CobrowseIO.Abstractions
         string DeviceId { get; }
 
         /// <summary>
+        /// Gets or sets the license.
+        /// </summary>
+        string License { get; set; }
+
+        /// <summary>
         /// Sets the license.
         /// </summary>
+        [Obsolete("Use License property instead")]
         void SetLicense(string licenseKey);
 
         /// <summary>
@@ -54,8 +60,14 @@ namespace Xamarin.CobrowseIO.Abstractions
         void Stop();
 
         /// <summary>
+        /// Gets or sets Cobrowse.io custom data. 
+        /// </summary>
+        IReadOnlyDictionary<string, object> CustomData { get; set; }
+
+        /// <summary>
         /// Sets Cobrowse.io custom data.
         /// </summary>
+        [Obsolete("Use CustomData property instead")]
         void SetCustomData(IDictionary<string, object> customData);
 
         /// <summary>

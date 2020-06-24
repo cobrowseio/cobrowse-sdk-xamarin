@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Foundation;
 
 namespace Xamarin.CobrowseIO
@@ -20,11 +21,37 @@ namespace Xamarin.CobrowseIO
 
         public static CobrowseIO Instance => GetInstance();
 
+        public IReadOnlyDictionary<string, object> CustomData
+        {
+            get
+            {
+                if (this.CustomNSDictionaryData is NSDictionary dictionary)
+                {
+                    var rvalue = new Dictionary<string, object>();
+                    foreach (KeyValuePair<NSObject, NSObject> next in dictionary)
+                    {
+                        rvalue.Add(next.Key.ToString(), next.Value);
+                    }
+                    return rvalue;
+                }
+                return null;
+            }
+            set => SetCustomData(value);
+        }
+
+        [Obsolete("Use CustomData property instead")]
         public void SetCustomData(IDictionary<string, string> customData)
+        {
+            this.SetCustomData(
+                (IReadOnlyDictionary<string, string>)
+                new ReadOnlyDictionary<string, string>(customData));
+        }
+
+        internal void SetCustomData(IReadOnlyDictionary<string, string> customData)
         {
             if (customData == null)
             {
-                this.CustomData = null;
+                this.CustomNSDictionaryData = null;
                 return;
             }
             NSString[] objects = new NSString[customData.Count];
@@ -36,19 +63,27 @@ namespace Xamarin.CobrowseIO
                 objects[counter] = new NSString(next.Value);
                 counter++;
             }
-            this.CustomData = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(objects, keys, customData.Count);
+            this.CustomNSDictionaryData = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(objects, keys, customData.Count);
         }
 
         public void SetCustomData(NSDictionary<NSString, NSObject> customData)
         {
-            this.CustomData = customData;
+            this.CustomNSDictionaryData = customData;
         }
 
+        [Obsolete("Use CustomData property instead")]
         public void SetCustomData(IDictionary<string, object> customData)
+        {
+            this.SetCustomData(
+                (IReadOnlyDictionary<string, object>)
+                new ReadOnlyDictionary<string, object>(customData));
+        }
+
+        internal void SetCustomData(IReadOnlyDictionary<string, object> customData)
         {
             if (customData == null)
             {
-                this.CustomData = null;
+                this.CustomNSDictionaryData = null;
                 return;
             }
             NSObject[] objects = new NSObject[customData.Count];
@@ -84,10 +119,10 @@ namespace Xamarin.CobrowseIO
 
                 counter++;
             }
-            this.CustomData = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(objects, keys, customData.Count);
+            this.CustomNSDictionaryData = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(objects, keys, customData.Count);
         }
 
-
+        [Obsolete("Use License property instead")]
         public void SetLicense(string license)
         {
             this.License = license;

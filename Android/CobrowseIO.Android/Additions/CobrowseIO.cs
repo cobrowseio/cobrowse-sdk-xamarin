@@ -1,11 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Java.Lang.Annotation;
 
 namespace Xamarin.CobrowseIO
 {
     public partial class CobrowseIO
     {
+        [Obsolete("Use License property instead")]
+        public void SetLicense(string license)
+            => this.License = license;
+
+        public IReadOnlyDictionary<string, object> _CustomData
+        {
+            get => null; // TODO return the actual custom data
+            set => SetCustomData(value);
+        }
+
+        [Obsolete("Use CustomData property instead")]
         public void SetCustomData(IDictionary<string, object> customData)
+        {
+            this.SetCustomData(
+                (IReadOnlyDictionary<string, object>)
+                new ReadOnlyDictionary<string, object>(customData));
+        }
+
+        internal void SetCustomData(IReadOnlyDictionary<string, object> customData)
         {
             if (customData == null)
             {
@@ -25,7 +45,7 @@ namespace Xamarin.CobrowseIO
             }
             this.SetCustomJavaData(javaCustomData);
         }
-
+        
         public void CreateSession(CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
         {
             this.CreateSession(new CobrowseCallback<Java.Lang.Error, Session>(@delegate));

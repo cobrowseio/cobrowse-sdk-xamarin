@@ -83,8 +83,18 @@ namespace Xamarin.CobrowseIO
         public string DeviceId => CobrowseIO.Instance.DeviceId;
 
         /// <summary>
+        /// Gets or sets the license.
+        /// </summary>
+        public string License
+        {
+            get => CobrowseIO.Instance.License;
+            set => CobrowseIO.Instance.License = value;
+        }
+
+        /// <summary>
         /// Sets the license.
         /// </summary>
+        [Obsolete("Use License property instead")]
         public void SetLicense(string licenseKey)
         {
             CobrowseIO.Instance.SetLicense(licenseKey);
@@ -108,8 +118,18 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <summary>
+        /// Gets or sets Cobrowse.io custom data. 
+        /// </summary>
+        public IReadOnlyDictionary<string, object> CustomData
+        {
+            get => CobrowseIO.Instance.CustomData;
+            set => CobrowseIO.Instance.CustomData = value;
+        }
+
+        /// <summary>
         /// Sets Cobrowse.io custom data.
         /// </summary>
+        [Obsolete("Use CustomData property instead")]
         public void SetCustomData(IDictionary<string, object> customData)
         {
             CobrowseIO.Instance.SetCustomData(customData);
