@@ -78,6 +78,15 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <summary>
+        /// Gets or sets the API string.
+        /// </summary>
+        public string Api
+        {
+            get => CobrowseIO.Instance.Api;
+            set => CobrowseIO.Instance.Api = value;
+        }
+
+        /// <summary>
         /// Gets the current Cobrowse.io device ID.
         /// </summary>
         public string DeviceId => CobrowseIO.Instance.DeviceId;

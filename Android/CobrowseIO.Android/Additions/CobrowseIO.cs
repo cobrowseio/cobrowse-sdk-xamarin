@@ -7,13 +7,29 @@ namespace Xamarin.CobrowseIO
 {
     public partial class CobrowseIO
     {
+        [Obsolete("Use Api property instead")]
+        public void SetApi(string api)
+            => this.Api = api;
+
         [Obsolete("Use License property instead")]
         public void SetLicense(string license)
             => this.License = license;
 
-        public IReadOnlyDictionary<string, object> _CustomData
+        public IReadOnlyDictionary<string, object> CustomData
         {
-            get => null; // TODO return the actual custom data
+            get
+            {
+                if (this.CustomJavaData is Dictionary<string, Java.Lang.Object> dictionary)
+                {
+                    var rvalue = new Dictionary<string, object>();
+                    foreach (KeyValuePair<string, Java.Lang.Object> next in dictionary)
+                    {
+                        rvalue.Add(next.Key, next.Value);
+                    }
+                    return rvalue;
+                }
+                return null;
+            }
             set => SetCustomData(value);
         }
 
@@ -43,7 +59,7 @@ namespace Xamarin.CobrowseIO
                     javaCustomData.Add(next.Key, next.Value.ToString());
                 }
             }
-            this.SetCustomJavaData(javaCustomData);
+            this.CustomJavaData = javaCustomData;
         }
         
         public void CreateSession(CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)

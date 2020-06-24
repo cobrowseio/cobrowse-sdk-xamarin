@@ -122,6 +122,12 @@ namespace Xamarin.CobrowseIO
             this.CustomNSDictionaryData = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(objects, keys, customData.Count);
         }
 
+        [Obsolete("Use Api property instead")]
+        public void SetApi(string api)
+        {
+            this.Api = api;
+        }
+
         [Obsolete("Use License property instead")]
         public void SetLicense(string license)
         {

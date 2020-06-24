@@ -34,6 +34,11 @@ namespace Xamarin.CobrowseIO.Abstractions
         void CreateSession(CobrowseCallback callback);
 
         /// <summary>
+        /// Gets or sets the API string.
+        /// </summary>
+        string Api { get; set; }
+
+        /// <summary>
         /// Gets the current Cobrowse.io device ID.
         /// </summary>
         string DeviceId { get; }
