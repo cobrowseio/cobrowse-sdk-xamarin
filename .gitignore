@@ -412,3 +412,8 @@ Release-iphonesimulator
 # Cake Build related
 tools/**
 !tools/packages.config
+
+# Cobrowse.io Native SDKs
+Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar
+iOS/CobrowseIO.iOS/CobrowseIO.framework/**
+iOS/CobrowseIO.AppExtension.iOS/CobrowseIOAppExtension.framework/**
