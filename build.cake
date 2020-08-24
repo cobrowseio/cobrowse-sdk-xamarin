@@ -128,7 +128,7 @@ Task("FindLatestIosVersions")
         var xcFrameworkDirectory=$"{targetFrameworkName}.xcframework";
 
         var iphoneFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
-        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-x86_64_i386-simulator/{frameworkDirectory}";
+        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-i386_x86_64-simulator/{frameworkDirectory}";
 
         if (DirectoryExists($"./{targetDirectory}/{frameworkDirectory}")) {
             DeleteDirectory($"./{targetDirectory}/{frameworkDirectory}", new DeleteDirectorySettings {
