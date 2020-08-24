@@ -11,6 +11,10 @@ namespace Xamarin.CobrowseIO
 	[BaseType(typeof(NSObject), Name = "CBIOAgent")]
 	interface Agent
 	{
+		// @property (nullable) NSString* email;
+		[Export("email")]
+		string Email { get; set; }
+
 		// @property NSString * _Nonnull name;
 		[Export("name")]
 		string Name { get; set; }
