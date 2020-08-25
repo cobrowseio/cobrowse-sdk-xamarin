@@ -13,15 +13,15 @@ namespace Xamarin.CobrowseIO
 	{
 		// @property (nullable) NSString* email;
 		[Export("email")]
-		string Email { get; set; }
+		string Email { get; }
 
 		// @property NSString * _Nonnull name;
 		[Export("name")]
-		string Name { get; set; }
+		string Name { get; }
 
 		// @property NSString * _Nonnull id;
 		[Export("id")]
-		string Id { get; set; }
+		string Id { get; }
 
 		// +(instancetype _Nullable)from:(NSDictionary * _Nonnull)dict;
 		[Static]
