@@ -18,18 +18,6 @@
             Clicked="CobrowseCustomUiButton_Clicked" />
         <Button
             HorizontalOptions="FillAndExpand"
-            Text="Check Full-Device Control&#x0a;configuration"
-            Clicked="CheckCobrowseFullDevice_Clicked">
-            <Button.IsVisible>
-                <OnPlatform
-                    x:TypeArguments="x:Boolean">
-                    <On Platform="iOS">False</On>
-                    <On Platform="Android">True</On>
-                </OnPlatform>
-            </Button.IsVisible>
-        </Button>
-        <Button
-            HorizontalOptions="FillAndExpand"
             Text="Open Page with redacted views"
             Clicked="PageRedactedViews_Clicked" />
         <Button

@@ -25,17 +25,6 @@ namespace SampleApp.Forms
             Navigation.PushAsync(new CobrowseCustomPage());
         }
 
-        private void CheckCobrowseFullDevice_Clicked(object sender, EventArgs e)
-        {
-            bool configured = CobrowseIO.Instance.CheckCobrowseFullDevice();
-            if (configured)
-            {
-                DisplayAlert("Cobrowse.io",
-                             "Full-device screen sharing is configured correctly",
-                             "OK");
-            }
-        }
-
         private void PageRedactedViews_Clicked(object sender, EventArgs e)
         {
             this.Navigation.PushAsync(new LoginPage());
