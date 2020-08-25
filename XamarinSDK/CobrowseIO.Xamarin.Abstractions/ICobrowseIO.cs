@@ -83,6 +83,8 @@ namespace Xamarin.CobrowseIO.Abstractions
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
+        [Obsolete("Use 'CobrowseAccessibilityService' directly in the Android project")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         bool CheckCobrowseFullDevice();
     }
 }
