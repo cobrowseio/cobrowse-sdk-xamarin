@@ -10,9 +10,9 @@ namespace SampleApp.Forms
         {
             InitializeComponent();
 
-            CobrowseIO.Instance.SetLicense("trial");
+            CobrowseIO.Instance.License = "trial";
             CobrowseIO.Instance.Start();
-            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
+            CobrowseIO.Instance.CustomData = new Dictionary<string, object>
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
@@ -20,7 +20,7 @@ namespace SampleApp.Forms
                 { CobrowseIO.DeviceIdKey, "<your_device_id>" },
                 { CobrowseIO.DeviceNameKey, "<your_device_name>" },
                 { "custom_field", 5.75f }
-            });
+            };
 
             MainPage = new NavigationPage(new MainPage());
         }

@@ -18,10 +18,10 @@ namespace SampleApp.iOS
         [Export("application:didFinishLaunchingWithOptions:")]
         public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            CobrowseIO.Instance.SetLicense("trial");
+            CobrowseIO.Instance.License = "trial";
             Console.WriteLine("Cobrowse device id:" + CobrowseIO.Instance.DeviceId);
             
-            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
+            CobrowseIO.Instance.CustomData = new Dictionary<string, object>
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
@@ -29,7 +29,7 @@ namespace SampleApp.iOS
                 { CobrowseIO.DeviceIdKey, "<your_device_id>" },
                 { CobrowseIO.DeviceNameKey, "<your_device_name>" },
                 { "custom_field", 5.75f }
-            });
+            };
 
             CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
             CobrowseIO.Instance.Start();

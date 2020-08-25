@@ -30,10 +30,10 @@ namespace SampleApp.Android
         {
             base.OnCreate();
 
-            CobrowseIO.Instance.SetLicense("trial");
+            CobrowseIO.Instance.License = "trial";
             Debug.WriteLine("Cobrowse device id: " + CobrowseIO.Instance.GetDeviceId(this));
 
-            CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>()
+            CobrowseIO.Instance.CustomData = new Dictionary<string, object>()
             {
                 { CobrowseIO.UserIdKey, "<your_user_id>" },
                 { CobrowseIO.UserNameKey, "<your_user_name>" },
@@ -41,7 +41,7 @@ namespace SampleApp.Android
                 { CobrowseIO.DeviceIdKey, "<your_device_id>" },
                 { CobrowseIO.DeviceNameKey, "<your_device_name>" },
                 { "custom_field", 5.75f }
-            });
+            };
 
             CobrowseIO.Instance.SetDelegate(new CustomCobrowseDelegate());
             CobrowseIO.Instance.Start(this);
