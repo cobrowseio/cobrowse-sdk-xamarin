@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Java.Lang.Annotation;
 
 namespace Xamarin.CobrowseIO
@@ -8,10 +9,12 @@ namespace Xamarin.CobrowseIO
     public partial class CobrowseIO
     {
         [Obsolete("Use Api property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetApi(string api)
             => this.Api = api;
 
         [Obsolete("Use License property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetLicense(string license)
             => this.License = license;
 
@@ -34,6 +37,7 @@ namespace Xamarin.CobrowseIO
         }
 
         [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetCustomData(IDictionary<string, object> customData)
         {
             this.SetCustomData(

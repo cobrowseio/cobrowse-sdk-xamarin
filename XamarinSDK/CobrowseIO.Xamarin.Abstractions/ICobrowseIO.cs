@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Xamarin.CobrowseIO.Abstractions
 {
@@ -52,6 +53,7 @@ namespace Xamarin.CobrowseIO.Abstractions
         /// Sets the license.
         /// </summary>
         [Obsolete("Use License property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         void SetLicense(string licenseKey);
 
         /// <summary>
@@ -73,6 +75,7 @@ namespace Xamarin.CobrowseIO.Abstractions
         /// Sets Cobrowse.io custom data.
         /// </summary>
         [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         void SetCustomData(IDictionary<string, object> customData);
 
         /// <summary>

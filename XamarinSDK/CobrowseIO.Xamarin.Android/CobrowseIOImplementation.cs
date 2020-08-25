@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -110,6 +111,7 @@ namespace Xamarin.CobrowseIO
         /// Sets the license.
         /// </summary>
         [Obsolete("Use License property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetLicense(string licenseKey)
         {
             CobrowseIO.Instance.SetLicense(licenseKey);
@@ -148,6 +150,7 @@ namespace Xamarin.CobrowseIO
         /// Sets Cobrowse.io custom data.
         /// </summary>
         [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetCustomData(IDictionary<string, object> customData)
         {
             CobrowseIO.Instance.SetCustomData(customData);

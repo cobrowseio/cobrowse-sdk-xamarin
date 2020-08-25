@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Xamarin.CobrowseIO.Abstractions
@@ -11,18 +12,23 @@ namespace Xamarin.CobrowseIO.Abstractions
         #region Common Cobrowse.io custom data keys
 
         [Obsolete]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static string UserId => UserIdKey;
 
         [Obsolete]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static string UserEmail => UserEmailKey;
 
         [Obsolete]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static string UserName => UserNameKey;
 
         [Obsolete]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static string DeviceId => DeviceIdKey;
 
         [Obsolete]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static string DeviceName => DeviceNameKey;
 
         public static string UserIdKey = "user_id";

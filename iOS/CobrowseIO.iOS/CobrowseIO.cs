@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Foundation;
 
 namespace Xamarin.CobrowseIO
@@ -40,6 +41,7 @@ namespace Xamarin.CobrowseIO
         }
 
         [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetCustomData(IDictionary<string, string> customData)
         {
             this.SetCustomData(
@@ -72,6 +74,7 @@ namespace Xamarin.CobrowseIO
         }
 
         [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetCustomData(IDictionary<string, object> customData)
         {
             this.SetCustomData(
@@ -123,12 +126,14 @@ namespace Xamarin.CobrowseIO
         }
 
         [Obsolete("Use Api property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetApi(string api)
         {
             this.Api = api;
         }
 
         [Obsolete("Use License property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetLicense(string license)
         {
             this.License = license;
