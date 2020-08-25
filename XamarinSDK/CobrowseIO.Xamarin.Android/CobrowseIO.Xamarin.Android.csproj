@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="CobrowseSessionImplementation.cs" />
     <Compile Include="CobrowseDelegateImplementation.cs" />
+    <Compile Include="AgentImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CobrowseIO.Xamarin.Abstractions\CobrowseIO.Xamarin.Abstractions.csproj">
