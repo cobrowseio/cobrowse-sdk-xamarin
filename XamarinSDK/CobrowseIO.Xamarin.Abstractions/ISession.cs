@@ -36,6 +36,16 @@
         bool IsPending { get; }
 
         /// <summary>
+        /// Gets a value indicating if an agent object is available.
+        /// </summary>
+        bool HasAgent { get; }
+
+        /// <summary>
+        /// Gets an agent instance.
+        /// </summary>
+        IAgent Agent { get; }
+
+        /// <summary>
         /// Activates the session.
         /// </summary>
         void Activate(CobrowseCallback callback);

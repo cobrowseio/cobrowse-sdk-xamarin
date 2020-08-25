@@ -54,6 +54,17 @@ Task("ConfigureNuGetSources")
     }
 });
 
+Task("Clean")
+    .Does(() =>
+{
+    foreach (NuGetArtifact artifact in nugetArtifacts) {
+        foreach (string csprojFile in artifact.CsprojFiles) {
+            CleanDirectory(System.IO.Directory.GetParent(csprojFile) + "/bin");
+            CleanDirectory(System.IO.Directory.GetParent(csprojFile) + "/obj");
+        }
+    }
+});
+
 Task("RestoreNuGetPackages")
     .Does(() =>
 {
@@ -277,6 +288,7 @@ Task("PushToNuGetOrg")
 
 Task("Default")
     .IsDependentOn("ConfigureNuGetSources")
+    .IsDependentOn("Clean")
     .IsDependentOn("RestoreNuGetPackages")
     .IsDependentOn("CleanUp")
     .IsDependentOn("FindLatestAndroidVersions")

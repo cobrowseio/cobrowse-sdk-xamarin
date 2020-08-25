@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -84,13 +85,33 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <summary>
+        /// Gets or sets the API string.
+        /// </summary>
+        public string Api
+        {
+            get => CobrowseIO.Instance.Api;
+            set => CobrowseIO.Instance.Api = value;
+        }
+
+        /// <summary>
         /// Gets the current Cobrowse.io device ID.
         /// </summary>
         public string DeviceId => CobrowseIO.Instance.GetDeviceId(Activity.Application);
 
         /// <summary>
+        /// Gets or sets the license.
+        /// </summary>
+        public string License
+        {
+            get => CobrowseIO.Instance.License;
+            set => CobrowseIO.Instance.License = value;
+        }
+
+        /// <summary>
         /// Sets the license.
         /// </summary>
+        [Obsolete("Use License property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetLicense(string licenseKey)
         {
             CobrowseIO.Instance.SetLicense(licenseKey);
@@ -117,8 +138,19 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <summary>
+        /// Gets or sets Cobrowse.io custom data. 
+        /// </summary>
+        public IReadOnlyDictionary<string, object> CustomData
+        {
+            get => CobrowseIO.Instance.CustomData;
+            set => CobrowseIO.Instance.CustomData = value;
+        }
+
+        /// <summary>
         /// Sets Cobrowse.io custom data.
         /// </summary>
+        [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetCustomData(IDictionary<string, object> customData)
         {
             CobrowseIO.Instance.SetCustomData(customData);
@@ -136,14 +168,15 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
-        public void CheckCobrowseFullDevice()
+        public bool CheckCobrowseFullDevice()
         {
             bool isRunning = CobrowseAccessibilityService.IsRunning(Activity);
             if (!isRunning)
             {
                 CobrowseAccessibilityService.ShowSetup(Activity);
-                return;
+                return false;
             }
+            return true;
         }
     }
 

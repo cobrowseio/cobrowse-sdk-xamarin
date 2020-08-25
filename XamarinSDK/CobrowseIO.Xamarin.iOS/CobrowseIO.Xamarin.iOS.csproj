@@ -40,7 +40,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CobrowseIOImplementationImplementation.cs" />
+    <Compile Include="CobrowseIOImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\CobrowseIO.Xamarin\CrossCobrowseIO.cs">
       <Link>CrossCobrowseIO.cs</Link>
@@ -49,6 +49,7 @@
     <Compile Include="CobrowseSessionImplementation.cs" />
     <Compile Include="NSErrorExtensions.cs" />
     <Compile Include="CobrowseDelegateImplementation.cs" />
+    <Compile Include="AgentImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj">

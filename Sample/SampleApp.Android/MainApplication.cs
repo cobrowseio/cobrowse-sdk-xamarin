@@ -13,7 +13,7 @@ namespace SampleApp.Android
         #else
         Debuggable = false,
         #endif
-        Label = "@strings/app_name",
+        Label = "Cobrowse.io Xamarin.Android",
         Icon = "@mipmap/ic_launcher")]
     public class MainApplication : Application
     {

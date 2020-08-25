@@ -11,13 +11,17 @@ namespace Xamarin.CobrowseIO
 	[BaseType(typeof(NSObject), Name = "CBIOAgent")]
 	interface Agent
 	{
+		// @property (nullable) NSString* email;
+		[Export("email")]
+		string Email { get; }
+
 		// @property NSString * _Nonnull name;
 		[Export("name")]
-		string Name { get; set; }
+		string Name { get; }
 
 		// @property NSString * _Nonnull id;
 		[Export("id")]
-		string Id { get; set; }
+		string Id { get; }
 
 		// +(instancetype _Nullable)from:(NSDictionary * _Nonnull)dict;
 		[Static]
@@ -262,7 +266,6 @@ namespace Xamarin.CobrowseIO
 	{
 		// @property CBLicense * _Nonnull license;
 		[Export("license")]
-		[Internal]
 		string License { get; set; }
 
 		// @property NSString * _Nonnull api;
@@ -272,7 +275,7 @@ namespace Xamarin.CobrowseIO
 		// @property NSDictionary<NSString *,NSObject *> * _Nonnull customData;
 		[Export("customData", ArgumentSemantic.Assign)]
 		[Internal]
-		NSDictionary<NSString, NSObject> CustomData { get; set; }
+		NSDictionary<NSString, NSObject> CustomNSDictionaryData { get; set; }
 
 		[Wrap("WeakDelegate")]
 		[NullAllowed]

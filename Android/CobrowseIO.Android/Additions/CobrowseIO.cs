@@ -1,11 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using Java.Lang.Annotation;
 
 namespace Xamarin.CobrowseIO
 {
     public partial class CobrowseIO
     {
+        [Obsolete("Use Api property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SetApi(string api)
+            => this.Api = api;
+
+        [Obsolete("Use License property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void SetLicense(string license)
+            => this.License = license;
+
+        public IReadOnlyDictionary<string, object> CustomData
+        {
+            get
+            {
+                if (this.CustomJavaData is Dictionary<string, Java.Lang.Object> dictionary)
+                {
+                    var rvalue = new Dictionary<string, object>();
+                    foreach (KeyValuePair<string, Java.Lang.Object> next in dictionary)
+                    {
+                        rvalue.Add(next.Key, next.Value);
+                    }
+                    return rvalue;
+                }
+                return null;
+            }
+            set => SetCustomData(value);
+        }
+
+        [Obsolete("Use CustomData property instead")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public void SetCustomData(IDictionary<string, object> customData)
+        {
+            this.SetCustomData(
+                (IReadOnlyDictionary<string, object>)
+                new ReadOnlyDictionary<string, object>(customData));
+        }
+
+        internal void SetCustomData(IReadOnlyDictionary<string, object> customData)
         {
             if (customData == null)
             {
@@ -23,9 +63,9 @@ namespace Xamarin.CobrowseIO
                     javaCustomData.Add(next.Key, next.Value.ToString());
                 }
             }
-            this.SetCustomJavaData(javaCustomData);
+            this.CustomJavaData = javaCustomData;
         }
-
+        
         public void CreateSession(CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
         {
             this.CreateSession(new CobrowseCallback<Java.Lang.Error, Session>(@delegate));

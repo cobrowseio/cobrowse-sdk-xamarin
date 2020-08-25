@@ -14,11 +14,11 @@ namespace SampleApp.Forms
             CobrowseIO.Instance.Start();
             CobrowseIO.Instance.SetCustomData(new Dictionary<string, object>
             {
-                { CobrowseIO.UserId, "<your_user_id>" },
-                { CobrowseIO.UserName, "<your_user_name>" },
-                { CobrowseIO.UserEmail, "<your_user_email>" },
-                { CobrowseIO.DeviceId, "<your_device_id>" },
-                { CobrowseIO.DeviceName, "<your_device_name>" },
+                { CobrowseIO.UserIdKey, "<your_user_id>" },
+                { CobrowseIO.UserNameKey, "<your_user_name>" },
+                { CobrowseIO.UserEmailKey, "<your_user_email>" },
+                { CobrowseIO.DeviceIdKey, "<your_device_id>" },
+                { CobrowseIO.DeviceNameKey, "<your_device_name>" },
                 { "custom_field", 5.75f }
             });
 

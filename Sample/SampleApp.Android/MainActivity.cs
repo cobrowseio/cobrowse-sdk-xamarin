@@ -12,7 +12,7 @@ using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 namespace SampleApp.Android
 {
     [Activity(
-        Label = "@string/app_name",
+        Label = "Cobrowse.io Xamarin.Android",
         Theme = "@style/AppTheme.NoActionBar",
         MainLauncher = true)]
     public class MainActivity : AppCompatActivity

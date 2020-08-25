@@ -56,6 +56,18 @@ namespace Xamarin.CobrowseIO
         public bool IsPending => _platformSession.IsPending;
 
         /// <summary>
+        /// Gets a value indicating if an agent object is available.
+        /// </summary>
+        public bool HasAgent => _platformSession.HasAgent;
+
+        /// <summary>
+        /// Gets an agent instance.
+        /// </summary>
+        public IAgent Agent => _platformSession.Agent != null
+            ? new AgentImplementation(_platformSession.Agent)
+            : null;
+
+        /// <summary>
         /// Activates the session.
         /// </summary>
         public void Activate(CobrowseCallback callback)
