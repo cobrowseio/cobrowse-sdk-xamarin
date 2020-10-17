@@ -119,7 +119,7 @@ Task("FindLatestIosVersions")
         GitPull(POD_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
 
-    // Starting 2.6.0, Cobrowse.io iOS SDK uses xcframework instead of regularu framework
+    // Starting 2.6.0, Cobrowse.io iOS SDK uses xcframework instead of regular framework
     // This function creates a 'fat' framework which will be used in next tasks
     void _BuildUniversal() {
         var targetDirectory=POD_CLONE_DIRECTORY;
@@ -127,7 +127,7 @@ Task("FindLatestIosVersions")
         var frameworkDirectory=$"{targetFrameworkName}.framework";
         var xcFrameworkDirectory=$"{targetFrameworkName}.xcframework";
 
-        var iphoneFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
+        var iphoneFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}";
         var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-i386_x86_64-simulator/{frameworkDirectory}";
 
         if (DirectoryExists($"./{targetDirectory}/{frameworkDirectory}")) {
