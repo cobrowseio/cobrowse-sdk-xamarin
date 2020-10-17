@@ -12,6 +12,7 @@
         <iconUrl>https://avatars3.githubusercontent.com/u/32596876</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Cobrowse.io - Xamarin SDK</description>
+        <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, android, ios</tags>
         <dependencies>
             <group targetFramework="MonoAndroid100">
