@@ -3,7 +3,7 @@
 namespace Xamarin.CobrowseIO
 {
     /// <summary>
-    /// <see cref="NSError"/> <-> <see cref="NSException"/> converter.
+    /// <see cref="NSError"/> to/from <see cref="NSException"/> converter.
     /// </summary>
     [Preserve(AllMembers = true)]
     internal static class NSErrorExtensions

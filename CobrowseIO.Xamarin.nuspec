@@ -36,10 +36,7 @@
     </metadata>
     <files>
         <!--Core-->
-        <file src="XamarinSDK/CobrowseIO.Xamarin/bin/Release/netstandard1.0/CobrowseIO.Xamarin.pdb" target="lib\netstandard1.0" />
-        <file src="XamarinSDK/CobrowseIO.Xamarin/bin/Release/netstandard1.0/CobrowseIO.Xamarin.dll" target="lib\netstandard1.0" />
-        <file src="XamarinSDK/CobrowseIO.Xamarin.Abstractions/bin/Release/netstandard1.0/CobrowseIO.Xamarin.Abstractions.pdb" target="lib\netstandard1.0" />
-        <file src="XamarinSDK/CobrowseIO.Xamarin.Abstractions/bin/Release/netstandard1.0/CobrowseIO.Xamarin.Abstractions.dll" target="lib\netstandard1.0" />
+        <file src="XamarinSDK/CobrowseIO.Xamarin/bin/Release/netstandard1.0/CobrowseIO.Xamarin.*" target="lib\netstandard1.0" />
     
         <!-- Android-specific files -->
         <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.dll" target="lib/MonoAndroid100" />
