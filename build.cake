@@ -130,7 +130,7 @@ Task("FindLatestIosVersions")
         var iphoneFrameworkDirectory= DirectoryExists($"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}")
             ? $"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}"
             : $"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
-        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-i386_x86_64-simulator/{frameworkDirectory}";
+        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_i386_x86_64-simulator/{frameworkDirectory}";
 
         if (DirectoryExists($"./{targetDirectory}/{frameworkDirectory}")) {
             DeleteDirectory($"./{targetDirectory}/{frameworkDirectory}", new DeleteDirectorySettings {
@@ -140,6 +140,12 @@ Task("FindLatestIosVersions")
         }
         CopyDirectory($"{iphoneFrameworkDirectory}", $"{targetDirectory}/{frameworkDirectory}");
         CopyDirectory($"{simulatorFrameworkDirectory}/Modules/", $"{targetDirectory}/{frameworkDirectory}/Modules/");
+        // No suport form iOS Simulators on Apple Silicon for now
+        StartProcess(
+            "lipo",
+            new ProcessSettings {
+                Arguments = $"-remove arm64 \"{simulatorFrameworkDirectory}/{targetFrameworkName}\" -o \"{simulatorFrameworkDirectory}/{targetFrameworkName}\""
+            });
         StartProcess(
             "lipo", 
             new ProcessSettings { 
