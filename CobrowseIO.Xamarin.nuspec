@@ -21,7 +21,7 @@
                 <dependency id="Square.OkHttp3" version="3.12.6" />
                 <dependency id="Xamarin.AndroidX.Core" version="1.3.2" />
                 <dependency id="Xamarin.AndroidX.AppCompat" version="1.2.0" />
-                <dependency id="Xamarin.AndroidX.ConstraintLayout" version="2.0.2" />
+                <dependency id="Xamarin.AndroidX.ConstraintLayout" version="2.0.4" />
                 <dependency id="Plugin.CurrentActivity" version="2.1.0.4" />
             </group>
             <group targetFramework="Xamarin.iOS10">
