@@ -23,6 +23,7 @@ string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
 string nugetPrivateFeedApiKey = Argument("nugetPrivateFeedApiKey", string.Empty);
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
+string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
 
 Task("ConfigureNuGetSources")
     .Does(() =>
@@ -99,11 +100,19 @@ Task("CleanUp")
 Task("FindLatestAndroidVersions")
     .Does(() =>
 {
-    var bintrayApiEndpoint = "https://api.bintray.com/search/packages/maven?q=&g=io.cobrowse&a=cobrowse-sdk-android";
-    string responseBody = HttpGet(bintrayApiEndpoint);
-    JObject result = ParseJson(responseBody.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
+    if(!DirectoryExists(AAR_CLONE_DIRECTORY)) {
+        GitClone("https://github.com/cobrowseio/cobrowse-sdk-android-binary", 
+                 AAR_CLONE_DIRECTORY);
+    } else {
+        GitCheckout(AAR_CLONE_DIRECTORY, "master");
+        GitPull(AAR_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
+    }
 
-    cobrowseAndroidProject.VersionString = result["latest_version"].ToString();
+    cobrowseAndroidProject.VersionString = FindRegexMatchGroupInFile(
+            AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + "maven-metadata.xml", 
+            @"\<release\>([\S]*?)\<\/release\>",
+            1,
+            RegexOptions.Compiled).Value;
     
     Information("Latest native Android SDK is {0}", cobrowseAndroidProject.VersionString);
 });
@@ -171,9 +180,9 @@ Task("DownloadNativeSDKs")
 {
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
-            var downloadUrl = string.Format(androidBindingProject.DownloadUrl, androidBindingProject.VersionString);
-            var jarPath = string.Format(androidBindingProject.JarPath, androidBindingProject.VersionString);
-            DownloadFile(downloadUrl, jarPath);
+            string jarPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + ".aar";
+            CopyFile(jarPath,
+                     androidBindingProject.JarPath);
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
             CopyDirectory(POD_CLONE_DIRECTORY + "/" + dirName,
