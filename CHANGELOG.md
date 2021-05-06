@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.1.3] - 2021-05-06
+- Android Native SDK [`2.10.2`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md)
+- iOS Native SDK [`2.12.1`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md)
+
 ## [3.1.1] - 2020-09-19
 - Android Native SDK [`2.6.0`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md#250---2020-08-24)
 - iOS Native SDK [`2.8.2`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md#280---2020-08-24)
