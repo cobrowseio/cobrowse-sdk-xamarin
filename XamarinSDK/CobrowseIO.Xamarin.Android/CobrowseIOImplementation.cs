@@ -7,7 +7,10 @@ using Android.Runtime;
 using Plugin.CurrentActivity;
 using Xamarin.CobrowseIO.Abstractions;
 using Xamarin.CobrowseIO.UI;
+using JClass = Java.Lang.Class;
 using JError = Java.Lang.Error;
+using JMethod = Java.Lang.Reflect.Method;
+using JObject = Java.Lang.Object;
 
 namespace Xamarin.CobrowseIO
 {
@@ -17,7 +20,41 @@ namespace Xamarin.CobrowseIO
     [Preserve(AllMembers = true)]
     public class CobrowseIOImplementation : ICobrowseIO
     {
-        protected Activity Activity => CrossCurrentActivity.Current.Activity;
+        protected Activity Activity
+        {
+            get
+            {
+                Activity rvalue;
+
+                try
+                {
+                    rvalue = CrossCurrentActivity.Current.Activity;
+                }
+                catch (Exception)
+                {
+                    // User may forget to initialize the Current Activity plugin in the app
+                    rvalue = null;
+                }
+
+                if (rvalue == null)
+                {
+                    try
+                    {
+                        JClass activityWatcher = JClass.ForName("io.cobrowse.ActivityWatcher");
+                        JMethod foregroundActivity = activityWatcher.GetDeclaredMethod("foregroundActivity");
+                        foregroundActivity.Accessible = true;
+                        JObject activity = foregroundActivity.Invoke(activityWatcher);
+                        rvalue = (Activity)activity;
+                    }
+                    catch (Exception)
+                    {
+                        // Not expected to happen
+                    }
+                }
+
+                return rvalue;
+            }
+        }
 
         /// <summary>
         /// Occurs when a session is requested.
@@ -168,6 +205,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
+        [Obsolete("Use 'CobrowseAccessibilityService' directly in the Android project")]
         public bool CheckCobrowseFullDevice()
         {
             bool isRunning = CobrowseAccessibilityService.IsRunning(Activity);

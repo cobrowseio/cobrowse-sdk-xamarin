@@ -162,6 +162,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Checks if full-device screen sharing is allowed.
         /// </summary>
+        [Obsolete("Use 'CobrowseAccessibilityService' directly in the Android project")]
         public bool CheckCobrowseFullDevice()
         {
             // On iOS it is only requered to add a broadcast extension to the app.

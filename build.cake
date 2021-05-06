@@ -23,6 +23,7 @@ string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
 string nugetPrivateFeedApiKey = Argument("nugetPrivateFeedApiKey", string.Empty);
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
+string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
 
 Task("ConfigureNuGetSources")
     .Does(() =>
@@ -99,11 +100,19 @@ Task("CleanUp")
 Task("FindLatestAndroidVersions")
     .Does(() =>
 {
-    var bintrayApiEndpoint = "https://api.bintray.com/search/packages/maven?q=&g=io.cobrowse&a=cobrowse-sdk-android";
-    string responseBody = HttpGet(bintrayApiEndpoint);
-    JObject result = ParseJson(responseBody.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' }));
+    if(!DirectoryExists(AAR_CLONE_DIRECTORY)) {
+        GitClone("https://github.com/cobrowseio/cobrowse-sdk-android-binary", 
+                 AAR_CLONE_DIRECTORY);
+    } else {
+        GitCheckout(AAR_CLONE_DIRECTORY, "master");
+        GitPull(AAR_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
+    }
 
-    cobrowseAndroidProject.VersionString = result["latest_version"].ToString();
+    cobrowseAndroidProject.VersionString = FindRegexMatchGroupInFile(
+            AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + "maven-metadata.xml", 
+            @"\<release\>([\S]*?)\<\/release\>",
+            1,
+            RegexOptions.Compiled).Value;
     
     Information("Latest native Android SDK is {0}", cobrowseAndroidProject.VersionString);
 });
@@ -119,7 +128,7 @@ Task("FindLatestIosVersions")
         GitPull(POD_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
 
-    // Starting 2.6.0, Cobrowse.io iOS SDK uses xcframework instead of regularu framework
+    // Starting 2.6.0, Cobrowse.io iOS SDK uses xcframework instead of regular framework
     // This function creates a 'fat' framework which will be used in next tasks
     void _BuildUniversal() {
         var targetDirectory=POD_CLONE_DIRECTORY;
@@ -127,8 +136,10 @@ Task("FindLatestIosVersions")
         var frameworkDirectory=$"{targetFrameworkName}.framework";
         var xcFrameworkDirectory=$"{targetFrameworkName}.xcframework";
 
-        var iphoneFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
-        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-i386_x86_64-simulator/{frameworkDirectory}";
+        var iphoneFrameworkDirectory= DirectoryExists($"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}")
+            ? $"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}"
+            : $"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
+        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_i386_x86_64-simulator/{frameworkDirectory}";
 
         if (DirectoryExists($"./{targetDirectory}/{frameworkDirectory}")) {
             DeleteDirectory($"./{targetDirectory}/{frameworkDirectory}", new DeleteDirectorySettings {
@@ -138,6 +149,12 @@ Task("FindLatestIosVersions")
         }
         CopyDirectory($"{iphoneFrameworkDirectory}", $"{targetDirectory}/{frameworkDirectory}");
         CopyDirectory($"{simulatorFrameworkDirectory}/Modules/", $"{targetDirectory}/{frameworkDirectory}/Modules/");
+        // No suport form iOS Simulators on Apple Silicon for now
+        StartProcess(
+            "lipo",
+            new ProcessSettings {
+                Arguments = $"-remove arm64 \"{simulatorFrameworkDirectory}/{targetFrameworkName}\" -o \"{simulatorFrameworkDirectory}/{targetFrameworkName}\""
+            });
         StartProcess(
             "lipo", 
             new ProcessSettings { 
@@ -163,9 +180,9 @@ Task("DownloadNativeSDKs")
 {
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
-            var downloadUrl = string.Format(androidBindingProject.DownloadUrl, androidBindingProject.VersionString);
-            var jarPath = string.Format(androidBindingProject.JarPath, androidBindingProject.VersionString);
-            DownloadFile(downloadUrl, jarPath);
+            string jarPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + ".aar";
+            CopyFile(jarPath,
+                     androidBindingProject.JarPath);
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
             CopyDirectory(POD_CLONE_DIRECTORY + "/" + dirName,

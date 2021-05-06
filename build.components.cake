@@ -13,8 +13,7 @@ abstract class BindingProject {
 }
 
 class AndroidBindingProject : BindingProject {
-    public string DownloadUrl  { get; set; }
-    public string JarPath { get; set; }    
+    public string JarPath { get; set; }
 }
 
 class IosBindingProject : BindingProject {
@@ -28,7 +27,6 @@ IosBindingProject cobrowseIosExtensionProject;
 BindingProject[] bindingProjects = new BindingProject[] {
     cobrowseAndroidProject = new AndroidBindingProject {
         AssemblyInfoFile = "./Android/CobrowseIO.Android/Properties/AssemblyInfo.cs",
-        DownloadUrl = "https://jcenter.bintray.com/io/cobrowse/cobrowse-sdk-android/{0}/cobrowse-sdk-android-{0}.aar",
         JarPath = "./Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar"
     },
     cobrowseIosProject = new IosBindingProject {
