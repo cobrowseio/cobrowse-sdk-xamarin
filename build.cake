@@ -55,6 +55,16 @@ Task("ConfigureNuGetSources")
     }
 });
 
+Task("FindNextNuGetPackageVersion")
+    .Does(() =>
+    {
+        string version = GetCobrowseNuGetVersion();
+        Information("Next {0} package version will be {1}", COBROWSE_NUGET_PACKAGE_ID, version);
+        cobrowseArtifact.VersionString 
+            = cobrowseIosExtensionArtifact.VersionString 
+            = version;
+    });
+
 Task("Clean")
     .Does(() =>
 {
@@ -305,6 +315,7 @@ Task("PushToNuGetOrg")
 
 Task("Default")
     .IsDependentOn("ConfigureNuGetSources")
+    .IsDependentOn("FindNextNuGetPackageVersion")
     .IsDependentOn("Clean")
     .IsDependentOn("RestoreNuGetPackages")
     .IsDependentOn("CleanUp")

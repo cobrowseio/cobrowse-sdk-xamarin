@@ -1,3 +1,5 @@
+string COBROWSE_NUGET_PACKAGE_ID = "CobrowseIO.Xamarin";
+
 class NuGetArtifact {
     public string[] CsprojFiles { get; set; }
     public string[] AssemblyInfoFiles { get; set; }    
@@ -39,24 +41,26 @@ BindingProject[] bindingProjects = new BindingProject[] {
     }
 };
 
+NuGetArtifact numbersJavaArtifact, cborJavaArtifact, swiftCborArtifact, starscreamArtifact, cobrowseArtifact, cobrowseIosExtensionArtifact;
+
 NuGetArtifact[] nugetArtifacts = new NuGetArtifact[] {
-    new NuGetArtifact {
+    numbersJavaArtifact = new NuGetArtifact {
         CsprojFiles = new [] { "./Android/NumbersJava.Android/NumbersJava.Android.csproj" },
         NuspecFile = "./NumbersJava.Android.nuspec"
     },
-    new NuGetArtifact {
+    cborJavaArtifact = new NuGetArtifact {
         CsprojFiles = new [] { "./Android/CborJava.Android/CborJava.Android.csproj" },
         NuspecFile = "./CborJava.Android.nuspec"
     },
-    new NuGetArtifact {
+    swiftCborArtifact = new NuGetArtifact {
         CsprojFiles = new [] { "./iOS/SwiftCBOR.iOS/SwiftCBOR.iOS.csproj" },
         NuspecFile = "./SwiftCBOR.iOS.nuspec"
     },
-    new NuGetArtifact {
+    starscreamArtifact = new NuGetArtifact {
         CsprojFiles = new [] { "./iOS/Starscream.iOS/Starscream.iOS.csproj" },
         NuspecFile = "./Starscream.iOS.nuspec"
     },
-    new NuGetArtifact {
+    cobrowseArtifact = new NuGetArtifact {
         CsprojFiles = new [] 
         { 
             "./Android/CobrowseIO.Android/CobrowseIO.Android.csproj",
@@ -73,13 +77,11 @@ NuGetArtifact[] nugetArtifacts = new NuGetArtifact[] {
             "./XamarinSDK/CobrowseIO.Xamarin.Android/Properties/AssemblyInfo.cs",
             "./XamarinSDK/CobrowseIO.Xamarin.iOS/Properties/AssemblyInfo.cs",
         },
-        NuspecFile = "./CobrowseIO.Xamarin.nuspec",
-        VersionString = GetCobrowseNuGetVersion()
+        NuspecFile = "./CobrowseIO.Xamarin.nuspec"
     },
-    new NuGetArtifact {
+    cobrowseIosExtensionArtifact = new NuGetArtifact {
         CsprojFiles = new [] { "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj" },
-        NuspecFile = "./CobrowseIO.AppExtension.iOS.nuspec",
-        VersionString = GetCobrowseNuGetVersion()
+        NuspecFile = "./CobrowseIO.AppExtension.iOS.nuspec"
     },
 };
 
@@ -92,8 +94,57 @@ static Version TrimVersionString(string versionString) {
 }
 
 string GetCobrowseNuGetVersion() {
-    string version = Argument("cobrowseNuGetPackageVersion", string.Empty);
-    return !string.IsNullOrEmpty(version)
-        ? version
-        : null;
+    string passedVersion = Argument("cobrowseNuGetPackageVersion", string.Empty);
+    return !string.IsNullOrEmpty(passedVersion)
+        ? passedVersion
+        : CalculateNextNuGetVersion();
+}
+
+string CalculateNextNuGetVersion() {
+    var packageList = NuGetList(COBROWSE_NUGET_PACKAGE_ID, new NuGetListSettings { AllVersions = true, Prerelease = true });
+    Version currentVersion = default;
+    int currentVersionSuffix = default;
+    foreach (NuGetListItem package in packageList)
+    {
+        if (package.Name != COBROWSE_NUGET_PACKAGE_ID)
+        {
+            continue;
+        }
+        //Information("Found package {0}, version {1}", package.Name, package.Version);
+        if (package.Version.Contains("-pre"))
+        {
+            Version packageVersion = new Version(package.Version.Split("-pre")[0]);
+            int packageSuffix = int.Parse(package.Version.Split("-pre")[1]);
+            if (currentVersion == default || currentVersion < packageVersion || (currentVersion == packageVersion && currentVersionSuffix < packageSuffix))
+            {
+                currentVersion = packageVersion;
+                currentVersionSuffix = packageSuffix;
+            }
+        }
+        else
+        {
+            Version packageVersion = new Version(package.Version);
+            if (currentVersion == default || currentVersion < packageVersion)
+            {
+                currentVersion = packageVersion;
+                currentVersionSuffix = default;
+            }
+        }
+    }
+
+    if (currentVersion == default)
+    {
+        throw new Exception(string.Format("Cannot find any {0} version", COBROWSE_NUGET_PACKAGE_ID));
+    }
+
+    string newVersion = currentVersionSuffix == 0
+        ? "" + currentVersion.Major + "." + currentVersion.Minor + "." + (currentVersion.Build + 1)
+        : currentVersion.ToString();
+    string newVersionSuffix = currentVersionSuffix == 0
+        ? "01"
+        : currentVersionSuffix >= 10
+            ? (currentVersionSuffix + 1).ToString()
+            : "0" + (currentVersionSuffix + 1);
+
+    return newVersion + "-pre" + newVersionSuffix;
 }
