@@ -20,7 +20,8 @@ var slnPath = "./CobrowseIO.sln";
 var buildConfiguration = Argument("configuration", "Release");
 
 string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
-string nugetPrivateFeedApiKey = Argument("nugetPrivateFeedApiKey", string.Empty);
+string nugetPrivateFeedReadApiKey = Argument("nugetPrivateFeedReadApiKey", string.Empty);
+string nugetPrivateFeedWriteApiKey = Argument("nugetPrivateFeedWriteApiKey", string.Empty);
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
@@ -28,7 +29,7 @@ string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
 Task("ConfigureNuGetSources")
     .Does(() =>
 {
-    if (string.IsNullOrEmpty(nugetPrivateFeedApiKey))
+    if (string.IsNullOrEmpty(nugetPrivateFeedReadApiKey))
     {
         Warning("No API key was found for the private NuGet feed");
         return;
@@ -46,7 +47,7 @@ Task("ConfigureNuGetSources")
             new NuGetSourcesSettings
             {
                 UserName = "user",
-                Password = nugetPrivateFeedApiKey
+                Password = nugetPrivateFeedReadApiKey
             });
     }
     else
@@ -263,7 +264,7 @@ Task("Pack")
 Task("PushToPrivateFeed")
     .Does(() =>
 {
-    if (string.IsNullOrEmpty(nugetPrivateFeedApiKey))
+    if (string.IsNullOrEmpty(nugetPrivateFeedWriteApiKey))
     {
         Warning("No API key was found for the private NuGet feed");
         return;
@@ -277,7 +278,7 @@ Task("PushToPrivateFeed")
         Information("Publishing {0}", name);
         NuGetPush(name, new NuGetPushSettings
         {
-            ApiKey = nugetPrivateFeedApiKey,
+            ApiKey = nugetPrivateFeedWriteApiKey,
             SkipDuplicate = true,
             Source = "cobrowse-nuget-feed"
         });
