@@ -16,6 +16,7 @@ abstract class BindingProject {
 
 class AndroidBindingProject : BindingProject {
     public string JarPath { get; set; }
+    public string JavadocPath { get; set; }
 }
 
 class IosBindingProject : BindingProject {
@@ -29,7 +30,8 @@ IosBindingProject cobrowseIosExtensionProject;
 BindingProject[] bindingProjects = new BindingProject[] {
     cobrowseAndroidProject = new AndroidBindingProject {
         AssemblyInfoFile = "./Android/CobrowseIO.Android/Properties/AssemblyInfo.cs",
-        JarPath = "./Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar"
+        JarPath = "./Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar",
+        JavadocPath = "./Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST-javadoc.jar",
     },
     cobrowseIosProject = new IosBindingProject {
         AssemblyInfoFile = "./iOS/CobrowseIO.iOS/Properties/AssemblyInfo.cs",

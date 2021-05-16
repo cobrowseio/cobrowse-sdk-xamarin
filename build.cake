@@ -91,6 +91,9 @@ Task("CleanUp")
             if (FileExists(androidBindingProject.JarPath)) {
                 DeleteFile(androidBindingProject.JarPath);
             }
+            if (FileExists(androidBindingProject.JavadocPath)) {
+                DeleteFile(androidBindingProject.JavadocPath);
+            }
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             if (DirectoryExists(iosBindingProject.FrameworkPath)) {
                 DeleteDirectory(iosBindingProject.FrameworkPath,
@@ -192,8 +195,11 @@ Task("DownloadNativeSDKs")
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
             string jarPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + ".aar";
-            CopyFile(jarPath,
-                     androidBindingProject.JarPath);
+            CopyFile(jarPath, androidBindingProject.JarPath);
+            if (!string.IsNullOrEmpty(androidBindingProject.JavadocPath)) {
+                string javadocPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + "-javadoc.jar";
+                CopyFile(javadocPath, androidBindingProject.JavadocPath);
+            }
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
             CopyDirectory(POD_CLONE_DIRECTORY + "/" + dirName,
