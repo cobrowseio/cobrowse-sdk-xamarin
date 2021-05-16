@@ -20,7 +20,8 @@ var slnPath = "./CobrowseIO.sln";
 var buildConfiguration = Argument("configuration", "Release");
 
 string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
-string nugetPrivateFeedApiKey = Argument("nugetPrivateFeedApiKey", string.Empty);
+string nugetPrivateFeedReadApiKey = Argument("nugetPrivateFeedReadApiKey", string.Empty);
+string nugetPrivateFeedWriteApiKey = Argument("nugetPrivateFeedWriteApiKey", string.Empty);
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
@@ -28,7 +29,7 @@ string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
 Task("ConfigureNuGetSources")
     .Does(() =>
 {
-    if (string.IsNullOrEmpty(nugetPrivateFeedApiKey))
+    if (string.IsNullOrEmpty(nugetPrivateFeedReadApiKey))
     {
         Warning("No API key was found for the private NuGet feed");
         return;
@@ -46,7 +47,7 @@ Task("ConfigureNuGetSources")
             new NuGetSourcesSettings
             {
                 UserName = "user",
-                Password = nugetPrivateFeedApiKey
+                Password = nugetPrivateFeedReadApiKey
             });
     }
     else
@@ -54,6 +55,16 @@ Task("ConfigureNuGetSources")
         Information("Private NuGet source already exists");
     }
 });
+
+Task("FindNextNuGetPackageVersion")
+    .Does(() =>
+    {
+        string version = GetCobrowseNuGetVersion();
+        Information("Next {0} package version will be {1}", COBROWSE_NUGET_PACKAGE_ID, version);
+        cobrowseArtifact.VersionString 
+            = cobrowseIosExtensionArtifact.VersionString 
+            = version;
+    });
 
 Task("Clean")
     .Does(() =>
@@ -79,6 +90,9 @@ Task("CleanUp")
         if (bindingProject is AndroidBindingProject androidBindingProject) {
             if (FileExists(androidBindingProject.JarPath)) {
                 DeleteFile(androidBindingProject.JarPath);
+            }
+            if (FileExists(androidBindingProject.JavadocPath)) {
+                DeleteFile(androidBindingProject.JavadocPath);
             }
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             if (DirectoryExists(iosBindingProject.FrameworkPath)) {
@@ -181,8 +195,11 @@ Task("DownloadNativeSDKs")
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
             string jarPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + ".aar";
-            CopyFile(jarPath,
-                     androidBindingProject.JarPath);
+            CopyFile(jarPath, androidBindingProject.JarPath);
+            if (!string.IsNullOrEmpty(androidBindingProject.JavadocPath)) {
+                string javadocPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + "-javadoc.jar";
+                CopyFile(javadocPath, androidBindingProject.JavadocPath);
+            }
         } else if (bindingProject is IosBindingProject iosBindingProject) {
             string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
             CopyDirectory(POD_CLONE_DIRECTORY + "/" + dirName,
@@ -253,7 +270,7 @@ Task("Pack")
 Task("PushToPrivateFeed")
     .Does(() =>
 {
-    if (string.IsNullOrEmpty(nugetPrivateFeedApiKey))
+    if (string.IsNullOrEmpty(nugetPrivateFeedWriteApiKey))
     {
         Warning("No API key was found for the private NuGet feed");
         return;
@@ -267,7 +284,7 @@ Task("PushToPrivateFeed")
         Information("Publishing {0}", name);
         NuGetPush(name, new NuGetPushSettings
         {
-            ApiKey = nugetPrivateFeedApiKey,
+            ApiKey = nugetPrivateFeedWriteApiKey,
             SkipDuplicate = true,
             Source = "cobrowse-nuget-feed"
         });
@@ -305,6 +322,7 @@ Task("PushToNuGetOrg")
 
 Task("Default")
     .IsDependentOn("ConfigureNuGetSources")
+    .IsDependentOn("FindNextNuGetPackageVersion")
     .IsDependentOn("Clean")
     .IsDependentOn("RestoreNuGetPackages")
     .IsDependentOn("CleanUp")
