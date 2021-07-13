@@ -28,8 +28,15 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='code']" name="managedName">GetCode</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='agent']" name="managedName">GetAgent</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='state']" name="managedName">GetState</attr>
-    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="managedName">GetFullDevice</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='id']" name="managedName">GetId</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='remoteControl']" name="managedName">GetRemoteControl</attr>
+
+    <!--
+    Ideally we would use a proper getter but Xamarin fails to convert Java.Lang.Boolean to bool
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="managedName">GetFullDevice</attr>
+    -->
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="managedName">_FullDevice</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="visibility">internal</attr>
     
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->

@@ -11,4 +11,8 @@
     <method jni-name="writeToParcel" parameter="flags" clr-enum-type="Android.OS.ParcelableWriteFlags" />
   </mapping>
   -->
+    <mapping jni-class="io/cobrowse/Session">
+        <method jni-name="remoteControl" parameter="return" clr-enum-type="Xamarin.CobrowseIO.RemoteControlState" />
+        <method jni-name="setRemoteControl" parameter="state" clr-enum-type="Xamarin.CobrowseIO.RemoteControlState" />
+    </mapping>
 </enum-method-mappings>

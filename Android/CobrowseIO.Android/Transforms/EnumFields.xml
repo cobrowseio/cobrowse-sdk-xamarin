@@ -12,4 +12,10 @@
     <field jni-name="Fragment_tag" clr-name="Tag" value="2" />
   </mapping>
   -->
+    <mapping jni-class="io/cobrowse/Session/RemoteControlState" clr-enum-type="Xamarin.CobrowseIO.RemoteControlState">
+        <field jni-name="Off" clr-name="Off" value="0" />
+        <field jni-name="Requested" clr-name="Requested" value="1" />
+        <field jni-name="Rejected" clr-name="Rejected" value="2" />
+        <field jni-name="On" clr-name="On" value="3" />
+    </mapping>
 </enum-field-mappings>
