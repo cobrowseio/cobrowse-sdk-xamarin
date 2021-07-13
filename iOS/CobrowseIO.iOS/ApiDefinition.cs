@@ -155,6 +155,22 @@ namespace Xamarin.CobrowseIO
 		// -(CBIOAgent * _Nullable)agent;
 		[NullAllowed, Export("agent")]
 		Agent Agent { get; }
+
+		// -(_Bool)fullDevice;
+		[Export("fullDevice")]
+		bool FullDevice { get; }
+
+		// -(void)setFullDevice:(BOOL)value callback:(CBErrorSessionBlock _Nullable)callback;
+		[Export("setFullDevice:callback:")]
+		void SetFullDevice(bool value, [NullAllowed] CBErrorSessionBlock callback);
+
+		// -(CBIORemoteControlState)remoteControl;
+		[Export("remoteControl")]
+		RemoteControlState RemoteControl { get; }
+
+		// -(void)setRemoteControl:(CBIORemoteControlState)state callback:(CBErrorSessionBlock _Nullable)callback;
+		[Export("setRemoteControl:callback:")]
+		void SetRemoteControl(RemoteControlState state, [NullAllowed] CBErrorSessionBlock callback);
 	}
 
 	// @interface CBIOTouch : NSObject
@@ -225,6 +241,10 @@ namespace Xamarin.CobrowseIO
 		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseRedactedViewsForViewController:(UIViewController * _Nonnull)vc;
 		[Export("cobrowseRedactedViewsForViewController:")]
 		UIView[] RedactedViewsForViewController(UIViewController vc);
+
+		// @optional -(void)cobrowseHandleRemoteControlRequest:(CBIOSession * _Nonnull)session;
+		[Export("cobrowseHandleRemoteControlRequest:")]
+		void CobrowseHandleRemoteControlRequest(Session session);
 	}
 
 	// @interface CBIOViewController : UIViewController
@@ -323,6 +343,14 @@ namespace Xamarin.CobrowseIO
 		// -(CBIOSession * _Nullable)currentSession;
 		[NullAllowed, Export("currentSession")]
 		Session CurrentSession { get; }
+
+		// -(_Bool)isStarted;
+		[Export("isStarted")]
+		bool IsStarted { get; }
+
+		// -(NSString * _Nonnull)version;
+		[Export("version")]
+		string Version { get; }
 
 		// +(BOOL)isCobrowseNotification:(NSDictionary * _Nonnull)userInfo;
 		[Static]
