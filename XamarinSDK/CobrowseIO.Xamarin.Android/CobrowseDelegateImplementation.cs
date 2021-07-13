@@ -9,7 +9,8 @@ namespace Xamarin.CobrowseIO
     /// </summary>
     [Preserve(AllMembers = true)]
     public class CobrowseDelegateImplementation : Java.Lang.Object,
-        CobrowseIO.ISessionRequestDelegate
+        CobrowseIO.ISessionRequestDelegate,
+        CobrowseIO.IRemoteControlRequestDelegate
     {
         private CobrowseIOImplementation CrossImplementation
             => (CobrowseIOImplementation)Xamarin.CobrowseIO.Abstractions.CobrowseIO.Instance;
@@ -28,6 +29,14 @@ namespace Xamarin.CobrowseIO
             if (!CrossImplementation.RaiseSessionDidRequest(session))
             {
                 session.Activate(callback: null);
+            }
+        }
+
+        public void HandleRemoteControlRequest(Activity activity, Session session)
+        {
+            if (!CrossImplementation.RaiseRemoteControlRequest(session))
+            {
+                session.SetRemoteControl(RemoteControlState.On, callback: null);
             }
         }
 

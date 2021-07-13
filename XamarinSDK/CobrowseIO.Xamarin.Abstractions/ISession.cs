@@ -46,6 +46,26 @@
         IAgent Agent { get; }
 
         /// <summary>
+        /// Gets the current remote control status.
+        /// </summary>
+        RemoteControlState RemoteControl { get; }
+
+        /// <summary>
+        /// Enables or disables remote control.
+        /// </summary>
+        void SetRemoteControl(RemoteControlState value, CobrowseCallback callback);
+
+        /// <summary>
+        /// Gets a value indicating if the session is in full-device mode.
+        /// </summary>
+        bool FullDevice { get; }
+
+        /// <summary>
+        /// Enables or disables full-device mode.
+        /// </summary>
+        void SetFullDevice(bool value, CobrowseCallback callback);
+
+        /// <summary>
         /// Activates the session.
         /// </summary>
         void Activate(CobrowseCallback callback);

@@ -61,12 +61,28 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public event EventHandler<ISession> SessionDidRequest;
 
+        /// <summary>
+        /// Occurs when an agent requests remote control.
+        /// </summary>
+        public event EventHandler<ISession> RemoteControlRequest;
+
         internal bool RaiseSessionDidRequest(Session session)
         {
             var sessionDidRequest = SessionDidRequest;
             if (sessionDidRequest != null)
             {
                 sessionDidRequest(this, CobrowseSessionImplementation.TryCreate(session));
+                return true;
+            }
+            return false;
+        }
+
+        internal bool RaiseRemoteControlRequest(Session session)
+        {
+            var remoteControlRequest = RemoteControlRequest;
+            if (remoteControlRequest != null)
+            {
+                remoteControlRequest(this, CobrowseSessionImplementation.TryCreate(session));
                 return true;
             }
             return false;

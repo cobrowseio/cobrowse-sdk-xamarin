@@ -27,6 +27,14 @@ namespace Xamarin.CobrowseIO
             }
         }
 
+        public override void HandleRemoteControlRequest(Session session)
+        {
+            if (!CrossImplementation.RaiseRemoteControlRequest(session))
+            {
+                session.SetRemoteControl(RemoteControlState.On, callback: null);
+            }
+        }
+
         public override void SessionDidUpdate(Session session)
         {
             CrossImplementation.RaiseSessionDidUpdate(session);

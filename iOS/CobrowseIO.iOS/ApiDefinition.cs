@@ -230,6 +230,10 @@ namespace Xamarin.CobrowseIO
 		[Export("cobrowseHandleSessionRequest:")]
 		void HandleSessionRequest(Session session);
 
+		// @optional -(void)cobrowseHandleRemoteControlRequest:(CBIOSession * _Nonnull)session;
+		[Export("cobrowseHandleRemoteControlRequest:")]
+		void HandleRemoteControlRequest(Session session);
+
 		// @optional -(void)cobrowseShowSessionControls:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShowSessionControls:")]
 		void ShowSessionControls(Session session);
@@ -241,10 +245,6 @@ namespace Xamarin.CobrowseIO
 		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseRedactedViewsForViewController:(UIViewController * _Nonnull)vc;
 		[Export("cobrowseRedactedViewsForViewController:")]
 		UIView[] RedactedViewsForViewController(UIViewController vc);
-
-		// @optional -(void)cobrowseHandleRemoteControlRequest:(CBIOSession * _Nonnull)session;
-		[Export("cobrowseHandleRemoteControlRequest:")]
-		void CobrowseHandleRemoteControlRequest(Session session);
 	}
 
 	// @interface CBIOViewController : UIViewController
