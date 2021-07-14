@@ -67,6 +67,68 @@ namespace Xamarin.CobrowseIO
             ? new AgentImplementation(_platformSession.Agent)
             : null;
 
+        /// <inheritdoc/>
+        public Abstractions.RemoteControlState RemoteControl
+        {
+            get
+            {
+                switch (_platformSession.RemoteControl)
+                {
+                    case RemoteControlState.Off:
+                        return Abstractions.RemoteControlState.Off;
+                    case RemoteControlState.Requested:
+                        return Abstractions.RemoteControlState.Requested;
+                    case RemoteControlState.Rejected:
+                        return Abstractions.RemoteControlState.Rejected;
+                    case RemoteControlState.On:
+                        return Abstractions.RemoteControlState.On;
+                    default:
+                        return default;
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void SetRemoteControl(Abstractions.RemoteControlState state, CobrowseCallback callback)
+        {
+            RemoteControlState toBeSet;
+            switch (state)
+            {
+                case Abstractions.RemoteControlState.Off:
+                    toBeSet = RemoteControlState.Off;
+                    break;
+                case Abstractions.RemoteControlState.Requested:
+                    toBeSet = RemoteControlState.Requested;
+                    break;
+                case Abstractions.RemoteControlState.Rejected:
+                    toBeSet = RemoteControlState.Rejected;
+                    break;
+                case Abstractions.RemoteControlState.On:
+                    toBeSet = RemoteControlState.On;
+                    break;
+                default:
+                    toBeSet = default;
+                    break;
+            }
+
+            _platformSession.SetRemoteControl(toBeSet, (JError e, Session session) =>
+            {
+                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+            });
+        }
+
+        /// <inheritdoc/>
+        public bool FullDevice => _platformSession.FullDevice;
+
+        /// <inheritdoc/>
+        public void SetFullDevice(bool value, CobrowseCallback callback)
+        {
+            _platformSession.SetFullDevice(value, (JError e, Session session) =>
+            {
+                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+            });
+        }
+
         /// <summary>
         /// Activates the session.
         /// </summary>
