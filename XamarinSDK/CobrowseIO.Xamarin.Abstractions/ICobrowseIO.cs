@@ -25,6 +25,11 @@ namespace Xamarin.CobrowseIO.Abstractions
         event EventHandler<ISession> SessionDidEnd;
 
         /// <summary>
+        /// Occurs when an agent requests remote control.
+        /// </summary>
+        event EventHandler<ISession> RemoteControlRequest;
+
+        /// <summary>
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>
         ISession CurrentSession { get; }
