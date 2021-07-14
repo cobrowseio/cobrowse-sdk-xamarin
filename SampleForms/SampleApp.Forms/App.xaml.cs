@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Xamarin.CobrowseIO.Abstractions;
 using Xamarin.Forms;
 
@@ -43,15 +45,19 @@ namespace SampleApp.Forms
         private void Subscribe()
         {
             CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
+            CobrowseIO.Instance.RemoteControlRequest += OnRemoteControlRequest;
         }
 
         private void Unsubscribe()
         {
             CobrowseIO.Instance.SessionDidRequest -= OnCobrowseSessionDidRequest;
+            CobrowseIO.Instance.RemoteControlRequest -= OnRemoteControlRequest;
         }
 
         private async void OnCobrowseSessionDidRequest(object sender, ISession session)
         {
+            Debug.WriteLine("RemoteControl: " + session.RemoteControl);
+
             bool allowed = await this.MainPage.DisplayAlert(
                 title: "Cobrowse.io",
                 message: "Allow Cobrowse.io session?",
@@ -64,6 +70,31 @@ namespace SampleApp.Forms
             else
             {
                 session.End(null);
+            }
+        }
+
+        private async void OnRemoteControlRequest(object sender, ISession session)
+        {
+            Debug.WriteLine("RemoteControl: " + session.RemoteControl);
+
+            bool allowed = await this.MainPage.DisplayAlert(
+                title: "Cobrowse.io",
+                message: "Allow remote control?",
+                accept: "Allow",
+                cancel: "Reject");
+            if (allowed)
+            {
+                session.SetRemoteControl(RemoteControlState.On, (e, s) =>
+                {
+                    Debug.WriteLine("RemoteControl: " + session.RemoteControl);
+                });
+            }
+            else
+            {
+                session.SetRemoteControl(RemoteControlState.Rejected, (e, s) =>
+                {
+                    Debug.WriteLine("RemoteControl: " + session.RemoteControl);
+                });
             }
         }
     }
