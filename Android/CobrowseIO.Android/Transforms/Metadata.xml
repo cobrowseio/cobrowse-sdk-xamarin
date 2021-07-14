@@ -33,10 +33,26 @@
 
     <!--
     Ideally we would use a proper getter but Xamarin fails to convert Java.Lang.Boolean to bool
+
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="managedName">GetFullDevice</attr>
     -->
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="managedName">_FullDevice</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDevice']" name="visibility">internal</attr>
+
+    <!--
+    Ideally we would use Java.Lang.Enum-enum mapping, but for some reason Xamarin generates invalid
+    Java invokations in such case. As a result, we map enums manually in "Additions/Session.cs"
+    
+    <mapping jni-class="io/cobrowse/Session">
+        <method jni-name="remoteControl" parameter="return" clr-enum-type="Xamarin.CobrowseIO.RRemoteControlState" />
+        <method jni-name="setRemoteControl" parameter="state" clr-enum-type="Xamarin.CobrowseIO.RRemoteControlState" />
+    </mapping>
+    -->
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session.RemoteControlState']" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='remoteControl']" name="managedName">_RemoteControl</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='remoteControl']" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setRemoteControl']" name="managedName">_SetRemoteControl</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setRemoteControl']" name="visibility">internal</attr>
     
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->

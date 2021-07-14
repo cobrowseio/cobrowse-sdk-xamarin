@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.Runtime;
 
 namespace Xamarin.CobrowseIO
 {
@@ -21,9 +22,54 @@ namespace Xamarin.CobrowseIO
             this.SetFullDevice(value, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
 
-        public void SetRemoteControl(Xamarin.CobrowseIO.RemoteControlState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        [GeneratedEnum]
+        public Xamarin.CobrowseIO.RemoteControlState RemoteControl
         {
-            this.SetRemoteControl(state, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
+            get
+            {
+                Xamarin.CobrowseIO.Session.RemoteControlState javaState = this._RemoteControl();
+                if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.Off)
+                {
+                    return Xamarin.CobrowseIO.RemoteControlState.Off;
+                }
+                if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.Requested)
+                {
+                    return Xamarin.CobrowseIO.RemoteControlState.Requested;
+                }
+                if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.Rejected)
+                {
+                    return Xamarin.CobrowseIO.RemoteControlState.Rejected;
+                }
+                if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.On)
+                {
+                    return Xamarin.CobrowseIO.RemoteControlState.On;
+                }
+                return default;
+            }
+        }
+
+        public void SetRemoteControl([GeneratedEnum] Xamarin.CobrowseIO.RemoteControlState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        {
+            Xamarin.CobrowseIO.Session.RemoteControlState javaState;
+            switch (state)
+            {
+                case Xamarin.CobrowseIO.RemoteControlState.Off:
+                    javaState = Xamarin.CobrowseIO.Session.RemoteControlState.Off;
+                    break;
+                case Xamarin.CobrowseIO.RemoteControlState.Requested:
+                    javaState = Xamarin.CobrowseIO.Session.RemoteControlState.Requested;
+                    break;
+                case Xamarin.CobrowseIO.RemoteControlState.Rejected:
+                    javaState = Xamarin.CobrowseIO.Session.RemoteControlState.Rejected;
+                    break;
+                case Xamarin.CobrowseIO.RemoteControlState.On:
+                    javaState = Xamarin.CobrowseIO.Session.RemoteControlState.On;
+                    break;
+                default:
+                    javaState = default;
+                    break;
+            }
+            this._SetRemoteControl(javaState, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
     }
 }
