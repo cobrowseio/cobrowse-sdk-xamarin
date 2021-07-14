@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.0] - 2021-07-14
+- Added new API for setting desired full device state
+- Added support for overriding the default remote control consent prompt
+- Android Native SDK [`2.12.1`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md#2121-2021-07-13)
+- iOS Native SDK [`2.14.0`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md#2140---2021-07-13)
+
 ## [3.1.3] - 2021-05-06
 - Android Native SDK [`2.10.2`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md)
 - iOS Native SDK [`2.12.1`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md)
