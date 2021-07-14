@@ -47,6 +47,7 @@
     <Compile Include="Additions\CobrowseIO.cs" />
     <Compile Include="Additions\CobrowseSessionListener.cs" />
     <Compile Include="Additions\Session.cs" />
+    <Compile Include="Additions\RemoteControlStateExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
