@@ -112,12 +112,14 @@ string CalculateNextNuGetVersion() {
         {
             continue;
         }
-        //Information("Found package {0}, version {1}", package.Name, package.Version);
+        Information("Found package {0}, version {1}", package.Name, package.Version);
         if (package.Version.Contains("-pre"))
         {
             Version packageVersion = new Version(package.Version.Split("-pre")[0]);
             int packageSuffix = int.Parse(package.Version.Split("-pre")[1]);
-            if (currentVersion == default || currentVersion < packageVersion || (currentVersion == packageVersion && currentVersionSuffix < packageSuffix))
+            if (currentVersion == default /* Not initialized */
+                || currentVersion < packageVersion /* Older version */
+                || (currentVersion == packageVersion && currentVersionSuffix != default && currentVersionSuffix < packageSuffix) /* Older pre-version */)
             {
                 currentVersion = packageVersion;
                 currentVersionSuffix = packageSuffix;
@@ -126,7 +128,9 @@ string CalculateNextNuGetVersion() {
         else
         {
             Version packageVersion = new Version(package.Version);
-            if (currentVersion == default || currentVersion < packageVersion)
+            if (currentVersion == default /* Not initialized */
+                || currentVersion < packageVersion /* Older version */
+                || (currentVersion == packageVersion && currentVersionSuffix != default) /* Older pre-version */)
             {
                 currentVersion = packageVersion;
                 currentVersionSuffix = default;
