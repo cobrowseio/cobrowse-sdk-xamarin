@@ -23,7 +23,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
     [Export("application:didFinishLaunchingWithOptions:")]
     public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
-        CobrowseIO.Instance.SetLicense("<your license key here>");
+        CobrowseIO.Instance.SetLicense("put your license key here");
         CobrowseIO.Instance.Start();
         
         return true;
@@ -64,7 +64,7 @@ public class MainApplication : Application
     {
         base.OnCreate();
 
-        CobrowseIO.Instance.SetLicense("<your license key here>");
+        CobrowseIO.Instance.SetLicense("put your license key here");
         CobrowseIO.Instance.Start(this);
     }
 }
@@ -94,7 +94,7 @@ public partial class App : Xamarin.Forms.Application
     {
         InitializeComponent();
 
-        CobrowseIO.Instance.SetLicense("<your license key here>");
+        CobrowseIO.Instance.SetLicense("put your license key here");
         CobrowseIO.Instance.Start();
     }
 }
