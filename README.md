@@ -35,7 +35,7 @@ public class AppDelegate : UIResponder, IUIApplicationDelegate
 
 #### Xamarin.iOS Swift support
 
-Cobrowse.io SDK uses Swift language, and if you are targeting iOS 12.1 or earlier, it is required to add [Xamarin.iOS.SwiftRuntimeSupport]() NuGet dependency to ship specific Swift dylibs used by Cobrowse with your application. 
+Cobrowse.io SDK uses Swift language, and if you are targeting iOS 12.1 or earlier, it is required to add [Xamarin.iOS.SwiftRuntimeSupport](https://www.nuget.org/packages/Xamarin.iOS.SwiftRuntimeSupport/) NuGet dependency to ship specific Swift dylibs used by Cobrowse with your application. 
 
 * [![NuGet](https://img.shields.io/nuget/v/Xamarin.iOS.SwiftRuntimeSupport.svg?label=Xamarin.iOS.SwiftRuntimeSupport)](https://www.nuget.org/packages/Xamarin.iOS.SwiftRuntimeSupport/)
 
