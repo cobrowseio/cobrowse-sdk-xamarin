@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.3.0] - 2021-11-28
+- SDK now targets Android 11 (API 30)
+- Android Native SDK [`2.14.1`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md#2141-2021-11-15)
+- iOS Native SDK [`2.16.0`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md#2160-2021-11-15)
+
 ## [3.2.0] - 2021-07-14
 - Added new API for setting desired full device state
 - Added support for overriding the default remote control consent prompt
