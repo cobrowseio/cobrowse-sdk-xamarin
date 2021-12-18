@@ -12,6 +12,7 @@
     <AssemblyName>CobrowseIO.AppExtension.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary/tree/master/CobrowseIOAppExtension.xcframework</Description>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
