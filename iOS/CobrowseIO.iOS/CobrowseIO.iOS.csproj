@@ -64,5 +64,8 @@
       <Name>SwiftCBOR.iOS</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CobrowseIO.iOS.targets" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

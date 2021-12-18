@@ -16,14 +16,16 @@
         <tags>xamarin, ios</tags>
         <dependencies>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Starscream.iOS" version="3.1.1.1" />
-                <dependency id="SwiftCBOR.iOS" version="0.4.3.2" />
+                <dependency id="Starscream.iOS" version="3.1.1.1-pre05" />
+                <dependency id="SwiftCBOR.iOS" version="0.4.3.2-pre05" />
             </group>
         </dependencies>
         <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/master/CHANGELOG.md</releaseNotes>
     </metadata>
     <files>
-        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/CobrowseIO.AppExtension.iOS.dll" target="lib/Xamarin.iOS10" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/CobrowseIO.AppExtension.iOS.*" target="lib/Xamarin.iOS10" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/CobrowseIO.AppExtension.iOS.resources/**" target="content/CobrowseIO.AppExtension.iOS.resources" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.targets" target="build/Xamarin.iOS10" />
         <file src="icon.png" />
     </files>
 </package>

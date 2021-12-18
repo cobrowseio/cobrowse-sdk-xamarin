@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>Starscream.iOS</id>
-        <version>3.1.1.1</version>
+        <version>3.1.1.1-pre05</version>
         <title>Starscream.iOS</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
@@ -16,6 +16,8 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="iOS/Starscream.iOS/bin/Release/Starscream.iOS.dll" target="lib/Xamarin.iOS10" />
+        <file src="iOS/Starscream.iOS/bin/Release/Starscream.iOS.*" target="lib/Xamarin.iOS10" />
+        <file src="iOS/Starscream.iOS/bin/Release/Starscream.iOS.resources/**" target="content/Starscream.iOS.resources" />
+        <file src="iOS/Starscream.iOS/Starscream.iOS.targets" target="build/Xamarin.iOS10" />
     </files>
 </package>
