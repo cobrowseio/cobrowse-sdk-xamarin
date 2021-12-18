@@ -11,7 +11,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>CobrowseIO.AppExtension.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary/tree/master/CobrowseIOAppExtension.framework</Description>
+    <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary/tree/master/CobrowseIOAppExtension.xcframework</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +43,7 @@
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="CobrowseIOAppExtension.framework">
+    <NativeReference Include="CobrowseIOAppExtension.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>

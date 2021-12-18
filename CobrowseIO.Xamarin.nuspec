@@ -26,8 +26,8 @@
                 <dependency id="Plugin.CurrentActivity" version="2.1.0.4" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Starscream.iOS" version="3.1.1" />
-                <dependency id="SwiftCBOR.iOS" version="0.4.3.1" />
+                <dependency id="Starscream.iOS" version="3.1.1.1" />
+                <dependency id="SwiftCBOR.iOS" version="0.4.3.2" />
             </group>
             <group targetFramework="netstandard1.0">
                 <dependency id="NETStandard.Library" version="1.6.1" />

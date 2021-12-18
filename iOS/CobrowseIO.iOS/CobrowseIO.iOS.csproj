@@ -44,7 +44,7 @@
     <Compile Include="CobrowseIO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="CobrowseIO.framework">
+    <NativeReference Include="CobrowseIO.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
