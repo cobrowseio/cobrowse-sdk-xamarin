@@ -65,7 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CobrowseIO.iOS.targets" />
+    <None Include="CobrowseIO.Xamarin.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>
