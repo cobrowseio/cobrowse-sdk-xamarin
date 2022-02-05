@@ -61,11 +61,6 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public event EventHandler<ISession> SessionDidRequest;
 
-        /// <summary>
-        /// Occurs when an agent requests remote control.
-        /// </summary>
-        public event EventHandler<ISession> RemoteControlRequest;
-
         internal bool RaiseSessionDidRequest(Session session)
         {
             var sessionDidRequest = SessionDidRequest;
@@ -77,12 +72,34 @@ namespace Xamarin.CobrowseIO
             return false;
         }
 
+        /// <summary>
+        /// Occurs when an agent requests remote control.
+        /// </summary>
+        public event EventHandler<ISession> RemoteControlRequest;
+
         internal bool RaiseRemoteControlRequest(Session session)
         {
             var remoteControlRequest = RemoteControlRequest;
             if (remoteControlRequest != null)
             {
                 remoteControlRequest(this, CobrowseSessionImplementation.TryCreate(session));
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Occurs when a session is first made available to the device,
+        /// whether by creating a 6 digit code, or via a connect request from an agent.
+        /// </summary>
+        public event EventHandler<ISession> SessionDidLoad;
+
+        internal bool RaiseSessionDidLoad(Session session)
+        {
+            var sessionDidLoad = SessionDidLoad;
+            if (sessionDidLoad != null)
+            {
+                sessionDidLoad(this, CobrowseSessionImplementation.TryCreate(session));
                 return true;
             }
             return false;

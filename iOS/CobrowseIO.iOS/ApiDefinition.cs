@@ -214,6 +214,10 @@ namespace Xamarin.CobrowseIO
 		[Export("cobrowseSessionDidEnd:")]
 		void SessionDidEnd(Session session);
 
+		// @optional -(void)cobrowseSessionDidLoad:(CBIOSession * _Nonnull)session;
+		[Export("cobrowseSessionDidLoad:")]
+		void SessionDidLoad(Session session);
+
 		// @optional -(_Bool)cobrowseShouldAllowTouchEvent:(CBIOTouchEvent * _Nonnull)touchEvent forSession:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShouldAllowTouchEvent:forSession:")]
 		bool ShouldAllowTouchEvent(TouchEvent touchEvent, Session session);

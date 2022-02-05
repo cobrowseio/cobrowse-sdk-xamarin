@@ -35,6 +35,11 @@ namespace Xamarin.CobrowseIO
             }
         }
 
+        public override void SessionDidLoad(Session session)
+        {
+            CrossImplementation.RaiseSessionDidLoad(session);
+        }
+
         public override void SessionDidUpdate(Session session)
         {
             CrossImplementation.RaiseSessionDidUpdate(session);

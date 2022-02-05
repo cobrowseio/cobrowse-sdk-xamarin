@@ -10,6 +10,12 @@ namespace Xamarin.CobrowseIO.Abstractions
     public interface ICobrowseIO
     {
         /// <summary>
+        /// Occurs when a session is first made available to the device,
+        /// whether by creating a 6 digit code, or via a connect request from an agent.
+        /// </summary>
+        event EventHandler<ISession> SessionDidLoad;
+
+        /// <summary>
         /// Occurs when a session is requested.
         /// </summary>
         event EventHandler<ISession> SessionDidRequest;
