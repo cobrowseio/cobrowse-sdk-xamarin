@@ -418,3 +418,6 @@ Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST.aar
 Android/CobrowseIO.Android/Jars/cobrowse-sdk-android-LATEST-javadoc.jar
 iOS/CobrowseIO.iOS/CobrowseIO.xcframework/**
 iOS/CobrowseIO.AppExtension.iOS/CobrowseIOAppExtension.xcframework/**
+
+# Google Classyshark files
+classyshark*.properties
