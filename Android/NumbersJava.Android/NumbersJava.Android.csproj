@@ -56,25 +56,7 @@
     <EmbeddedJar Include="Jars\numbers-1.4.3.jar" />
   </ItemGroup>
   <ItemGroup>
-    <!--
     <JavaSourceJar Include="Jars\numbers-1.4.3-sources.jar" />
-    
-    JavaSourceJar should be enabled, but that causes the build process to fail:
-    > ...
-    > Loading source files for package com.upokecenter.numbers...
-    > obj/Debug/javasources/numbers-1.4.3-sources/com/upokecenter/numbers/EDecimal.java:1387: error: unmappable character for encoding ASCII
-    >     * Finds the constant ??, the circumference of a circle divided by its diameter.
-    > ...
-        
-    Apparently, the JavaDoc MSBuild task (iherets from ToolTask) somehow launched 'javadoc'
-    (a Java app) with encoding set ot ASCII instead of UTF-8.
-    I wasn't able to found anything what might cause the build errors exept these threads:
-    • https://github.com/microsoft/msbuild/issues/4904
-    • https://github.com/microsoft/msbuild/pull/5043
-        
-    We have to use JAR sources and not JAR Javadoc, because the javadoc usage is broken in Xamarin:
-    • https://github.com/xamarin/xamarin-android/issues/2745
-    -->
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
