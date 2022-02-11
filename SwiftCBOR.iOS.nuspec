@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata minClientVersion="2.8.1">
         <id>SwiftCBOR.iOS</id>
-        <version>0.4.3.1</version>
+        <version>0.4.3.2-pre08</version>
         <title>SwiftCBOR.iOS</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
@@ -16,6 +16,8 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="iOS/SwiftCBOR.iOS/bin/Release/SwiftCBOR.iOS.dll" target="lib/Xamarin.iOS10" />
+        <file src="iOS/SwiftCBOR.iOS/bin/Release/SwiftCBOR.iOS.*" target="lib/Xamarin.iOS10" />
+        <file src="iOS/SwiftCBOR.iOS/bin/Release/SwiftCBOR.iOS.resources/**" target="content/SwiftCBOR.iOS.resources" />
+        <file src="iOS/SwiftCBOR.iOS/SwiftCBOR.iOS.targets" target="build/Xamarin.iOS10" />
     </files>
 </package>

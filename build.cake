@@ -142,42 +142,6 @@ Task("FindLatestIosVersions")
         GitPull(POD_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
 
-    // Starting 2.6.0, Cobrowse.io iOS SDK uses xcframework instead of regular framework
-    // This function creates a 'fat' framework which will be used in next tasks
-    void _BuildUniversal() {
-        var targetDirectory=POD_CLONE_DIRECTORY;
-        var targetFrameworkName="CobrowseIO";
-        var frameworkDirectory=$"{targetFrameworkName}.framework";
-        var xcFrameworkDirectory=$"{targetFrameworkName}.xcframework";
-
-        var iphoneFrameworkDirectory= DirectoryExists($"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}")
-            ? $"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_armv7/{frameworkDirectory}"
-            : $"{targetDirectory}/{xcFrameworkDirectory}/ios-armv7_arm64/{frameworkDirectory}";
-        var simulatorFrameworkDirectory=$"{targetDirectory}/{xcFrameworkDirectory}/ios-arm64_i386_x86_64-simulator/{frameworkDirectory}";
-
-        if (DirectoryExists($"./{targetDirectory}/{frameworkDirectory}")) {
-            DeleteDirectory($"./{targetDirectory}/{frameworkDirectory}", new DeleteDirectorySettings {
-                Recursive = true,
-                Force = true
-            });
-        }
-        CopyDirectory($"{iphoneFrameworkDirectory}", $"{targetDirectory}/{frameworkDirectory}");
-        CopyDirectory($"{simulatorFrameworkDirectory}/Modules/", $"{targetDirectory}/{frameworkDirectory}/Modules/");
-        // No suport form iOS Simulators on Apple Silicon for now
-        StartProcess(
-            "lipo",
-            new ProcessSettings {
-                Arguments = $"-remove arm64 \"{simulatorFrameworkDirectory}/{targetFrameworkName}\" -o \"{simulatorFrameworkDirectory}/{targetFrameworkName}\""
-            });
-        StartProcess(
-            "lipo", 
-            new ProcessSettings { 
-                Arguments = $"-create -output \"./{targetDirectory}/{frameworkDirectory}/{targetFrameworkName}\" \"{iphoneFrameworkDirectory}/{targetFrameworkName}\" \"{simulatorFrameworkDirectory}/{targetFrameworkName}\"" 
-            });
-    }
-
-    _BuildUniversal();
-
     cobrowseIosProject.VersionString 
         = cobrowseIosExtensionProject.VersionString
         = FindRegexMatchGroupInFile(

@@ -35,11 +35,11 @@ BindingProject[] bindingProjects = new BindingProject[] {
     },
     cobrowseIosProject = new IosBindingProject {
         AssemblyInfoFile = "./iOS/CobrowseIO.iOS/Properties/AssemblyInfo.cs",
-        FrameworkPath = "./iOS/CobrowseIO.iOS/CobrowseIO.framework"
+        FrameworkPath = "./iOS/CobrowseIO.iOS/CobrowseIO.xcframework"
     },
     cobrowseIosExtensionProject = new IosBindingProject {
         AssemblyInfoFile = "./iOS/CobrowseIO.AppExtension.iOS/Properties/AssemblyInfo.cs",
-        FrameworkPath = "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIOAppExtension.framework"
+        FrameworkPath = "./iOS/CobrowseIO.AppExtension.iOS/CobrowseIOAppExtension.xcframework"
     }
 };
 

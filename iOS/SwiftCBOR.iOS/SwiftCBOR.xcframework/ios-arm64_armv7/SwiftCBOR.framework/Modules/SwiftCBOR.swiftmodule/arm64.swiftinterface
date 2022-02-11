@@ -1,0 +1,209 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-module-flags: -target arm64-apple-ios8.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name SwiftCBOR
+import Foundation
+import Swift
+import _Concurrency
+indirect public enum CBOR : Swift.Equatable, Swift.Hashable, Swift.ExpressibleByNilLiteral, Swift.ExpressibleByIntegerLiteral, Swift.ExpressibleByStringLiteral, Swift.ExpressibleByArrayLiteral, Swift.ExpressibleByDictionaryLiteral, Swift.ExpressibleByBooleanLiteral, Swift.ExpressibleByFloatLiteral {
+  case unsignedInt(Swift.UInt64)
+  case negativeInt(Swift.UInt64)
+  case byteString([Swift.UInt8])
+  case utf8String(Swift.String)
+  case array([SwiftCBOR.CBOR])
+  case map([SwiftCBOR.CBOR : SwiftCBOR.CBOR])
+  case tagged(SwiftCBOR.CBOR.Tag, SwiftCBOR.CBOR)
+  case simple(Swift.UInt8)
+  case boolean(Swift.Bool)
+  case null
+  case undefined
+  case half(Swift.Float32)
+  case float(Swift.Float32)
+  case double(Swift.Float64)
+  case `break`
+  case date(Foundation.Date)
+  public func hash(into hasher: inout Swift.Hasher)
+  public subscript(position: SwiftCBOR.CBOR) -> SwiftCBOR.CBOR? {
+    get
+    set(x)
+  }
+  public init(nilLiteral: ())
+  public init(integerLiteral value: Swift.Int)
+  public init(extendedGraphemeClusterLiteral value: Swift.String)
+  public init(unicodeScalarLiteral value: Swift.String)
+  public init(stringLiteral value: Swift.String)
+  public init(arrayLiteral elements: SwiftCBOR.CBOR...)
+  public init(dictionaryLiteral elements: (SwiftCBOR.CBOR, SwiftCBOR.CBOR)...)
+  public init(booleanLiteral value: Swift.Bool)
+  public init(floatLiteral value: Swift.Float32)
+  public static func == (lhs: SwiftCBOR.CBOR, rhs: SwiftCBOR.CBOR) -> Swift.Bool
+  public struct Tag : Swift.RawRepresentable, Swift.Equatable, Swift.Hashable {
+    public let rawValue: Swift.UInt64
+    public init(rawValue: Swift.UInt64)
+    public var hashValue: Swift.Int {
+      get
+    }
+    public typealias RawValue = Swift.UInt64
+  }
+  public typealias ArrayLiteralElement = SwiftCBOR.CBOR
+  public typealias BooleanLiteralType = Swift.Bool
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias FloatLiteralType = Swift.Float32
+  public typealias IntegerLiteralType = Swift.Int
+  public typealias Key = SwiftCBOR.CBOR
+  public typealias StringLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
+  public typealias Value = SwiftCBOR.CBOR
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension SwiftCBOR.CBOR.Tag {
+  public static let standardDateTimeString: SwiftCBOR.CBOR.Tag
+  public static let epochBasedDateTime: SwiftCBOR.CBOR.Tag
+  public static let positiveBignum: SwiftCBOR.CBOR.Tag
+  public static let negativeBignum: SwiftCBOR.CBOR.Tag
+  public static let decimalFraction: SwiftCBOR.CBOR.Tag
+  public static let bigfloat: SwiftCBOR.CBOR.Tag
+  public static let expectedConversionToBase64URLEncoding: SwiftCBOR.CBOR.Tag
+  public static let expectedConversionToBase64Encoding: SwiftCBOR.CBOR.Tag
+  public static let expectedConversionToBase16Encoding: SwiftCBOR.CBOR.Tag
+  public static let encodedCBORDataItem: SwiftCBOR.CBOR.Tag
+  public static let uri: SwiftCBOR.CBOR.Tag
+  public static let base64Url: SwiftCBOR.CBOR.Tag
+  public static let base64: SwiftCBOR.CBOR.Tag
+  public static let regularExpression: SwiftCBOR.CBOR.Tag
+  public static let mimeMessage: SwiftCBOR.CBOR.Tag
+  public static let uuid: SwiftCBOR.CBOR.Tag
+  public static let selfDescribeCBOR: SwiftCBOR.CBOR.Tag
+}
+public enum CBORError : Swift.Error {
+  case unfinishedSequence
+  case wrongTypeInsideSequence
+  case tooLongSequence
+  case incorrectUTF8String
+  public static func == (a: SwiftCBOR.CBORError, b: SwiftCBOR.CBORError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension SwiftCBOR.CBOR {
+  public static func decode(_ input: [Swift.UInt8]) throws -> SwiftCBOR.CBOR?
+}
+public class CBORDecoder {
+  public init(stream: SwiftCBOR.CBORInputStream)
+  public init(input: Swift.ArraySlice<Swift.UInt8>)
+  public init(input: [Swift.UInt8])
+  public func decodeItem() throws -> SwiftCBOR.CBOR?
+  @objc deinit
+}
+public protocol CBOREncodable : Swift.Hashable {
+  func encode() -> [Swift.UInt8]
+}
+extension SwiftCBOR.CBOR : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.Int : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.UInt : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.UInt8 : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.UInt16 : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.UInt64 : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.UInt32 : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.String : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.Float : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.Double : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.Bool : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Swift.Array where Element : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Foundation.Date : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension Foundation.Data : SwiftCBOR.CBOREncodable {
+  public func encode() -> [Swift.UInt8]
+}
+extension SwiftCBOR.CBOR {
+  public static func encode<T>(_ value: T) -> [Swift.UInt8] where T : SwiftCBOR.CBOREncodable
+  public static func encode<T>(_ array: [T], asByteString: Swift.Bool = false) -> [Swift.UInt8] where T : SwiftCBOR.CBOREncodable
+  public static func encode<A, B>(_ dict: [A : B]) -> [Swift.UInt8] where A : SwiftCBOR.CBOREncodable, B : SwiftCBOR.CBOREncodable
+  public static func encodeUInt8(_ x: Swift.UInt8) -> [Swift.UInt8]
+  public static func encodeUInt16(_ x: Swift.UInt16) -> [Swift.UInt8]
+  public static func encodeUInt32(_ x: Swift.UInt32) -> [Swift.UInt8]
+  public static func encodeUInt64(_ x: Swift.UInt64) -> [Swift.UInt8]
+  public static func encodeNegativeInt(_ x: Swift.Int64) -> [Swift.UInt8]
+  public static func encodeByteString(_ bs: [Swift.UInt8]) -> [Swift.UInt8]
+  public static func encodeData(_ data: Foundation.Data) -> [Swift.UInt8]
+  public static func encodeString(_ str: Swift.String) -> [Swift.UInt8]
+  public static func encodeArray<T>(_ arr: [T]) -> [Swift.UInt8] where T : SwiftCBOR.CBOREncodable
+  public static func encodeMap<A, B>(_ map: [A : B]) -> [Swift.UInt8] where A : SwiftCBOR.CBOREncodable, B : SwiftCBOR.CBOREncodable
+  public static func encodeMap<A>(_ map: [A : Any?]) throws -> [Swift.UInt8] where A : SwiftCBOR.CBOREncodable
+  public static func encodeTagged<T>(tag: SwiftCBOR.CBOR.Tag, value: T) -> [Swift.UInt8] where T : SwiftCBOR.CBOREncodable
+  public static func encodeSimpleValue(_ x: Swift.UInt8) -> [Swift.UInt8]
+  public static func encodeNull() -> [Swift.UInt8]
+  public static func encodeUndefined() -> [Swift.UInt8]
+  public static func encodeBreak() -> [Swift.UInt8]
+  public static func encodeFloat(_ x: Swift.Float) -> [Swift.UInt8]
+  public static func encodeDouble(_ x: Swift.Double) -> [Swift.UInt8]
+  public static func encodeBool(_ x: Swift.Bool) -> [Swift.UInt8]
+  public static func encodeArrayStreamStart() -> [Swift.UInt8]
+  public static func encodeMapStreamStart() -> [Swift.UInt8]
+  public static func encodeStringStreamStart() -> [Swift.UInt8]
+  public static func encodeByteStringStreamStart() -> [Swift.UInt8]
+  public static func encodeStreamEnd() -> [Swift.UInt8]
+  public static func encodeArrayChunk<T>(_ chunk: [T]) -> [Swift.UInt8] where T : SwiftCBOR.CBOREncodable
+  public static func encodeMapChunk<A, B>(_ map: [A : B]) -> [Swift.UInt8] where A : SwiftCBOR.CBOREncodable, B : SwiftCBOR.CBOREncodable
+  public static func encodeDate(_ date: Foundation.Date) -> [Swift.UInt8]
+  public static func encodeAny(_ any: Any?) throws -> [Swift.UInt8]
+}
+public enum CBOREncoderError : Swift.Error {
+  case invalidType
+  public static func == (a: SwiftCBOR.CBOREncoderError, b: SwiftCBOR.CBOREncoderError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc(XamarinSwiftHelper) open class XamarinSwiftHelper : ObjectiveC.NSObject {
+  open func getValue() -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+public protocol CBORInputStream {
+  mutating func popByte() throws -> Swift.UInt8
+  mutating func popBytes(_ n: Swift.Int) throws -> Swift.ArraySlice<Swift.UInt8>
+}
+final public class CodableCBORDecoder {
+  public init()
+  final public var userInfo: [Swift.CodingUserInfoKey : Any]
+  final public func decode<T>(_ type: T.Type, from data: Foundation.Data) throws -> T where T : Swift.Decodable
+  @objc deinit
+}
+public class CodableCBOREncoder {
+  public init()
+  public func encode(_ value: Swift.Encodable) throws -> Foundation.Data
+  @objc deinit
+}
+extension SwiftCBOR.CBORError : Swift.Equatable {}
+extension SwiftCBOR.CBORError : Swift.Hashable {}
+extension SwiftCBOR.CBOREncoderError : Swift.Equatable {}
+extension SwiftCBOR.CBOREncoderError : Swift.Hashable {}

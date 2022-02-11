@@ -84,9 +84,15 @@
   <ItemGroup>
     <LibraryProjectZip Include="Jars\cobrowse-sdk-android-LATEST.aar" />
   </ItemGroup>
+  <!--
+  Xamarin.Android 11.2 deprecated the @(JavaDocJar) build action, 
+  and .NET 6 drops support of it completely.
+  https://github.com/xamarin/java.interop/issues/847
+
   <ItemGroup>
     <JavaDocJar Include="Jars\cobrowse-sdk-android-LATEST-javadoc.jar" />
   </ItemGroup>
+  -->
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,8 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>CobrowseIO.AppExtension.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-    <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary/tree/master/CobrowseIOAppExtension.framework</Description>
+    <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary/tree/master/CobrowseIOAppExtension.xcframework</Description>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,7 +44,7 @@
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="CobrowseIOAppExtension.framework">
+    <NativeReference Include="CobrowseIOAppExtension.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
@@ -57,6 +58,9 @@
       <Project>{89690D1D-E492-4302-A262-1125807A9CF7}</Project>
       <Name>SwiftCBOR.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CobrowseIO.AppExtension.iOS.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

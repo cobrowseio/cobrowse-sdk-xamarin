@@ -12,6 +12,7 @@
     <AssemblyName>Starscream.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Description>https://github.com/daltoniam/Starscream</Description>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,10 +47,13 @@
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="Starscream.framework">
+    <NativeReference Include="Starscream.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Starscream.iOS.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

@@ -12,6 +12,7 @@
     <AssemblyName>CobrowseIO.iOS</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <Description>https://github.com/cobrowseio/cobrowse-sdk-ios-binary</Description>
+    <NoBindingEmbedding>true</NoBindingEmbedding>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,7 +45,7 @@
     <Compile Include="CobrowseIO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="CobrowseIO.framework">
+    <NativeReference Include="CobrowseIO.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
@@ -62,6 +63,9 @@
       <Project>{89690D1D-E492-4302-A262-1125807A9CF7}</Project>
       <Name>SwiftCBOR.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CobrowseIO.Xamarin.targets" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
 </Project>

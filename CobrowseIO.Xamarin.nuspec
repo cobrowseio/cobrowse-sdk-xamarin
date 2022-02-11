@@ -26,8 +26,8 @@
                 <dependency id="Plugin.CurrentActivity" version="2.1.0.4" />
             </group>
             <group targetFramework="Xamarin.iOS10">
-                <dependency id="Starscream.iOS" version="3.1.1" />
-                <dependency id="SwiftCBOR.iOS" version="0.4.3.1" />
+                <dependency id="Starscream.iOS" version="3.1.1.1-pre08" />
+                <dependency id="SwiftCBOR.iOS" version="0.4.3.2-pre08" />
             </group>
             <group targetFramework="netstandard1.0">
                 <dependency id="NETStandard.Library" version="1.6.1" />
@@ -45,8 +45,9 @@
         <file src="XamarinSDK/CobrowseIO.Xamarin.Android/bin/Release/CobrowseIO.Xamarin.*" target="lib/MonoAndroid11.0" />
 
         <!-- iOS-specific files -->
-        <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.dll" target="lib/Xamarin.iOS10" />
-        <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.pdb" target="lib/Xamarin.iOS10" />
+        <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.*" target="lib/Xamarin.iOS10" />
+        <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.resources/**" target="content/CobrowseIO.iOS.resources" />
+        <file src="iOS/CobrowseIO.iOS/CobrowseIO.Xamarin.targets" target="build/Xamarin.iOS10" />
         <file src="XamarinSDK/CobrowseIO.Xamarin.iOS/bin/Release/CobrowseIO.Xamarin.*" target="lib/Xamarin.iOS10" />
 
         <!-- Package icon -->
