@@ -10032,10 +10032,7 @@ namespace SampleApp.Forms.Android
 			public const int abc_config_actionMenuItemAllCaps = 2130968578;
 			
 			// aapt resource value: 0x7F040003
-			public const int cobrowse_enable_full_device_control = 2130968579;
-			
-			// aapt resource value: 0x7F040004
-			public const int mtrl_btn_textappearance_all_caps = 2130968580;
+			public const int mtrl_btn_textappearance_all_caps = 2130968579;
 			
 			static Boolean()
 			{

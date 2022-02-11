@@ -48,7 +48,9 @@ namespace SampleApp.Android
         }
     }
 
-    public class CustomCobrowseDelegate : Java.Lang.Object, CobrowseIO.ISessionRequestDelegate
+    public class CustomCobrowseDelegate : Java.Lang.Object,
+        CobrowseIO.ISessionRequestDelegate,
+        CobrowseIO.ISessionLoadDelegate
     {
         public CustomCobrowseDelegate()
         {
@@ -63,6 +65,11 @@ namespace SampleApp.Android
         {
             Debug.WriteLine("HandleSessionRequest");
             session.Activate(callback: null);
+        }
+
+        public void SessionDidLoad(Session session)
+        {
+            Debug.WriteLine("SessionDidLoad");
         }
 
         public void SessionDidEnd(Session session)

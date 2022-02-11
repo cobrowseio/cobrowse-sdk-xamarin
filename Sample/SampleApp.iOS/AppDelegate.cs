@@ -90,6 +90,11 @@ namespace SampleApp.iOS
             return indicator;
         }
 
+        public override void SessionDidLoad(Session session)
+        {
+            Debug.WriteLine("SessionDidLoad");
+        }
+
         public override void SessionDidUpdate(Session session)
         {
             Debug.WriteLine("CobrowseSessionDidUpdate");
