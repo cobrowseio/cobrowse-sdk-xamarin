@@ -1550,9 +1550,6 @@ namespace SampleApp.Android
 			// aapt resource value: 0x7F030002
 			public const int abc_config_actionMenuItemAllCaps = 2130903042;
 			
-			// aapt resource value: 0x7F030003
-			public const int cobrowse_enable_full_device_control = 2130903043;
-			
 			static Boolean()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
