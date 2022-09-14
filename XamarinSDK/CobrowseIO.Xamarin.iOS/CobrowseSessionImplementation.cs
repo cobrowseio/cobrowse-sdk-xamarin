@@ -117,9 +117,11 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <inheritdoc/>
+        [Obsolete("Use FullDeviceState instead")]
         public bool FullDevice => _platformSession.FullDevice;
 
         /// <inheritdoc/>
+        [Obsolete("Use SetFullDeviceState instead")]
         public void SetFullDevice(bool value, CobrowseCallback callback)
         {
             _platformSession.SetFullDevice(value, (NSError e, Session session) =>
@@ -127,6 +129,57 @@ namespace Xamarin.CobrowseIO
                 callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
+
+        /// <inheritdoc/>
+        public Abstractions.FullDeviceState FullDeviceState
+        {
+            get
+            {
+                switch (_platformSession.FullDeviceState)
+                {
+                    case Xamarin.CobrowseIO.FullDeviceState.Off:
+                        return Abstractions.FullDeviceState.Off;
+                    case Xamarin.CobrowseIO.FullDeviceState.Requested:
+                        return Abstractions.FullDeviceState.Requested;
+                    case Xamarin.CobrowseIO.FullDeviceState.Rejected:
+                        return Abstractions.FullDeviceState.Rejected;
+                    case Xamarin.CobrowseIO.FullDeviceState.On:
+                        return Abstractions.FullDeviceState.On;
+                    default:
+                        return default;
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        public void SetFullDeviceState(Abstractions.FullDeviceState state, CobrowseCallback callback)
+        {
+            Xamarin.CobrowseIO.FullDeviceState toBeSet;
+            switch (state)
+            {
+                case Abstractions.FullDeviceState.Off:
+                    toBeSet = Xamarin.CobrowseIO.FullDeviceState.Off;
+                    break;
+                case Abstractions.FullDeviceState.Requested:
+                    toBeSet = Xamarin.CobrowseIO.FullDeviceState.Requested;
+                    break;
+                case Abstractions.FullDeviceState.Rejected:
+                    toBeSet = Xamarin.CobrowseIO.FullDeviceState.Rejected;
+                    break;
+                case Abstractions.FullDeviceState.On:
+                    toBeSet = Xamarin.CobrowseIO.FullDeviceState.On;
+                    break;
+                default:
+                    toBeSet = default;
+                    break;
+            }
+
+            _platformSession.SetFullDeviceState(toBeSet, (NSError e, Session session) =>
+            {
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
+            });
+        }
+
 
         /// <summary>
         /// Activates the session.

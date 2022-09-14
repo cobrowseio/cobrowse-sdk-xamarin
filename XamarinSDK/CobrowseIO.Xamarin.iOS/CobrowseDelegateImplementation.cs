@@ -35,6 +35,17 @@ namespace Xamarin.CobrowseIO
             }
         }
 
+        /*
+         * TODO implement in the next version
+        public override void HandleFullDeviceRequest(Session session)
+        {
+            if (!CrossImplementation.RaiseFullDeviceRequest(session))
+            {
+                session.SetFullDeviceState(FullDeviceState.On, callback: null);
+            }
+        }
+         */
+
         public override void SessionDidLoad(Session session)
         {
             CrossImplementation.RaiseSessionDidLoad(session);

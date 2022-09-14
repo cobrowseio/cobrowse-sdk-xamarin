@@ -12,6 +12,7 @@ namespace Xamarin.CobrowseIO
         CobrowseIO.ISessionRequestDelegate,
         CobrowseIO.IRemoteControlRequestDelegate,
         CobrowseIO.ISessionLoadDelegate
+        // TODO implement in the next version CobrowseIO.IFullDeviceRequestDelegate
     {
         private CobrowseIOImplementation CrossImplementation
             => (CobrowseIOImplementation)Xamarin.CobrowseIO.Abstractions.CobrowseIO.Instance;
@@ -55,5 +56,13 @@ namespace Xamarin.CobrowseIO
         {
             CrossImplementation.RaiseSessionDidEnd(session);
         }
+
+        /*
+         * TODO implement in the next version
+        public void HandleFullDeviceRequest(Activity activity, Session session)
+        {
+            CrossImplementation.RaiseFullDeviceRequest(session);
+        }
+         */
     }
 }
