@@ -53,6 +53,13 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setRemoteControl']" name="managedName">_SetRemoteControl</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setRemoteControl']" name="visibility">internal</attr>
     
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session.FullDeviceState']" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session.FullDeviceState']" name="managedName">FullDeviceStateJava</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDeviceState']" name="managedName">_FullDeviceState</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDeviceState']" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setFullDeviceState']" name="managedName">_SetFullDeviceState</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setFullDeviceState']" name="visibility">internal</attr>
+
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->
     <attr 

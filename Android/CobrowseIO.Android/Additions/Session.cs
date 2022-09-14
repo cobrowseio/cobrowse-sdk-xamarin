@@ -15,12 +15,41 @@ namespace Xamarin.CobrowseIO
             this.End(new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
 
+        #region Full device
+
+        [Obsolete("Use FullDeviceState instead")]
         public bool FullDevice => this._FullDevice().BooleanValue();
 
+        [Obsolete("Use SetFullDeviceState instead")]
         public void SetFullDevice(bool value, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
         {
             this.SetFullDevice(value, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
+
+        [GeneratedEnum]
+        public Xamarin.CobrowseIO.FullDeviceState FullDeviceState
+        {
+            get
+            {
+                return this._FullDeviceState().ToManagedEnum();
+            }
+        }
+
+        public void SetFullDeviceState([GeneratedEnum] Xamarin.CobrowseIO.FullDeviceState state, ICallback callback)
+        {
+            Xamarin.CobrowseIO.Session.FullDeviceStateJava javaState = state.ToJavaEnum();
+            this._SetFullDeviceState(javaState, callback);
+        }
+
+        public void SetFullDeviceState([GeneratedEnum] Xamarin.CobrowseIO.FullDeviceState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        {
+            Xamarin.CobrowseIO.Session.FullDeviceStateJava javaState = state.ToJavaEnum();
+            this._SetFullDeviceState(javaState, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
+        }
+
+        #endregion
+
+        #region Remote control
 
         [GeneratedEnum]
         public Xamarin.CobrowseIO.RemoteControlState RemoteControl
@@ -42,5 +71,7 @@ namespace Xamarin.CobrowseIO
             Xamarin.CobrowseIO.Session.RemoteControlState javaState = state.ToJavaEnum();
             this._SetRemoteControl(javaState, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
+
+        #endregion
     }
 }
