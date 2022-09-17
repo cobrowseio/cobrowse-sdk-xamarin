@@ -35,13 +35,6 @@ namespace Xamarin.CobrowseIO.Abstractions
         /// </summary>
         event EventHandler<ISession> RemoteControlRequest;
 
-        /* TODO implement in the next version
-        /// <summary>
-        /// Occurs when an agent requests full device screensharing.
-        /// </summary>
-        event EventHandler<ISession> FullDeviceRequest;
-        */
-
         /// <summary>
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>

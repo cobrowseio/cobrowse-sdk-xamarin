@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Runtime;
+using Xamarin.CobrowseIO.UI;
 
 namespace Xamarin.CobrowseIO
 {
@@ -12,7 +13,6 @@ namespace Xamarin.CobrowseIO
         CobrowseIO.ISessionRequestDelegate,
         CobrowseIO.IRemoteControlRequestDelegate,
         CobrowseIO.ISessionLoadDelegate
-        // TODO implement in the next version CobrowseIO.IFullDeviceRequestDelegate
     {
         private CobrowseIOImplementation CrossImplementation
             => (CobrowseIOImplementation)Xamarin.CobrowseIO.Abstractions.CobrowseIO.Instance;
@@ -30,7 +30,7 @@ namespace Xamarin.CobrowseIO
         {
             if (!CrossImplementation.RaiseSessionDidRequest(session))
             {
-                session.Activate(callback: null);
+                new SessionConsentDialogFragment().Show(activity);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Xamarin.CobrowseIO
         {
             if (!CrossImplementation.RaiseRemoteControlRequest(session))
             {
-                session.SetRemoteControl(RemoteControlState.On, callback: null);
+                new RemoteControlConsentDialogFragment().Show(activity);
             }
         }
 
@@ -56,13 +56,5 @@ namespace Xamarin.CobrowseIO
         {
             CrossImplementation.RaiseSessionDidEnd(session);
         }
-
-        /*
-         * TODO implement in the next version
-        public void HandleFullDeviceRequest(Activity activity, Session session)
-        {
-            CrossImplementation.RaiseFullDeviceRequest(session);
-        }
-         */
     }
 }

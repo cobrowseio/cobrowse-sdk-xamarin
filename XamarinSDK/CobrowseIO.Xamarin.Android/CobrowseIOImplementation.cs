@@ -88,22 +88,6 @@ namespace Xamarin.CobrowseIO
             return false;
         }
 
-        /* TODO implement in the next version
-        /// <inheritdoc/>
-        public event EventHandler<ISession> FullDeviceRequest;
-
-        internal bool RaiseFullDeviceRequest(Session session)
-        {
-            var fullDeviceRequest = FullDeviceRequest;
-            if (fullDeviceRequest != null)
-            {
-                fullDeviceRequest(this, CobrowseSessionImplementation.TryCreate(session));
-                return true;
-            }
-            return false;
-        }
-        */
-
         /// <summary>
         /// Occurs when a session is first made available to the device,
         /// whether by creating a 6 digit code, or via a connect request from an agent.
