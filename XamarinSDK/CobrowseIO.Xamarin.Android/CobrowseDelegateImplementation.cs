@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Runtime;
+using Xamarin.CobrowseIO.UI;
 
 namespace Xamarin.CobrowseIO
 {
@@ -29,7 +30,7 @@ namespace Xamarin.CobrowseIO
         {
             if (!CrossImplementation.RaiseSessionDidRequest(session))
             {
-                session.Activate(callback: null);
+                new SessionConsentDialogFragment().Show(activity);
             }
         }
 
@@ -37,7 +38,7 @@ namespace Xamarin.CobrowseIO
         {
             if (!CrossImplementation.RaiseRemoteControlRequest(session))
             {
-                session.SetRemoteControl(RemoteControlState.On, callback: null);
+                new RemoteControlConsentDialogFragment().Show(activity);
             }
         }
 

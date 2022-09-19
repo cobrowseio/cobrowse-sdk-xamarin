@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using UIKit;
 
 namespace Xamarin.CobrowseIO
 {
@@ -23,7 +24,30 @@ namespace Xamarin.CobrowseIO
         {
             if (!CrossImplementation.RaiseSessionDidRequest(session))
             {
-                session.Activate(callback: null);
+                var alert = UIAlertController.Create(
+                    title: "SessionRequestConsentPromptTitle".GetLocalizedString("Support Request"),
+                    message: "SessionRequestConsentPromptMessage".GetLocalizedString("A support agent would like to use this app with you. Do you wish to allow this?"),
+                    preferredStyle: UIAlertControllerStyle.Alert);
+                UIAlertAction allow = UIAlertAction.Create(
+                    title: "SessionRequestConsentPromptAllow".GetLocalizedString("Allow"),
+                    style: UIAlertActionStyle.Default,
+                    handler: e =>
+                    {
+                        session.Activate(callback: null);
+                    });
+                UIAlertAction deny = UIAlertAction.Create(
+                    title: "SessionRequestConsentPromptDeny".GetLocalizedString("Deny"),
+                    style: UIAlertActionStyle.Cancel,
+                    handler: e =>
+                    {
+                        session.End(callback: null);
+                    });
+                alert.AddAction(allow);
+                alert.AddAction(deny);
+
+                UIViewControllerExtensions
+                    .GetVisibleViewController(null)
+                    .PresentViewController(alert, animated: true, completionHandler: null);
             }
         }
 
@@ -31,7 +55,30 @@ namespace Xamarin.CobrowseIO
         {
             if (!CrossImplementation.RaiseRemoteControlRequest(session))
             {
-                session.SetRemoteControl(RemoteControlState.On, callback: null);
+                var alert = UIAlertController.Create(
+                    title: "RemoteControlConsentPromptTitle".GetLocalizedString("Remote Control Request"),
+                    message: "RemoteControlConsentPromptMessage".GetLocalizedString("A support agent would like to remotely control this app. Do you wish to allow this?"),
+                    preferredStyle: UIAlertControllerStyle.Alert);
+                UIAlertAction allow = UIAlertAction.Create(
+                    title: "RemoteControlConsentPromptAllow".GetLocalizedString("Allow"),
+                    style: UIAlertActionStyle.Default,
+                    handler: e =>
+                    {
+                        session.SetRemoteControl(RemoteControlState.On, callback: null);
+                    });
+                UIAlertAction deny = UIAlertAction.Create(
+                    title: "RemoteControlConsentPromptDeny".GetLocalizedString("Deny"),
+                    style: UIAlertActionStyle.Cancel,
+                    handler: e =>
+                    {
+                        session.SetRemoteControl(RemoteControlState.Rejected, callback: null);
+                    });
+                alert.AddAction(allow);
+                alert.AddAction(deny);
+
+                UIViewControllerExtensions
+                    .GetVisibleViewController(null)
+                    .PresentViewController(alert, animated: true, completionHandler: null);
             }
         }
 

@@ -53,6 +53,7 @@
     <Compile Include="NSErrorExtensions.cs" />
     <Compile Include="CobrowseDelegateImplementation.cs" />
     <Compile Include="AgentImplementation.cs" />
+    <Compile Include="CobrowseLocalizedStringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj">

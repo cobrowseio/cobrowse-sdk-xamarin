@@ -1,4 +1,6 @@
-﻿namespace Xamarin.CobrowseIO.Abstractions
+﻿using System;
+
+namespace Xamarin.CobrowseIO.Abstractions
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io session.
@@ -58,12 +60,24 @@
         /// <summary>
         /// Gets a value indicating if the session is in full-device mode.
         /// </summary>
+        [Obsolete("Use FullDeviceState instead")]
         bool FullDevice { get; }
 
         /// <summary>
         /// Enables or disables full-device mode.
         /// </summary>
+        [Obsolete("Use SetFullDeviceState instead")]
         void SetFullDevice(bool value, CobrowseCallback callback);
+
+        /// <summary>
+        /// Gets the current full device status.
+        /// </summary>
+        FullDeviceState FullDeviceState { get; }
+
+        /// <summary>
+        /// Enable or disables full device.
+        /// </summary>
+        void SetFullDeviceState(FullDeviceState value, CobrowseCallback callback);
 
         /// <summary>
         /// Activates the session.

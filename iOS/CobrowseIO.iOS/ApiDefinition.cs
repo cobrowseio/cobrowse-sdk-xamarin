@@ -158,11 +158,21 @@ namespace Xamarin.CobrowseIO
 
 		// -(_Bool)fullDevice;
 		[Export("fullDevice")]
+		[Obsolete("Use FullDeviceState instead")]
 		bool FullDevice { get; }
 
 		// -(void)setFullDevice:(BOOL)value callback:(CBErrorSessionBlock _Nullable)callback;
 		[Export("setFullDevice:callback:")]
+		[Obsolete("Use SetFullDeviceState instead")]
 		void SetFullDevice(bool value, [NullAllowed] CBErrorSessionBlock callback);
+
+		// -(CBIOFullDeviceState) fullDeviceState;
+		[Export("fullDeviceState")]
+		FullDeviceState FullDeviceState { get; }
+
+		// -(void)setFullDeviceState:(CBIOFullDeviceState)state callback:(CBErrorSessionBlock _Nullable) callback;
+		[Export("setFullDeviceState:callback:")]
+		void SetFullDeviceState(FullDeviceState state, [NullAllowed] CBErrorSessionBlock callback);
 
 		// -(CBIORemoteControlState)remoteControl;
 		[Export("remoteControl")]
@@ -237,6 +247,10 @@ namespace Xamarin.CobrowseIO
 		// @optional -(void)cobrowseHandleRemoteControlRequest:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseHandleRemoteControlRequest:")]
 		void HandleRemoteControlRequest(Session session);
+
+		// @optional -(void) cobrowseHandleFullDeviceRequest: (CBIOSession * _Nonnull) session;
+		[Export("cobrowseHandleFullDeviceRequest:")]
+		void HandleFullDeviceRequest(Session session);
 
 		// @optional -(void)cobrowseShowSessionControls:(CBIOSession * _Nonnull)session;
 		[Export("cobrowseShowSessionControls:")]
