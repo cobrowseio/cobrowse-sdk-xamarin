@@ -61,5 +61,14 @@ namespace SampleApp.Forms.iOS
 
             return nativeIndicator;
         }
+
+        /*
+         * If you're overriding HandleFullDeviceRequest you become responsible
+         * to show RPSystemBroadcastPickerView and ask user to start full-device broadcasting.
+        public override void HandleFullDeviceRequest(Session session)
+        {
+            session.SetFullDeviceState(FullDeviceState.On, callback: null);
+        }
+        */
     }
 }

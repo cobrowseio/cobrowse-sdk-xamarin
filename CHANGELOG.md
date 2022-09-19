@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.5.0] - 2022-09-19
+
+- Android SDK requires targeting Android 12 (API 31)
+- New API to allow customization of full device request behavior
+- New full device state API
+- Android Native SDK [`2.23.0`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md#2230-2022-09-06)
+- iOS Native SDK [`2.21.2`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md#2212-2022-08-29)
+
 ## [3.4.0] - 2022-02-11
 
 **Special Consideration**
@@ -8,8 +16,8 @@ Due to recent Google Play Store policy changes regarding use of the Accessibilit
 
 - iOS SDK now uses XCFramework instead of a single universal framework
 - Added delegate method that's called the first time a session is fetched from the server
-- Android Native SDK [2.18.1](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md#2181-2022-02-07)
-- iOS Native SDK [2.17.1](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md#2171-2022-02-07)
+- Android Native SDK [`2.18.1`](https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/CHANGELOG.md#2181-2022-02-07)
+- iOS Native SDK [`2.17.1`](https://github.com/cobrowseio/cobrowse-sdk-ios-binary/blob/master/CHANGELOG.md#2171-2022-02-07)
 
 ## [3.3.0] - 2021-11-28
 - SDK now targets Android 11 (API 30)

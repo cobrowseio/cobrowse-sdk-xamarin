@@ -10,7 +10,8 @@ using XView = Xamarin.Forms.View;
 
 namespace SampleApp.Forms.Android
 {
-    public class CustomOverlayCobrowseDelegate : CobrowseDelegateImplementation,
+    public class CustomOverlayCobrowseDelegate
+        : CobrowseDelegateImplementation,
         CobrowseIO.ISessionControlsDelegate
     {
         public CustomOverlayCobrowseDelegate()
@@ -77,5 +78,14 @@ namespace SampleApp.Forms.Android
             rootFrameLayout.RemoveView(_overlayIndicator);
             _overlayIndicator = null;
         }
+
+        /*
+         * If you're overriding HandleFullDeviceRequest you become responsible
+         * to update the session full-device state.
+        public void HandleFullDeviceRequest(Activity activity, Session session)
+        {
+            session.SetFullDeviceState(FullDeviceState.On, callback: null);
+        }
+         */
     }
 }

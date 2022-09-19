@@ -29,36 +29,28 @@ namespace SampleApp.Forms
 
         protected override void OnStart()
         {
-            Subscribe();
-        }
-
-        protected override void OnSleep()
-        {
-            Unsubscribe();
-        }
-
-        protected override void OnResume()
-        {
-            Subscribe();
-        }
-
-        private void Subscribe()
-        {
             CobrowseIO.Instance.SessionDidLoad += OnCobrowseSessionDidLoad;
-            CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
-            CobrowseIO.Instance.RemoteControlRequest += OnRemoteControlRequest;
-        }
+            CobrowseIO.Instance.SessionDidUpdate += OnCobrowseSessionDidUpdate;
+            CobrowseIO.Instance.SessionDidEnd += OnCobrowseSessionDidEnd;
 
-        private void Unsubscribe()
-        {
-            CobrowseIO.Instance.SessionDidLoad -= OnCobrowseSessionDidLoad;
-            CobrowseIO.Instance.SessionDidRequest -= OnCobrowseSessionDidRequest;
-            CobrowseIO.Instance.RemoteControlRequest -= OnRemoteControlRequest;
+            CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
+
+            CobrowseIO.Instance.RemoteControlRequest += OnRemoteControlRequest;
         }
 
         private void OnCobrowseSessionDidLoad(object sender, ISession session)
         {
             Debug.WriteLine("Session loaded");
+        }
+
+        private void OnCobrowseSessionDidUpdate(object sender, ISession session)
+        {
+            Debug.WriteLine("Session updated");
+        }
+
+        private void OnCobrowseSessionDidEnd(object sender, ISession session)
+        {
+            Debug.WriteLine("Session ended");
         }
 
         private async void OnCobrowseSessionDidRequest(object sender, ISession session)

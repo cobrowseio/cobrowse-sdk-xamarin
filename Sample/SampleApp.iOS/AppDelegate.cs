@@ -116,6 +116,33 @@ namespace SampleApp.iOS
                 cobrowseVc.SessionDidEnd(session);
             }
         }
+
+        /*
+         * If you're overriding HandleSessionRequest you become responsible
+         * to activate the session.
+        public override void HandleSessionRequest(Session session)
+        {
+            session.Activate(callback: null);
+        }
+         */
+
+        /*
+         * If you're overriding HandleRemoteControlRequest you become responsible
+         * to update the session remote-control state.
+        public override void HandleRemoteControlRequest(Session session)
+        {
+            session.SetRemoteControl(RemoteControlState.On, callback: null);
+        }
+         */
+
+        /*
+         * If you're overriding HandleFullDeviceRequest you become responsible
+         * to show RPSystemBroadcastPickerView and ask user to start full-device broadcasting.
+        public override void HandleFullDeviceRequest(Session session)
+        {
+            session.SetFullDeviceState(FullDeviceState.On, callback: null);
+        }
+         */
     }
 }
 

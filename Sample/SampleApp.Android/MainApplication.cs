@@ -49,8 +49,10 @@ namespace SampleApp.Android
     }
 
     public class CustomCobrowseDelegate : Java.Lang.Object,
-        CobrowseIO.ISessionRequestDelegate,
+        // CobrowseIO.ISessionRequestDelegate,
         CobrowseIO.ISessionLoadDelegate
+        // CobrowseIO.IRemoteControlRequestDelegate,
+        // CobrowseIO.IFullDeviceRequestDelegate
     {
         public CustomCobrowseDelegate()
         {
@@ -61,11 +63,15 @@ namespace SampleApp.Android
         {
         }
 
+        /*
+         * If you're overriding HandleSessionRequest you become responsible
+         * to activate the session.
         public void HandleSessionRequest(Activity activity, Session session)
         {
             Debug.WriteLine("HandleSessionRequest");
             session.Activate(callback: null);
         }
+         */
 
         public void SessionDidLoad(Session session)
         {
@@ -81,5 +87,23 @@ namespace SampleApp.Android
         {
             Debug.WriteLine("SessionDidUpdate");
         }
+
+        /*
+         * If you're overriding HandleRemoteControlRequest you become responsible
+         * to update the session remote-control state.
+        public void HandleRemoteControlRequest(Activity activity, Session session)
+        {
+            session.SetRemoteControl(RemoteControlState.On, callback: null);
+        }
+         */
+
+        /*
+         * If you're overriding HandleFullDeviceRequest you become responsible
+         * to update the session full-device state.
+        public void HandleFullDeviceRequest(Activity activity, Session session)
+        {
+            session.SetFullDeviceState(FullDeviceState.On, callback: null);
+        }
+         */
     }
 }
