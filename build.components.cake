@@ -103,9 +103,11 @@ string GetCobrowseNuGetVersion() {
 }
 
 string CalculateNextNuGetVersion() {
-    var packageList = NuGetList(COBROWSE_NUGET_PACKAGE_ID, new NuGetListSettings { AllVersions = true, Prerelease = true });
+    // Previously a pre-release version was calculated by increasing `-pre` suffix of the last published pre-release package.
+    // However, because Github Packages does not support `nuget list` API there is no easy way to find the last pre-release version,
+    // so the build script calculates a `-pre` suffix from current UTC time.
+    var packageList = NuGetList(COBROWSE_NUGET_PACKAGE_ID, new NuGetListSettings { AllVersions = true, Prerelease = false });
     Version currentVersion = default;
-    int currentVersionSuffix = default;
     foreach (NuGetListItem package in packageList)
     {
         if (package.Name != COBROWSE_NUGET_PACKAGE_ID)
@@ -113,28 +115,11 @@ string CalculateNextNuGetVersion() {
             continue;
         }
         Information("Found package {0}, version {1}", package.Name, package.Version);
-        if (package.Version.Contains("-pre"))
+        Version packageVersion = new Version(package.Version);
+        if (currentVersion == default /* Not initialized */
+            || currentVersion < packageVersion /* Older version */ )
         {
-            Version packageVersion = new Version(package.Version.Split("-pre")[0]);
-            int packageSuffix = int.Parse(package.Version.Split("-pre")[1]);
-            if (currentVersion == default /* Not initialized */
-                || currentVersion < packageVersion /* Older version */
-                || (currentVersion == packageVersion && currentVersionSuffix != default && currentVersionSuffix < packageSuffix) /* Older pre-version */)
-            {
-                currentVersion = packageVersion;
-                currentVersionSuffix = packageSuffix;
-            }
-        }
-        else
-        {
-            Version packageVersion = new Version(package.Version);
-            if (currentVersion == default /* Not initialized */
-                || currentVersion < packageVersion /* Older version */
-                || (currentVersion == packageVersion && currentVersionSuffix != default) /* Older pre-version */)
-            {
-                currentVersion = packageVersion;
-                currentVersionSuffix = default;
-            }
+            currentVersion = packageVersion;
         }
     }
 
@@ -143,14 +128,8 @@ string CalculateNextNuGetVersion() {
         throw new Exception(string.Format("Cannot find any {0} version", COBROWSE_NUGET_PACKAGE_ID));
     }
 
-    string newVersion = currentVersionSuffix == 0
-        ? "" + currentVersion.Major + "." + currentVersion.Minor + "." + (currentVersion.Build + 1)
-        : currentVersion.ToString();
-    string newVersionSuffix = currentVersionSuffix == 0
-        ? "01"
-        : currentVersionSuffix >= 10
-            ? (currentVersionSuffix + 1).ToString()
-            : "0" + (currentVersionSuffix + 1);
+    string newVersion = "" + currentVersion.Major + "." + currentVersion.Minor + "." + (currentVersion.Build + 1);
+    string newVersionSuffix = DateTime.UtcNow.ToString("yyMMdd.HHmm");
 
     return newVersion + "-pre" + newVersionSuffix;
 }

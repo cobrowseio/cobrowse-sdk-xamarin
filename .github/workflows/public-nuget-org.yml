@@ -1,0 +1,24 @@
+name: Build, pack a NuGet package, publish to NuGet.org
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Calculate NuGet package version
+      run: |
+        echo "COBROWSE_NUGET_PACKAGE_VERSION=$(echo ${{ github.ref_name }} | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')" >> $GITHUB_ENV
+        echo $COBROWSE_NUGET_PACKAGE_VERSION
+
+    - name: Run Cake build script
+      run: |
+        ./build.sh --nugetPrivateFeedUser="${{ secrets.NUGET_PRIVATE_FEED_USER }}" --nugetPrivateFeedReadApiKey="${{ secrets.NUGET_PRIVATE_FEED_API_KEY }}" --nugetPrivateFeedWriteApiKey="${{ secrets.NUGET_PRIVATE_FEED_WRITE_API_KEY }}" --nugetOrgApiKey="${{ secrets.NUGET_PUSH_TOKEN }}" --cobrowseNuGetPackageVersion="${{ env.COBROWSE_NUGET_PACKAGE_VERSION }}" --verbosity diagnostic

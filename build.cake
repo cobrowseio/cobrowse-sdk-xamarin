@@ -20,6 +20,7 @@ var slnPath = "./CobrowseIO.sln";
 var buildConfiguration = Argument("configuration", "Release");
 
 string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
+string nugetPrivateFeedUser = Argument("nugetPrivateFeedUser", string.Empty);
 string nugetPrivateFeedReadApiKey = Argument("nugetPrivateFeedReadApiKey", string.Empty);
 string nugetPrivateFeedWriteApiKey = Argument("nugetPrivateFeedWriteApiKey", string.Empty);
 
@@ -34,9 +35,14 @@ Task("ConfigureNuGetSources")
         Warning("No API key was found for the private NuGet feed");
         return;
     }
-    
-    // Generate a new token: https://dev.azure.com/cobrowse-xamarin-sdk/_usersSettings/tokens
-    string privateFeed = "https://pkgs.dev.azure.com/cobrowse-xamarin-sdk/cobrowse-xamarin-sdk-nuget/_packaging/cobrowse-nuget-feed/nuget/v3/index.json";
+
+    if (string.IsNullOrEmpty(nugetPrivateFeedUser))
+    {
+        Warning("No username was found for the private NuGet feed");
+        return;
+    }
+
+    string privateFeed = "https://nuget.pkg.github.com/lassana/index.json";
     
     if (!NuGetHasSource(privateFeed))
     {
@@ -46,7 +52,7 @@ Task("ConfigureNuGetSources")
             privateFeed,
             new NuGetSourcesSettings
             {
-                UserName = "user",
+                UserName = nugetPrivateFeedUser,
                 Password = nugetPrivateFeedReadApiKey
             });
     }

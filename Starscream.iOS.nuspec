@@ -10,6 +10,7 @@
         <projectUrl>https://github.com/daltoniam/Starscream</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Xamarin binding for Starscream: websockets in swift for iOS and OSX</description>
+        <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, ios</tags>
         <dependencies>
             <group targetFramework="Xamarin.iOS10" />
