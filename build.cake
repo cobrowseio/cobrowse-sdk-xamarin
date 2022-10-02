@@ -1,9 +1,9 @@
-#addin nuget:?package=Cake.FileHelpers&version=3.2.1
-#addin nuget:?package=Cake.Json&version=4.0.0
-#addin nuget:?package=Cake.Http&version=0.7.0
-#addin nuget:?package=Cake.Git&version=0.21.0
-#addin nuget:?package=Newtonsoft.Json&version=12.0.3
-#addin nuget:?package=NuGet.Protocol&version=5.4.0
+#addin nuget:?package=Cake.FileHelpers&version=4.0.1
+#addin nuget:?package=Cake.Json&version=6.0.1
+#addin nuget:?package=Cake.Http&version=1.3.0
+#addin nuget:?package=Cake.Git&version=1.1.0
+#addin nuget:?package=Newtonsoft.Json&version=13.0.1
+#addin nuget:?package=NuGet.Protocol&version=6.3.0
 
 #load "build.components.cake"
 
