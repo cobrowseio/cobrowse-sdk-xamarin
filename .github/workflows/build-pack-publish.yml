@@ -21,4 +21,4 @@ jobs:
 
     - name: Run Cake build script
       run: |
-        ./build.sh --nugetPrivateFeedUser="${{ secrets.NUGET_PRIVATE_FEED_USER }}" --nugetPrivateFeedReadApiKey="${{ secrets.NUGET_PRIVATE_FEED_API_KEY }}" --nugetPrivateFeedWriteApiKey="${{ secrets.NUGET_PRIVATE_FEED_WRITE_API_KEY }}" --nugetOrgApiKey="${{ secrets.NUGET_PUSH_TOKEN }}" --cobrowseNuGetPackageVersion="${{ env.COBROWSE_NUGET_PACKAGE_VERSION }}" --verbosity diagnostic
+        ./build.sh --nugetOrgApiKey="${{ secrets.NUGET_PUSH_TOKEN }}" --verbosity diagnostic
