@@ -44,7 +44,7 @@
     <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="CobrowseIOAppExtension.xcframework">
+    <NativeReference Include="..\..\cobrowse-sdk-ios-binary\CobrowseIOAppExtension.xcframework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>

@@ -83,7 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\cobrowse-sdk-android-LATEST.aar" />
+    <LibraryProjectZip Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.23.0\cobrowse-sdk-android-2.23.0.aar">
+      <Link>Jars\cobrowse-sdk-android-LATEST.aar</Link>
+    </LibraryProjectZip>
   </ItemGroup>
   <!--
   Xamarin.Android 11.2 deprecated the @(JavaDocJar) build action, 
