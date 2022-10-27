@@ -88,6 +88,7 @@ Task("DownloadBindings")
     Information("Current iOS SDK is {0}", iOSCurrentVersion);
 });
 
+// Updates the native SDK versions used in bindings with the latest available.
 Task("UpdateBindings")
     .Does(() =>
 {
@@ -139,13 +140,13 @@ Task("UpdateBindings")
 
     foreach (BindingProject bindingProject in bindingProjects) {
         if (bindingProject is AndroidBindingProject androidBindingProject) {
-            // TODO replace LibraryProjectZip in Android csproj file
+            // Replace LibraryProjectZip in Android csproj file
             string jarPath = @"..\..\" + AAR_CLONE_DIRECTORY + @"\io\cobrowse\cobrowse-sdk-android\" + androidVersion + @"\cobrowse-sdk-android-" + androidVersion + ".aar";
             ReplaceRegexInFiles(
                 androidBindingProject.CsprojFile,
                 "(?<=LibraryProjectZip\\ Include\\=\").*(?=\")",
                 jarPath);
-            // TODO replace JavaDocJar in Android csproj file
+            // Replace JavaDocJar in Android csproj file
             string javadocPath = @"..\..\" + AAR_CLONE_DIRECTORY + @"\io\cobrowse\cobrowse-sdk-android\" + androidVersion + @"\cobrowse-sdk-android-" + androidVersion + "-javadoc.jar";
             ReplaceRegexInFiles(
                 androidBindingProject.CsprojFile,
@@ -166,7 +167,7 @@ Task("Restore")
     NuGetRestore(slnPath);
 });
 
-// Builds all prjects in the solution
+// Builds all projects in the solution.
 Task("Build")
     .Does(() =>
 {
@@ -177,7 +178,7 @@ Task("Build")
     }
 });
 
-// Packs all nuget packages
+// Packs all nuget packages.
 Task("Pack")
     .Does(() =>
 {
@@ -186,13 +187,13 @@ Task("Pack")
     }
 });
 
-// Pushes previously created nuget package to nuget.org
+// Pushes previously created nuget package to nuget.org.
 Task("Push")
     .Does(() =>
 {
     if (string.IsNullOrEmpty(nugetOrgApiKey))
     {
-        Error("No API key was found for NuGet.org");
+        Warning("No API key was found for NuGet.org");
         return;
     }
     
