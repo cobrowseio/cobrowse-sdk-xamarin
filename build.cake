@@ -62,6 +62,13 @@ Task("DownloadBindings")
         GitCheckout(AAR_CLONE_DIRECTORY, "master");
         GitPull(AAR_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
+    string androidCurrentVersion
+        = FindRegexMatchGroupInFile(
+            cobrowseAndroidProject.AssemblyInfoFile,
+            @"AssemblyVersion\(""([0-9]+\.[0-9]+\.[0-9]+)",
+            1,
+            RegexOptions.Compiled).Value;
+    Information("Current Android SDK is {0}", androidCurrentVersion);
 
     // Clone specific version of iOS binaries repo
     if(!DirectoryExists(POD_CLONE_DIRECTORY)) {
@@ -78,6 +85,7 @@ Task("DownloadBindings")
             1,
             RegexOptions.Compiled).Value;
     GitCheckout(POD_CLONE_DIRECTORY, "v" + iOSCurrentVersion);
+    Information("Current iOS SDK is {0}", iOSCurrentVersion);
 });
 
 Task("UpdateBindings")

@@ -1,6 +1,8 @@
-name: Build and pack a NuGet package
+name: Build and pack NuGet packages
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ "master" ]
 
@@ -16,3 +18,16 @@ jobs:
     - name: Run Cake build script
       run: |
         ./build.sh --verbosity diagnostic
+
+    - name: Copy nupkg files to artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: |
+          CborJava.Android.*.nupkg
+          CobrowseIO.AppExtension.iOS.*.nupkg
+          CobrowseIO.Xamarin.*.nupkg
+          NumbersJava.Android.*.nupkg
+          Starscream.iOS.*.nupkg
+          SwiftCBOR.iOS.*.nupkg
+        retention-days: 7
+        if-no-files-found: error
