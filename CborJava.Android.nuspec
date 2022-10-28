@@ -10,6 +10,7 @@
         <projectUrl>https://github.com/peteroupc/CBOR-Java</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Xamarin binding for CBOR-Java: a Java implementation of Concise Binary Object Representation (RFC 7049)</description>
+        <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, android</tags>
         <dependencies>
             <group targetFramework="MonoAndroid10">

@@ -10,6 +10,7 @@
         <projectUrl>https://github.com/myfreeweb/SwiftCBOR</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Xamarin binding for SwiftCBOR: a CBOR implementation for Swift</description>
+        <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, ios</tags>
         <dependencies>
             <group targetFramework="Xamarin.iOS10" />

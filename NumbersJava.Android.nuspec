@@ -10,6 +10,7 @@
         <projectUrl>https://github.com/peteroupc/numbers-java/</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Xamarin binding for numbers-java: a Java implementation of arbitrary-precision arithmetic classes</description>
+        <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, android</tags>
         <dependencies>
             <group targetFramework="MonoAndroid10" />

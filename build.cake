@@ -1,9 +1,9 @@
-#addin nuget:?package=Cake.FileHelpers&version=3.2.1
-#addin nuget:?package=Cake.Json&version=4.0.0
-#addin nuget:?package=Cake.Http&version=0.7.0
-#addin nuget:?package=Cake.Git&version=0.21.0
-#addin nuget:?package=Newtonsoft.Json&version=12.0.3
-#addin nuget:?package=NuGet.Protocol&version=5.4.0
+#addin nuget:?package=Cake.FileHelpers&version=4.0.1
+#addin nuget:?package=Cake.Json&version=6.0.1
+#addin nuget:?package=Cake.Http&version=1.3.0
+#addin nuget:?package=Cake.Git&version=1.1.0
+#addin nuget:?package=Newtonsoft.Json&version=13.0.1
+#addin nuget:?package=NuGet.Protocol&version=6.3.0
 
 #load "build.components.cake"
 
@@ -20,86 +20,25 @@ var slnPath = "./CobrowseIO.sln";
 var buildConfiguration = Argument("configuration", "Release");
 
 string nugetOrgApiKey = Argument("nugetOrgApiKey", string.Empty);
-string nugetPrivateFeedReadApiKey = Argument("nugetPrivateFeedReadApiKey", string.Empty);
-string nugetPrivateFeedWriteApiKey = Argument("nugetPrivateFeedWriteApiKey", string.Empty);
 
 string POD_CLONE_DIRECTORY = "cobrowse-sdk-ios-binary";
 string AAR_CLONE_DIRECTORY = "cobrowse-sdk-android-binary";
 
-Task("ConfigureNuGetSources")
-    .Does(() =>
-{
-    if (string.IsNullOrEmpty(nugetPrivateFeedReadApiKey))
-    {
-        Warning("No API key was found for the private NuGet feed");
-        return;
-    }
-    
-    // Generate a new token: https://dev.azure.com/cobrowse-xamarin-sdk/_usersSettings/tokens
-    string privateFeed = "https://pkgs.dev.azure.com/cobrowse-xamarin-sdk/cobrowse-xamarin-sdk-nuget/_packaging/cobrowse-nuget-feed/nuget/v3/index.json";
-    
-    if (!NuGetHasSource(privateFeed))
-    {
-        Information("Private NuGet source is missing, adding...");
-        NuGetAddSource(
-            "cobrowse-nuget-feed",
-            privateFeed,
-            new NuGetSourcesSettings
-            {
-                UserName = "user",
-                Password = nugetPrivateFeedReadApiKey
-            });
-    }
-    else
-    {
-        Information("Private NuGet source already exists");
-    }
-});
-
-Task("FindNextNuGetPackageVersion")
-    .Does(() =>
-    {
-        string version = GetCobrowseNuGetVersion();
-        Information("Next {0} package version will be {1}", COBROWSE_NUGET_PACKAGE_ID, version);
-        cobrowseArtifact.VersionString 
-            = cobrowseIosExtensionArtifact.VersionString 
-            = version;
-    });
-
+// Cleans built binaries and nuget packages.
 Task("Clean")
     .Does(() =>
 {
     foreach (NuGetArtifact artifact in nugetArtifacts) {
         foreach (string csprojFile in artifact.CsprojFiles) {
-            CleanDirectory(System.IO.Directory.GetParent(csprojFile) + "/bin");
-            CleanDirectory(System.IO.Directory.GetParent(csprojFile) + "/obj");
-        }
-    }
-});
-
-Task("RestoreNuGetPackages")
-    .Does(() =>
-{
-    NuGetRestore(slnPath);
-});
-
-Task("CleanUp")
-    .Does(() =>
-{    
-    foreach (BindingProject bindingProject in bindingProjects) {
-        if (bindingProject is AndroidBindingProject androidBindingProject) {
-            if (FileExists(androidBindingProject.JarPath)) {
-                DeleteFile(androidBindingProject.JarPath);
+            string bin = System.IO.Directory.GetParent(csprojFile) + "/bin";
+            string obj = System.IO.Directory.GetParent(csprojFile) + "/obj";
+            if (DirectoryExists(bin))
+            {
+                DeleteDirectory(bin, new DeleteDirectorySettings { Recursive = true });
             }
-            if (FileExists(androidBindingProject.JavadocPath)) {
-                DeleteFile(androidBindingProject.JavadocPath);
-            }
-        } else if (bindingProject is IosBindingProject iosBindingProject) {
-            if (DirectoryExists(iosBindingProject.FrameworkPath)) {
-                DeleteDirectory(iosBindingProject.FrameworkPath,
-                                new DeleteDirectorySettings {
-                                    Recursive = true
-                                });
+            if (DirectoryExists(obj))
+            {
+                DeleteDirectory(obj, new DeleteDirectorySettings { Recursive = true });
             }
         }
     }
@@ -111,7 +50,46 @@ Task("CleanUp")
     }
 });
 
-Task("FindLatestAndroidVersions")
+// Downloads native SDK binaries.
+Task("DownloadBindings")
+    .Does(() =>
+{
+    // Clone latest master of Android binaries repo
+    if(!DirectoryExists(AAR_CLONE_DIRECTORY)) {
+        GitClone("https://github.com/cobrowseio/cobrowse-sdk-android-binary", 
+                 AAR_CLONE_DIRECTORY);
+    } else {
+        GitCheckout(AAR_CLONE_DIRECTORY, "master");
+        GitPull(AAR_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
+    }
+    string androidCurrentVersion
+        = FindRegexMatchGroupInFile(
+            cobrowseAndroidProject.AssemblyInfoFile,
+            @"AssemblyVersion\(""([0-9]+\.[0-9]+\.[0-9]+)",
+            1,
+            RegexOptions.Compiled).Value;
+    Information("Current Android SDK is {0}", androidCurrentVersion);
+
+    // Clone specific version of iOS binaries repo
+    if(!DirectoryExists(POD_CLONE_DIRECTORY)) {
+        GitClone("https://github.com/cobrowseio/cobrowse-sdk-ios-binary.git", 
+                 POD_CLONE_DIRECTORY);
+    } else {
+        GitCheckout(POD_CLONE_DIRECTORY, "master");
+        GitPull(POD_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
+    }
+    string iOSCurrentVersion
+        = FindRegexMatchGroupInFile(
+            cobrowseIosProject.AssemblyInfoFile, 
+            @"AssemblyVersion\(""([0-9]+\.[0-9]+\.[0-9]+)",
+            1,
+            RegexOptions.Compiled).Value;
+    GitCheckout(POD_CLONE_DIRECTORY, "v" + iOSCurrentVersion);
+    Information("Current iOS SDK is {0}", iOSCurrentVersion);
+});
+
+// Updates the native SDK versions used in bindings with the latest available.
+Task("UpdateBindings")
     .Does(() =>
 {
     if(!DirectoryExists(AAR_CLONE_DIRECTORY)) {
@@ -122,18 +100,14 @@ Task("FindLatestAndroidVersions")
         GitPull(AAR_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
 
-    cobrowseAndroidProject.VersionString = FindRegexMatchGroupInFile(
+    string androidVersion
+        = FindRegexMatchGroupInFile(
             AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + "maven-metadata.xml", 
             @"\<release\>([\S]*?)\<\/release\>",
             1,
             RegexOptions.Compiled).Value;
-    
-    Information("Latest native Android SDK is {0}", cobrowseAndroidProject.VersionString);
-});
+    Information("Latest native Android SDK is {0}", androidVersion);
 
-Task("FindLatestIosVersions")
-    .Does(() =>
-{
     if(!DirectoryExists(POD_CLONE_DIRECTORY)) {
         GitClone("https://github.com/cobrowseio/cobrowse-sdk-ios-binary.git", 
                  POD_CLONE_DIRECTORY);
@@ -142,44 +116,18 @@ Task("FindLatestIosVersions")
         GitPull(POD_CLONE_DIRECTORY, "CakeBuild", "CakeBuild@cobrowse.io");
     }
 
-    cobrowseIosProject.VersionString 
-        = cobrowseIosExtensionProject.VersionString
+    string iOSVersion
         = FindRegexMatchGroupInFile(
             POD_CLONE_DIRECTORY + "/" + "CobrowseIO.podspec", 
             @"s\.version = '([\S]*?)'",
             1,
             RegexOptions.Compiled).Value;
-    
-    Information("Latest native iOS SDK is {0}", cobrowseIosProject.VersionString);
-});
+    Information("Latest native iOS SDK is {0}", iOSVersion);
 
-Task("DownloadNativeSDKs")
-    .Does(() =>
-{
-    foreach (BindingProject bindingProject in bindingProjects) {
-        if (bindingProject is AndroidBindingProject androidBindingProject) {
-            string jarPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + ".aar";
-            CopyFile(jarPath, androidBindingProject.JarPath);
-            if (!string.IsNullOrEmpty(androidBindingProject.JavadocPath)) {
-                string javadocPath = AAR_CLONE_DIRECTORY + "/io/cobrowse/cobrowse-sdk-android/" + androidBindingProject.VersionString + "/cobrowse-sdk-android-" + androidBindingProject.VersionString + "-javadoc.jar";
-                CopyFile(javadocPath, androidBindingProject.JavadocPath);
-            }
-        } else if (bindingProject is IosBindingProject iosBindingProject) {
-            string dirName = System.IO.Path.GetFileName(iosBindingProject.FrameworkPath);
-            CopyDirectory(POD_CLONE_DIRECTORY + "/" + dirName,
-                          iosBindingProject.FrameworkPath);
-        }
-    }
-});
-
-Task("UpdateAssemblyVersions")
-    .Does(() =>
-{
-    void _SetAseemblyVersion(string filePath, Version version) {
+    void _SetAssemblyVersion(string filePath, Version version) {
         if (version == null) {
             return;
         }
-
         ReplaceRegexInFiles(
             filePath,
             "(?<=AssemblyVersion\\(\")(.+?)(?=\"\\))", 
@@ -190,20 +138,36 @@ Task("UpdateAssemblyVersions")
             version.ToString());
     }
 
-    foreach (var bindingProject in bindingProjects) {
-        _SetAseemblyVersion(bindingProject.AssemblyInfoFile, bindingProject.Version);
-    }
-    
-    foreach (var nugetArtifact in nugetArtifacts) {
-        if (nugetArtifact.AssemblyInfoFiles == null) {
-            continue;
-        }
-        foreach (string assemblyInfoFile in nugetArtifact.AssemblyInfoFiles) {
-            _SetAseemblyVersion(assemblyInfoFile, nugetArtifact.Version);
+    foreach (BindingProject bindingProject in bindingProjects) {
+        if (bindingProject is AndroidBindingProject androidBindingProject) {
+            // Replace LibraryProjectZip in Android csproj file
+            string jarPath = @"..\..\" + AAR_CLONE_DIRECTORY + @"\io\cobrowse\cobrowse-sdk-android\" + androidVersion + @"\cobrowse-sdk-android-" + androidVersion + ".aar";
+            ReplaceRegexInFiles(
+                androidBindingProject.CsprojFile,
+                "(?<=LibraryProjectZip\\ Include\\=\").*(?=\")",
+                jarPath);
+            // Replace JavaDocJar in Android csproj file
+            string javadocPath = @"..\..\" + AAR_CLONE_DIRECTORY + @"\io\cobrowse\cobrowse-sdk-android\" + androidVersion + @"\cobrowse-sdk-android-" + androidVersion + "-javadoc.jar";
+            ReplaceRegexInFiles(
+                androidBindingProject.CsprojFile,
+                "(?<=JavaDocJar\\ Include\\=\").*(?=\")",
+                javadocPath);
+            _SetAssemblyVersion(bindingProject.AssemblyInfoFile, Version.Parse(androidVersion));
+        } else if (bindingProject is IosBindingProject iosBindingProject) {
+            // No need to modify iOS csproj file but need to set new version in the assembly info
+            _SetAssemblyVersion(bindingProject.AssemblyInfoFile, Version.Parse(iOSVersion));
         }
     }
 });
 
+// Restores nuget packages.
+Task("Restore")
+    .Does(() =>
+{
+    NuGetRestore(slnPath);
+});
+
+// Builds all projects in the solution.
 Task("Build")
     .Does(() =>
 {
@@ -214,48 +178,17 @@ Task("Build")
     }
 });
 
+// Packs all nuget packages.
 Task("Pack")
     .Does(() =>
 {
     foreach (NuGetArtifact artifact in nugetArtifacts) {
-        if (artifact.VersionString == null) {
-            // There are packages which nuspec files we do not modify on each build
-            // We just build these packages
-            NuGetPack(artifact.NuspecFile, new NuGetPackSettings());
-        } else {
-            NuGetPack(artifact.NuspecFile,
-                      new NuGetPackSettings {
-                          Version = artifact.VersionString
-                      });
-        }
+        NuGetPack(artifact.NuspecFile, new NuGetPackSettings());
     }
 });
 
-Task("PushToPrivateFeed")
-    .Does(() =>
-{
-    if (string.IsNullOrEmpty(nugetPrivateFeedWriteApiKey))
-    {
-        Warning("No API key was found for the private NuGet feed");
-        return;
-    }
-    
-    string apiKey = EnvironmentVariable("NUGET_PRIVATE_FEED_API_KEY");
-    var nugetPackages = GetFiles("./*.nupkg");
-    foreach (var package in nugetPackages)
-    {
-        string name = System.IO.Path.GetFileName(package.FullPath);
-        Information("Publishing {0}", name);
-        NuGetPush(name, new NuGetPushSettings
-        {
-            ApiKey = nugetPrivateFeedWriteApiKey,
-            SkipDuplicate = true,
-            Source = "cobrowse-nuget-feed"
-        });
-    }
-});
-
-Task("PushToNuGetOrg")
+// Pushes previously created nuget package to nuget.org.
+Task("Push")
     .Does(() =>
 {
     if (string.IsNullOrEmpty(nugetOrgApiKey))
@@ -285,25 +218,18 @@ Task("PushToNuGetOrg")
 });
 
 Task("Default")
-    .IsDependentOn("ConfigureNuGetSources")
-    .IsDependentOn("FindNextNuGetPackageVersion")
     .IsDependentOn("Clean")
-    .IsDependentOn("RestoreNuGetPackages")
-    .IsDependentOn("CleanUp")
-    .IsDependentOn("FindLatestAndroidVersions")
-    .IsDependentOn("FindLatestIosVersions")
-    .IsDependentOn("DownloadNativeSDKs")
-    .IsDependentOn("UpdateAssemblyVersions")
+    .IsDependentOn("DownloadBindings")
+    .IsDependentOn("Restore")
     .IsDependentOn("Build")
     .IsDependentOn("Pack")
-    .IsDependentOn("PushToPrivateFeed")
-    .IsDependentOn("PushToNuGetOrg");
+    .IsDependentOn("Push");
 
-Task("UpdateBindings")
-    .IsDependentOn("CleanUp")
-    .IsDependentOn("FindLatestAndroidVersions")
-    .IsDependentOn("FindLatestIosVersions")
-    .IsDependentOn("DownloadNativeSDKs")
-    .IsDependentOn("UpdateAssemblyVersions");
+Task("UpdateNativeSDKs")
+    .IsDependentOn("Clean")
+    .IsDependentOn("UpdateBindings")
+    .IsDependentOn("Restore")
+    .IsDependentOn("Build")
+    .IsDependentOn("Pack");
 
 RunTarget(target);

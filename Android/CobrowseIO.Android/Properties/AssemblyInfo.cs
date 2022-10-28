@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Android;
@@ -20,8 +20,8 @@ using Android.App;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.2.0.1")]
-[assembly: AssemblyInformationalVersion("2.2.0.1")]
+// [assembly: AssemblyVersion("2.23.0")]
+[assembly: AssemblyVersion("2.23.0")]
+[assembly: AssemblyInformationalVersion("2.23.0")]
 
 [assembly: LinkerSafe]
