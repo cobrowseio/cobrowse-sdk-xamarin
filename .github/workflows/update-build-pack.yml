@@ -1,0 +1,52 @@
+name: Update native SDKs, build and pack NuGet packages
+
+on: workflow_dispatch
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run Cake build script
+      run: |
+        ./build.sh --verbosity diagnostic --target UpdateNativeSDKs
+
+    - name: Copy nupkg files to artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: |
+          CborJava.Android.*.nupkg
+          CobrowseIO.AppExtension.iOS.*.nupkg
+          CobrowseIO.Xamarin.*.nupkg
+          NumbersJava.Android.*.nupkg
+          Starscream.iOS.*.nupkg
+          SwiftCBOR.iOS.*.nupkg
+        retention-days: 7
+        if-no-files-found: error
+
+    # If SDKs were updated, commit the changes automatically and open a new pull request
+    - name: Create a new pull request
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FILES_TO_COMMIT: Android/CobrowseIO.Android/CobrowseIO.Android.csproj Android/CobrowseIO.Android/Properties/AssemblyInfo.cs iOS/CobrowseIO.AppExtension.iOS/Properties/AssemblyInfo.cs iOS/CobrowseIO.iOS/Properties/AssemblyInfo.cs
+        NEW_BRANCH_NAME: feature/update_native_sdks_${{ github.run_id }}
+      run: |
+        if [[ `git status --porcelain $FILES_TO_COMMIT` ]]; then
+          git config --local user.name "Cobrowse.io Bot"
+          git config --local user.email "github@cobrowse.io"
+          git checkout -b $NEW_BRANCH_NAME
+          git add $FILES_TO_COMMIT
+          git commit -m "feat: update native SDKs"
+          git push origin $NEW_BRANCH_NAME
+          gh pr create -B master -H $NEW_BRANCH_NAME --title 'Update native SDKs' --body ''
+        else
+          echo "Native SDKs haven't been updated"
+        fi
