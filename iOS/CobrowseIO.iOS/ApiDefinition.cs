@@ -263,6 +263,10 @@ namespace Xamarin.CobrowseIO
 		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseRedactedViewsForViewController:(UIViewController * _Nonnull)vc;
 		[Export("cobrowseRedactedViewsForViewController:")]
 		UIView[] RedactedViewsForViewController(UIViewController vc);
+
+		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseUnredactedViewsForViewController:(UIViewController * _Nonnull)vc __attribute__((availability(ios, introduced=9)));
+		[Export("cobrowseUnredactedViewsForViewController:")]
+		UIView[] CobrowseUnredactedViewsForViewController(UIViewController vc);
 	}
 
 	// @interface CBIOViewController : UIViewController
@@ -297,6 +301,25 @@ namespace Xamarin.CobrowseIO
 		[Export("redactedViews")]
 		UIView[] RedactedViews { get; }
 	}
+	// @protocol CobrowseIOUnredacted <NSObject>
+	/*
+	  Check whether adding [Model] to this declaration is appropriate.
+	  [Model] is used to generate a C# class that implements this protocol,
+	  and might be useful for protocols that consumers are supposed to implement,
+	  since consumers can subclass the generated class instead of implementing
+	  the generated interface. If consumers are not supposed to implement this
+	  protocol, then [Model] is redundant and will generate code that will never
+	  be used.
+	*/
+	[Protocol(Name = "CobrowseIOUnredacted"), Model]
+	[BaseType(typeof(NSObject))]
+	interface CobrowseIOUnredacted
+	{
+		// @required -(NSArray * _Nonnull)unredactedViews;
+		[Abstract]
+		[Export("unredactedViews")]
+		NSObject[] UnredactedViews { get; }
+	}
 
 	// @interface CobrowseIO : NSObject
 	[BaseType(typeof(NSObject), Name = "CobrowseIO")]
@@ -314,6 +337,10 @@ namespace Xamarin.CobrowseIO
 		[Export("customData", ArgumentSemantic.Assign)]
 		[Internal]
 		NSDictionary<NSString, NSObject> CustomNSDictionaryData { get; set; }
+
+		// @property NSArray<NSString *> * _Nonnull capabilities;
+		[Export("capabilities", ArgumentSemantic.Assign)]
+		string[] Capabilities { get; set; }
 
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
