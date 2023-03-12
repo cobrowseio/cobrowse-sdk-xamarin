@@ -75,5 +75,11 @@ namespace Xamarin.CobrowseIO
         {
             this.GetSession(idOrCode, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
+
+        public string[] Capabilities
+        {
+            get => GetCapabilities();
+            set => SetCapabilities(value);
+        }
     }
 }
