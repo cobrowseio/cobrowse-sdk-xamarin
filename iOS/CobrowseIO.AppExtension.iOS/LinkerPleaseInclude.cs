@@ -17,15 +17,5 @@ namespace Xamarin.CobrowseIO.AppExtension
         {
             _ = new CobrowseIOReplayKitExtension();
         }
-
-        public void Include(Starscream.iOS.LinkerPleaseInclude _)
-        {
-            _ = new Starscream.iOS.LinkerPleaseInclude();
-        }
-
-        public void Include(SwiftCBOR.iOS.LinkerPleaseInclude _)
-        {
-            _ = new SwiftCBOR.iOS.LinkerPleaseInclude();
-        }
     }
 }
