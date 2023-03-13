@@ -76,6 +76,12 @@ namespace Xamarin.CobrowseIO
             this.GetSession(idOrCode, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
 
+        /// <summary>
+        /// Gets or sets the available capabilities for a session. Different
+        /// annotation tools and events will be available during a session
+        /// depending on the capabilities you set here. By default all
+        /// capabilities supported by the device are enabled.
+        /// </summary>
         public string[] Capabilities
         {
             get => GetCapabilities();

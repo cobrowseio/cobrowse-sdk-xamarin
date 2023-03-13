@@ -266,7 +266,7 @@ namespace Xamarin.CobrowseIO
 
 		// @optional -(NSArray<UIView *> * _Nonnull)cobrowseUnredactedViewsForViewController:(UIViewController * _Nonnull)vc __attribute__((availability(ios, introduced=9)));
 		[Export("cobrowseUnredactedViewsForViewController:")]
-		UIView[] CobrowseUnredactedViewsForViewController(UIViewController vc);
+		UIView[] UnredactedViewsForViewController(UIViewController vc);
 	}
 
 	// @interface CBIOViewController : UIViewController
