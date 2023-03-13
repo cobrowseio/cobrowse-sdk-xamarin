@@ -181,6 +181,18 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <summary>
+        /// Gets or sets the available capabilities for a session. Different
+        /// annotation tools and events will be available during a session
+        /// depending on the capabilities you set here. By default all
+        /// capabilities supported by the device are enabled.
+        /// </summary>
+        public string[] Capabilities
+        {
+            get => CobrowseIO.Instance.Capabilities;
+            set => CobrowseIO.Instance.Capabilities = value;
+        }
+
+        /// <summary>
         /// Launches 6-digits code UI.
         /// </summary>
         public void OpenCobrowseUI()

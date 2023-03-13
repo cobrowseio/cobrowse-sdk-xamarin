@@ -34,7 +34,7 @@ BindingProject[] bindingProjects = new BindingProject[] {
     }
 };
 
-NuGetArtifact numbersJavaArtifact, cborJavaArtifact, swiftCborArtifact, starscreamArtifact, cobrowseArtifact, cobrowseIosExtensionArtifact;
+NuGetArtifact numbersJavaArtifact, cborJavaArtifact, cobrowseArtifact, cobrowseIosExtensionArtifact;
 
 NuGetArtifact[] nugetArtifacts = new NuGetArtifact[] {
     numbersJavaArtifact = new NuGetArtifact {
@@ -44,14 +44,6 @@ NuGetArtifact[] nugetArtifacts = new NuGetArtifact[] {
     cborJavaArtifact = new NuGetArtifact {
         CsprojFiles = new [] { "./Android/CborJava.Android/CborJava.Android.csproj" },
         NuspecFile = "./CborJava.Android.nuspec"
-    },
-    swiftCborArtifact = new NuGetArtifact {
-        CsprojFiles = new [] { "./iOS/SwiftCBOR.iOS/SwiftCBOR.iOS.csproj" },
-        NuspecFile = "./SwiftCBOR.iOS.nuspec"
-    },
-    starscreamArtifact = new NuGetArtifact {
-        CsprojFiles = new [] { "./iOS/Starscream.iOS/Starscream.iOS.csproj" },
-        NuspecFile = "./Starscream.iOS.nuspec"
     },
     cobrowseArtifact = new NuGetArtifact {
         CsprojFiles = new [] 

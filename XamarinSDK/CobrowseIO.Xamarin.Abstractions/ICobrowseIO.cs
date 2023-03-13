@@ -90,6 +90,14 @@ namespace Xamarin.CobrowseIO.Abstractions
         void SetCustomData(IDictionary<string, object> customData);
 
         /// <summary>
+        /// Gets or sets the available capabilities for a session. Different
+        /// annotation tools and events will be available during a session
+        /// depending on the capabilities you set here. By default all
+        /// capabilities supported by the device are enabled.
+        /// </summary>
+        string[] Capabilities { get; set; }
+
+        /// <summary>
         /// Launches 6-digits code UI.
         /// </summary>
         void OpenCobrowseUI();
