@@ -69,6 +69,10 @@
     <attr 
         path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.RedactionDelegate']/method[@name='redactedViews']/parameter[@name='p0']" 
         name="name">activity</attr>
+    <!-- CobrowseIO.RedactionDelegate -->
+    <attr 
+        path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.UnredactionDelegate']/method[@name='unredactedViews']/parameter[@name='p0']" 
+        name="name">activity</attr>
     <!-- CobrowseIO.SessionRequestDelegate -->
     <attr 
         path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionRequestDelegate']/method[@name='handleSessionRequest']/parameter[@name='p0']" 
