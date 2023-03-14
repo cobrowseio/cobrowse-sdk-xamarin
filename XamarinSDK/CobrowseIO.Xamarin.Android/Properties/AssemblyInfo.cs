@@ -8,7 +8,7 @@ using Android;
 
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("3.6.0")]
-[assembly: AssemblyInformationalVersion("3.6.0")]
+[assembly: AssemblyVersion("3.6.1")]
+[assembly: AssemblyInformationalVersion("3.6.1")]
 
 [assembly: LinkerSafe]
