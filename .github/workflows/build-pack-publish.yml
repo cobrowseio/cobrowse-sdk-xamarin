@@ -26,7 +26,5 @@ jobs:
           CobrowseIO.AppExtension.iOS.*.nupkg
           CobrowseIO.Xamarin.*.nupkg
           NumbersJava.Android.*.nupkg
-          Starscream.iOS.*.nupkg
-          SwiftCBOR.iOS.*.nupkg
         retention-days: 7
         if-no-files-found: error
