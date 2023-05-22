@@ -83,7 +83,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.25.2\cobrowse-sdk-android-2.25.2.aar">
+    <LibraryProjectZip Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.26.0\cobrowse-sdk-android-2.26.0.aar">
       <Link>Jars\cobrowse-sdk-android-LATEST.aar</Link>
     </LibraryProjectZip>
   </ItemGroup>
@@ -93,7 +93,7 @@
   https://github.com/xamarin/java.interop/issues/847
 
   <ItemGroup>
-    <JavaDocJar Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.25.2\cobrowse-sdk-android-2.25.2-javadoc.jar">
+    <JavaDocJar Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.26.0\cobrowse-sdk-android-2.26.0-javadoc.jar">
         <Link>Jars\cobrowse-sdk-android-LATEST-javadoc.jar</Link>
     </JavaDocJar>
   </ItemGroup>
