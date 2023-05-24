@@ -238,6 +238,13 @@ namespace Xamarin.CobrowseIO
             set => CobrowseIO.Instance.Capabilities = value;
         }
 
+        /// <inheritdoc/>
+        public bool Registration
+        {
+            get => CobrowseIO.Instance.Registration;
+            set => CobrowseIO.Instance.Registration = value;
+        }
+
         /// <summary>
         /// Launches 6-digits code UI.
         /// </summary>

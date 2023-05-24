@@ -342,6 +342,10 @@ namespace Xamarin.CobrowseIO
 		[Export("capabilities", ArgumentSemantic.Assign)]
 		string[] Capabilities { get; set; }
 
+		// @property _Bool registration;
+		[Export("registration", ArgumentSemantic.Assign)]
+		bool Registration { get; set; }
+
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
 		[Internal]
