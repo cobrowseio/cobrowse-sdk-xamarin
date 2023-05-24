@@ -98,6 +98,17 @@ namespace Xamarin.CobrowseIO.Abstractions
         string[] Capabilities { get; set; }
 
         /// <summary>
+        /// By default, when the SDK starts it will register the device to your account and share
+        /// its connectivity state. This provides the dashboard with a list of devices which are
+        /// online and ready to connect. <p>
+        /// If you don't need to see a list of devices in your dashboard, e.g. your sessions start
+        /// only using <see cref="ICobrowseIO.CreateSession(CobrowseCallback)"/>,
+        /// then you can stop the SDK from registering the device and its status by passing the
+        /// <c>registration</c> option with a value of <c>false</c>.
+        /// </summary>
+        bool Registration { get; set; }
+
+        /// <summary>
         /// Launches 6-digits code UI.
         /// </summary>
         void OpenCobrowseUI();
