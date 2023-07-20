@@ -29,7 +29,11 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='capabilities' and count(parameter)=0]" name="visibility">internal</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='registration' and count(parameter)=1]" name="managedName">SetRegistration</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='registration' and count(parameter)=0]" name="managedName">GetRegistration</attr>
-    
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='webviewRedactedViews' and count(parameter)=1]" name="managedName">SetWebviewRedactedViews</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='webviewRedactedViews' and count(parameter)=0]" name="managedName">GetWebviewRedactedViews</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='webviewRedactedViews' and count(parameter)=1]" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='webviewRedactedViews' and count(parameter)=0]" name="visibility">internal</attr>
+
     <!-- Make method names the same as in the iOS SDK -->
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='code']" name="managedName">GetCode</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='agent']" name="managedName">GetAgent</attr>

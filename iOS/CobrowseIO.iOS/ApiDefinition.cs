@@ -346,6 +346,10 @@ namespace Xamarin.CobrowseIO
 		[Export("registration", ArgumentSemantic.Assign)]
 		bool Registration { get; set; }
 
+		// @property NSArray<NSString *> * _Nonnull capabilities;
+		[Export("webviewRedactedViews", ArgumentSemantic.Assign)]
+		string[] WebViewRedactedViews { get; set; }
+
 		[Wrap("WeakDelegate")]
 		[NullAllowed]
 		[Internal]

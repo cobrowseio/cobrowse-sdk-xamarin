@@ -192,6 +192,18 @@ namespace Xamarin.CobrowseIO
             set => CobrowseIO.Instance.Capabilities = value;
         }
 
+        /// <summary>
+        /// Gets or sets the CSS selectors which will be used to redact content within WebViews.
+        /// Any HTML element matching one of the selectors configured here will be redacted and
+        /// not visible to your agents.
+        /// Defaults to an empty list which means the feature is disabled.
+        /// </summary>
+        public string[] WebViewRedactedViews
+        {
+            get => CobrowseIO.Instance.WebViewRedactedViews;
+            set => CobrowseIO.Instance.WebViewRedactedViews = value;
+        }
+
         /// <inheritdoc/>
         public bool Registration
         {
