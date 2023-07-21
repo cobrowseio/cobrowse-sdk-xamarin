@@ -98,6 +98,14 @@ namespace Xamarin.CobrowseIO.Abstractions
         string[] Capabilities { get; set; }
 
         /// <summary>
+        /// Gets or sets the CSS selectors which will be used to redact content within WebViews.
+        /// Any HTML element matching one of the selectors configured here will be redacted and
+        /// not visible to your agents.
+        /// Defaults to an empty list which means the feature is disabled.
+        /// </summary>
+        string[] WebViewRedactedViews { get; set; }
+
+        /// <summary>
         /// By default, when the SDK starts it will register the device to your account and share
         /// its connectivity state. This provides the dashboard with a list of devices which are
         /// online and ready to connect. <p>
