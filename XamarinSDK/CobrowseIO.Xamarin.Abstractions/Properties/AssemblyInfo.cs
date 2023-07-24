@@ -4,5 +4,5 @@ using System.Reflection;
 [assembly: AssemblyDescription("Cobrowse.io - Xamarin SDK")]
 [assembly: AssemblyCompany("Cobrowse.io LLC")]
 
-[assembly: AssemblyVersion("3.6.1")]
-[assembly: AssemblyInformationalVersion("3.6.1")]
+[assembly: AssemblyVersion("3.7.0")]
+[assembly: AssemblyInformationalVersion("3.7.0")]

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/cobrowseio/cobrowse-sdk-xamarin/compare/v3.6.1...v3.7.0) (2023-07-24)
+
+
+### Features
+
+* allow clients to prevent devices from being registered (`canRegister: false` option) ([#41](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/41)) ([766dba5](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/766dba5ecd3fe569f75cad290e4111bdfbf7ddc4))
+* Reflect new `webviewRedactedViews` SDK's API  ([#47](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/47)) ([1e9a125](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/1e9a12510bcbbed292d3d298f96be0b8f7d7fdfc))
+* update native SDKs ([#34](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/34)) ([6043077](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/6043077fbdd6f356455bd560d78291e3288b12df))
+* update native SDKs ([#35](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/35)) ([ee3c2a1](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/ee3c2a154415f1832f995bd2b6c1e4cef6d3a434))
+* update native SDKs ([#36](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/36)) ([6c91094](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/6c91094d85e55ed63d35b002df02749da92a2768))
+* update native SDKs ([#39](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/39)) ([1bf5bb8](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/1bf5bb81cf12dcb454fb1bd0d57e0a9d6d175341))
+* update native SDKs ([#40](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/40)) ([e7e9dab](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/e7e9dabf8744d880b755f914283ec8ef589f791c))
+
 ### [3.6.1](https://github.com/cobrowseio/cobrowse-sdk-xamarin/compare/v3.6.0...v3.6.1) (2023-03-14)
 
 ### Features
