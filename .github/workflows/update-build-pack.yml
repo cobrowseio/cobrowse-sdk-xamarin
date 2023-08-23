@@ -1,4 +1,4 @@
-name: Update native SDKs, build and pack NuGet packages
+name: Update native SDKs, build and pack NuGet packages, create a pull request if necessary
 
 on: workflow_dispatch
 
