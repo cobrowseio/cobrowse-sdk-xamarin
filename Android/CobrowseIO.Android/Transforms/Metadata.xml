@@ -69,6 +69,8 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='fullDeviceState']" name="visibility">internal</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setFullDeviceState']" name="managedName">_SetFullDeviceState</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setFullDeviceState']" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setCapabilities']" name="managedName">_SetCapabilities</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='setCapabilities']" name="visibility">internal</attr>
 
     <!-- Change parameter names from the generic p0, p1, etc. to something more meaningful. -->
     <!-- CobrowseIO.RedactionDelegate -->

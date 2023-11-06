@@ -181,6 +181,10 @@ namespace Xamarin.CobrowseIO
 		// -(void)setRemoteControl:(CBIORemoteControlState)state callback:(CBErrorSessionBlock _Nullable)callback;
 		[Export("setRemoteControl:callback:")]
 		void SetRemoteControl(RemoteControlState state, [NullAllowed] CBErrorSessionBlock callback);
+
+		// -(void) setCapabilities: ( NSArray<NSString*>* _Nonnull) capabilities callback: (nullable CBErrorSessionBlock) callback;
+		[Export("setCapabilities:callback:")]
+		void SetCapabilities(string[] capabilities, [NullAllowed] CBErrorSessionBlock callback);
 	}
 
 	// @interface CBIOTouch : NSObject
