@@ -80,6 +80,11 @@ namespace Xamarin.CobrowseIO.Abstractions
         void SetFullDeviceState(FullDeviceState value, CobrowseCallback callback);
 
         /// <summary>
+        /// Sets the capabilities on this session object.
+        /// </summary>
+        void SetCapabilities(string[] capabilities, CobrowseCallback callback);
+
+        /// <summary>
         /// Activates the session.
         /// </summary>
         void Activate(CobrowseCallback callback);

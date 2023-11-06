@@ -49,6 +49,15 @@ namespace Xamarin.CobrowseIO
 
         #endregion
 
+        #region Capabilities
+
+        public void SetCapabilities(string[] capabilities, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        {
+            this._SetCapabilities(capabilities, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
+        }
+
+        #endregion
+
         #region Remote control
 
         [GeneratedEnum]

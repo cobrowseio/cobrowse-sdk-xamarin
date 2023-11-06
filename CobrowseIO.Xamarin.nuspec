@@ -15,7 +15,7 @@
         <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, android, ios</tags>
         <dependencies>
-            <group targetFramework="MonoAndroid12.0">
+            <group targetFramework="MonoAndroid13.0">
                 <dependency id="NumbersJava.Android" version="1.4.3" />
                 <dependency id="CborJava.Android" version="4.0.1" />
                 <dependency id="Square.OkHttp3" version="3.12.6" />
@@ -23,6 +23,7 @@
                 <dependency id="Xamarin.AndroidX.AppCompat" version="1.2.0" />
                 <dependency id="Xamarin.AndroidX.ConstraintLayout" version="2.0.4" />
                 <dependency id="Xamarin.AndroidX.Lifecycle.Process" version="2.3.0" />
+                <dependency id="Xamarin.AndroidX.WebKit" version="1.4.0" />
                 <dependency id="Plugin.CurrentActivity" version="2.1.0.4" />
             </group>
             <group targetFramework="Xamarin.iOS10">
@@ -38,9 +39,9 @@
         <file src="XamarinSDK/CobrowseIO.Xamarin/bin/Release/netstandard1.0/CobrowseIO.Xamarin.*" target="lib\netstandard1.0" />
     
         <!-- Android-specific files -->
-        <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.dll" target="lib/MonoAndroid11.0" />
-        <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.pdb" target="lib/MonoAndroid11.0" />
-        <file src="XamarinSDK/CobrowseIO.Xamarin.Android/bin/Release/CobrowseIO.Xamarin.*" target="lib/MonoAndroid11.0" />
+        <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.dll" target="lib/MonoAndroid13.0" />
+        <file src="Android/CobrowseIO.Android/bin/Release/CobrowseIO.Android.pdb" target="lib/MonoAndroid13.0" />
+        <file src="XamarinSDK/CobrowseIO.Xamarin.Android/bin/Release/CobrowseIO.Xamarin.*" target="lib/MonoAndroid13.0" />
 
         <!-- iOS-specific files -->
         <file src="iOS/CobrowseIO.iOS/bin/Release/CobrowseIO.iOS.*" target="lib/Xamarin.iOS10" />

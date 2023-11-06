@@ -180,6 +180,14 @@ namespace Xamarin.CobrowseIO
             });
         }
 
+        /// <inheritdoc/>
+        public void SetCapabilities(string[] capabilities, CobrowseCallback callback)
+        {
+            _platformSession.SetCapabilities(capabilities, (NSError e, Session session) =>
+            {
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
+            });
+        }
 
         /// <summary>
         /// Activates the session.
