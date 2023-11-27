@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Foundation;
 
-namespace Xamarin.CobrowseIO
+namespace Xamarin.CobrowseIO.iOS
 {
     public partial class CobrowseIO
     {

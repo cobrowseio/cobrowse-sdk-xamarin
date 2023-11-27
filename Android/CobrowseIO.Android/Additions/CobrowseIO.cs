@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Java.Lang.Annotation;
 
-namespace Xamarin.CobrowseIO
+namespace Xamarin.CobrowseIO.Android
 {
     public partial class CobrowseIO
     {

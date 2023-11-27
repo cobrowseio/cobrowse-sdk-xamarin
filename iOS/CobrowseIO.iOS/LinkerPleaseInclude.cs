@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Xamarin.CobrowseIO
+namespace Xamarin.CobrowseIO.iOS
 {
     [Foundation.Preserve(AllMembers = true)]
     public class LinkerPleaseInclude

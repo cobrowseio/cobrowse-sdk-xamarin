@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using ObjCRuntime;
 using Xamarin.CobrowseIO;
 
-namespace Xamarin.CobrowseIO
+namespace Xamarin.CobrowseIO.iOS
 {
     [Native(NativeName = "CBIORemoteControlState")]
     public enum RemoteControlState : ulong

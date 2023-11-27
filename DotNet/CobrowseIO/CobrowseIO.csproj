@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;</TargetFrameworks>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>false</ImplicitUsings>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+
+    <Title>Xamarin.CobrowseIO</Title>
+    <Product>Xamarin.CobrowseIO</Product>
+    <RootNamespace>Xamarin.CobrowseIO</RootNamespace>
+    <Description>Cobrowse.io - .NET Mobile SDK</Description>
+    <Company>Cobrowse.io LLC</Company>
+    <Version>4.0.0</Version>
+    <Configurations>Release;Debug</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+    <ProjectReference Include="..\..\Android\NumbersJava.Android\NumbersJava.Android.csproj" />
+    <ProjectReference Include="..\..\Android\CborJava.Android\CborJava.Android.csproj" />
+    <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
+    <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj" />
+  </ItemGroup>
+
+</Project>
