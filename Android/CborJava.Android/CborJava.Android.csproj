@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
+    <TargetFramework>net8.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -18,6 +18,6 @@
     </AndroidJavaSource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="NumbersJava.Android\NumbersJava.Android.csproj" />
+    <ProjectReference Include="..\NumbersJava.Android\NumbersJava.Android.csproj" />
   </ItemGroup>
 </Project>

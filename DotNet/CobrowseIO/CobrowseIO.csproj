@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-android;net8.0-ios;</TargetFrameworks>
     <UseMaui>true</UseMaui>
+    <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
     <SingleProject>true</SingleProject>
     <ImplicitUsings>false</ImplicitUsings>
 
@@ -18,7 +19,7 @@
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
     <CreatePackage>false</CreatePackage>
   </PropertyGroup>
   
@@ -26,13 +27,45 @@
     <CreatePackage>false</CreatePackage>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.10.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.6" />
+    <PackageReference Include="Square.OkHttp3" Version="4.9.2.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.4.0" />
+  </ItemGroup>
+
+  <Target Name="FixMauiBug10150" AfterTargets="Build" Condition="'$(TargetFramework)'=='net8.0-android'">
+    <!--
+    If a MAUI app (like `MauiSample`) consumes a MAUI source project (like `CobrowseIO`)
+    it looks for the Android-specific DLLs in the wrong place.
+    The workaround MSBuild target copies the built output into that "incorrect" directory.
+    https://github.com/dotnet/maui/issues/10150
+    https://github.com/dotnet/maui/issues/10200
+    -->
+    <Message Importance="high" Text="FixMauiBug10150:" />
+    <ItemGroup>
+      <AndroidBuildOutputs Include="$(ProjectDir)$(OutDir)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AndroidBuildOutputs)" DestinationFolder="$(ProjectDir)$(OutDir)android-x64" />
+    <Copy SourceFiles="@(AndroidBuildOutputs)" DestinationFolder="$(ProjectDir)$(OutDir)android-x86" />
+    <Copy SourceFiles="@(AndroidBuildOutputs)" DestinationFolder="$(ProjectDir)$(OutDir)android-arm64" />
+  </Target>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
     <ProjectReference Include="..\..\Android\NumbersJava.Android\NumbersJava.Android.csproj" />
     <ProjectReference Include="..\..\Android\CborJava.Android\CborJava.Android.csproj" />
     <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
     <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj" />
   </ItemGroup>
 
