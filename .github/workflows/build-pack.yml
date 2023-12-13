@@ -1,0 +1,51 @@
+name: Build and pack NuGet packages
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: 'true'
+
+    - name: Print toolchain versions
+      run: |
+        dotnet --version
+        xcodebuild -version
+        java -version
+
+    - name: Restore NuGet packages
+      run: |
+        dotnet restore CobrowseIO.sln --source https://api.nuget.org/v3/index.json
+
+    - name: Build SDK projects
+      run: |
+        dotnet build Android/NumbersJava.Android/NumbersJava.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build Android/CborJava.Android/CborJava.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build Android/CobrowseIO.Android/CobrowseIO.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build DotNet/CobrowseIO/CobrowseIO.csproj --configuration "Release" --no-dependencies --no-restore
+
+    - name: Create NuGet packages
+      run: |
+        nuget pack CobrowseIO.AppExtension.iOS.nuspec
+        nuget pack CobrowseIO.Xamarin.nuspec
+
+    - name: Copy nupkg files to artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        path: |
+          CobrowseIO.AppExtension.iOS.*.nupkg
+          CobrowseIO.Xamarin.*.nupkg
+        retention-days: 7
+        if-no-files-found: error
