@@ -13,7 +13,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Cobrowse.io - .NET iOS and Android SDK</description>
         <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
-        <tags>xamarin, android, ios</tags>
+        <tags>dotnet, android, ios, cobrowse</tags>
         <dependencies>
             <group targetFramework="net8.0-android34.0">
                 <dependency id="Square.OkHttp3" version="3.12.6" />
@@ -54,7 +54,6 @@
         <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.pdb" target="lib\net8.0-android34.0" />
         <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.xml" target="lib\net8.0-android34.0" />
 
-        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.aar" target="lib\net8.0-android34.0" />
         <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.dll" target="lib\net8.0-android34.0" />
         <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.pdb" target="lib\net8.0-android34.0" />
         <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.xml" target="lib\net8.0-android34.0" />
