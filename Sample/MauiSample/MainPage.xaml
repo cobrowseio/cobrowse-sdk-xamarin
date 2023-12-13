@@ -29,9 +29,8 @@
                 HorizontalOptions="Center" />
 
             <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
+                Text="Open Cobrowse.io"
+                SemanticProperties.Hint="Open Cobrowse.io 6-digits code screen"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
