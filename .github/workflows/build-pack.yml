@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
     - name: Checkout repository
@@ -21,11 +21,21 @@ jobs:
       with:
         dotnet-version: '8.x.x'
 
+    - name: Select Xcode version
+      env:
+        XCODE_SELECTED_PATH: "/Applications/Xcode_15.0.1.app"
+      shell: bash
+      run: sudo xcode-select --switch ${XCODE_SELECTED_PATH}
+
     - name: Print toolchain versions
       run: |
         dotnet --version
         xcodebuild -version
         java -version
+
+    - name: Install .NET workloads
+      run: |
+        sudo dotnet workload restore
 
     - name: Restore NuGet packages
       run: |
