@@ -9,7 +9,7 @@
     <Title>Xamarin.CobrowseIO.iOS.AppExtension</Title>
     <Product>Xamarin.CobrowseIO.iOS.AppExtension</Product>
     <RootNamespace>Xamarin.CobrowseIO.iOS.AppExtension</RootNamespace>
-    <Description>Cobrowse.io - .NET Mobile SDK</Description>
+    <Description>Cobrowse.io - .NET iOS and Android SDK</Description>
   </PropertyGroup>
 
   <ItemGroup>
