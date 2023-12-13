@@ -7,6 +7,8 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+        Title = "Home";
     }
 
     private void OnCounterClicked(object sender, EventArgs e)

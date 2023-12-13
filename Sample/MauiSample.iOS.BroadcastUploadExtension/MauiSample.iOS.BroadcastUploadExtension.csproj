@@ -1,26 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>net8.0-ios</TargetFrameworks>
-        <OutputType>Library</OutputType>
-        <ApplicationId>io.cobrowse.mauisample.broadcastuploadextension</ApplicationId>
-        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-        <ApplicationVersion>1</ApplicationVersion>
-        <SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
-        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-ios</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <ApplicationId>io.cobrowse.mauisample.broadcastuploadextension</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion>12.0</SupportedOSPlatformVersion>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <IsAppExtension>true</IsAppExtension>
-        <IsWatchExtension>false</IsWatchExtension>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-      <CreatePackage>false</CreatePackage>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-      <CreatePackage>false</CreatePackage>
-    </PropertyGroup>
-    
-    <ItemGroup>
-      <ProjectReference Include="..\..\iOS\CobrowseIO.AppExtension.iOS\CobrowseIO.AppExtension.iOS.csproj" />
-    </ItemGroup>
+  <PropertyGroup>
+    <IsAppExtension>true</IsAppExtension>
+    <IsWatchExtension>false</IsWatchExtension>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\iOS\CobrowseIO.AppExtension.iOS\CobrowseIO.AppExtension.iOS.csproj" />
+  </ItemGroup>
 </Project>

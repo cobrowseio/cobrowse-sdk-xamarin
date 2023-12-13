@@ -9,7 +9,7 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = new AppShell();
+        MainPage = new NavigationPage(new MainPage());
 
         CobrowseIO.Instance.License = "e-73R7b1nIeoFQ";
         CobrowseIO.Instance.Api = "https://staging.cobrowse.io";
