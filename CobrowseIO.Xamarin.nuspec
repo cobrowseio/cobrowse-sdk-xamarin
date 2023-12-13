@@ -49,7 +49,6 @@
         <file src="Android/CborJava.Android/bin/Release/net8.0-android/CborJava.Android.xml" target="lib\net8.0-android34.0" />
 
         <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/cobrowse-sdk-android-*.aar" target="lib\net8.0-android34.0" />
-        <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.aar" target="lib\net8.0-android34.0" />
         <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.dll" target="lib\net8.0-android34.0" />
         <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.pdb" target="lib\net8.0-android34.0" />
         <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.xml" target="lib\net8.0-android34.0" />
