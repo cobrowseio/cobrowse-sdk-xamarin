@@ -11,7 +11,7 @@
         <icon>icon.png</icon>
         <iconUrl>https://avatars3.githubusercontent.com/u/32596876</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Cobrowse.io - .NET Mobile SDK</description>
+        <description>Cobrowse.io - .NET iOS and Android SDK</description>
         <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
         <tags>xamarin, android, ios</tags>
         <dependencies>
@@ -34,15 +34,39 @@
     </metadata>
     <files>
         <!-- Core -->
-        <file src="DotNet/CobrowseIO/bin/Release/net8.0/CobrowseIO.*" target="lib\net8.0" />
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0/CobrowseIO.dll" target="lib\net8.0" />
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0/CobrowseIO.pdb" target="lib\net8.0" />
 
         <!-- Android-specific files -->
-        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/NumbersJava.Android.*" target="lib\net8.0-android34.0" />
-        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CborJava.Android.*" target="lib\net8.0-android34.0" />
-        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.*" target="lib\net8.0-android34.0" />
+        <file src="Android/NumbersJava.Android/bin/Release/net8.0-android/NumbersJava.Android.aar" target="lib\net8.0-android34.0" />
+        <file src="Android/NumbersJava.Android/bin/Release/net8.0-android/NumbersJava.Android.dll" target="lib\net8.0-android34.0" />
+        <file src="Android/NumbersJava.Android/bin/Release/net8.0-android/NumbersJava.Android.pdb" target="lib\net8.0-android34.0" />
+        <file src="Android/NumbersJava.Android/bin/Release/net8.0-android/NumbersJava.Android.xml" target="lib\net8.0-android34.0" />
+
+        <file src="Android/CborJava.Android/bin/Release/net8.0-android/CborJava.Android.aar" target="lib\net8.0-android34.0" />
+        <file src="Android/CborJava.Android/bin/Release/net8.0-android/CborJava.Android.dll" target="lib\net8.0-android34.0" />
+        <file src="Android/CborJava.Android/bin/Release/net8.0-android/CborJava.Android.pdb" target="lib\net8.0-android34.0" />
+        <file src="Android/CborJava.Android/bin/Release/net8.0-android/CborJava.Android.xml" target="lib\net8.0-android34.0" />
+
+        <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/cobrowse-sdk-android-*.aar" target="lib\net8.0-android34.0" />
+        <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.aar" target="lib\net8.0-android34.0" />
+        <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.dll" target="lib\net8.0-android34.0" />
+        <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.pdb" target="lib\net8.0-android34.0" />
+        <file src="Android/CobrowseIO.Android/bin/Release/net8.0-android/CobrowseIO.Android.xml" target="lib\net8.0-android34.0" />
+
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.aar" target="lib\net8.0-android34.0" />
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.dll" target="lib\net8.0-android34.0" />
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.pdb" target="lib\net8.0-android34.0" />
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0-android/CobrowseIO.xml" target="lib\net8.0-android34.0" />
 
         <!-- iOS-specific files -->
-        <file src="DotNet/CobrowseIO/bin/Release/net8.0-ios/CobrowseIO.*" target="lib\net8.0-ios17.0"/>
+        <file src="iOS/CobrowseIO.iOS/bin/Release/net8.0-ios/CobrowseIO.iOS.dll" target="lib\net8.0-ios17.0"/>
+        <file src="iOS/CobrowseIO.iOS/bin/Release/net8.0-ios/CobrowseIO.iOS.pdb" target="lib\net8.0-ios17.0"/>
+        <file src="iOS/CobrowseIO.iOS/bin/Release/net8.0-ios/CobrowseIO.iOS.resources.stamp" target="lib\net8.0-ios17.0"/>
+        <file src="iOS/CobrowseIO.iOS/bin/Release/net8.0-ios/CobrowseIO.iOS.resources.zip" target="lib\net8.0-ios17.0"/>
+
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0-ios/CobrowseIO.dll" target="lib\net8.0-ios17.0"/>
+        <file src="DotNet/CobrowseIO/bin/Release/net8.0-ios/CobrowseIO.pdb" target="lib\net8.0-ios17.0"/>
 
         <!-- Package icon -->
         <file src="icon.png" />
