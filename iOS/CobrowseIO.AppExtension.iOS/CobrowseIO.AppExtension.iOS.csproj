@@ -5,7 +5,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
     <Company>Cobrowse.io LLC</Company>
-    <Version>2.28.3</Version>
+    <Version>2.29.3</Version>
     <Title>Xamarin.CobrowseIO.iOS.AppExtension</Title>
     <Product>Xamarin.CobrowseIO.iOS.AppExtension</Product>
     <RootNamespace>Xamarin.CobrowseIO.iOS.AppExtension</RootNamespace>

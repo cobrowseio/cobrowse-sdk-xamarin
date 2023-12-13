@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Company>Cobrowse.io LLC</Company>
-    <Version>2.30.2</Version>
+    <Version>2.30.3</Version>
     <Title>Xamarin.CobrowseIO.Android</Title>
     <Product>Xamarin.CobrowseIO.Android</Product>
     <RootNamespace>Xamarin.CobrowseIO.Android</RootNamespace>
@@ -27,13 +27,13 @@
   https://github.com/xamarin/java.interop/issues/847
 
   <ItemGroup>
-    <JavaDocJar Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.2\cobrowse-sdk-android-2.30.2-javadoc.jar">
+    <JavaDocJar Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.3\cobrowse-sdk-android-2.30.3-javadoc.jar">
         <Link>Jars\cobrowse-sdk-android-LATEST-javadoc.jar</Link>
     </JavaDocJar>
   </ItemGroup>
   -->
   <ItemGroup>
-    <AndroidLibrary Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.2\cobrowse-sdk-android-2.30.2.aar">
+    <AndroidLibrary Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.3\cobrowse-sdk-android-2.30.3.aar">
       <Link>Jars\cobrowse-sdk-android-LATEST.aar</Link>
       <Pack>true</Pack>
       <Bind>true</Bind>
