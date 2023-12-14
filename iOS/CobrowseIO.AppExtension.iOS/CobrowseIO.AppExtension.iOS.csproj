@@ -29,8 +29,8 @@
     Instead, it only generates a `Cobrowse.IO.iOS.AppExtension.resources` folder with the extension
     XCFramework content. However, this directory is not being picked up when referencing
     the broadcast extension library via a NuGet package.
-    The simplest way to force .NET to generate a ZIP file is to simply add the main XCFramework as
-    a second depenency.
+    The simplest way to force .NET to generate a ZIP file is to add the main XCFramework
+    as a second dependency.
     -->
     <NativeReference Include="..\..\cobrowse-sdk-ios-binary\CobrowseIO.xcframework">
       <Kind>Framework</Kind>
