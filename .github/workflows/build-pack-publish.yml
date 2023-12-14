@@ -1,13 +1,12 @@
-name: Build and pack NuGet packages
+name: Build, pack NuGet packages, publish to NuGet.org
 
 on:
   push:
-    branches: [ master ]
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
-
-    runs-on: macos-13
 
     steps:
     - name: Checkout repository
@@ -61,3 +60,7 @@ jobs:
           CobrowseIO.DotNet.*.nupkg
         retention-days: 7
         if-no-files-found: error
+
+    - name: Push nupkg files to NuGet.org
+      run: |
+        nuget push CobrowseIO.DotNet.*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_PUSH_TOKEN }} -SkipDuplicate
