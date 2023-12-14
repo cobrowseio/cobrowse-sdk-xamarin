@@ -27,10 +27,10 @@
     Rather misteriously, referencing the extension framework only leads to a situation when .NET
     does not generate `Cobrowse.IO.iOS.AppExtension.resources.zip` file.
     Instead, it only generates a `Cobrowse.IO.iOS.AppExtension.resources` folder with the extension
-    XCFramework content. However, su directory is not being picked up when referencing the extension
-    library though a NuGet package.
+    XCFramework content. However, this directory is not being picked up when referencing
+    the broadcast extension library via a NuGet package.
     The simplest way to force .NET to generate a ZIP file is to simply add the main XCFramework as
-    a depenency.
+    a second depenency.
     -->
     <NativeReference Include="..\..\cobrowse-sdk-ios-binary\CobrowseIO.xcframework">
       <Kind>Framework</Kind>
