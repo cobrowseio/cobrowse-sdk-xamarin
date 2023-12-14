@@ -1,8 +1,10 @@
-name: Build and pack NuGet packages
+name: Update native SDKs, build and pack NuGet packages, create a pull request if necessary
 
-on:
-  push:
-    branches: [ master ]
+on: workflow_dispatch
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   build:
@@ -31,13 +33,21 @@ jobs:
         xcodebuild -version
         java -version
 
+    - name: Install .NET script
+      run: |
+        dotnet tool install -g dotnet-script
+
+    - name: Update native SDKs
+      run: |
+        dotnet script UpdateSDKs/UpdateSDKs.csx
+
     - name: Install .NET workloads
       run: |
         sudo dotnet workload restore
 
     - name: Restore NuGet packages
       run: |
-        dotnet restore CobrowseIO.sln
+        dotnet restore CobrowseIO.sln --source https://api.nuget.org/v3/index.json
 
     - name: Build SDK projects
       run: |
@@ -61,3 +71,22 @@ jobs:
           CobrowseIO.DotNet.*.nupkg
         retention-days: 7
         if-no-files-found: error
+
+    # If SDKs were updated, commit the changes automatically and open a new pull request
+    - name: Create a new pull request
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FILES_TO_COMMIT: cobrowse-sdk-android-binary cobrowse-sdk-ios-binary Android/CobrowseIO.Android/CobrowseIO.Android.csproj iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj
+        NEW_BRANCH_NAME: feature/update_native_sdks_${{ github.run_id }}
+      run: |
+        if [[ `git status --porcelain $FILES_TO_COMMIT` ]]; then
+          git config --local user.name "Cobrowse.io Bot"
+          git config --local user.email "github@cobrowse.io"
+          git checkout -b $NEW_BRANCH_NAME
+          git add $FILES_TO_COMMIT
+          git commit -m "feat: update native SDKs"
+          git push origin $NEW_BRANCH_NAME
+          gh pr create -B master -H $NEW_BRANCH_NAME --title 'Update native SDKs' --body ''
+        else
+          echo "Native SDKs haven't been updated"
+        fi

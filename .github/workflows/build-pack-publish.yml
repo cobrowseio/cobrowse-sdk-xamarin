@@ -8,6 +8,8 @@ on:
 jobs:
   build:
 
+    runs-on: macos-13
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -36,7 +38,7 @@ jobs:
 
     - name: Restore NuGet packages
       run: |
-        dotnet restore CobrowseIO.sln --source https://api.nuget.org/v3/index.json
+        dotnet restore CobrowseIO.sln
 
     - name: Build SDK projects
       run: |
