@@ -23,8 +23,10 @@ public partial class App : Application
             { "<set your optional custom field>", 3.14f }
         };
 
-#if IOS
         // Optional. Needed for the redaction feature.
+#if ANDROID
+        Cobrowse.IO.Android.CobrowseIO.Instance.SetDelegate(new MauiSample.Platforms.Android.CobrowseRedactionDelegate());
+#elif IOS
         Cobrowse.IO.iOS.CobrowseIO.Instance.SetDelegate(new MauiSample.Platforms.iOS.CobrowseRedactionDelegate());
 #endif
     }
