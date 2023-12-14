@@ -48,18 +48,18 @@ jobs:
         dotnet build Android/CobrowseIO.Android/CobrowseIO.Android.csproj --configuration "Release" --no-dependencies --no-restore
         dotnet build iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj --configuration "Release" --no-dependencies --no-restore
         dotnet build iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj --configuration "Release" --no-dependencies --no-restore
-        dotnet build DotNet/CobrowseIO/CobrowseIO.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build SDK/CobrowseIO/CobrowseIO.csproj --configuration "Release" --no-dependencies --no-restore
 
     - name: Create NuGet packages
       run: |
-        nuget pack CobrowseIO.AppExtension.iOS.nuspec
-        nuget pack CobrowseIO.Xamarin.nuspec
+        nuget pack CobrowseIO.DotNet.iOS.AppExtension.nuspec
+        nuget pack CobrowseIO.DotNet.nuspec
 
     - name: Copy nupkg files to artifacts
       uses: actions/upload-artifact@v3
       with:
         path: |
-          CobrowseIO.AppExtension.iOS.*.nupkg
-          CobrowseIO.Xamarin.*.nupkg
+          CobrowseIO.DotNet.iOS.AppExtension.*.nupkg
+          CobrowseIO.DotNet.*.nupkg
         retention-days: 7
         if-no-files-found: error

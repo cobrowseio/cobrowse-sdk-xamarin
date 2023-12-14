@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Xamarin.CobrowseIO;
+using Cobrowse.IO;
 
 namespace MauiSample;
 
@@ -11,18 +11,22 @@ public partial class App : Application
 
         MainPage = new NavigationPage(new MainPage());
 
-        CobrowseIO.Instance.License = "e-73R7b1nIeoFQ";
-        CobrowseIO.Instance.Api = "https://staging.cobrowse.io";
+        CobrowseIO.Instance.License = "trial";
         CobrowseIO.Instance.Start();
         CobrowseIO.Instance.CustomData = new Dictionary<string, object>
         {
-            { CobrowseIO.UserIdKey, "<your_user_id>" },
-            { CobrowseIO.UserNameKey, "<your_user_name>" },
-            { CobrowseIO.UserEmailKey, "<your_user_email>" },
-            { CobrowseIO.DeviceIdKey, "<your_device_id>" },
-            { CobrowseIO.DeviceNameKey, "<your_device_name>" },
-            { "custom_field", 5.75f }
+            { CobrowseIO.UserIdKey, "<set your optional user id>" },
+            { CobrowseIO.UserNameKey, "<set your optional user name>" },
+            { CobrowseIO.UserEmailKey, "<set your optional user email>" },
+            { CobrowseIO.DeviceIdKey, "<set your optional device id>" },
+            { CobrowseIO.DeviceNameKey, "<set your optional device name>" },
+            { "<set your optional custom field>", 3.14f }
         };
+
+#if IOS
+        // Optional. Needed for the redaction feature.
+        Cobrowse.IO.iOS.CobrowseIO.Instance.SetDelegate(new MauiSample.Platforms.iOS.CobrowseRedactionDelegate());
+#endif
     }
 
     protected override void OnStart()
@@ -31,31 +35,34 @@ public partial class App : Application
         CobrowseIO.Instance.SessionDidUpdate += OnCobrowseSessionDidUpdate;
         CobrowseIO.Instance.SessionDidEnd += OnCobrowseSessionDidEnd;
 
-        CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequest;
+        CobrowseIO.Instance.SessionDidRequest += OnCobrowseSessionDidRequestAsync;
 
-        CobrowseIO.Instance.RemoteControlRequest += OnRemoteControlRequest;
+        CobrowseIO.Instance.RemoteControlRequest += OnRemoteControlRequestAsync;
     }
 
-    private void OnCobrowseSessionDidLoad(object sender, ISession session)
+    private Page RequireMainPage()
+        => MainPage ?? throw new InvalidOperationException("MainPage is not set!");
+
+    private void OnCobrowseSessionDidLoad(object? sender, ISession session)
     {
         Debug.WriteLine("Session loaded");
     }
 
-    private void OnCobrowseSessionDidUpdate(object sender, ISession session)
+    private void OnCobrowseSessionDidUpdate(object? sender, ISession session)
     {
         Debug.WriteLine("Session updated");
     }
 
-    private void OnCobrowseSessionDidEnd(object sender, ISession session)
+    private void OnCobrowseSessionDidEnd(object? sender, ISession session)
     {
         Debug.WriteLine("Session ended");
     }
 
-    private async void OnCobrowseSessionDidRequest(object sender, ISession session)
+    private async void OnCobrowseSessionDidRequestAsync(object? sender, ISession session)
     {
         Debug.WriteLine("RemoteControl: " + session.RemoteControl);
 
-        bool allowed = await this.MainPage.DisplayAlert(
+        bool allowed = await RequireMainPage().DisplayAlert(
             title: "Cobrowse.io",
             message: "Allow Cobrowse.io session?",
             accept: "Allow",
@@ -70,11 +77,11 @@ public partial class App : Application
         }
     }
 
-    private async void OnRemoteControlRequest(object sender, ISession session)
+    private async void OnRemoteControlRequestAsync(object? sender, ISession session)
     {
         Debug.WriteLine("RemoteControl: " + session.RemoteControl);
 
-        bool allowed = await this.MainPage.DisplayAlert(
+        bool allowed = await RequireMainPage().DisplayAlert(
             title: "Cobrowse.io",
             message: "Allow remote control?",
             accept: "Allow",

@@ -1,8 +1,8 @@
 ﻿using System;
 using Android.Runtime;
-using Xamarin.CobrowseIO.Android;
+using Cobrowse.IO.Android;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io Agent class.

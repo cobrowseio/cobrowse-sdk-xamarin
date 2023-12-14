@@ -2,7 +2,7 @@
 using Foundation;
 using UIKit;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// <see cref="UIViewController"/> extension methods.

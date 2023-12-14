@@ -1,10 +1,10 @@
 ﻿using Foundation;
 using UIKit;
-using Xamarin.CobrowseIO.iOS;
-using NativeRemoteControlState = Xamarin.CobrowseIO.iOS.RemoteControlState;
-using NativeFullDeviceState = Xamarin.CobrowseIO.iOS.FullDeviceState;
+using Cobrowse.IO.iOS;
+using NativeRemoteControlState = Cobrowse.IO.iOS.RemoteControlState;
+using NativeFullDeviceState = Cobrowse.IO.iOS.FullDeviceState;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cobrowse.io delegate provides callbacks to the cross-platform wrapper.

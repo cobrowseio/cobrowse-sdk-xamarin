@@ -6,10 +6,11 @@
     <IsBindingProject>true</IsBindingProject>
     <Company>Cobrowse.io LLC</Company>
     <Version>2.29.3</Version>
-    <Title>Xamarin.CobrowseIO.iOS</Title>
-    <Product>Xamarin.CobrowseIO.iOS</Product>
-    <RootNamespace>Xamarin.CobrowseIO.iOS</RootNamespace>
-    <Description>Cobrowse.io - .NET iOS and Android SDK</Description>
+    <Title>Cobrowse.IO.iOS</Title>
+    <Product>Cobrowse.IO.iOS</Product>
+    <RootNamespace>Cobrowse.IO.iOS</RootNamespace>
+    <AssemblyName>Cobrowse.IO.iOS</AssemblyName>
+    <Description>Cobrowse.io - .NET iOS SDK</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,15 +4,15 @@ using System.ComponentModel;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
-using Xamarin.CobrowseIO.Android;
-using Xamarin.CobrowseIO.Android.UI;
+using Cobrowse.IO.Android;
+using Cobrowse.IO.Android.UI;
 using JClass = Java.Lang.Class;
 using JError = Java.Lang.Error;
 using JMethod = Java.Lang.Reflect.Method;
 using JObject = Java.Lang.Object;
-using NativeCobrowseIO = Xamarin.CobrowseIO.Android.CobrowseIO;
+using NativeCobrowseIO = Cobrowse.IO.Android.CobrowseIO;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Android-specific implementation of the cross-platform Cobrowse.io wrapper.
@@ -20,11 +20,11 @@ namespace Xamarin.CobrowseIO
     [Preserve(AllMembers = true)]
     public class CobrowseIOImplementation : ICobrowseIO
     {
-        protected Activity Activity
+        protected Activity? Activity
         {
             get
             {
-                Activity rvalue = null;
+                Activity? rvalue = null;
                 try
                 {
                     JClass activityWatcher = JClass.ForName("io.cobrowse.ActivityWatcher");
@@ -44,14 +44,15 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Occurs when a session is requested.
         /// </summary>
-        public event EventHandler<ISession> SessionDidRequest;
+        public event EventHandler<ISession>? SessionDidRequest;
 
         internal bool RaiseSessionDidRequest(Session session)
         {
-            var sessionDidRequest = SessionDidRequest;
-            if (sessionDidRequest != null)
+            EventHandler<ISession>? sessionDidRequest = SessionDidRequest;
+            if (sessionDidRequest != null
+                && CobrowseSessionImplementation.TryCreate(session) is ISession s)
             {
-                sessionDidRequest(this, CobrowseSessionImplementation.TryCreate(session));
+                sessionDidRequest(this, s);
                 return true;
             }
             return false;
@@ -60,14 +61,15 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Occurs when an agent requests remote control.
         /// </summary>
-        public event EventHandler<ISession> RemoteControlRequest;
+        public event EventHandler<ISession>? RemoteControlRequest;
 
         internal bool RaiseRemoteControlRequest(Session session)
         {
-            var remoteControlRequest = RemoteControlRequest;
-            if (remoteControlRequest != null)
+            EventHandler<ISession>? remoteControlRequest = RemoteControlRequest;
+            if (remoteControlRequest != null
+                && CobrowseSessionImplementation.TryCreate(session) is ISession s)
             {
-                remoteControlRequest(this, CobrowseSessionImplementation.TryCreate(session));
+                remoteControlRequest(this, s);
                 return true;
             }
             return false;
@@ -77,14 +79,15 @@ namespace Xamarin.CobrowseIO
         /// Occurs when a session is first made available to the device,
         /// whether by creating a 6 digit code, or via a connect request from an agent.
         /// </summary>
-        public event EventHandler<ISession> SessionDidLoad;
+        public event EventHandler<ISession>? SessionDidLoad;
 
         internal bool RaiseSessionDidLoad(Session session)
         {
-            var sessionDidLoad = SessionDidLoad;
-            if (sessionDidLoad != null)
+            EventHandler<ISession>? sessionDidLoad = SessionDidLoad;
+            if (sessionDidLoad != null
+                && CobrowseSessionImplementation.TryCreate(session) is ISession s)
             {
-                sessionDidLoad(this, CobrowseSessionImplementation.TryCreate(session));
+                sessionDidLoad(this, s);
                 return true;
             }
             return false;
@@ -93,14 +96,15 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Occurs when a session is updated.
         /// </summary>
-        public event EventHandler<ISession> SessionDidUpdate;
+        public event EventHandler<ISession>? SessionDidUpdate;
 
         internal bool RaiseSessionDidUpdate(Session session)
         {
-            var sessionDidUpdate = SessionDidUpdate;
-            if (sessionDidUpdate != null)
+            EventHandler<ISession>? sessionDidUpdate = SessionDidUpdate;
+            if (sessionDidUpdate != null
+                && CobrowseSessionImplementation.TryCreate(session) is ISession s)
             {
-                sessionDidUpdate(this, CobrowseSessionImplementation.TryCreate(session));
+                sessionDidUpdate(this, s);
                 return true;
             }
             return false;
@@ -109,14 +113,15 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Occurs when a session ends.
         /// </summary>
-        public event EventHandler<ISession> SessionDidEnd;
+        public event EventHandler<ISession>? SessionDidEnd;
 
         internal bool RaiseSessionDidEnd(Session session)
         {
-            var sessionDidEnd = SessionDidEnd;
-            if (sessionDidEnd != null)
+            EventHandler<ISession>? sessionDidEnd = SessionDidEnd;
+            if (sessionDidEnd != null
+                && CobrowseSessionImplementation.TryCreate(session) is ISession s)
             {
-                sessionDidEnd(this, CobrowseSessionImplementation.TryCreate(session));
+                sessionDidEnd(this, s);
                 return true;
             }
             return false;
@@ -125,13 +130,13 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>
-        public ISession CurrentSession
+        public ISession? CurrentSession
             => CobrowseSessionImplementation.TryCreate(NativeCobrowseIO.Instance.CurrentSession);
 
         /// <summary>
         /// Creates a new Cobrowse.io session.
         /// </summary>
-        public void CreateSession(CobrowseCallback callback)
+        public void CreateSession(CobrowseCallback? callback)
         {
             NativeCobrowseIO.Instance.CreateSession((JError e, Session session) =>
             {

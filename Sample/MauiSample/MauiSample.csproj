@@ -82,19 +82,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DotNet\CobrowseIO\CobrowseIO.csproj" />
+    <ProjectReference Include="..\..\SDK\CobrowseIO\CobrowseIO.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
     <ProjectReference Include="..\..\Android\NumbersJava.Android\NumbersJava.Android.csproj" />
     <ProjectReference Include="..\..\Android\CborJava.Android\CborJava.Android.csproj" />
     <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj" />
-    <ProjectReference Include="..\..\DotNet\CobrowseIO\CobrowseIO.csproj" />
+    <ProjectReference Include="..\..\SDK\CobrowseIO\CobrowseIO.csproj" />
   </ItemGroup>
 
    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
     <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj" />
-    <ProjectReference Include="..\..\DotNet\CobrowseIO\CobrowseIO.csproj" />
+    <ProjectReference Include="..\..\SDK\CobrowseIO\CobrowseIO.csproj" />
     <ProjectReference Include="..\MauiSample.iOS.BroadcastUploadExtension\MauiSample.iOS.BroadcastUploadExtension.csproj">
       <IsAppExtension>true</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>

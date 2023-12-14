@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cross-platform Cobrowse.io API.

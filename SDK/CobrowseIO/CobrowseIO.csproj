@@ -5,13 +5,15 @@
     <UseMaui>false</UseMaui>
     <SingleProject>true</SingleProject>
     <ImplicitUsings>false</ImplicitUsings>
+    <Nullable>enable</Nullable>
 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 
-    <Title>Xamarin.CobrowseIO</Title>
-    <Product>Xamarin.CobrowseIO</Product>
-    <RootNamespace>Xamarin.CobrowseIO</RootNamespace>
+    <Title>Cobrowse.IO</Title>
+    <Product>Cobrowse.IO</Product>
+    <RootNamespace>Cobrowse.IO</RootNamespace>
+    <AssemblyName>Cobrowse.IO</AssemblyName>
     <Description>Cobrowse.io - .NET iOS and Android SDK</Description>
     <Company>Cobrowse.io LLC</Company>
     <Version>4.0.0</Version>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Foundation;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     [Preserve(AllMembers = true)]
     internal static class CobrowseLocalizedStringExtensions

@@ -1,7 +1,6 @@
 ﻿using System;
 using ObjCRuntime;
-using Xamarin.CobrowseIO;
 
-namespace Xamarin.CobrowseIO.iOS.AppExtension
+namespace Cobrowse.IO.iOS.AppExtension
 {
 }

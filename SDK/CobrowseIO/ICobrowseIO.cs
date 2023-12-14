@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io SDK.
@@ -38,12 +38,12 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Returns the current session instance or null if it doesn't exist.
         /// </summary>
-        ISession CurrentSession { get; }
+        ISession? CurrentSession { get; }
 
         /// <summary>
         /// Creates a new Cobrowse.io session.
         /// </summary>
-        void CreateSession(CobrowseCallback callback);
+        void CreateSession(CobrowseCallback? callback);
 
         /// <summary>
         /// Gets or sets the API string.

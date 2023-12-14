@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io session.
@@ -10,7 +10,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Gets the session's code.
         /// </summary>
-        string Code { get; }
+        string? Code { get; }
 
         /// <summary>
         /// Gets the session's state.
@@ -45,7 +45,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Gets an agent instance.
         /// </summary>
-        IAgent Agent { get; }
+        IAgent? Agent { get; }
 
         /// <summary>
         /// Gets the current remote control status.
@@ -55,7 +55,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Enables or disables remote control.
         /// </summary>
-        void SetRemoteControl(RemoteControlState value, CobrowseCallback callback);
+        void SetRemoteControl(RemoteControlState value, CobrowseCallback? callback);
 
         /// <summary>
         /// Gets a value indicating if the session is in full-device mode.
@@ -67,7 +67,7 @@ namespace Xamarin.CobrowseIO
         /// Enables or disables full-device mode.
         /// </summary>
         [Obsolete("Use SetFullDeviceState instead")]
-        void SetFullDevice(bool value, CobrowseCallback callback);
+        void SetFullDevice(bool value, CobrowseCallback? callback);
 
         /// <summary>
         /// Gets the current full device status.
@@ -77,21 +77,21 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Enable or disables full device.
         /// </summary>
-        void SetFullDeviceState(FullDeviceState value, CobrowseCallback callback);
+        void SetFullDeviceState(FullDeviceState value, CobrowseCallback? callback);
 
         /// <summary>
         /// Sets the capabilities on this session object.
         /// </summary>
-        void SetCapabilities(string[] capabilities, CobrowseCallback callback);
+        void SetCapabilities(string[] capabilities, CobrowseCallback? callback);
 
         /// <summary>
         /// Activates the session.
         /// </summary>
-        void Activate(CobrowseCallback callback);
+        void Activate(CobrowseCallback? callback);
 
         /// <summary>
         /// Ends the session.
         /// </summary>
-        void End(CobrowseCallback callback);
+        void End(CobrowseCallback? callback);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Xamarin.CobrowseIO
+﻿namespace Cobrowse.IO
 {
     public enum FullDeviceState
     {

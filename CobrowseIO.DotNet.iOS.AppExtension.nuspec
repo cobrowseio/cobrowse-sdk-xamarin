@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>CobrowseIO.AppExtension.iOS</id>
+        <id>CobrowseIO.DotNet.iOS.AppExtension</id>
         <version>4.0.0-alpha01</version>
-        <title>CobrowseIO.AppExtension.iOS</title>
+        <title>CobrowseIO.DotNet.iOS.AppExtension</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
         <license type="expression">Apache-2.0</license>
@@ -23,7 +23,7 @@
     <files>
         <file src="icon.png" target="" />
 
-        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/CobrowseIO.AppExtension.iOS.*" target="lib/net8.0-ios17.0" />
-        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/CobrowseIO.AppExtension.iOS.resources/**" target="lib/net8.0-ios17.0" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/Cobrowse.IO.iOS.AppExtension.*" target="lib/net8.0-ios17.0" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/Cobrowse.IO.iOS.AppExtension.resources/**" target="lib/net8.0-ios17.0" />
     </files>
 </package>

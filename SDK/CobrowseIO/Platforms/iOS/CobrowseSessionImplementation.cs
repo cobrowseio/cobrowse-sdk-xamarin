@@ -1,12 +1,10 @@
 ﻿using System;
-using Android.Runtime;
-using Xamarin.CobrowseIO.Android;
-using JError = Java.Lang.Error;
-using NativeCobrowseIO = Xamarin.CobrowseIO.Android.CobrowseIO;
-using NativeRemoteControlState = Xamarin.CobrowseIO.Android.RemoteControlState;
-using NativeFullDeviceState = Xamarin.CobrowseIO.Android.FullDeviceState;
+using Foundation;
+using Cobrowse.IO.iOS;
+using NativeRemoteControlState = Cobrowse.IO.iOS.RemoteControlState;
+using NativeFullDeviceState = Cobrowse.IO.iOS.FullDeviceState;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io session.
@@ -14,7 +12,7 @@ namespace Xamarin.CobrowseIO
     [Preserve(AllMembers = true)]
     public class CobrowseSessionImplementation : ISession
     {
-        private Session _platformSession;
+        private readonly Session _platformSession;
 
         public CobrowseSessionImplementation(Session session)
         {
@@ -31,7 +29,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Gets the session's code.
         /// </summary>
-        public string Code => _platformSession.Code;
+        public string? Code => _platformSession.Code;
 
         /// <summary>
         /// Gets the session's state.
@@ -66,7 +64,7 @@ namespace Xamarin.CobrowseIO
         /// <summary>
         /// Gets an agent instance.
         /// </summary>
-        public IAgent Agent => _platformSession.Agent != null
+        public IAgent? Agent => _platformSession.Agent != null
             ? new AgentImplementation(_platformSession.Agent)
             : null;
 
@@ -92,10 +90,10 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <inheritdoc/>
-        public void SetRemoteControl(RemoteControlState state, CobrowseCallback callback)
+        public void SetRemoteControl(RemoteControlState value, CobrowseCallback? callback)
         {
             NativeRemoteControlState toBeSet;
-            switch (state)
+            switch (value)
             {
                 case RemoteControlState.Off:
                     toBeSet = NativeRemoteControlState.Off;
@@ -114,9 +112,9 @@ namespace Xamarin.CobrowseIO
                     break;
             }
 
-            _platformSession.SetRemoteControl(toBeSet, (JError e, Session session) =>
+            _platformSession.SetRemoteControl(toBeSet, (NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
@@ -126,11 +124,11 @@ namespace Xamarin.CobrowseIO
 
         /// <inheritdoc/>
         [Obsolete("Use SetFullDeviceState instead")]
-        public void SetFullDevice(bool value, CobrowseCallback callback)
+        public void SetFullDevice(bool value, CobrowseCallback? callback)
         {
-            _platformSession.SetFullDevice(value, (JError e, Session session) =>
+            _platformSession.SetFullDevice(value, (NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
@@ -156,7 +154,7 @@ namespace Xamarin.CobrowseIO
         }
 
         /// <inheritdoc/>
-        public void SetFullDeviceState(FullDeviceState state, CobrowseCallback callback)
+        public void SetFullDeviceState(FullDeviceState state, CobrowseCallback? callback)
         {
             NativeFullDeviceState toBeSet;
             switch (state)
@@ -178,29 +176,29 @@ namespace Xamarin.CobrowseIO
                     break;
             }
 
-            _platformSession.SetFullDeviceState(toBeSet, (JError e, Session session) =>
+            _platformSession.SetFullDeviceState(toBeSet, (NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
         /// <inheritdoc/>
         public void SetCapabilities(string[] capabilities, CobrowseCallback callback)
         {
-            _platformSession.SetCapabilities(capabilities, (JError e, Session session) =>
+            _platformSession.SetCapabilities(capabilities, (NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
         /// <summary>
         /// Activates the session.
         /// </summary>
-        public void Activate(CobrowseCallback callback)
+        public void Activate(CobrowseCallback? callback)
         {
-            _platformSession.Activate((JError e, Session session) =>
+            _platformSession.Activate((NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
 
@@ -209,9 +207,9 @@ namespace Xamarin.CobrowseIO
         /// </summary>
         public void End(CobrowseCallback callback)
         {
-            _platformSession.End((JError e, Session session) =>
+            _platformSession.End((NSError e, Session session) =>
             {
-                callback?.Invoke(e, CobrowseSessionImplementation.TryCreate(session));
+                callback?.Invoke(e?.AsException(), CobrowseSessionImplementation.TryCreate(session));
             });
         }
     }

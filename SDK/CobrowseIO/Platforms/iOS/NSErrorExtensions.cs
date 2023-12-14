@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// <see cref="NSError"/> to/from <see cref="NSException"/> converter.

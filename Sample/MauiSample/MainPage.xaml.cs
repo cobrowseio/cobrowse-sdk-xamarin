@@ -1,4 +1,4 @@
-using Xamarin.CobrowseIO;
+using Cobrowse.IO;
 
 namespace MauiSample;
 

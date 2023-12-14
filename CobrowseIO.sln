@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO.iOS", "iOS\Cobro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO.AppExtension.iOS", "iOS\CobrowseIO.AppExtension.iOS\CobrowseIO.AppExtension.iOS.csproj", "{B51B85EA-9528-45F9-8307-C32A6E251340}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DotNet", "DotNet", "{602759EE-5189-43B5-83FF-51ABAE4516A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{602759EE-5189-43B5-83FF-51ABAE4516A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{24961DD2-4C7E-4883-8DE8-E0B2CEAE0FE6}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumbersJava.Android", "Andr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO.Android", "Android\CobrowseIO.Android\CobrowseIO.Android.csproj", "{B66AC1F4-37FF-4FD4-BBEC-5EFDEE041EC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO", "DotNet\CobrowseIO\CobrowseIO.csproj", "{960AC50F-A2E3-4CE4-BCB1-829D957103D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CobrowseIO", "SDK\CobrowseIO\CobrowseIO.csproj", "{960AC50F-A2E3-4CE4-BCB1-829D957103D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{45E166B3-5E5D-45C2-A2EE-416FB4D14AE8}"
 EndProject

@@ -6,9 +6,17 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
-        var builder = MauiApp.CreateBuilder();
+        MauiAppBuilder builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .ConfigureEffects(effects =>
+            {
+#if ANDROID
+                effects.Add<CobrowseRedactedViewEffect, MauiSample.Platforms.Android.PlatformCobrowseRedactedViewEffect>();
+#elif IOS
+                effects.Add<CobrowseRedactedViewEffect, MauiSample.Platforms.iOS.PlatformCobrowseRedactedViewEffect>();
+#endif
+            })
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

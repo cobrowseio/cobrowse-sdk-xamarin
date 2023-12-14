@@ -1,47 +1,47 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Xamarin.CobrowseIO.Android
+namespace Cobrowse.IO.Android
 {
     internal static class FullDeviceStateExtensions
     {
-        internal static Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava ToJavaEnum(
-            this Xamarin.CobrowseIO.Android.FullDeviceState state)
+        internal static Cobrowse.IO.Android.Session.FullDeviceStateJava ToJavaEnum(
+            this Cobrowse.IO.Android.FullDeviceState state)
         {
             switch (state)
             {
-                case Xamarin.CobrowseIO.Android.FullDeviceState.Off:
-                    return Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.Off;
-                case Xamarin.CobrowseIO.Android.FullDeviceState.Requested:
-                    return Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.Requested;
-                case Xamarin.CobrowseIO.Android.FullDeviceState.Rejected:
-                    return Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.Rejected;
-                case Xamarin.CobrowseIO.Android.FullDeviceState.On:
-                    return Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.On;
+                case Cobrowse.IO.Android.FullDeviceState.Off:
+                    return Cobrowse.IO.Android.Session.FullDeviceStateJava.Off;
+                case Cobrowse.IO.Android.FullDeviceState.Requested:
+                    return Cobrowse.IO.Android.Session.FullDeviceStateJava.Requested;
+                case Cobrowse.IO.Android.FullDeviceState.Rejected:
+                    return Cobrowse.IO.Android.Session.FullDeviceStateJava.Rejected;
+                case Cobrowse.IO.Android.FullDeviceState.On:
+                    return Cobrowse.IO.Android.Session.FullDeviceStateJava.On;
                 default:
                     return default;
             }
 
         }
 
-        internal static Xamarin.CobrowseIO.Android.FullDeviceState ToManagedEnum(
-            this Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava javaState)
+        internal static Cobrowse.IO.Android.FullDeviceState ToManagedEnum(
+            this Cobrowse.IO.Android.Session.FullDeviceStateJava javaState)
         {
-            if (javaState == Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.Off)
+            if (javaState == Cobrowse.IO.Android.Session.FullDeviceStateJava.Off)
             {
-                return Xamarin.CobrowseIO.Android.FullDeviceState.Off;
+                return Cobrowse.IO.Android.FullDeviceState.Off;
             }
-            if (javaState == Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.Requested)
+            if (javaState == Cobrowse.IO.Android.Session.FullDeviceStateJava.Requested)
             {
-                return Xamarin.CobrowseIO.Android.FullDeviceState.Requested;
+                return Cobrowse.IO.Android.FullDeviceState.Requested;
             }
-            if (javaState == Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.Rejected)
+            if (javaState == Cobrowse.IO.Android.Session.FullDeviceStateJava.Rejected)
             {
-                return Xamarin.CobrowseIO.Android.FullDeviceState.Rejected;
+                return Cobrowse.IO.Android.FullDeviceState.Rejected;
             }
-            if (javaState == Xamarin.CobrowseIO.Android.Session.FullDeviceStateJava.On)
+            if (javaState == Cobrowse.IO.Android.Session.FullDeviceStateJava.On)
             {
-                return Xamarin.CobrowseIO.Android.FullDeviceState.On;
+                return Cobrowse.IO.Android.FullDeviceState.On;
             }
             return default;
         }

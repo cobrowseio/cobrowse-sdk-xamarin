@@ -6,10 +6,11 @@
     <IsBindingProject>true</IsBindingProject>
     <Company>Cobrowse.io LLC</Company>
     <Version>2.29.3</Version>
-    <Title>Xamarin.CobrowseIO.iOS.AppExtension</Title>
-    <Product>Xamarin.CobrowseIO.iOS.AppExtension</Product>
-    <RootNamespace>Xamarin.CobrowseIO.iOS.AppExtension</RootNamespace>
-    <Description>Cobrowse.io - .NET iOS and Android SDK</Description>
+    <Title>Cobrowse.IO.iOS.AppExtension</Title>
+    <Product>Cobrowse.IO.iOS.AppExtension</Product>
+    <RootNamespace>Cobrowse.IO.iOS.AppExtension</RootNamespace>
+    <AssemblyName>Cobrowse.IO.iOS.AppExtension</AssemblyName>
+    <Description>Cobrowse.io - .NET iOS Broadcast Extension</Description>
   </PropertyGroup>
 
   <ItemGroup>

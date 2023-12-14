@@ -1,11 +1,11 @@
 ﻿using System;
 using Android.App;
 using Android.Runtime;
-using Xamarin.CobrowseIO.Android;
-using Xamarin.CobrowseIO.Android.UI;
-using NativeCobrowseIO = Xamarin.CobrowseIO.Android.CobrowseIO;
+using Cobrowse.IO.Android;
+using Cobrowse.IO.Android.UI;
+using NativeCobrowseIO = Cobrowse.IO.Android.CobrowseIO;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cobrowse.io delegate provides callbacks to the cross-platform wrapper.

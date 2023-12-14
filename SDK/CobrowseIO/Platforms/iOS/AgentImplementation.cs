@@ -1,8 +1,8 @@
 ﻿using System;
 using Foundation;
-using Xamarin.CobrowseIO.iOS;
+using Cobrowse.IO.iOS;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO
 {
     /// <summary>
     /// Cross-platform wrapper of the Cobrowse.io Agent class.

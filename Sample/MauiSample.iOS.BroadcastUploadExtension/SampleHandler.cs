@@ -1,7 +1,7 @@
 using System;
 using Foundation;
 using ReplayKit;
-using Xamarin.CobrowseIO.iOS.AppExtension;
+using Cobrowse.IO.iOS.AppExtension;
 
 namespace MauiSample.iOS.BroadcastUploadExtension
 {

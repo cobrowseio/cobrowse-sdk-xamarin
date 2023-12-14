@@ -5,7 +5,7 @@ using Foundation;
 using UIKit;
 using ReplayKit;
 
-namespace Xamarin.CobrowseIO.iOS.AppExtension
+namespace Cobrowse.IO.iOS.AppExtension
 {
     // @interface CobrowseIOReplayKitExtension : RPBroadcastSampleHandler
     [BaseType(typeof(RPBroadcastSampleHandler))]
