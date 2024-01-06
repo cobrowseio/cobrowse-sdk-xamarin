@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Company>Cobrowse.io LLC</Company>
-    <Version>2.30.3</Version>
+    <Version>2.30.4</Version>
     <Title>Cobrowse.IO.Android</Title>
     <Product>Cobrowse.IO.Android</Product>
     <RootNamespace>Cobrowse.IO.Android</RootNamespace>
@@ -16,7 +16,7 @@
   <ItemGroup>
     <!--
     Usually hese are the exact same version required by the native Android SDK as specified here:
-    https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/io/cobrowse/cobrowse-sdk-android/2.30.3/cobrowse-sdk-android-2.30.3.pom
+    https://github.com/cobrowseio/cobrowse-sdk-android-binary/blob/master/io/cobrowse/cobrowse-sdk-android/2.30.4/cobrowse-sdk-android-2.30.4.pom
 
     Whenever updating these versions, make sure to update the nuspec file as well.
     -->
@@ -58,13 +58,13 @@
   https://github.com/xamarin/java.interop/issues/847
 
   <ItemGroup>
-    <JavaDocJar Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.3\cobrowse-sdk-android-2.30.3-javadoc.jar">
+    <JavaDocJar Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.4\cobrowse-sdk-android-2.30.4-javadoc.jar">
         <Link>Jars\cobrowse-sdk-android-LATEST-javadoc.jar</Link>
     </JavaDocJar>
   </ItemGroup>
   -->
   <ItemGroup>
-    <AndroidLibrary Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.3\cobrowse-sdk-android-2.30.3.aar">
+    <AndroidLibrary Include="..\..\cobrowse-sdk-android-binary\io\cobrowse\cobrowse-sdk-android\2.30.4\cobrowse-sdk-android-2.30.4.aar">
       <Link>Jars\cobrowse-sdk-android-LATEST.aar</Link>
       <Pack>true</Pack>
       <Bind>true</Bind>
