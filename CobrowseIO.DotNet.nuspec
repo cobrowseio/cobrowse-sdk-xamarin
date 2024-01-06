@@ -28,7 +28,7 @@
             <group targetFramework="net8.0">
             </group>
         </dependencies>
-        <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/master/CHANGELOG.md</releaseNotes>
+        <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/dotnet/CHANGELOG.md</releaseNotes>
     </metadata>
     <files>
         <!-- Core -->
