@@ -86,7 +86,7 @@ jobs:
           git add $FILES_TO_COMMIT
           git commit -m "feat: update native SDKs"
           git push origin $NEW_BRANCH_NAME
-          gh pr create -B master -H $NEW_BRANCH_NAME --title 'Update native SDKs' --body ''
+          gh pr create -B dotnet -H $NEW_BRANCH_NAME --title 'Update native SDKs' --body ''
         else
           echo "Native SDKs haven't been updated"
         fi

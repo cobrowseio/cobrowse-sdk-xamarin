@@ -2,7 +2,7 @@ name: Build and pack NuGet packages
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dotnet ]
 
 jobs:
   build:

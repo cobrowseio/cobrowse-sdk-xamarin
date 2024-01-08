@@ -3,7 +3,7 @@ name: Build, pack NuGet packages, publish to NuGet.org
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v4.[0-9]+.[0-9]+'
 
 jobs:
   build:
