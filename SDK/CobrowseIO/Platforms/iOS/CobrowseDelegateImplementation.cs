@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using ObjCRuntime;
 using UIKit;
 using Cobrowse.IO.iOS;
 using NativeRemoteControlState = Cobrowse.IO.iOS.RemoteControlState;
@@ -19,7 +20,7 @@ namespace Cobrowse.IO
         {
         }
 
-        public CobrowseDelegateImplementation(System.IntPtr handle) : base(handle)
+        public CobrowseDelegateImplementation(NativeHandle handle) : base(handle)
         {
         }
 
