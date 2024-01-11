@@ -12,6 +12,10 @@ Try our **online demo** at <https://cobrowse.io/demo>.
 
 See the [installation documentation](https://docs.cobrowse.io/sdk-installation/xamarin) to get started.
 
+## .NET version
+
+Looking for the source code of .NET iOS and Android SDK? It's on a separate branch: [`dotnet`](https://github.com/cobrowseio/cobrowse-sdk-xamarin/tree/dotnet)
+
 ## Try it out
 
 Once you have your app running in the iOS Simulator or on a physical device, navigate to <https://cobrowse.io/dashboard> to see your device listed. You can click the "Connect" button to initiate a Cobrowse session!
