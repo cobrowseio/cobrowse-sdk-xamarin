@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:versionCode="1" android:versionName="1.0" package="io.cobrowsesample.android">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
-	<application android:label="Cobrowse.io Xamarin.Forms">
-		<service android:name="io.cobrowse.CobrowseAccessibilityService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" tools:node="merge" />
-	</application>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-</manifest>

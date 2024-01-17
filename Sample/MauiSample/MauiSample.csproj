@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-android;net8.0-ios;net8.0;</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MauiSample</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Display name -->
+    <ApplicationTitle>MauiSample</ApplicationTitle>
+
+    <!-- App Identifier -->
+    <ApplicationId>io.cobrowse.mauisample</ApplicationId>
+    <ApplicationIdGuid>ef30bce3-df93-41ba-874d-cb6c55443050</ApplicationIdGuid>
+
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+    <AndroidManifest>Platforms\Android\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+    <CreatePackage>false</CreatePackage>
+    <!--
+    CodesignEntitlements property appears to be ignored in Debug builds.
+    The following message is printed in the MSBuild output:
+    > The "CodesignEntitlements" property is a global property, and cannot be modified.
+
+    The bug is not reproducible in Release builds.
+    -->
+    <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+    <!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+    <!--
+    An Android MAUI app cannot simply rely on the same dependency versions the Cobrowse.io SDK uses.
+    Instead, the client app _must_ specify the exact versions that MAUI relies on. Otherwise
+    it leads to duplicate Java classes build errors.
+    https://github.com/xamarin/AndroidX/issues/764
+    https://github.com/xamarin/GooglePlayServicesComponents/issues/648
+    -->
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.10.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.4.6" />
+    <PackageReference Include="Square.OkHttp3" Version="4.11.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SDK\CobrowseIO\CobrowseIO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+    <ProjectReference Include="..\..\Android\NumbersJava.Android\NumbersJava.Android.csproj" />
+    <ProjectReference Include="..\..\Android\CborJava.Android\CborJava.Android.csproj" />
+    <ProjectReference Include="..\..\Android\CobrowseIO.Android\CobrowseIO.Android.csproj" />
+    <ProjectReference Include="..\..\SDK\CobrowseIO\CobrowseIO.csproj" />
+  </ItemGroup>
+
+   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+    <ProjectReference Include="..\..\iOS\CobrowseIO.iOS\CobrowseIO.iOS.csproj" />
+    <ProjectReference Include="..\..\SDK\CobrowseIO\CobrowseIO.csproj" />
+    <ProjectReference Include="..\MauiSample.iOS.BroadcastUploadExtension\MauiSample.iOS.BroadcastUploadExtension.csproj">
+      <IsAppExtension>true</IsAppExtension>
+      <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>

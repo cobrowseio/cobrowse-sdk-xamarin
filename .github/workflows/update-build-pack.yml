@@ -9,24 +9,66 @@ permissions:
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: 'true'
 
-    - name: Run Cake build script
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x.x'
+
+    - name: Select Xcode version
+      env:
+        XCODE_SELECTED_PATH: "/Applications/Xcode_15.0.1.app"
+      shell: bash
+      run: sudo xcode-select --switch ${XCODE_SELECTED_PATH}
+
+    - name: Print toolchain versions
       run: |
-        ./build.sh --verbosity diagnostic --target UpdateNativeSDKs
+        dotnet --version
+        xcodebuild -version
+        java -version
+
+    - name: Install .NET script
+      run: |
+        dotnet tool install -g dotnet-script
+
+    - name: Update native SDKs
+      run: |
+        dotnet script UpdateSDKs/UpdateSDKs.csx
+
+    - name: Install .NET workloads
+      run: |
+        sudo dotnet workload restore
+
+    - name: Restore NuGet packages
+      run: |
+        dotnet restore CobrowseIO.sln --source https://api.nuget.org/v3/index.json
+
+    - name: Build SDK projects
+      run: |
+        dotnet build Android/NumbersJava.Android/NumbersJava.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build Android/CborJava.Android/CborJava.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build Android/CobrowseIO.Android/CobrowseIO.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build SDK/CobrowseIO/CobrowseIO.csproj --configuration "Release" --no-dependencies --no-restore
+
+    - name: Create NuGet packages
+      run: |
+        nuget pack CobrowseIO.DotNet.iOS.AppExtension.nuspec
+        nuget pack CobrowseIO.DotNet.nuspec
 
     - name: Copy nupkg files to artifacts
       uses: actions/upload-artifact@v3
       with:
         path: |
-          CborJava.Android.*.nupkg
-          CobrowseIO.AppExtension.iOS.*.nupkg
-          CobrowseIO.Xamarin.*.nupkg
-          NumbersJava.Android.*.nupkg
+          CobrowseIO.DotNet.iOS.AppExtension.*.nupkg
+          CobrowseIO.DotNet.*.nupkg
         retention-days: 7
         if-no-files-found: error
 
@@ -34,7 +76,7 @@ jobs:
     - name: Create a new pull request
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILES_TO_COMMIT: Android/CobrowseIO.Android/CobrowseIO.Android.csproj Android/CobrowseIO.Android/Properties/AssemblyInfo.cs iOS/CobrowseIO.AppExtension.iOS/Properties/AssemblyInfo.cs iOS/CobrowseIO.iOS/Properties/AssemblyInfo.cs
+        FILES_TO_COMMIT: cobrowse-sdk-android-binary cobrowse-sdk-ios-binary Android/CobrowseIO.Android/CobrowseIO.Android.csproj iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj
         NEW_BRANCH_NAME: feature/update_native_sdks_${{ github.run_id }}
       run: |
         if [[ `git status --porcelain $FILES_TO_COMMIT` ]]; then
@@ -44,7 +86,7 @@ jobs:
           git add $FILES_TO_COMMIT
           git commit -m "feat: update native SDKs"
           git push origin $NEW_BRANCH_NAME
-          gh pr create -B master -H $NEW_BRANCH_NAME --title 'Update native SDKs' --body ''
+          gh pr create -B dotnet -H $NEW_BRANCH_NAME --title 'Update native SDKs' --body ''
         else
           echo "Native SDKs haven't been updated"
         fi

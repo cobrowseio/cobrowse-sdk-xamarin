@@ -1,15 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<metadata>
-    <!--
+﻿<metadata>
+  <!--
   This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
   <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
   
   This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
   <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
   -->
-    <attr path="/api/package[@name='io.cobrowse']" name="managedName">Xamarin.CobrowseIO</attr>
-    <attr path="/api/package[@name='io.cobrowse.integrations']" name="managedName">Xamarin.CobrowseIO.Integrations</attr>
-    <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">Xamarin.CobrowseIO.UI</attr>
+    <attr path="/api/package[@name='io.cobrowse']" name="managedName">Cobrowse.IO.Android</attr>
+    <attr path="/api/package[@name='io.cobrowse.integrations']" name="managedName">Cobrowse.IO.Android.Integrations</attr>
+    <attr path="/api/package[@name='io.cobrowse.ui']" name="managedName">Cobrowse.IO.Android.UI</attr>
 
     <!-- Make setter-method names start with "Set" -->
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='instance']" name="managedName">GetInstance</attr>
@@ -53,8 +52,8 @@
     Java invokations in such case. As a result, we map enums manually in "Additions/Session.cs"
     
     <mapping jni-class="io/cobrowse/Session">
-        <method jni-name="remoteControl" parameter="return" clr-enum-type="Xamarin.CobrowseIO.RRemoteControlState" />
-        <method jni-name="setRemoteControl" parameter="state" clr-enum-type="Xamarin.CobrowseIO.RRemoteControlState" />
+        <method jni-name="remoteControl" parameter="return" clr-enum-type="Cobrowse.IO.Android.RemoteControlState" />
+        <method jni-name="setRemoteControl" parameter="state" clr-enum-type="Cobrowse.IO.Android.RemoteControlState" />
     </mapping>
     -->
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session.RemoteControlState']" name="visibility">internal</attr>
@@ -108,4 +107,7 @@
     <attr 
         path="/api/package[@name='io.cobrowse']/interface[@name='CobrowseIO.SessionControlsDelegate']/method[@name='hideSessionControls']/parameter[@name='p1']" 
         name="name">session</attr>
+
 </metadata>
+
+

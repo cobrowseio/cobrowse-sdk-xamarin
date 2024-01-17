@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>CobrowseIO.DotNet.iOS.AppExtension</id>
+        <version>4.0.0-alpha04</version>
+        <title>CobrowseIO.DotNet.iOS.AppExtension</title>
+        <authors>Cobrowse.io</authors>
+        <owners>Cobrowse.io</owners>
+        <license type="expression">Apache-2.0</license>
+        <projectUrl>https://cobrowse.io</projectUrl>
+        <icon>icon.png</icon>
+        <iconUrl>https://avatars3.githubusercontent.com/u/32596876</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Cobrowse.io - .NET iOS Broadcast Extension</description>
+        <repository type="git" url="https://github.com/cobrowseio/cobrowse-sdk-xamarin" />
+        <tags>dotnet, ios, cobrowse</tags>
+        <dependencies>
+            <group targetFramework="net8.0-ios17.0">
+            </group>
+        </dependencies>
+        <releaseNotes>https://github.com/cobrowseio/cobrowse-sdk-xamarin/blob/dotnet/CHANGELOG.md</releaseNotes>
+    </metadata>
+    <files>
+        <file src="icon.png" target="" />
+
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/Cobrowse.IO.iOS.AppExtension.dll" target="lib/net8.0-ios17.0" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/Cobrowse.IO.iOS.AppExtension.pdb" target="lib/net8.0-ios17.0" />
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/Cobrowse.IO.iOS.AppExtension.resources.stamp" target="lib\net8.0-ios17.0"/>
+        <file src="iOS/CobrowseIO.AppExtension.iOS/bin/Release/net8.0-ios/Cobrowse.IO.iOS.AppExtension.resources.zip" target="lib/net8.0-ios17.0" />
+    </files>
+</package>

@@ -2,28 +2,62 @@ name: Build and pack NuGet packages
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dotnet ]
 
 jobs:
   build:
 
-    runs-on: macos-latest
+    runs-on: macos-13
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        submodules: 'true'
 
-    - name: Run Cake build script
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.x.x'
+
+    - name: Select Xcode version
+      env:
+        XCODE_SELECTED_PATH: "/Applications/Xcode_15.0.1.app"
+      shell: bash
+      run: sudo xcode-select --switch ${XCODE_SELECTED_PATH}
+
+    - name: Print toolchain versions
       run: |
-        ./build.sh --verbosity diagnostic
+        dotnet --version
+        xcodebuild -version
+        java -version
+
+    - name: Install .NET workloads
+      run: |
+        sudo dotnet workload restore
+
+    - name: Restore NuGet packages
+      run: |
+        dotnet restore CobrowseIO.sln
+
+    - name: Build SDK projects
+      run: |
+        dotnet build Android/NumbersJava.Android/NumbersJava.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build Android/CborJava.Android/CborJava.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build Android/CobrowseIO.Android/CobrowseIO.Android.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build iOS/CobrowseIO.AppExtension.iOS/CobrowseIO.AppExtension.iOS.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build iOS/CobrowseIO.iOS/CobrowseIO.iOS.csproj --configuration "Release" --no-dependencies --no-restore
+        dotnet build SDK/CobrowseIO/CobrowseIO.csproj --configuration "Release" --no-dependencies --no-restore
+
+    - name: Create NuGet packages
+      run: |
+        nuget pack CobrowseIO.DotNet.iOS.AppExtension.nuspec
+        nuget pack CobrowseIO.DotNet.nuspec
 
     - name: Copy nupkg files to artifacts
       uses: actions/upload-artifact@v3
       with:
         path: |
-          CborJava.Android.*.nupkg
-          CobrowseIO.AppExtension.iOS.*.nupkg
-          CobrowseIO.Xamarin.*.nupkg
-          NumbersJava.Android.*.nupkg
+          CobrowseIO.DotNet.iOS.AppExtension.*.nupkg
+          CobrowseIO.DotNet.*.nupkg
         retention-days: 7
         if-no-files-found: error

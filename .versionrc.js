@@ -1,59 +1,18 @@
 // .versionrc.js
 const tracker = [
   {
-    filename: 'XamarinSDK/CobrowseIO.Xamarin/Properties/AssemblyInfo.cs',
+    filename: 'SDK/CobrowseIO/CobrowseIO.csproj',
     updater: {
       readVersion: function(contents) {
-        return contents.match(/\[assembly: AssemblyVersion\("([0-9]+\.[0-9]+\.[0-9]+)/)[1]
+        return contents.match(/<Version>(.*)<\/Version>/)[1]
       },
       writeVersion: function (contents, version) {
-        var modified = contents.replace(/(\[assembly: AssemblyVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        modified = modified.replace(/(\[assembly: AssemblyInformationalVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        return modified
+        return contents.replace(/(<Version>)(.*)(<\/Version>)/, `$1${version}$3`)
       }
     }
   },
   {
-    filename: 'XamarinSDK/CobrowseIO.Xamarin.Abstractions/Properties/AssemblyInfo.cs',
-    updater: {
-      readVersion: function(contents) {
-        return contents.match(/\[assembly: AssemblyVersion\("([0-9]+\.[0-9]+\.[0-9]+)/)[1]
-      },
-      writeVersion: function (contents, version) {
-        var modified = contents.replace(/(\[assembly: AssemblyVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        modified = modified.replace(/(\[assembly: AssemblyInformationalVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        return modified
-      }
-    }
-  },
-  {
-    filename: 'XamarinSDK/CobrowseIO.Xamarin.Android/Properties/AssemblyInfo.cs',
-    updater: {
-      readVersion: function(contents) {
-        return contents.match(/\[assembly: AssemblyVersion\("([0-9]+\.[0-9]+\.[0-9]+)/)[1]
-      },
-      writeVersion: function (contents, version) {
-        var modified = contents.replace(/(\[assembly: AssemblyVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        modified = modified.replace(/(\[assembly: AssemblyInformationalVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        return modified
-      }
-    }
-  },
-  {
-    filename: 'XamarinSDK/CobrowseIO.Xamarin.iOS/Properties/AssemblyInfo.cs',
-    updater: {
-      readVersion: function(contents) {
-        return contents.match(/\[assembly: AssemblyVersion\("([0-9]+\.[0-9]+\.[0-9]+)/)[1]
-      },
-      writeVersion: function (contents, version) {
-        var modified = contents.replace(/(\[assembly: AssemblyVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        modified = modified.replace(/(\[assembly: AssemblyInformationalVersion\(")([0-9\.]+)(\"\)\])/, `$1${version}$3`)
-        return modified
-      }
-    }
-  },
-  {
-    filename: 'CobrowseIO.Xamarin.nuspec',
+    filename: 'CobrowseIO.DotNet.iOS.AppExtension.nuspec',
     updater: {
       readVersion: function(contents) {
         return contents.match(/<version>(.*)<\/version>/)[1]
@@ -64,7 +23,7 @@ const tracker = [
     }
   },
   {
-    filename: 'CobrowseIO.AppExtension.iOS.nuspec',
+    filename: 'CobrowseIO.DotNet.nuspec',
     updater: {
       readVersion: function(contents) {
         return contents.match(/<version>(.*)<\/version>/)[1]

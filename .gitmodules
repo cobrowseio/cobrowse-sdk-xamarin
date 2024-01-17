@@ -1,0 +1,6 @@
+[submodule "cobrowse-sdk-ios-binary"]
+	path = cobrowse-sdk-ios-binary
+	url = https://github.com/cobrowseio/cobrowse-sdk-ios-binary.git
+[submodule "cobrowse-sdk-android-binary"]
+	path = cobrowse-sdk-android-binary
+	url = https://github.com/cobrowseio/cobrowse-sdk-android-binary.git

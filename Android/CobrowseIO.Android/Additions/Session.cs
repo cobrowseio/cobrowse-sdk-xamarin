@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.Runtime;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO.Android
 {
     public partial class Session
     {
@@ -27,7 +27,7 @@ namespace Xamarin.CobrowseIO
         }
 
         [GeneratedEnum]
-        public Xamarin.CobrowseIO.FullDeviceState FullDeviceState
+        public Cobrowse.IO.Android.FullDeviceState FullDeviceState
         {
             get
             {
@@ -35,15 +35,15 @@ namespace Xamarin.CobrowseIO
             }
         }
 
-        public void SetFullDeviceState([GeneratedEnum] Xamarin.CobrowseIO.FullDeviceState state, ICallback callback)
+        public void SetFullDeviceState([GeneratedEnum] Cobrowse.IO.Android.FullDeviceState state, ICallback callback)
         {
-            Xamarin.CobrowseIO.Session.FullDeviceStateJava javaState = state.ToJavaEnum();
+            Cobrowse.IO.Android.Session.FullDeviceStateJava javaState = state.ToJavaEnum();
             this._SetFullDeviceState(javaState, callback);
         }
 
-        public void SetFullDeviceState([GeneratedEnum] Xamarin.CobrowseIO.FullDeviceState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        public void SetFullDeviceState([GeneratedEnum] Cobrowse.IO.Android.FullDeviceState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
         {
-            Xamarin.CobrowseIO.Session.FullDeviceStateJava javaState = state.ToJavaEnum();
+            Cobrowse.IO.Android.Session.FullDeviceStateJava javaState = state.ToJavaEnum();
             this._SetFullDeviceState(javaState, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
 
@@ -61,7 +61,7 @@ namespace Xamarin.CobrowseIO
         #region Remote control
 
         [GeneratedEnum]
-        public Xamarin.CobrowseIO.RemoteControlState RemoteControl
+        public Cobrowse.IO.Android.RemoteControlState RemoteControl
         {
             get
             {
@@ -69,15 +69,15 @@ namespace Xamarin.CobrowseIO
             }
         }
 
-        public void SetRemoteControl([GeneratedEnum] Xamarin.CobrowseIO.RemoteControlState state, ICallback callback)
+        public void SetRemoteControl([GeneratedEnum] Cobrowse.IO.Android.RemoteControlState state, ICallback callback)
         {
-            Xamarin.CobrowseIO.Session.RemoteControlState javaState = state.ToJavaEnum();
+            Cobrowse.IO.Android.Session.RemoteControlState javaState = state.ToJavaEnum();
             this._SetRemoteControl(javaState, callback);
         }
 
-        public void SetRemoteControl([GeneratedEnum] Xamarin.CobrowseIO.RemoteControlState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
+        public void SetRemoteControl([GeneratedEnum] Cobrowse.IO.Android.RemoteControlState state, CobrowseCallbackDelegate<Java.Lang.Error, Session> @delegate)
         {
-            Xamarin.CobrowseIO.Session.RemoteControlState javaState = state.ToJavaEnum();
+            Cobrowse.IO.Android.Session.RemoteControlState javaState = state.ToJavaEnum();
             this._SetRemoteControl(javaState, new CobrowseCallback<Java.Lang.Error, Session>(@delegate));
         }
 

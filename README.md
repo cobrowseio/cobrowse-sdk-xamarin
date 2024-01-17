@@ -1,4 +1,4 @@
-# Cobrowse.io - Xamarin SDK
+# Cobrowse.io - .NET iOS and Android SDK
 
 Cobrowse.io is 100% free and easy to try out in your own apps.
 
@@ -10,7 +10,7 @@ Try our **online demo** at <https://cobrowse.io/demo>.
 
 ## Installation
 
-See the [installation documentation](https://docs.cobrowse.io/sdk-installation/xamarin) to get started.
+See the [installation documentation](https://docs.cobrowse.io/sdk-installation/) to get started.
 
 ## Try it out
 
@@ -33,4 +33,5 @@ Once you have your app running in the iOS Simulator or on a physical device, nav
 [Advanced features](https://docs.cobrowse.io/sdk-features/advanced-features)
 
 ## Questions?
+
 Any questions at all? Please email us directly at [hello@cobrowse.io](mailto:hello@cobrowse.io).

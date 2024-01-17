@@ -1,4 +1,4 @@
-﻿namespace Xamarin.CobrowseIO
+﻿namespace Cobrowse.IO.Android
 {
     public delegate void CobrowseSessionListenerDelegate(Session session);
 

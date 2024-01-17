@@ -1,27 +1,5 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Android;
-using Android.App;
-
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("CobrowseIO.Android")]
-[assembly: AssemblyDescription("Cobrowse.io - Xamarin.Android SDK")]
-[assembly: AssemblyCompany("Cobrowse.io LLC")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("2.30.3")]
-[assembly: AssemblyVersion("2.30.3")]
-[assembly: AssemblyInformationalVersion("2.30.3")]
-
-[assembly: LinkerSafe]
+// This attribute allows you to mark your assemblies as “safe to link”.
+// When the attribute is present, the linker—if enabled—will process the assembly
+// even if you’re using the “Link SDK assemblies only” option, which is the default for device builds.
+// LinkerSafeAttirbute is obsolete in .NET.
+[assembly: System.Reflection.AssemblyMetadata("IsTrimmable", "True")]

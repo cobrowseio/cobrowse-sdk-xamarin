@@ -1,47 +1,47 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Xamarin.CobrowseIO
+namespace Cobrowse.IO.Android
 {
     internal static class RemoteControlStateExtensions
     {
-        internal static Xamarin.CobrowseIO.Session.RemoteControlState ToJavaEnum(
-            this Xamarin.CobrowseIO.RemoteControlState state)
+        internal static Cobrowse.IO.Android.Session.RemoteControlState ToJavaEnum(
+            this Cobrowse.IO.Android.RemoteControlState state)
         {
             switch (state)
             {
-                case Xamarin.CobrowseIO.RemoteControlState.Off:
-                    return Xamarin.CobrowseIO.Session.RemoteControlState.Off;
-                case Xamarin.CobrowseIO.RemoteControlState.Requested:
-                    return Xamarin.CobrowseIO.Session.RemoteControlState.Requested;
-                case Xamarin.CobrowseIO.RemoteControlState.Rejected:
-                    return Xamarin.CobrowseIO.Session.RemoteControlState.Rejected;
-                case Xamarin.CobrowseIO.RemoteControlState.On:
-                    return Xamarin.CobrowseIO.Session.RemoteControlState.On;
+                case Cobrowse.IO.Android.RemoteControlState.Off:
+                    return Cobrowse.IO.Android.Session.RemoteControlState.Off;
+                case Cobrowse.IO.Android.RemoteControlState.Requested:
+                    return Cobrowse.IO.Android.Session.RemoteControlState.Requested;
+                case Cobrowse.IO.Android.RemoteControlState.Rejected:
+                    return Cobrowse.IO.Android.Session.RemoteControlState.Rejected;
+                case Cobrowse.IO.Android.RemoteControlState.On:
+                    return Cobrowse.IO.Android.Session.RemoteControlState.On;
                 default:
                     return default;
             }
 
         }
 
-        internal static Xamarin.CobrowseIO.RemoteControlState ToManagedEnum(
-            this Xamarin.CobrowseIO.Session.RemoteControlState javaState)
+        internal static Cobrowse.IO.Android.RemoteControlState ToManagedEnum(
+            this Cobrowse.IO.Android.Session.RemoteControlState javaState)
         {
-            if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.Off)
+            if (javaState == Cobrowse.IO.Android.Session.RemoteControlState.Off)
             {
-                return Xamarin.CobrowseIO.RemoteControlState.Off;
+                return Cobrowse.IO.Android.RemoteControlState.Off;
             }
-            if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.Requested)
+            if (javaState == Cobrowse.IO.Android.Session.RemoteControlState.Requested)
             {
-                return Xamarin.CobrowseIO.RemoteControlState.Requested;
+                return Cobrowse.IO.Android.RemoteControlState.Requested;
             }
-            if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.Rejected)
+            if (javaState == Cobrowse.IO.Android.Session.RemoteControlState.Rejected)
             {
-                return Xamarin.CobrowseIO.RemoteControlState.Rejected;
+                return Cobrowse.IO.Android.RemoteControlState.Rejected;
             }
-            if (javaState == Xamarin.CobrowseIO.Session.RemoteControlState.On)
+            if (javaState == Cobrowse.IO.Android.Session.RemoteControlState.On)
             {
-                return Xamarin.CobrowseIO.RemoteControlState.On;
+                return Cobrowse.IO.Android.RemoteControlState.On;
             }
             return default;
         }
