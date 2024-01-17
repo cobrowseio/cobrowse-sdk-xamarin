@@ -16,7 +16,7 @@
     <AssemblyName>Cobrowse.IO</AssemblyName>
     <Description>Cobrowse.io - .NET iOS and Android SDK</Description>
     <Company>Cobrowse.io LLC</Company>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
