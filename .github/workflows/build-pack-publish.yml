@@ -65,4 +65,5 @@ jobs:
 
     - name: Push nupkg files to NuGet.org
       run: |
-        nuget push CobrowseIO.DotNet.*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_PUSH_TOKEN }} -SkipDuplicate
+        nuget push CobrowseIO.DotNet.iOS.AppExtension.4.*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_PUSH_TOKEN }} -SkipDuplicate
+        nuget push CobrowseIO.DotNet.4.*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_PUSH_TOKEN }} -SkipDuplicate
