@@ -95,6 +95,7 @@ private static string GetSourceFile([CallerFilePath] string file = "") => file;
 
 private static void PullLatest(this Repository repo)
 {
+    Commands.Checkout(repo, "master");
     Commands.Pull(
         repo,
         new Signature(
