@@ -15,6 +15,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install Xamarin
+      run: brew install xamarin-android xamarin-ios
+
     - name: Run Cake build script
       run: |
         ./build.sh --verbosity diagnostic --target UpdateNativeSDKs
