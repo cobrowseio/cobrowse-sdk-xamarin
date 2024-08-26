@@ -5,7 +5,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
     <Company>Cobrowse.io LLC</Company>
-    <Version>2.31.1</Version>
+    <Version>2.31.2</Version>
     <Title>Cobrowse.IO.iOS</Title>
     <Product>Cobrowse.IO.iOS</Product>
     <RootNamespace>Cobrowse.IO.iOS</RootNamespace>
