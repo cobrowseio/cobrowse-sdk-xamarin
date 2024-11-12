@@ -34,6 +34,16 @@
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='webviewRedactedViews' and count(parameter)=1]" name="visibility">internal</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='webviewRedactedViews' and count(parameter)=0]" name="visibility">internal</attr>
 
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='redactedViews' and count(parameter)=1]" name="managedName">SetRedactedViews</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='redactedViews' and count(parameter)=0]" name="managedName">GetRedactedViews</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='redactedViews' and count(parameter)=1]" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='redactedViews' and count(parameter)=0]" name="visibility">internal</attr>
+
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='unredactedViews' and count(parameter)=1]" name="managedName">SetUnredactedViews</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='unredactedViews' and count(parameter)=0]" name="managedName">GetUnredactedViews</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='unredactedViews' and count(parameter)=1]" name="visibility">internal</attr>
+    <attr path="/api/package[@name='io.cobrowse']/class[@name='CobrowseIO']/method[@name='unredactedViews' and count(parameter)=0]" name="visibility">internal</attr>
+
     <!-- Make method names the same as in the iOS SDK -->
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='code']" name="managedName">GetCode</attr>
     <attr path="/api/package[@name='io.cobrowse']/class[@name='Session']/method[@name='agent']" name="managedName">GetAgent</attr>
