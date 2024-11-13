@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>CobrowseIO.DotNet.iOS.AppExtension</id>
-        <version>4.0.2</version>
+        <version>4.1.0</version>
         <title>CobrowseIO.DotNet.iOS.AppExtension</title>
         <authors>Cobrowse.io</authors>
         <owners>Cobrowse.io</owners>
