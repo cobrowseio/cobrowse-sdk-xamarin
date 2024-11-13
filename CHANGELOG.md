@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://github.com/cobrowseio/cobrowse-sdk-xamarin/compare/v3.9.0...v3.10.0) (2024-11-13)
+
+
+### Features
+
+* update native SDKs ([#101](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/101)) ([c062d53](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/c062d5379695a76055b54b4733ed369ad8c901b4))
+* update native SDKs ([#104](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/104)) ([79e4a7a](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/79e4a7a6c563e733a428b498b0a229ff36f4b0aa))
+* update native SDKs ([#106](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/106)) ([c25a3c7](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/c25a3c7b378d9476f0a03e0251f55806cf807c8b))
+* update native SDKs ([#108](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/108)) ([e50b76c](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/e50b76c42fae66e28806505ee3d9cf50370a86b1))
+* update native SDKs ([#110](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/110)) ([60a20bd](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/60a20bd8968711b260dde21a4d8302661479eece))
+* update native SDKs ([#111](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/111)) ([91c8e66](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/91c8e66cc29529f4c0fef23fd2551ff374f9c10c))
+* update native SDKs ([#113](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/113)) ([970785b](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/970785b51b039549720b9cbf3e875a949f0e4036))
+* update native SDKs ([#115](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/115)) ([ac7179f](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/ac7179f5481179aae616bdfba99c3a6d7a907cb8))
+* update native SDKs ([#118](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/118)) ([ff00d6b](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/ff00d6bce801cc5d509804bd3ac8a1ffaa09bf0d))
+* update native SDKs ([#120](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/120)) ([1115e1b](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/1115e1b2762cd26f19cfa8bf4f8c1ed7f5f50a1a))
+* update native SDKs ([#122](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/122)) ([8d247f3](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/8d247f31578960040bb4794ccad079e1af61af72))
+* update native SDKs ([#124](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/124)) ([28b1e4e](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/28b1e4ee446b719a74c8734f2cc45544e24be2f3))
+* update native SDKs ([#126](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/126)) ([872cfe6](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/872cfe6aee03059ea14fb0584d519ff81088c63e))
+* update native SDKs ([#128](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/128)) ([c3a0e93](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/c3a0e9310ee0508772b384e16d6d9b223f8d0ea6))
+* update native SDKs ([#75](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/75)) ([1f89427](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/1f894276ac2e11ec59ddd379dcca0338450d4803))
+* update native SDKs ([#78](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/78)) ([a9834e5](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/a9834e5ab9c7f4355e073d02590d5ecd2517a804))
+* update native SDKs ([#79](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/79)) ([d5c7b20](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/d5c7b2087a0b5da1c3f21b3917d0648c3630ca66))
+* update native SDKs ([#81](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/81)) ([062f484](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/062f4842b7180cd89c32b83cea6d88717c14bb11))
+* update native SDKs ([#83](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/83)) ([727688b](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/727688ba805ad2b33084c97ac45bc1958bc43db1))
+* update native SDKs ([#86](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/86)) ([f6a6de5](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/f6a6de558baa626e5fa2550248c788e5fb3eb5f4))
+* update native SDKs ([#87](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/87)) ([01935f8](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/01935f883c952d965c216629d276a97c5b9598d6))
+* update native SDKs ([#97](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/97)) ([8930a2f](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/8930a2f8de6b4148de0d8b75279be19f6e5809c5))
+* update native SDKs ([#99](https://github.com/cobrowseio/cobrowse-sdk-xamarin/issues/99)) ([394ee16](https://github.com/cobrowseio/cobrowse-sdk-xamarin/commit/394ee169b9726f58fcb7e20d932909be1d889801))
+
 ## [3.9.0](https://github.com/cobrowseio/cobrowse-sdk-xamarin/compare/v3.8.0...v3.9.0) (2024-01-17)
 
 
