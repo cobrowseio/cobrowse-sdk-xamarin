@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.1](https://github.com/cobrowseio/cobrowse-sdk-xamarin/compare/v3.10.0...v3.10.1) (2024-11-13)
+
 ## [3.10.0](https://github.com/cobrowseio/cobrowse-sdk-xamarin/compare/v3.9.0...v3.10.0) (2024-11-13)
 
 
