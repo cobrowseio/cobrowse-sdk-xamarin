@@ -17,6 +17,11 @@ jobs:
     - name: Install Xamarin
       run: brew install xamarin-android xamarin-ios
 
+    - name: Pre-download binary repositories
+      run: |
+        git clone https://github.com/cobrowseio/cobrowse-sdk-android-binary.git
+        git clone https://github.com/cobrowseio/cobrowse-sdk-ios-binary.git
+
     - name: Run Cake build script
       run: |
         ./build.sh --nugetOrgApiKey="${{ secrets.NUGET_PUSH_TOKEN }}" --verbosity diagnostic
